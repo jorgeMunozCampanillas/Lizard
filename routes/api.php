@@ -21,6 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('athenticated', [App\Http\Controllers\UserController::class, 'auth']);
 
 //Users
-Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index']);
+Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index', 'destroy', 'update']);
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);

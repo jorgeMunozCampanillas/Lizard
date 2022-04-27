@@ -19,26 +19,144 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      users: ''
+      //users
+      manageUsers: false,
+      users: [],
+      userAuth: '',
+      userEdit: false
     };
   },
   created: function created() {
     this.getUsers();
+    this.getUserAuth();
   },
   methods: {
+    //USERS
+    manage: function manage(option) {
+      this[option] = true;
+    },
+    //Getters
+    //Get all users
     getUsers: function getUsers() {
       var _this = this;
 
       axios.get('/api/users').then(function (res) {
-        _this.users = res;
-        console.log(res.data);
+        _this.users = res.data;
       })["catch"](function (e) {
         console.log("error en Dashboard.vue getUser");
         console.log(e);
       });
+    },
+    //Get the user auth
+    getUserAuth: function getUserAuth() {
+      var _this2 = this;
+
+      axios.get('api/athenticated').then(function (res) {
+        _this2.userAuth = res.data;
+      })["catch"](function (e) {
+        console.log("error en Dashboard.vue getUserAuth");
+        console.log(e);
+      });
+    },
+    //Crud
+    //Delete one user
+    deleteUser: function deleteUser(userDelete) {
+      var _this3 = this;
+
+      console.log("voy a borrar el user: " + userDelete.name + " : " + userDelete.id);
+      axios["delete"]('api/users/' + userDelete.id).then(function (e) {
+        //Update the array with the users
+        _this3.users = _this3.users.filter(function (u) {
+          return u.id != userDelete.id;
+        });
+      })["catch"](function (e) {
+        console.log("error en Dashboard.vue delete");
+        console.log(e);
+      });
+    },
+    //Edit one user
+    edit: function edit(editUser) {
+      this.userEdit = editUser;
+    },
+    editSuccess: function editSuccess() {
+      var _this4 = this;
+
+      axios.put('api/users/' + this.userEdit.id, this.userEdit).then(function (e) {
+        _this4.users.map(function (u) {
+          if (u.id == _this4.userEdit.id) {
+            u = _this4.userEdit;
+          }
+        });
+      })["catch"](function (e) {
+        console.log("error en Dashboard.vue update");
+        console.log(e);
+      });
+      this.userEdit = false;
+    },
+    editCancel: function editCancel() {
+      var inputName = document.getElementById("user." + this.userEdit.id + ".name");
+      inputName.innerHTML = this.userEdit.name;
+      this.userEdit = false;
     }
   }
 });
@@ -130,13 +248,252 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Madafucking dashBoard")]),
+    _c("h1", [_vm._v("Madafucking dashBoard 😎")]),
     _vm._v(" "),
-    _c("p", [_vm._v("ns")]),
-    _vm._v("\r\n  " + _vm._s(_vm.users) + "\r\n"),
+    _c("div", { staticClass: "card text-center" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("ul", { staticClass: "nav nav-pills card-header-pills" }, [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "button",
+              {
+                staticClass: "nav-link active",
+                attrs: { href: "#" },
+                on: {
+                  click: function ($event) {
+                    $event.preventDefault()
+                    return _vm.manage("manageUsers")
+                  },
+                },
+              },
+              [_vm._v("Users")]
+            ),
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        !_vm.manageUsers
+          ? _c("h3", { staticClass: "card-title" }, [
+              _vm._v("Do something Mr/s.Admin " + _vm._s(_vm.userAuth.name)),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.manageUsers
+          ? _c("table", { staticClass: "table" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.users, function (user) {
+                  return _c("tr", { key: user.id }, [
+                    _c(
+                      "th",
+                      {
+                        attrs: { id: "user." + user.id + ".id", scope: "row" },
+                      },
+                      [_vm._v(_vm._s(user.id))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        attrs: {
+                          id: "user." + user.id + ".name",
+                          scope: "row",
+                        },
+                      },
+                      [
+                        !_vm.userEdit || _vm.userEdit.id != user.id
+                          ? _c("span", [_vm._v(_vm._s(user.name))])
+                          : _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.userEdit.name,
+                                  expression: "userEdit.name",
+                                },
+                              ],
+                              domProps: { value: _vm.userEdit.name },
+                              on: {
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.userEdit,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                },
+                              },
+                            }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        attrs: {
+                          id: "user." + user.id + ".email",
+                          scope: "row",
+                        },
+                      },
+                      [
+                        !_vm.userEdit || _vm.userEdit.id != user.id
+                          ? _c("span", [_vm._v(_vm._s(user.email))])
+                          : _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.userEdit.email,
+                                  expression: "userEdit.email",
+                                },
+                              ],
+                              domProps: { value: _vm.userEdit.email },
+                              on: {
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.userEdit,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                },
+                              },
+                            }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(user.permissions))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(user.created_at.substr(0, 10)))]),
+                    _vm._v(" "),
+                    user.id != _vm.userAuth.id
+                      ? _c("td", [
+                          !_vm.userEdit
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.deleteUser(user)
+                                    },
+                                  },
+                                },
+                                [_vm._v("Delete")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.userEdit
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-warning",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.edit(user)
+                                    },
+                                  },
+                                },
+                                [_vm._v("Edit")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.userEdit.id == user.id
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.editSuccess()
+                                    },
+                                  },
+                                },
+                                [_vm._v("Success")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.userEdit.id == user.id
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.editCancel(user)
+                                    },
+                                  },
+                                },
+                                [_vm._v("Cancel")]
+                              )
+                            : _vm._e(),
+                        ])
+                      : _vm._e(),
+                  ])
+                }),
+                0
+              ),
+            ])
+          : _vm._e(),
+      ]),
+    ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("Link"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link disabled" }, [_vm._v("Disabled")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Permissions")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Created_at")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Options")]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
