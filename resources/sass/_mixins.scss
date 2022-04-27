@@ -1,0 +1,23 @@
+@mixin resalt-blue {
+    font-weight: bold;
+    color: $primary-blue;
+}
+
+@mixin normalize {
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+}
+
+@mixin center-absolute{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

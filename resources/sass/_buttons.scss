@@ -1,0 +1,34 @@
+@mixin normalize-btn {
+    background: none;
+    border: 0;
+    color: inherit;
+    line-height: normal;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: .3rem solid $primary-white;
+    transition: all .3s;
+}
+
+.button-normal {
+    @include normalize-btn();
+    color: $primary-dark;
+    background-color: $primary-white;
+    border-radius: 1rem;
+
+    &:hover{
+        color: $primary-white;
+        background-color: $primary-dark;
+    }
+}
+.button-line {
+    @include normalize-btn();
+    color: $primary-white;
+    background-color: $primary-dark;
+    border-radius: 1rem;
+
+    &:hover{
+        color: $primary-dark;
+        background-color: $primary-white;
+    }
+}

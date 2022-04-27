@@ -1,0 +1,59 @@
+@import "variables";
+@import "grid";
+@import "sizes";
+@import "mixins";
+@import "buttons";
+@import "nav";
+
+//@include normalize;
+
+.body-index{
+    //background-image: url('../img/Fondo\ index.png');
+    background-size: cover;
+    background-color: $primary-dark;
+    font-family: $title-typography;
+}
+a{
+    text-decoration:none;
+    color: $primary-white;
+}
+
+/*-_-_-_-_-_-_-_-_- MAIN -_-_-_-_-_-_-_-_-*/
+
+.main-index{
+    height: 95vh;
+    color: $primary-white;
+    font-family: $title-typography;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 7rem;
+
+    h1{
+        font-size: 13rem;
+    }
+
+    #main_count{
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    p{
+        text-align: center;
+        font-size: 2rem;
+        span{
+            @include resalt-blue;
+        }
+    }
+
+}
+
+.main-index > *{
+    margin: 1rem 0;
+}
+
+.button-normal, .button-line{
+    margin: 1rem;
+}
