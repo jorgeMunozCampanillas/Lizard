@@ -28,6 +28,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "codemirror": "^5.65.3",
         "prismjs": "^1.28.0",
         "vue-axios": "^3.2.5",
         "vue-loader": "^15.9.8",
