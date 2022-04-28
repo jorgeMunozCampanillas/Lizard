@@ -14,11 +14,15 @@ const Dashboard = () => import('./components/users/Dashboard.vue');
 const Home = () => import('./components/Home.vue');
 
 //No / Auth
-const Index = () => import('./components/Index.vue'
+const Index = () => import('./components/Index.vue');
+
+//CODE
+const CreateCode = () => import('./components/code/CreateCode.vue');
 
 
-)
+
 export const routes = [
+
     //No Auth (auth -> redirect to home)
     {
         path:'',
@@ -70,14 +74,37 @@ export const routes = [
                 path:'/home',
                 component:Home,
             },
+            {
+                name:'create-code',
+                path:'/create-code',
+                component:CreateCode,
+            },
             
         ]
     },
 
+    //Admins routes
     {
-        name:'dashboard',
-        path:'/dashboard',
-        component:Dashboard,
+        path:'',
+        component:Base,
+        beforeEnter: (to, from, next) => {
+            console.log("Voy a entrar bien")
+            axios.get('/api/athenticated')
+            .then((e)=>{
+                if(e.data.permissions > 1) next()
+                else return next({name:'home'});
+            })
+            .catch((e)=> next({name:'login'}))
+        },
+        children:[
+            {
+                name:'dashboard',
+                path:'/dashboard',
+                component:Dashboard,
+            }
+        ]
     },
+
+
 
 ];

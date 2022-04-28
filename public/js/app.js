@@ -5353,14 +5353,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'naVue',
   props: ['auth'],
+  data: function data() {
+    return {
+      options: false
+    };
+  },
   created: function created() {
     _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('updateAuth');
   },
   methods: {
+    changeOptions: function changeOptions() {
+      this.options = this.options ? false : true;
+    },
     logout: function logout() {
       var _this = this;
 
@@ -5516,6 +5540,11 @@ var Home = function Home() {
 
 var Index = function Index() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Index.vue */ "./resources/js/components/Index.vue"));
+}; //CODE
+
+
+var CreateCode = function CreateCode() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_code_CreateCode_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/code/CreateCode.vue */ "./resources/js/components/code/CreateCode.vue"));
 };
 
 var routes = [//No Auth (auth -> redirect to home)
@@ -5564,11 +5593,32 @@ var routes = [//No Auth (auth -> redirect to home)
     name: 'home',
     path: '/home',
     component: Home
+  }, {
+    name: 'create-code',
+    path: '/create-code',
+    component: CreateCode
   }]
-}, {
-  name: 'dashboard',
-  path: '/dashboard',
-  component: Dashboard
+}, //Admins routes
+{
+  path: '',
+  component: Base,
+  beforeEnter: function beforeEnter(to, from, next) {
+    console.log("Voy a entrar bien");
+    axios.get('/api/athenticated').then(function (e) {
+      if (e.data.permissions > 1) next();else return next({
+        name: 'home'
+      });
+    })["catch"](function (e) {
+      return next({
+        name: 'login'
+      });
+    });
+  },
+  children: [{
+    name: 'dashboard',
+    path: '/dashboard',
+    component: Dashboard
+  }]
 }];
 
 /***/ }),
@@ -28259,25 +28309,59 @@ var render = function () {
     _vm._v(" "),
     _vm.auth.permissions > 0
       ? _c("ul", { attrs: { id: "nav-out-permiss" } }, [
+          _c(
+            "li",
+            [
+              _c(
+                "router-link",
+                { staticClass: "nav-link", attrs: { to: "/create-code" } },
+                [_vm._v("Submit new Component!!")]
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c("li", [
-            _c("button", { on: { click: _vm.logout } }, [_vm._v("LogOut")]),
+            _c("button", { on: { click: _vm.changeOptions } }, [
+              _c("i", { staticClass: "bi bi-person-circle" }),
+            ]),
           ]),
+          _vm._v(" "),
+          _vm.options
+            ? _c("li", [
+                _c("div", [
+                  _c(
+                    "ul",
+                    [
+                      _vm.auth.permissions > 1
+                        ? _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { to: "/dashboard" },
+                            },
+                            [_vm._v("Dashboard")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("button", { on: { click: _vm.logout } }, [
+                          _vm._v("LogOut"),
+                        ]),
+                      ]),
+                    ],
+                    1
+                  ),
+                ]),
+              ])
+            : _vm._e(),
         ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.auth.permissions > 1
-      ? _c(
-          "ul",
-          { attrs: { id: "nav-out-permiss" } },
-          [
-            _c(
-              "router-link",
-              { staticClass: "nav-link", attrs: { to: "/dashboard" } },
-              [_vm._v("Dashboard")]
-            ),
-          ],
-          1
-        )
       : _vm._e(),
   ])
 }
@@ -28307,6 +28391,24 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("a", [_vm._v("Views")])])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", [_vm._v("Action")])])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", [_vm._v("Another action")])])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", [_vm._v("Something else here")])])
   },
 ]
 render._withStripped = true
@@ -43749,7 +43851,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_users_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_users_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
