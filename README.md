@@ -150,8 +150,8 @@ or
 - [X] Middleware Auth
 - [ ] Multilanguage
 - [ ] Dashboard
-  -[X] Users 
-  -[ ] Post
+  - [X] Users 
+  - [ ] Post
   
 - [ ] Code
   - [X] Code beautiful
