@@ -31,6 +31,8 @@ Lizard is a page to upload components and views of the TailwindCSS framework, on
 
 - Implementation of Vue.js for the creation of the SPA and reactivity of the page
 
+- Vuex for communication between components
+
 - Mirrorcode/html2canvas for the code editing part
 
 - Sass as CSS preprocessor
@@ -143,15 +145,28 @@ or
 <!-- ROADMAP -->
 ## Roadmap 🏁
 
+- [X] Login/Register
+- [X] SPA
+- [X] Middleware Auth
+- [ ] Multilanguage
 - [ ] Dashboard
   -[x] Users 
   -[] Post
-- [X] Middleware Auth
-- [ ] Multilanguage
-- [X] SPA
-- [X] Code beautiful
-- [X] Login/Register
-- [ ] CRUD Post
+-[] Code
+  - [X] Code beautiful
+  - [] Code Crud
+  - [] Code Screenshot
+  - [] Change theme
+  - [] Change displayed
+-[] Post
+  -[] View
+  -[] Filter
+  -[] Likes
+  -[] Comment
+  -[] Add fav
+
+
+
 
 
 
@@ -165,3 +180,4 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 - Configure EventBus: https://stackoverflow.com/questions/61034661/vue-js-how-can-i-emit-events-between-router-view-components
 - Vue Routes: https://codingpotions.com/vue-router
 - Vue Middleware: https://laravelvuespa.com/middleware/middleware-overview/
+- Vuex(3): https://v3.vuex.vuejs.org/guide/#the-simplest-store

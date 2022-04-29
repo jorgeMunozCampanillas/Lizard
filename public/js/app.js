@@ -5425,14 +5425,20 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0__["default"];
+ //Axios
 
 
+ //Route
 
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((vue_axios__WEBPACK_IMPORTED_MODULE_2___default()), (axios__WEBPACK_IMPORTED_MODULE_3___default()));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((vue_axios__WEBPACK_IMPORTED_MODULE_2___default()), (axios__WEBPACK_IMPORTED_MODULE_3___default())); //Vuex
+// import {store} from './store';
+// import Vuex from 'vuex'
+// Vue.use(Vuex);
+
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
   mode: 'history',
   routes: _routes__WEBPACK_IMPORTED_MODULE_4__.routes
@@ -5440,6 +5446,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
   router: router,
+  //store:store,
   render: function render(h) {
     return h(_components_App_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
   }

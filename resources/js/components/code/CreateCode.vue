@@ -1,55 +1,83 @@
 <template>
 <div>
-  <textarea v-model="content" id="editor"></textarea>
-  <textarea id="html"></textarea>
-  <textarea id="css"></textarea>
-
+    <Editor
+      editorLang="HTML"
+      lang="xml"
+    />
   <div id="code_output">
-    <iframe id="code"></iframe>
+    <iframe id="code" ></iframe>
   </div>
 </div>
 </template>
 
 <script>
+
+//Code mirror
 import * as CodeMiror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/htmlmixed/htmlmixed.js';
 import 'codemirror/mode/css/css';
+import 'codemirror/mode/xml/xml';
 
 import 'codemirror/mode/gfm/gfm.js';
 
+//Editor
+import Editor from './Editor.vue';
+import EventBus from './../../bus';
 export default {
+  components: { Editor },
+
   data() {
     return {
-      content: 'let a=0;\n#hello world'
+      html:'',
+      css:'',
+      js:'',
+      src:'',
     }
   },
-  mounted() {
-    CodeMiror.fromTextArea(document.getElementById('editor'), {
-      lineNumbers: true,
-      theme: 'dracula',
-      mode: 'javascript',
-    });
-
-    CodeMiror.fromTextArea(document.getElementById('html'), {
-      lineNumbers: true,
-      theme: 'dracula',
-      mode: 'htmlmixed',
-    });
-
-    CodeMiror.fromTextArea(document.getElementById('css'), {
-      lineNumbers: true,
-      theme: 'dracula',
-      mode: 'css',
-    });
-
+  created(){
+    EventBus.$on('update')
   },
-
-  methods:{
-
-  }
+  methods: {
+    updateHtml(html){
+      this.html = html;
+    },
+    updateCss(css) {
+      this.html = css;
+    },
+    updateJs(js){
+      this.html = js;
+    },
+    updateSrc(state){
+        this.src = `
+        <html>
+            <body>${state.html}</body>
+            <style>${state.css}</style>
+            <script>${state.js}<\/script>
+        </html>`;
+    },
+    hola(){
+      console.log("holaaaaa")
+    },
+    updateFrame(lang, code){
+      console.log("BIENNNN")
+      switch(lang) {
+          case 'html':
+            this.updateSrc("updateHtml", code)
+            break;
+          case 'css':
+            this.updateSrc("updateCss", code)
+            break;
+          case 'javascript':
+            this.updateSrc("updateJs", code)
+            break;
+          default:
+            break;
+        }
+    }
+  },
 
 }
 </script>

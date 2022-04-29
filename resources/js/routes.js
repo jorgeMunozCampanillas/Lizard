@@ -1,4 +1,3 @@
-
 //Base
 const Base = () => import('./components/Base.vue');
 
