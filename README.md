@@ -150,20 +150,22 @@ or
 - [X] Middleware Auth
 - [ ] Multilanguage
 - [ ] Dashboard
-  -[x] Users 
-  -[] Post
--[] Code
+  -[X] Users 
+  -[ ] Post
+  
+- [ ] Code
   - [X] Code beautiful
-  - [] Code Crud
-  - [] Code Screenshot
-  - [] Change theme
-  - [] Change displayed
--[] Post
-  -[] View
-  -[] Filter
-  -[] Likes
-  -[] Comment
-  -[] Add fav
+  - [ ] Code Crud
+  - [ ] Code Screenshot
+  - [ ] Change theme
+  - [ ] Change displayed
+
+- [ ] Post
+  - [ ] View
+  - [ ] Filter
+  - [ ] Likes
+  - [ ] Comment
+  - [ ] Add fav
 
 
 
