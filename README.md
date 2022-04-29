@@ -1,79 +1,167 @@
-<p align="center"><img src="./resources/img/Captura.PNG" width="400"></p>
+<div id="top"></div>
 
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h1 align="center">Lizard</h1>
+   <h4 align="center">
+       👋 Say goodbye to "coding" style just CNTRL + C / CNTRL + V 👋
+  </h4>
+</div>
+
+<!-- ABOUT THE PROJECT -->
 ## About Lizard
 
 Lizard is a page to upload components and views of the TailwindCSS framework, on this page users can upload their views and components to share them with other users of the website and in the same way copy the code of others to speed up the task of creating different components with styles.
 
-## Tecnologies
+<div align="center">
 
-  | Front | Back | Others |
-  |--|--|--|
-  | <div align="center">
+<h1># Stack #</h1>
+
+| Front | Back | miscellany
+| ------------- | ------------- | ------------- |
+|<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" width="50" height="50"/><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" width="50" height="50"/><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" width="50" height="50"/><img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Baboon.svg" width="40" height="40"/><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="50" height="50"/><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="50" height="50"/>|<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="50" height="50"/><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="50" height="50"/><img src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/194_Laravel-512.png" alt="laravel" width="50" height="50"/> |<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" width="50" height="50"/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" width="50" height="50"/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" width="50" height="50"/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/composer/composer-original.svg" width="50" height="50"/>|
+
+</div>
+<h1> # Front # 🖥</h1>
+
+- Implementation of Vue.js for the creation of the SPA and reactivity of the page
+
+- Mirrorcode/html2canvas for the code editing part
+
+- Sass as CSS preprocessor
+
+<h1> # Back #  👨‍💻 </h1>
+- Laravel 8 as the main main framework for the back-end
+
+- mariaDB as database manager
+
+<div align="center">
+<h2>Tables</h2>
+
+| # User | # Follw | # Post | # Favoritos | # Like
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+|idUsu |idUsuFollower|idPost|idUsu|idUsu|idComen|
+|Mail |idUsuFollw|id_Usu|idPost|idUsu|idPost|
+|Name |Date|Codigo|Code||idUsu|
+|Permiss ||Date|idUsu||Coment|
+
+</div>
+<div align="center">
+    <h2>Model E/R</h2>
+    <img src="https://user-images.githubusercontent.com/91120177/165914121-744c613f-3544-424d-896a-9bb60e166cba.jpg" width="700" height="600"/>
+</div>
+<h4></h4>
+A user can be of 3 types: Unregistered, Registered, Administrator.
+
+<> Unregistered user, you can:
+
+    - See the posts that are on the page, you do not have permission for anything else.
+
+
+<> Registered user, you can:
+
+    - Make a crud of your post.
+    - Like other posts.
+    - Add a post to favorites to see it later.
+    - Make comments on the post.
+    - Follow other registered users.
+
+
+<> Admin user, you can:
+
+    - Manage everything from other users.
+
+
+
+<h1> # Deploy # ☁</h1>
+The deployment will be done in an AWS EC2 instance with the Ngix server, this instance will only have
+whatever the page code is, the database will be hosted on a different server.
+
+I will try to make the domain .com or .es but if it is not possible I will opt for a free one
+
+
+<!-- GETTING STARTED -->
+## Getting Started 
+
+### Prerequisites
+
+You need to have installed npm and composer
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
   
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png" alt="html5" width="50" height="50"/> 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png" alt="css3" width="50" height="50"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="50" height="50"/>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png" alt="sass" width="50" height="50"/> 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/2367px-Vue.js_Logo_2.svg.png" alt="vue" width="50" height="50"/> 
-    <a href="https://https://reactjs.org.com" target="_blank" rel="noreferrer"> 
-        <img src="https://alternative.me/media/256/react-native-icon-pb99lshx8fagxe0r-c.png" alt="React" width="50" height="50"/> 
-    </a>
-    </div>| 
-    <div align="center"> 
-    <a href="https://www.php.net" target="_blank" rel="noreferrer"> 
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="40" height="40"/> 
-    </a>
-    <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> 
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> 
-    </a> 
-    <a href="https://laravel.com/" target="_blank" rel="noreferrer"> 
-        <img src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/194_Laravel-512.png" alt="laravel" width="40" height="40"/> 
-    </a> 
-    <a href="https://solidity-es.readthedocs.io/es/latest/" target="_blank" rel="noreferrer"> 
-        <img src="https://miro.medium.com/max/1200/0*yqbRInqX0ZRUlVS0" alt="Solidity" width="40" height="40"/> 
-    </a>  
-    <a href="https://ethereum.org/es/" target="_blank" rel="noreferrer"> 
-        <img src="https://github.com/ethereum/ethereum-org/blob/fe5ba46f061ba342ca57b9401920ef4677d9c980/public/images/logos/Ethereum-Icon-small.png" alt="Ethereum" width="40" height="40"/> 
-    </a> 
-    <a href="https://nodejs.org/es/" target="_blank" rel="noreferrer"> 
-        <img src="https://the-guild.dev/blog-assets/nodejs-esm/nodejs_logo.png" alt="Node" width="40" height="40"/> 
-    </a> 
-    </div>
+* xampp (or other stack like it with apache, mariaDB and php)
+
+<a href="https://www.apachefriends.org/es/index.html">Xampp Download Page</a>
+
+* Composer
+```sh
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+  php composer-setup.php
+  php -r "unlink('composer-setup.php');"
+```
+
+or
+
+<a href="https://getcomposer.org/download/">Composer Download Page</a>
   
 
+### Installation 🚀
 
-## Laravel Sponsors
+1. Clone the repo
+   ```sh
+     Git clone https://github.com/jorgeMunozCampanillas/Lizard
+   ```
+2. Install NPM packages
+   ```
+     npm install
+   ```
+3. Run NPM packages
+    ```
+        npm run dev
+    ```
+4. Launch server
+   ```
+       php artisan serve
+   ```
+   
+5. Create new data base called: lizard
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+6. Run migrations and seeders
+   ```
+       php artisan migrate:refresh --seed
+   ```
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+<!-- ROADMAP -->
+## Roadmap 🏁
 
-## Contributing
+- [ ] Dashboard
+  -[x] Users 
+  -[] Post
+- [X] Middleware Auth
+- [ ] Multilanguage
+- [X] SPA
+- [X] Code beautiful
+- [X] Login/Register
+- [ ] CRUD Post
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<!-- ACKNOWLEDGMENTS -->
+## Of great help 🙏 
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Started with codemirror: https://www.youtube.com/watch?v=oDitntruMLc
+- Configure EventBus: https://stackoverflow.com/questions/61034661/vue-js-how-can-i-emit-events-between-router-view-components
+- Vue Routes: https://codingpotions.com/vue-router
+- Vue Middleware: https://laravelvuespa.com/middleware/middleware-overview/

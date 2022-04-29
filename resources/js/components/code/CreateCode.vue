@@ -4,6 +4,9 @@
   <textarea id="html"></textarea>
   <textarea id="css"></textarea>
 
+  <div id="code_output">
+    <iframe id="code"></iframe>
+  </div>
 </div>
 </template>
 
@@ -41,11 +44,46 @@ export default {
       theme: 'dracula',
       mode: 'css',
     });
+
   },
+
+  methods:{
+
+  }
 
 }
 </script>
 
 <style>
-
+iframe#code {
+  bottom: 0;
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  border: unset;
+  background: #f2f4f6;
+}
+.prism-live {
+  min-height: 350px;
+  overflow-x: hidden;
+  width: 100%;
+}
+div#coding_area > div {
+  width: 100%;
+  border-left: 15px solid #555865;
+}
+div#coding_area > div:first-child {
+  border-left: none;
+}
+div#coding_area {
+  width: 100%;
+  height: calc(60vh - 60px);
+  min-height: 125px;
+  display: flex;
+  overflow: hidden;
+  border-bottom: 15px solid #555865;
+}
+div#code_output {
+  height: 100%;
+}
 </style>
