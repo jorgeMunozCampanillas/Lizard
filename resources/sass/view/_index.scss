@@ -1,17 +1,14 @@
-@import "variables";
-@import "grid";
-@import "sizes";
-@import "mixins";
-@import "buttons";
-@import "nav";
-
-//@include normalize;
-
 .body-index{
-    //background-image: url('../img/Fondo\ index.png');
-    background-size: cover;
+    background-image: url('./../../media/img/index.png');
+    background-size: contain;
     background-color: $primary-dark;
     font-family: $title-typography;
+    height: 93vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 a{
     text-decoration:none;
@@ -21,18 +18,16 @@ a{
 /*-_-_-_-_-_-_-_-_- MAIN -_-_-_-_-_-_-_-_-*/
 
 .main-index{
-    height: 95vh;
     color: $primary-white;
-    font-family: $title-typography;
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    padding-top: 7rem;
 
     h1{
-        font-size: 13rem;
+        font-size: 10rem;
     }
 
     #main_count{
@@ -42,7 +37,7 @@ a{
     
     p{
         text-align: center;
-        font-size: 2rem;
+        font-size: $text-long-size;
         span{
             @include resalt-blue;
         }

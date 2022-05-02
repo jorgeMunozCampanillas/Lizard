@@ -5554,6 +5554,10 @@ var CreateCode = function CreateCode() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_code_CreateCode_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/code/CreateCode.vue */ "./resources/js/components/code/CreateCode.vue"));
 };
 
+var showAllCode = function showAllCode() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_code_ShowCode_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/code/ShowCode.vue */ "./resources/js/components/code/ShowCode.vue"));
+};
+
 var routes = [//No Auth (auth -> redirect to home)
 {
   path: '',
@@ -5602,8 +5606,12 @@ var routes = [//No Auth (auth -> redirect to home)
     component: Home
   }, {
     name: 'create-code',
-    path: '/create-code',
+    path: '/create/code',
     component: CreateCode
+  }, {
+    name: 'show-code',
+    path: '/show/code',
+    component: showAllCode
   }]
 }, //Admins routes
 {
@@ -28283,13 +28291,7 @@ var render = function () {
     _c("ul", { attrs: { id: "nav-pages" } }, [
       _c(
         "li",
-        [
-          _c(
-            "router-link",
-            { staticClass: "nav-link", attrs: { to: "/home" } },
-            [_vm._v("Home")]
-          ),
-        ],
+        [_c("router-link", { attrs: { to: "/home" } }, [_vm._v("Home")])],
         1
       ),
       _vm._v(" "),
@@ -28302,13 +28304,7 @@ var render = function () {
       ? _c("ul", { attrs: { id: "nav-out-permiss" } }, [
           _c(
             "li",
-            [
-              _c(
-                "router-link",
-                { staticClass: "nav-link", attrs: { to: "/login" } },
-                [_vm._v("Login")]
-              ),
-            ],
+            [_c("router-link", { attrs: { to: "/login" } }, [_vm._v("Login")])],
             1
           ),
         ])
@@ -28319,11 +28315,9 @@ var render = function () {
           _c(
             "li",
             [
-              _c(
-                "router-link",
-                { staticClass: "nav-link", attrs: { to: "/create-code" } },
-                [_vm._v("Submit new Component!!")]
-              ),
+              _c("router-link", { attrs: { to: "/create/code" } }, [
+                _vm._v("Submit new Component!!"),
+              ]),
             ],
             1
           ),
@@ -28341,14 +28335,9 @@ var render = function () {
                     "ul",
                     [
                       _vm.auth.permissions > 1
-                        ? _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/dashboard" },
-                            },
-                            [_vm._v("Dashboard")]
-                          )
+                        ? _c("router-link", { attrs: { to: "/dashboard" } }, [
+                            _vm._v("Dashboard"),
+                          ])
                         : _vm._e(),
                       _vm._v(" "),
                       _vm._m(3),
@@ -43858,7 +43847,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_users_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_users_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1,"resources_js_components_code_ShowCode_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

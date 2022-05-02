@@ -26,7 +26,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var codemirror_mode_gfm_gfm_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! codemirror/mode/gfm/gfm.js */ "./node_modules/codemirror/mode/gfm/gfm.js");
 /* harmony import */ var codemirror_mode_gfm_gfm_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(codemirror_mode_gfm_gfm_js__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _Editor_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Editor.vue */ "./resources/js/components/code/Editor.vue");
-/* harmony import */ var _bus__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../../bus */ "./resources/js/bus.js");
 //
 //
 //
@@ -50,57 +49,52 @@ __webpack_require__.r(__webpack_exports__);
  //Editor
 
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     Editor: _Editor_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
   data: function data() {
     return {
-      html: '',
+      xml: '',
       css: '',
       js: '',
       src: ''
     };
   },
-  created: function created() {
-    _bus__WEBPACK_IMPORTED_MODULE_9__["default"].$on('update');
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/athenticated').then(function (res) {
+      _this.user = res.data;
+    })["catch"](function (e) {
+      console.log("error en CreateCode.vue mounted");
+      console.log(e);
+    });
   },
   methods: {
-    updateHtml: function updateHtml(html) {
-      this.html = html;
+    updateCode: function updateCode(lang, code) {
+      this[lang] = code;
+      this.updateSrc();
     },
-    updateCss: function updateCss(css) {
-      this.html = css;
+    updateSrc: function updateSrc() {
+      this.src = "\n        <html>\n            <body>".concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </html>");
     },
-    updateJs: function updateJs(js) {
-      this.html = js;
-    },
-    updateSrc: function updateSrc(state) {
-      this.src = "\n        <html>\n            <body>".concat(state.html, "</body>\n            <style>").concat(state.css, "</style>\n            <script>").concat(state.js, "</script>\n        </html>");
-    },
-    hola: function hola() {
-      console.log("holaaaaa");
-    },
-    updateFrame: function updateFrame(lang, code) {
-      console.log("BIENNNN");
+    save: function save() {
+      var _this2 = this;
 
-      switch (lang) {
-        case 'html':
-          this.updateSrc("updateHtml", code);
-          break;
-
-        case 'css':
-          this.updateSrc("updateCss", code);
-          break;
-
-        case 'javascript':
-          this.updateSrc("updateJs", code);
-          break;
-
-        default:
-          break;
-      }
+      var send = {
+        'idUsu': this.user.idUsu,
+        'html': this.xml,
+        'css': this.css,
+        'js': this.js
+      };
+      axios.post('api/code', send).then(function (res) {
+        console.log(res);
+        console.log("añadido :))");
+      })["catch"](function (error) {
+        console.log("Error save desde CreateCode.vue");
+        _this2.errors = error.response.data.errors;
+      });
     }
   }
 });
@@ -130,14 +124,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var codemirror_mode_css_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(codemirror_mode_css_css__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var codemirror_mode_gfm_gfm_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! codemirror/mode/gfm/gfm.js */ "./node_modules/codemirror/mode/gfm/gfm.js");
 /* harmony import */ var codemirror_mode_gfm_gfm_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(codemirror_mode_gfm_gfm_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _bus__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../../bus */ "./resources/js/bus.js");
 //
 //
 //
 //
 //
 //
-
 
 
 
@@ -147,24 +139,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Editor',
-  props: ['lang', 'editorLang', 'value'],
+  props: ['lang'],
   data: function data() {
     return {
       editor: null
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.editor = codemirror__WEBPACK_IMPORTED_MODULE_0__.fromTextArea(document.getElementById(this.lang), {
       lineNumbers: true,
       theme: 'dracula',
       mode: this.lang
     });
     this.editor.on("change", function () {
-      //console.log(this.editorValue())
-      _bus__WEBPACK_IMPORTED_MODULE_7__["default"].$emit('update'); //super.hola();
-      //this.$emit('hola');
-      //this.$emit('updateFrame', this.lang, this.editorValue() );
-      //this.updateFrame(this.lang, this.editorValue())
+      _this.$emit('update', _this.lang, _this.editorValue());
     });
   },
   methods: {
@@ -13877,7 +13867,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\niframe#code {\r\n  bottom: 0;\r\n  position: relative;\r\n  width: 100%;\r\n  height: 40vh;\r\n  border: unset;\r\n  background: #f2f4f6;\n}\n.prism-live {\r\n  min-height: 350px;\r\n  overflow-x: hidden;\r\n  width: 100%;\n}\ndiv#coding_area > div {\r\n  width: 100%;\r\n  border-left: 15px solid #555865;\n}\ndiv#coding_area > div:first-child {\r\n  border-left: none;\n}\ndiv#coding_area {\r\n  width: 100%;\r\n  height: calc(60vh - 60px);\r\n  min-height: 125px;\r\n  display: flex;\r\n  overflow: hidden;\r\n  border-bottom: 15px solid #555865;\n}\ndiv#code_output {\r\n  height: 100%;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.editor{\r\n  width: 26rem;\r\n  height: 20rem;\r\n  display: inline-block;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14507,23 +14497,37 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("Editor", { attrs: { editorLang: "HTML", lang: "xml" } }),
+      _c("Editor", {
+        staticClass: "editor",
+        attrs: { lang: "xml" },
+        on: { update: _vm.updateCode },
+      }),
       _vm._v(" "),
-      _vm._m(0),
+      _c("Editor", {
+        staticClass: "editor",
+        attrs: { lang: "css" },
+        on: { update: _vm.updateCode },
+      }),
+      _vm._v(" "),
+      _c("Editor", {
+        staticClass: "editor",
+        attrs: { lang: "javascript" },
+        on: { update: _vm.updateCode },
+      }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "code_output" } }, [
+        _c("iframe", {
+          staticStyle: { border: "5px solid" },
+          attrs: { id: "code", srcdoc: _vm.src },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.save } }, [_vm._v("Guardar")]),
     ],
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "code_output" } }, [
-      _c("iframe", { attrs: { id: "code" } }),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

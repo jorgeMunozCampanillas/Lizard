@@ -14,10 +14,9 @@ import 'codemirror/mode/css/css';
 
 import 'codemirror/mode/gfm/gfm.js';
 
-import EventBus from './../../bus';
 export default {
     name:'Editor',
-    props: ['lang', 'editorLang', 'value'],
+    props: ['lang'],
     data: () => ({
         editor:null
     }),
@@ -29,13 +28,9 @@ export default {
         })
 
         this.editor.on("change", ()=>{
-            //console.log(this.editorValue())
-            EventBus.$emit('update')
-            //super.hola();
-            //this.$emit('hola');
-            //this.$emit('updateFrame', this.lang, this.editorValue() );
-            //this.updateFrame(this.lang, this.editorValue())
+            this.$emit('update', this.lang, this.editorValue());
         })
+
     },
     methods: {
         editorValue(){

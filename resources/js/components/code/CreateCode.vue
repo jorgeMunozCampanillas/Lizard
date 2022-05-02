@@ -1,12 +1,12 @@
 <template>
 <div>
-    <Editor
-      editorLang="HTML"
-      lang="xml"
-    />
+    <Editor class="editor" lang="xml" v-on:update="updateCode"/>
+    <Editor class="editor" lang="css" v-on:update="updateCode"/>
+    <Editor class="editor" lang="javascript" v-on:update="updateCode"/>
   <div id="code_output">
-    <iframe id="code" ></iframe>
+    <iframe id="code" :srcdoc="src" style="border: 5px solid;"> </iframe>
   </div>
+  <button @click="save">Guardar</button>
 </div>
 </template>
 
@@ -25,57 +25,60 @@ import 'codemirror/mode/gfm/gfm.js';
 
 //Editor
 import Editor from './Editor.vue';
-import EventBus from './../../bus';
+
 export default {
   components: { Editor },
 
   data() {
     return {
-      html:'',
+      xml:'',
       css:'',
       js:'',
       src:'',
     }
   },
-  created(){
-    EventBus.$on('update')
+  mounted() {
+    axios.get('/api/athenticated').then((res)=>{
+      this.user = res.data
+    })
+    .catch((e)=>{
+      console.log("error en CreateCode.vue mounted")
+      console.log(e)
+    })
   },
   methods: {
-    updateHtml(html){
-      this.html = html;
+
+    updateCode(lang, code){
+      this[lang] = code;
+      this.updateSrc();
     },
-    updateCss(css) {
-      this.html = css;
-    },
-    updateJs(js){
-      this.html = js;
-    },
-    updateSrc(state){
+
+    updateSrc(){
         this.src = `
         <html>
-            <body>${state.html}</body>
-            <style>${state.css}</style>
-            <script>${state.js}<\/script>
+            <body>${this.xml}</body>
+            <style>${this.css}</style>
+            <script>${this.js}<\/script>
         </html>`;
     },
-    hola(){
-      console.log("holaaaaa")
-    },
-    updateFrame(lang, code){
-      console.log("BIENNNN")
-      switch(lang) {
-          case 'html':
-            this.updateSrc("updateHtml", code)
-            break;
-          case 'css':
-            this.updateSrc("updateCss", code)
-            break;
-          case 'javascript':
-            this.updateSrc("updateJs", code)
-            break;
-          default:
-            break;
-        }
+
+
+    save(){
+      let send = {
+        'idUsu': this.user.idUsu,
+        'html': this.xml,
+        'css': this.css,
+        'js': this.js,
+      }
+
+      axios.post('api/code', send).then(res=>{
+        console.log(res)
+        console.log("añadido :))");
+      })
+      .catch((error)=>{
+        console.log("Error save desde CreateCode.vue")
+        this.errors = error.response.data.errors;
+      })
     }
   },
 
@@ -83,35 +86,9 @@ export default {
 </script>
 
 <style>
-iframe#code {
-  bottom: 0;
-  position: relative;
-  width: 100%;
-  height: 40vh;
-  border: unset;
-  background: #f2f4f6;
-}
-.prism-live {
-  min-height: 350px;
-  overflow-x: hidden;
-  width: 100%;
-}
-div#coding_area > div {
-  width: 100%;
-  border-left: 15px solid #555865;
-}
-div#coding_area > div:first-child {
-  border-left: none;
-}
-div#coding_area {
-  width: 100%;
-  height: calc(60vh - 60px);
-  min-height: 125px;
-  display: flex;
-  overflow: hidden;
-  border-bottom: 15px solid #555865;
-}
-div#code_output {
-  height: 100%;
+.editor{
+  width: 26rem;
+  height: 20rem;
+  display: inline-block;
 }
 </style>

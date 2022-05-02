@@ -1,0 +1,14 @@
+/// Funcion que me retorna el color de fondo de las columnas dependiendo si es par o impar
+@function colum-color($col-number){
+    @if($col-number%2==0){
+        @return $color-col-pares;
+    }@else{
+        @return $color-col-impares
+    }
+}
+
+
+/// Funcion que retorna la anchura correspondiente al elemento de la maquetacions
+@function anchura_col($i) {
+    @return calc(100 / $num_elementos)*$i ;
+  }

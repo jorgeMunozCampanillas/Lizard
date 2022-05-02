@@ -17,6 +17,7 @@ const Index = () => import('./components/Index.vue');
 
 //CODE
 const CreateCode = () => import('./components/code/CreateCode.vue');
+const showAllCode = () => import('./components/code/ShowCode.vue');
 
 
 
@@ -75,8 +76,13 @@ export const routes = [
             },
             {
                 name:'create-code',
-                path:'/create-code',
+                path:'/create/code',
                 component:CreateCode,
+            },
+            {
+                name:'show-code',
+                path:'/show/code',
+                component:showAllCode,
             },
             
         ]

@@ -4,20 +4,20 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png" style="width: 3rem !important; height: 3rem !important;" alt="">
     </ul>
     <ul id="nav-pages">
-        <li><router-link to="/home" class="nav-link">Home</router-link></li>
+        <li><router-link to="/home">Home</router-link></li>
         <li><a>Comopnents</a></li>
         <li><a>Views</a></li>
     </ul>
 
     <!-- No registe -->
     <ul id="nav-out-permiss" v-if="auth.permissions==0">
-        <li><router-link to="/login" class="nav-link">Login</router-link></li>
+        <li><router-link to="/login">Login</router-link></li>
     </ul>
 
     <!-- Options -->
     <ul id="nav-out-permiss" v-if="auth.permissions>0">
         <li>
-            <router-link to="/create-code" class="nav-link">Submit new Component!!</router-link>
+            <router-link to="/create/code">Submit new Component!!</router-link>
         </li>
         <li>
             <button @click="changeOptions">
@@ -28,7 +28,7 @@
             <div>
                 <ul>
                     <!-- Admin User -->
-                    <router-link v-if="auth.permissions>1" to="/dashboard" class="nav-link">Dashboard</router-link>
+                    <router-link v-if="auth.permissions>1" to="/dashboard">Dashboard</router-link>
                     <li><a>Action</a></li>
                     <li><a>Another action</a></li>
                     <li><a>Something else here</a></li>

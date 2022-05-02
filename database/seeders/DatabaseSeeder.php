@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +17,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //USERS
         \App\Models\User::factory(10)->create();
+
+        //Admin User
+        DB::table('user')->insert([
+            'name' => 'xXJorgeXx',
+            'email' => 'j@g.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'), // password
+            'permissions' => 3,
+            'remember_token' => Str::random(10),
+        ]);
+
+        //Post
+        \App\Models\Post::factory(40)->create();
+
+
     }
 }

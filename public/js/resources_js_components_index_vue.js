@@ -17,6 +17,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -112,7 +124,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Index para no Auth")])])
+    return _c("div", { staticClass: "body-index" }, [
+      _c("main", { staticClass: "main-index" }, [
+        _c("h1", [_vm._v("Lizard")]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "main_count" } }, [
+          _c("p", [_vm._v("203 Components ")]),
+          _vm._v(" "),
+          _c("p", [
+            _c("i", { staticClass: "fa-solid fa-gallery-thumbnails" }),
+            _vm._v(" 108 Views"),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("Open source "),
+          _c("span", [_vm._v("repository")]),
+          _vm._v(" for community components "),
+          _c("br"),
+          _vm._v("\n            and views using "),
+          _c("span", [_vm._v("TailwindCSS")]),
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "main_buttons" } }, [
+          _c("button", { staticClass: "button-normal" }, [
+            _vm._v("Browse Components"),
+          ]),
+          _vm._v(" "),
+          _c("button", { staticClass: "button-line" }, [
+            _vm._v("Follow us on Twitter"),
+          ]),
+        ]),
+      ]),
+    ])
   },
 ]
 render._withStripped = true

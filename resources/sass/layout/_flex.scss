@@ -1,0 +1,98 @@
+$number-columns: 12;
+
+.container {
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  &.flex-right {
+    justify-content: flex-end;
+  }
+
+  &.flex-center {
+    justify-content: center;
+  }
+
+  &.flex-edges {
+    justify-content: space-between;
+  }
+
+  &.flex-spaces {
+    justify-content: space-around;
+  }
+
+  &.flex-top {
+    align-items: flex-start;
+  }
+
+  &.flex-middle {
+    align-items: center;
+  }
+
+  &.flex-bottom {
+    align-items: flex-end;
+  }
+}
+
+.col {
+  padding: 1rem;
+
+  @include resp(sm) {
+    @include col-size(100%);
+  }
+}
+
+.col-fill {
+  flex: 1 1 0;
+  width: auto;
+}
+
+//Generales si no pongo nada
+@for $i from 1 through $number-columns {
+  .row > .col-#{$i} {
+    flex: 0 0 #{anchura_col($i)}+ "%";
+    max-width: #{anchura_col($i)}+ "%";
+  }
+}
+
+$breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px
+);
+
+@each $k, $v in $breakpoints {
+  @media (min-width: #{$v}) {
+    //Bucle para generar las clases de las columnas responsivas
+    @for $i from 1 through $num_elementos {
+      .row > .col-#{$k+"-"+$i} {
+        flex: 0 0 #{anchura_col($i)}+ "%";
+        max-width: #{anchura_col($i)}+ "%";
+      }
+    }
+  }
+}
+
+@function anchura_col($i) {
+  @return calc(100 / $num_elementos)*$i ;
+}
+
+.align-top {
+  align-self: flex-start;
+}
+
+.align-middle {
+  align-self: center;
+}
+
+.align-bottom {
+  align-self: flex-end;
+}

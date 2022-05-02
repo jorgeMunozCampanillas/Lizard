@@ -1,19 +1,12 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-@import 'variables';
+//Utiles
+@import './utilities/variables';
+@import './base/reset';
+@import './components/nav';
+@import './utilities/mixins';
+@import './components/buttons';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-
-//My own Styles
-
-@import "variables";
-@import "grid";
-@import "sizes";
-@import "mixins";
-@import "buttons";
-@import "nav";
-@import "index";
+//Views
+@import './view/index';

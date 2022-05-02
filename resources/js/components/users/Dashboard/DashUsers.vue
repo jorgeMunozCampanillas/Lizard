@@ -12,27 +12,27 @@
         </tr>
         </thead>
         <tbody>
-            <tr v-for="user in users" :key="user.id">
-                <th :id="'user.'+user.id+'.id'" scope="row">{{user.id}}</th>
+            <tr v-for="user in users" :key="user.idUsu">
+                <th :id="'user.'+user.idUsu+'.id'" scope="row">{{user.idUsu}}</th>
 
                 <!-- Name -->
-                <td :id="'user.'+user.id+'.name'" scope="row">
-                  <span v-if="!userEdit || userEdit.id != user.id">{{user.name}}</span>
+                <td :id="'user.'+user.idUsu+'.name'" scope="row">
+                  <span v-if="!userEdit || userEdit.idUsu != user.idUsu">{{user.name}}</span>
                   <input v-model='userEdit.name' v-else />  
                 </td>
 
                 <!-- Email -->
-                <td :id="'user.'+user.id+'.email'" scope="row">
-                <span v-if="!userEdit || userEdit.id != user.id">{{user.email}}</span>
+                <td :id="'user.'+user.idUsu+'.email'" scope="row">
+                <span v-if="!userEdit || userEdit.idUsu != user.idUsu">{{user.email}}</span>
                 <input v-model='userEdit.email' v-else />  
                 </td>
                 <td>{{user.permissions}}</td>
                 <td>{{user.created_at.substr(0,10)}}</td>
-                <td v-if="user.id != userAuth.id">
+                <td v-if="user.idUsu != userAuth.idUsu">
                 <button class="btn btn-danger" @click.prevent="deleteUser(user)" v-if="!userEdit">Delete</button>
                 <button class="btn btn-warning" @click.prevent="edit(user)" v-if="!userEdit">Edit</button>
-                <button class="btn btn-success" @click.prevent="editSuccess()" v-if="userEdit.id == user.id">Success</button>
-                <button class="btn btn-danger" @click.prevent="editCancel(user)" v-if="userEdit.id == user.id">Cancel</button>
+                <button class="btn btn-success" @click.prevent="editSuccess()" v-if="userEdit.idUsu == user.idUsu">Success</button>
+                <button class="btn btn-danger" @click.prevent="editCancel(user)" v-if="userEdit.idUsu == user.idUsu">Cancel</button>
                 </td>
             </tr>
         </tbody>
@@ -80,10 +80,10 @@ export default {
       //Crud
       //Delete one user
       deleteUser(userDelete){
-        console.log("voy a borrar el user: "+userDelete.name+" : "+userDelete.id)
-        axios.delete('api/users/'+userDelete.id).then((e)=>{
+        console.log("voy a borrar el user: "+userDelete.name+" : "+userDelete.idUsu)
+        axios.delete('api/users/'+userDelete.idUsu).then((e)=>{
           //Update the array with the users
-          this.users = this.users.filter((u) => u.id != userDelete.id);
+          this.users = this.users.filter((u) => u.idUsu != userDelete.idUsu);
         })
         .catch((e)=>{
           console.log("error en Dashboard.vue delete")
@@ -96,9 +96,9 @@ export default {
         this.userEdit = editUser;
       },
       editSuccess(){
-        axios.put('api/users/'+this.userEdit.id, this.userEdit).then((e)=>{
+        axios.put('api/users/'+this.userEdit.idUsu, this.userEdit).then((e)=>{
           this.users.map((u)=>{
-            if (u.id == this.userEdit.id) {
+            if (u.idUsu == this.userEdit.idUsu) {
               u = this.userEdit;
             }
           })
@@ -110,7 +110,7 @@ export default {
         this.userEdit = false;
       },
       editCancel(){
-        let inputName = document.getElementById("user."+this.userEdit.id+".name");
+        let inputName = document.getElementById("user."+this.userEdit.idUsu+".name");
         inputName.innerHTML = this.userEdit.name;
         this.userEdit = false;
       }

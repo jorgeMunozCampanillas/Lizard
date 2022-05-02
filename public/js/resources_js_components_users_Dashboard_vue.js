@@ -169,11 +169,11 @@ __webpack_require__.r(__webpack_exports__);
     deleteUser: function deleteUser(userDelete) {
       var _this3 = this;
 
-      console.log("voy a borrar el user: " + userDelete.name + " : " + userDelete.id);
-      axios["delete"]('api/users/' + userDelete.id).then(function (e) {
+      console.log("voy a borrar el user: " + userDelete.name + " : " + userDelete.idUsu);
+      axios["delete"]('api/users/' + userDelete.idUsu).then(function (e) {
         //Update the array with the users
         _this3.users = _this3.users.filter(function (u) {
-          return u.id != userDelete.id;
+          return u.idUsu != userDelete.idUsu;
         });
       })["catch"](function (e) {
         console.log("error en Dashboard.vue delete");
@@ -187,9 +187,9 @@ __webpack_require__.r(__webpack_exports__);
     editSuccess: function editSuccess() {
       var _this4 = this;
 
-      axios.put('api/users/' + this.userEdit.id, this.userEdit).then(function (e) {
+      axios.put('api/users/' + this.userEdit.idUsu, this.userEdit).then(function (e) {
         _this4.users.map(function (u) {
-          if (u.id == _this4.userEdit.id) {
+          if (u.idUsu == _this4.userEdit.idUsu) {
             u = _this4.userEdit;
           }
         });
@@ -200,7 +200,7 @@ __webpack_require__.r(__webpack_exports__);
       this.userEdit = false;
     },
     editCancel: function editCancel() {
-      var inputName = document.getElementById("user." + this.userEdit.id + ".name");
+      var inputName = document.getElementById("user." + this.userEdit.idUsu + ".name");
       inputName.innerHTML = this.userEdit.name;
       this.userEdit = false;
     }
@@ -456,18 +456,18 @@ var render = function () {
       _c(
         "tbody",
         _vm._l(_vm.users, function (user) {
-          return _c("tr", { key: user.id }, [
+          return _c("tr", { key: user.idUsu }, [
             _c(
               "th",
-              { attrs: { id: "user." + user.id + ".id", scope: "row" } },
-              [_vm._v(_vm._s(user.id))]
+              { attrs: { id: "user." + user.idUsu + ".id", scope: "row" } },
+              [_vm._v(_vm._s(user.idUsu))]
             ),
             _vm._v(" "),
             _c(
               "td",
-              { attrs: { id: "user." + user.id + ".name", scope: "row" } },
+              { attrs: { id: "user." + user.idUsu + ".name", scope: "row" } },
               [
-                !_vm.userEdit || _vm.userEdit.id != user.id
+                !_vm.userEdit || _vm.userEdit.idUsu != user.idUsu
                   ? _c("span", [_vm._v(_vm._s(user.name))])
                   : _c("input", {
                       directives: [
@@ -493,9 +493,9 @@ var render = function () {
             _vm._v(" "),
             _c(
               "td",
-              { attrs: { id: "user." + user.id + ".email", scope: "row" } },
+              { attrs: { id: "user." + user.idUsu + ".email", scope: "row" } },
               [
-                !_vm.userEdit || _vm.userEdit.id != user.id
+                !_vm.userEdit || _vm.userEdit.idUsu != user.idUsu
                   ? _c("span", [_vm._v(_vm._s(user.email))])
                   : _c("input", {
                       directives: [
@@ -523,7 +523,7 @@ var render = function () {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(user.created_at.substr(0, 10)))]),
             _vm._v(" "),
-            user.id != _vm.userAuth.id
+            user.idUsu != _vm.userAuth.idUsu
               ? _c("td", [
                   !_vm.userEdit
                     ? _c(
@@ -557,7 +557,7 @@ var render = function () {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.userEdit.id == user.id
+                  _vm.userEdit.idUsu == user.idUsu
                     ? _c(
                         "button",
                         {
@@ -573,7 +573,7 @@ var render = function () {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.userEdit.id == user.id
+                  _vm.userEdit.idUsu == user.idUsu
                     ? _c(
                         "button",
                         {
