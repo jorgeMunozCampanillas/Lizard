@@ -169,7 +169,13 @@ or
 
 
 
-
+## Week
+Week 1:
+- User login
+- User register
+- User middlewares
+- User Dashboard
+- Some views to try vue routes
 
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
