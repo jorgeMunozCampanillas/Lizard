@@ -55,6 +55,11 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Error desde Login.vue");
         _this.errors = error.response.data.errors;
       });
+    },
+    saveForm2: function saveForm2() {
+      axios.get('/sactum/csrf-cookie').then(function (res) {
+        console.log(res);
+      });
     }
   }
 });

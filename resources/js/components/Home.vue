@@ -1,8 +1,16 @@
 <template>
-<div>
-  <h1>Home 😁</h1>
-  <h3>Welcome {{user.name}}</h3>
-  <!-- <button @click.prevent="logout">Logout</button> -->
+<div id="home">
+  <div id="menu"><h1>Menu</h1></div>
+  <div id="posts">
+    <h1 class="title">Tops Componens</h1>
+    <div class="post" v-for="post in posts" :key="post.idPost">
+      <img class="post-img" src="" alt="">
+      <div>
+        <img class="post-user" src="" alt="">
+        {{post.idUsu}}
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -10,21 +18,23 @@
 export default {
   data() {
     return {
-      user:''
+      user:'',
+      posts: ''
     }
   },
   methods:{
-    logout(){
-      axios.post('/api/logout').then(()=>{
-        this.$router.push({name:"login"})
-      })
-      .catch((e)=>{
-        console.log("error en Home.vue logout")
-        console.log(e)
-      })
+    getAllCode(){
+        axios.get('/api/code').then(res=>{
+            this.posts = res.data;
+            console.log(res.data)
+        })
+        .catch(err=>{
+            console.log("Error getAllPost ShhowCode.vue")
+        })
     }
   },
   mounted() {
+    this.getAllCode(),
     axios.get('/api/athenticated').then((res)=>{
       console.log(res);
       this.user = res.data

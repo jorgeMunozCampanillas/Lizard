@@ -2,14 +2,16 @@
 
 .nav-1{
     font-family: $title-typography;
-    height: 7vh;
+    height: 3rem;
     color: $primary-white;
     font-size: $text-big-size;
     font-weight: 600;
-    display: flex;
     justify-content: space-around;
     background-color: $primary-dark;
-    
+    border-bottom: 4px solid $primary-dark-strong;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: min-content;
 
     ul{
         display: flex;
@@ -17,7 +19,7 @@
         align-items: center;
         height: 100%;
         
-        li{
+        .nav-mains{
             width: max-content;
             position: relative;
             height: 100%;
@@ -53,5 +55,44 @@
             left: 0;
             transition: all .3s;
         }
+    }
+}
+
+#nav-logo{
+    grid-column-end: span 3
+}
+#nav-pages{
+    grid-column-end: span 6
+}
+#nav-with-permiss, #nav-out-permiss{
+    grid-column-end: span 3;
+    justify-content: space-around;
+}
+
+#options{
+    border: 1px solid rgb(148, 148, 148);
+    border-radius: .3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 30rem;
+    position: absolute;
+    right: 2rem;
+    top: 2.5rem;
+    z-index: 5;
+    background-color: $secondary-dark;
+    align-items: flex-start;
+    font-size: $text-normal-size;
+    font-weight: normal;
+    min-width: max-content;
+    width: 12rem;
+
+    *{
+        width: 100%;
+        padding: .3rem .5rem;
+    }
+    *:hover{
+        transition: all .2s;
+        background-color: $primary-orange;
     }
 }

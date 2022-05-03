@@ -39,6 +39,12 @@ export default {
             })
         },
 
+        saveForm2(){
+            axios.get('/sactum/csrf-cookie').then(res => {
+                console.log(res)
+            })
+        }
+
     }
 }
 </script>

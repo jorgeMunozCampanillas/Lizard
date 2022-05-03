@@ -1,0 +1,14 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(5);
+    gap: .4rem;
+    margin: 1rem;
+}
+
+
+.grid-3{ grid-column-end: span 3}
+.grid-4{ grid-column-end: span 4}
+.grid-6{ grid-column-end: span 6}
+.grid-8{ grid-column-end: span 8}
+.grid-12{ grid-column-end: span 12}

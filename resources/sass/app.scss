@@ -7,6 +7,9 @@
 @import './components/nav';
 @import './utilities/mixins';
 @import './components/buttons';
+@import './components/table';
 
 //Views
 @import './view/index';
+@import './view/home';
+@import './view/dashboard';

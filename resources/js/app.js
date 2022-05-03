@@ -18,11 +18,11 @@ Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 
 //Vuex
-// import {store} from './store';
+import {store} from './store.js';
 
-// import Vuex from 'vuex'
+import Vuex from 'vuex'
 
-// Vue.use(Vuex);
+Vue.use(Vuex);
 
 const router = new VueRouter({
     mode: 'history',
@@ -32,6 +32,6 @@ const router = new VueRouter({
 const app = new Vue({
     el: '#app',
     router:router,
-    //store:store,
+    store:store,
     render: h => h(App),
 });

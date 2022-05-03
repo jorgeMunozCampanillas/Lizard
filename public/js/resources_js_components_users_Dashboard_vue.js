@@ -37,9 +37,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -362,17 +359,16 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { attrs: { id: "dashboard" } }, [
     _c("h1", [_vm._v("Madafucking dashBoard 😎")]),
     _vm._v(" "),
-    _c("div", { staticClass: "card text-center" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("ul", { staticClass: "nav nav-pills card-header-pills" }, [
-          _c("li", { staticClass: "nav-item" }, [
+    _c("div", { attrs: { id: "dash-table" } }, [
+      _c("div", { attrs: { id: "dash-options" } }, [
+        _c("ul", [
+          _c("li", [
             _c(
               "button",
               {
-                staticClass: "nav-link active",
                 attrs: { href: "#" },
                 on: {
                   click: function ($event) {
@@ -393,10 +389,9 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "card-body" },
         [
           !_vm.manage
-            ? _c("h3", { staticClass: "card-title" }, [
+            ? _c("h3", [
                 _vm._v("Do something Mr/s.Admin " + _vm._s(_vm.userAuth.name)),
               ])
             : _vm._e(),
@@ -413,19 +408,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("Link"),
-      ]),
-    ])
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Link")])])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link disabled" }, [_vm._v("Disabled")]),
-    ])
+    return _c("li", [_c("a", [_vm._v("Disabled")])])
   },
 ]
 render._withStripped = true

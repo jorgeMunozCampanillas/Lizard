@@ -1,0 +1,30 @@
+#dashboard{
+    color: white;
+    background-color: $primary-dark;
+    height: 100vh;
+}
+
+#dash-table{
+    border: 3px solid red;
+    margin: 3rem 7rem;
+}
+
+#dash-options{
+    border: 3px solid green;
+
+    ul{
+        display: flex;
+        
+        li{
+            margin: 1rem 1.5rem;
+            padding: .5rem 1rem;
+            border-radius: .2rem;
+            color: $primary-blue-strong;
+        }
+        
+        li:focus{
+            background-color: $primary-blue-strong;
+            color: white;
+        }
+    }
+}

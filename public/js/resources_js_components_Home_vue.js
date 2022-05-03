@@ -19,30 +19,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      user: ''
+      user: '',
+      posts: ''
     };
   },
   methods: {
-    logout: function logout() {
+    getAllCode: function getAllCode() {
       var _this = this;
 
-      axios.post('/api/logout').then(function () {
-        _this.$router.push({
-          name: "login"
-        });
-      })["catch"](function (e) {
-        console.log("error en Home.vue logout");
-        console.log(e);
+      axios.get('/api/code').then(function (res) {
+        _this.posts = res.data;
+        console.log(res.data);
+      })["catch"](function (err) {
+        console.log("Error getAllPost ShhowCode.vue");
       });
     }
   },
   mounted: function mounted() {
     var _this2 = this;
 
-    axios.get('/api/athenticated').then(function (res) {
+    this.getAllCode(), axios.get('/api/athenticated').then(function (res) {
       console.log(res);
       _this2.user = res.data;
     })["catch"](function (e) {
@@ -138,13 +145,41 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v("Home 😁")]),
+  return _c("div", { attrs: { id: "home" } }, [
+    _vm._m(0),
     _vm._v(" "),
-    _c("h3", [_vm._v("Welcome " + _vm._s(_vm.user.name))]),
+    _c(
+      "div",
+      { attrs: { id: "posts" } },
+      [
+        _c("h1", { staticClass: "title" }, [_vm._v("Tops Componens")]),
+        _vm._v(" "),
+        _vm._l(_vm.posts, function (post) {
+          return _c("div", { key: post.idPost, staticClass: "post" }, [
+            _c("img", { staticClass: "post-img", attrs: { src: "", alt: "" } }),
+            _vm._v(" "),
+            _c("div", [
+              _c("img", {
+                staticClass: "post-user",
+                attrs: { src: "", alt: "" },
+              }),
+              _vm._v("\r\n        " + _vm._s(post.idUsu) + "\r\n      "),
+            ]),
+          ])
+        }),
+      ],
+      2
+    ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "menu" } }, [_c("h1", [_vm._v("Menu")])])
+  },
+]
 render._withStripped = true
 
 
