@@ -19,6 +19,8 @@ class CreatePostTable extends Migration
             $table->string('html');
             $table->string('css')->nullable();
             $table->string('js')->nullable();
+            $table->string('img')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
 

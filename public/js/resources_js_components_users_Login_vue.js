@@ -57,9 +57,20 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     saveForm2: function saveForm2() {
-      axios.get('/sactum/csrf-cookie').then(function (res) {
+      var _this2 = this;
+
+      //axios.get('/sactum/csrf-cookie').then(() => {
+      this.axios.post('/api/login', this.form).then(function (res) {
         console.log(res);
-      });
+        _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('updateAuth');
+
+        _this2.$router.push({
+          name: "home"
+        });
+      })["catch"](function (error) {
+        console.log("Error desde Login.vue ddsfaf");
+        _this2.errors = error.response.data.errors;
+      }); //})
     }
   }
 });
@@ -221,7 +232,7 @@ var render = function () {
         on: {
           click: function ($event) {
             $event.preventDefault()
-            return _vm.saveForm.apply(null, arguments)
+            return _vm.saveForm2.apply(null, arguments)
           },
         },
       }),

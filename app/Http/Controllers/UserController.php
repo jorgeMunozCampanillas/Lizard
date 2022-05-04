@@ -42,9 +42,12 @@ class UserController extends Controller
         
         $request->validate([
             'name' => ['required'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' =>['required']
+            'email' => ['required', 'email', 'unique:user'],
+            'password' =>['required'],
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
+
+        
         
         $user = User::create([
             'name' => $request->name,

@@ -26,7 +26,6 @@ export default {
     getAllCode(){
         axios.get('/api/code').then(res=>{
             this.posts = res.data;
-            console.log(res.data)
         })
         .catch(err=>{
             console.log("Error getAllPost ShhowCode.vue")
@@ -36,12 +35,10 @@ export default {
   mounted() {
     this.getAllCode(),
     axios.get('/api/athenticated').then((res)=>{
-      console.log(res);
       this.user = res.data
     })
     .catch((e)=>{
       console.log("error en Home.vue mounted")
-      console.log(e)
     })
   },
 }

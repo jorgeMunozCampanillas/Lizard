@@ -41,6 +41,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -48,24 +53,36 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        img: ''
       },
+      imagepreview: '',
       errors: []
     };
   },
   methods: {
-    saveForm: function saveForm() {
+    //Img preview
+    imgSelected: function imgSelected(e) {
       var _this = this;
 
-      axios.post('api/users', this.form).then(function (req) {
-        _this.$router.push({
-          name: "login"
-        });
-      })["catch"](function (error) {
-        _this.errors = error.response.data.errors;
-        console.log("Error desde saveFrom de Register.vue");
-        console.log(error);
-      });
+      this.form.img = e.target.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(this.form.img);
+
+      reader.onload = function (e) {
+        _this.imagepreview = e.target.result;
+      };
+    },
+    saveForm: function saveForm() {
+      var data = new FromData();
+      data.append('image');
+      /*axios.post('api/users', this.form).then((req) =>{
+          this.$router.push({name:"login"});
+      }).catch((error) =>{
+          this.errors = error.response.data.errors;
+          console.log("Error desde saveFrom de Register.vue")
+          console.log(error)
+      })*/
     }
   }
 });
@@ -159,7 +176,7 @@ var render = function () {
   return _c("div", [
     _c("h1", [_vm._v("Register")]),
     _vm._v(" "),
-    _c("form", { attrs: { method: "POST" } }, [
+    _c("form", { attrs: { method: "POST", enctype: "multipart/form-data" } }, [
       _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
       _vm._v(" "),
       _c("br"),
@@ -316,6 +333,13 @@ var render = function () {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
+      _c("label", { attrs: { for: "email" } }, [_vm._v("Img")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "file", name: "img" },
+        on: { change: _vm.imgSelected },
+      }),
+      _vm._v(" "),
       _c("input", {
         attrs: { type: "submit", value: "Register" },
         on: {
@@ -326,6 +350,15 @@ var render = function () {
         },
       }),
     ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("p", [_vm._v("Preview")]),
+    _vm._v(" "),
+    _c("img", {
+      staticStyle: { "max-height": "100px" },
+      attrs: { src: _vm.imagepreview, alt: "" },
+    }),
     _vm._v(" "),
     _c("p", [
       _c("i", [_vm._v("Do you already have an account? 😉 ")]),

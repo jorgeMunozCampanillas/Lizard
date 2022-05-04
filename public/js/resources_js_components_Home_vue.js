@@ -40,7 +40,6 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/code').then(function (res) {
         _this.posts = res.data;
-        console.log(res.data);
       })["catch"](function (err) {
         console.log("Error getAllPost ShhowCode.vue");
       });
@@ -50,11 +49,9 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     this.getAllCode(), axios.get('/api/athenticated').then(function (res) {
-      console.log(res);
       _this2.user = res.data;
     })["catch"](function (e) {
       console.log("error en Home.vue mounted");
-      console.log(e);
     });
   }
 });

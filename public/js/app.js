@@ -5654,9 +5654,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
 var store = {
+  namespaced: true,
   state: {
-    user: "jorgeeee",
-    isAuthenticated: false
+    authenticated: false,
+    user: {}
+  },
+  getters: {
+    authenticated: function authenticated(state) {
+      return state.authenticated;
+    },
+    user: function user(state) {
+      return state.user;
+    }
+  },
+  mutations: {
+    SET_AUTHENTICATED: function SET_AUTHENTICATED(state, value) {
+      state.authenticated = value;
+    },
+    SET_USER: function SET_USER(state, value) {
+      state.user = value;
+    }
+  },
+  actions: {
+    login: function login(_ref) {
+      var commit = _ref.commit;
+      return axios.get('/api/user').then(function (_ref2) {
+        var data = _ref2.data;
+        commit('SET_USER', data);
+        commit('SET_AUTHENTICATED', true);
+        router.push({
+          name: 'dashboard'
+        });
+      })["catch"](function (_ref3) {
+        var data = _ref3.response.data;
+        commit('SET_USER', {});
+        commit('SET_AUTHENTICATED', false);
+      });
+    },
+    logout: function logout(_ref4) {
+      var commit = _ref4.commit;
+      commit('SET_USER', {});
+      commit('SET_AUTHENTICATED', false);
+    }
   }
 };
 

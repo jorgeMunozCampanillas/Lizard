@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "codemirror": "^5.65.3",
+        "html2canvas": "^1.4.1",
         "prismjs": "^1.28.0",
         "vue-axios": "^3.2.5",
         "vue-loader": "^15.9.8",
