@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             'img' => 'avatars/jorgeAvatar.png',
             'permissions' => 3,
             'remember_token' => Str::random(10),
+            'created_at' => '2022-05-05 14:12:02',
+            'updated_at' => '2022-05-05 14:12:02',
         ]);
 
         //Post

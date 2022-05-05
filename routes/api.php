@@ -27,4 +27,4 @@ Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
 
 
 //Code
-Route::resource('code', App\Http\Controllers\PostController::class)->only(['store', 'index']);
+Route::resource('code', App\Http\Controllers\PostController::class)->only(['store', 'index', 'destroy', 'update']);

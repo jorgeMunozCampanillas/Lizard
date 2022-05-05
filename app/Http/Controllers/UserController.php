@@ -41,7 +41,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
- 
         $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:user'],
@@ -51,9 +50,6 @@ class UserController extends Controller
 
         $file = $request->file('img');
         $path = $request->file('img')->storePublicly('avatars', 'public');
-        //Storage::setVisibility($path, 'public');
-
-
         
         $user = User::create([
             'name' => $request->name,

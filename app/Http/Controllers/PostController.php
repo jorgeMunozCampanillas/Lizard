@@ -37,17 +37,24 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $req)
+    public function store(Request $request)
     {
-        $req->validate([
+        return response()->json([
+            'hola' => $request->img
+        ]);
+        $request->validate([
             'html' => ['required'],
         ]);
 
-        Post::create([
-            'idUsu' => $req->idUsu,
-            'html' => $req->html,
-            'css' => $req->css,
-            'js' => $req->js,
+        $file = $request->file('img');
+        $path = $request->file('img')->storePublicly('code', 'public');
+
+        $post = Post::create([
+            'idUsu' => $request->idUsu,
+            'html' => $request->html,
+            'css' => $request->css,
+            'js' => $request->js,
+            'img' => $path,
         ]);
 
         return response()->json([

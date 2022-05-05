@@ -64,10 +64,10 @@ export default {
             data.append('email', this.form.email)
             data.append('password', this.form.password)
             data.append('img', this.form.img)
+            console.log(this.form.img)
+            
             axios.post('api/users', data).then((req) =>{
-                console.log(req);
-                //this.$router.push({name:"login"});
-                console.log("todo ok")
+                this.$router.push({name:"login"});
             }).catch((error) =>{
                 //this.errors = error.response.data.errors;
                 console.log("Error desde saveFrom de Register.vue")

@@ -74,15 +74,18 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     saveForm: function saveForm() {
+      var _this2 = this;
+
       var data = new FormData();
       data.append('name', this.form.name);
       data.append('email', this.form.email);
       data.append('password', this.form.password);
       data.append('img', this.form.img);
+      console.log(this.form.img);
       axios.post('api/users', data).then(function (req) {
-        console.log(req); //this.$router.push({name:"login"});
-
-        console.log("todo ok");
+        _this2.$router.push({
+          name: "login"
+        });
       })["catch"](function (error) {
         //this.errors = error.response.data.errors;
         console.log("Error desde saveFrom de Register.vue");
