@@ -117,6 +117,12 @@ button, a, .reset {
   background-color: #E45858;
 }
 
+#avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 100%;
+}
+
 .button-normal {
   background: none;
   border: 0;

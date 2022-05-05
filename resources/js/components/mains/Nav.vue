@@ -23,7 +23,8 @@
         </li>
         <li>
             <button @click="changeOptions">
-                <i style="font-size:1.6rem" class="bi bi-person-circle"></i>
+                <i v-if="auth.img==null" style="font-size:1.6rem" class="bi bi-person-circle"></i>
+                <img id="avatar" v-else :src="'storage/'+auth.img" alt="">
             </button>
         </li>
     </ul>

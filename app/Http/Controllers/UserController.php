@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -39,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+ 
         $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:user'],
@@ -47,13 +49,18 @@ class UserController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        
+        $file = $request->file('img');
+        $path = $request->file('img')->storePublicly('avatars', 'public');
+        //Storage::setVisibility($path, 'public');
+
+
         
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'permissions' => 1,
+            'img' => $path,
         ]);
 
         return response()->json([

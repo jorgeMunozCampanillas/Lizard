@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'xXJorgeXx',
             'email' => 'j@g.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), // password
+            'password' => Hash::make('12345678'),
+            'img' => 'avatars/jorgeAvatar.png',
             'permissions' => 3,
             'remember_token' => Str::random(10),
         ]);

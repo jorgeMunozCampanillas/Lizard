@@ -5369,6 +5369,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'naVue',
@@ -28393,10 +28394,18 @@ var render = function () {
             _vm._v(" "),
             _c("li", [
               _c("button", { on: { click: _vm.changeOptions } }, [
-                _c("i", {
-                  staticClass: "bi bi-person-circle",
-                  staticStyle: { "font-size": "1.6rem" },
-                }),
+                _vm.auth.img == null
+                  ? _c("i", {
+                      staticClass: "bi bi-person-circle",
+                      staticStyle: { "font-size": "1.6rem" },
+                    })
+                  : _c("img", {
+                      attrs: {
+                        id: "avatar",
+                        src: "storage/" + _vm.auth.img,
+                        alt: "",
+                      },
+                    }),
               ]),
             ]),
           ])

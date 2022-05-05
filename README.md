@@ -156,7 +156,7 @@ or
 - [ ] Code
   - [X] Code beautiful
   - [ ] Code Crud
-  - [ ] Code Screenshot
+  - [X] Code Screenshot
   - [ ] Change theme
   - [ ] Change displayed
 
@@ -189,3 +189,5 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 - Vue Routes: https://codingpotions.com/vue-router
 - Vue Middleware: https://laravelvuespa.com/middleware/middleware-overview/
 - Vuex(3): https://v3.vuex.vuejs.org/guide/#the-simplest-store
+- UploadImg: https://www.youtube.com/watch?v=2JteMJzNI44
+- public/permiss for img: https://laravel.com/docs/8.x/filesystem

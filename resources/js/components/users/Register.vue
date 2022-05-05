@@ -59,15 +59,20 @@ export default {
             };
         },
         saveForm(){
-            let data = new FromData;
-            data.append('image')
-            /*axios.post('api/users', this.form).then((req) =>{
-                this.$router.push({name:"login"});
+            let data = new FormData;
+            data.append('name', this.form.name)
+            data.append('email', this.form.email)
+            data.append('password', this.form.password)
+            data.append('img', this.form.img)
+            axios.post('api/users', data).then((req) =>{
+                console.log(req);
+                //this.$router.push({name:"login"});
+                console.log("todo ok")
             }).catch((error) =>{
-                this.errors = error.response.data.errors;
+                //this.errors = error.response.data.errors;
                 console.log("Error desde saveFrom de Register.vue")
                 console.log(error)
-            })*/
+            })
         }
     },
 }
