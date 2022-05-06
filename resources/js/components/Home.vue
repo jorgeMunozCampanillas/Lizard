@@ -4,8 +4,8 @@
   <div id="posts">
     <h1 class="title">Tops Componens</h1>
     <div class="post" v-for="post in posts" :key="post.idPost">
-      <img class="post-img" src="" alt="">
-      <div>
+      <img v-if="post.img!=null" :src="'storage/'+post.img" class="post-img" alt="">
+    <div>
         <img class="post-user" src="" alt="">
         {{post.idUsu}}
       </div>

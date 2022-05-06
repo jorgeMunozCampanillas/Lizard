@@ -39,9 +39,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json([
-            'hola' => $request->img
-        ]);
+       
         $request->validate([
             'html' => ['required'],
         ]);

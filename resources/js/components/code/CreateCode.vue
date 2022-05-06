@@ -40,7 +40,7 @@ export default {
       css:'h1{color:red}',
       js:'',
       src:'',
-      img:'jaja no',
+      img:'',
     }
   },
   mounted() {
@@ -70,49 +70,43 @@ export default {
 
 
     async save(){
+
+      //set the code background the page to screeshot ( z-index -5 )
+      //shhh this is our secret...
       let codeScreenArea = document.getElementById("codeScreenArea");
       codeScreenArea.innerHTML = this.xml;
       codeScreenArea.innerHTML += '<style>'+this.css+'</style>';
 
-      await html2canvas(codeScreenArea).then((canvas)=>{
-        document.getElementById("code_output").appendChild(canvas);
-        this.img = canvas.toDataURL();
+      await html2canvas(codeScreenArea, {
+        //Set properties of the canvas (720p)
+        width:500,
+        height:374,
+
+
+      }).then( async (canvas)=>{
+
+        //convert the canvas to  blob and this to file :)))
+        canvas.toBlob((blob)=>{
+          this.img = new File([blob], 'prueba.jpg', {type: "image/jpeg"});
+        
+          let data = new FormData;
+          data.append('idUsu', this.user.idUsu);
+          data.append('html', this.xml);
+          data.append('css', this.css);
+          data.append('js', this.js);
+          data.append('img', this.img);
+
+          axios.post('/api/code', data).then(res=>{
+            console.log(res)
+            console.log("añadido :))");
+          })
+          .catch((error)=>{
+            console.log("Error save desde CreateCode.vue")
+            this.errors = error.response.data.errors;
+          })
+
+        });
       });
-
-
-    
-      let data = new FormData;
-      data.append('idUsu', this.user.idUsu);
-      data.append('html', this.xml);
-      data.append('css', this.css);
-      data.append('js', this.js);
-      data.append('img', this.img);
-
-      axios.post('/api/code', data).then(res=>{
-        console.log(res)
-        console.log("añadido :))");
-      })
-      .catch((error)=>{
-        console.log("Error save desde CreateCode.vue")
-        this.errors = error.response.data.errors;
-      })
-      /*
-      let send = {
-        'idUsu': this.user.idUsu,
-        'html': this.xml,
-        'css': this.css,
-        'js': this.js,
-      }
-
-      axios.post('/api/code', send).then(res=>{
-        console.log(res)
-        console.log("añadido :))");
-      })
-      .catch((error)=>{
-        console.log("Error save desde CreateCode.vue")
-        this.errors = error.response.data.errors;
-      })
-      */
       
     }
   },

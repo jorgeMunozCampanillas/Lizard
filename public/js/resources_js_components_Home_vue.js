@@ -153,7 +153,12 @@ var render = function () {
         _vm._v(" "),
         _vm._l(_vm.posts, function (post) {
           return _c("div", { key: post.idPost, staticClass: "post" }, [
-            _c("img", { staticClass: "post-img", attrs: { src: "", alt: "" } }),
+            post.img != null
+              ? _c("img", {
+                  staticClass: "post-img",
+                  attrs: { src: "storage/" + post.img, alt: "" },
+                })
+              : _vm._e(),
             _vm._v(" "),
             _c("div", [
               _c("img", {

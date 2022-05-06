@@ -84,7 +84,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       css: 'h1{color:red}',
       js: '',
       src: '',
-      img: 'jaja no'
+      img: ''
     };
   },
   mounted: function mounted() {
@@ -108,58 +108,67 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     save: function save() {
       var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var codeScreenArea, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var codeScreenArea;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
+                //set the code background the page to screeshot ( z-index -5 )
+                //shhh this is our secret...
                 codeScreenArea = document.getElementById("codeScreenArea");
                 codeScreenArea.innerHTML = _this2.xml;
                 codeScreenArea.innerHTML += '<style>' + _this2.css + '</style>';
-                _context.next = 5;
-                return html2canvas__WEBPACK_IMPORTED_MODULE_10___default()(codeScreenArea).then(function (canvas) {
-                  document.getElementById("code_output").appendChild(canvas);
-                  _this2.img = canvas.toDataURL();
-                });
+                _context2.next = 5;
+                return html2canvas__WEBPACK_IMPORTED_MODULE_10___default()(codeScreenArea, {
+                  //Set properties of the canvas (720p)
+                  width: 500,
+                  height: 374
+                }).then( /*#__PURE__*/function () {
+                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(canvas) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            //convert the canvas to  blob and this to file :)))
+                            canvas.toBlob(function (blob) {
+                              _this2.img = new File([blob], 'prueba.jpg', {
+                                type: "image/jpeg"
+                              });
+                              var data = new FormData();
+                              data.append('idUsu', _this2.user.idUsu);
+                              data.append('html', _this2.xml);
+                              data.append('css', _this2.css);
+                              data.append('js', _this2.js);
+                              data.append('img', _this2.img);
+                              axios.post('/api/code', data).then(function (res) {
+                                console.log(res);
+                                console.log("añadido :))");
+                              })["catch"](function (error) {
+                                console.log("Error save desde CreateCode.vue");
+                                _this2.errors = error.response.data.errors;
+                              });
+                            });
+
+                          case 1:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  }));
+
+                  return function (_x) {
+                    return _ref.apply(this, arguments);
+                  };
+                }());
 
               case 5:
-                data = new FormData();
-                data.append('idUsu', _this2.user.idUsu);
-                data.append('html', _this2.xml);
-                data.append('css', _this2.css);
-                data.append('js', _this2.js);
-                data.append('img', _this2.img);
-                axios.post('/api/code', data).then(function (res) {
-                  console.log(res);
-                  console.log("añadido :))");
-                })["catch"](function (error) {
-                  console.log("Error save desde CreateCode.vue");
-                  _this2.errors = error.response.data.errors;
-                });
-                /*
-                let send = {
-                  'idUsu': this.user.idUsu,
-                  'html': this.xml,
-                  'css': this.css,
-                  'js': this.js,
-                }
-                  axios.post('/api/code', send).then(res=>{
-                  console.log(res)
-                  console.log("añadido :))");
-                })
-                .catch((error)=>{
-                  console.log("Error save desde CreateCode.vue")
-                  this.errors = error.response.data.errors;
-                })
-                */
-
-              case 12:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     }
   }
