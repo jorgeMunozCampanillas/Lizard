@@ -20,10 +20,6 @@ Vue.use(VueAxios, axios);
 //Vuex
 import {store} from './store.js';
 
-import Vuex from 'vuex'
-
-Vue.use(Vuex);
-
 const router = new VueRouter({
     mode: 'history',
     routes: routes,

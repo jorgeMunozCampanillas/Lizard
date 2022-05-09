@@ -1,19 +1,23 @@
-export const store = {
+import Vuex from 'vuex';
+import Vue from 'vue';
+Vue.use(Vuex);
+
+export const store = new Vuex.Store({
 
     state:{  
         auth: {},
         isAuthenticated: false
     },  
     mutations:{  
-        setAuth(data) {    
-            this.auth = data;
-            this.isAuthenticated = true;            
+        setAuth(state, data) {    
+            state.auth = data;
+            state.isAuthenticated = true;            
         },
     },
     actions:{
-       prueba({ commit },data){
+        login({ commit },data){
             commit('setAuth', data);
        }
     }
 
-};
+});

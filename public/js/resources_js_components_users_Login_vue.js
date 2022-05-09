@@ -46,23 +46,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.axios.post('/api/login', this.form).then(function (res) {
-        _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('updateAuth');
+        _this.$store.dispatch('login', res.data);
 
-        _this.$router.push({
-          name: "home"
-        });
+        console.log(_this.$store.state.auth);
+        _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('updateAuth'); //this.$router.push({name:"home"})
       })["catch"](function (error) {
         console.log("Error desde Login.vue ddsfaf");
         console.log(error);
         _this.errors = error.response.data.errors;
       });
-    },
-    foo: function foo() {
-      this.$store.actions.prueba({
-        'nombre': 'jorge'
-      });
-      console.log(this.$store.state.auth);
-      console.log(this.$store.state.isAuthenticated);
     }
   }
 });
