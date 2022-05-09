@@ -32,10 +32,7 @@ export default {
         saveForm(){
             this.axios.post('/api/login', this.form).then((res)=>{
                 this.$store.dispatch('login', res.data);
-                console.log(this.$store.state.auth)
-
-                EventBus.$emit('updateAuth');
-                //this.$router.push({name:"home"})
+                this.$router.push({name:"home"})
             }).catch((error)=>{
                 console.log("Error desde Login.vue ddsfaf")
                 console.log(error)

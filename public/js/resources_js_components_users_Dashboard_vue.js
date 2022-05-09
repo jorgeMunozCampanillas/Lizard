@@ -45,28 +45,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       //users
-      manage: false,
-      userAuth: ''
+      manage: false
     };
-  },
-  beforeMount: function beforeMount() {
-    this.getUserAuth();
   },
   methods: {
     //MANAGE CHANGE
     manageChange: function manageChange(option) {
       this.manage = option;
-    },
-    //Get the user auth
-    getUserAuth: function getUserAuth() {
-      var _this = this;
-
-      axios.get('api/athenticated').then(function (res) {
-        _this.userAuth = res.data;
-      })["catch"](function (e) {
-        console.log("error en Dashboard.vue getUserAuth");
-        console.log(e);
-      });
     }
   }
 });
@@ -129,13 +114,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       users: [],
-      userAuth: '',
       userEdit: false
     };
   },
   created: function created() {
     this.getUsers();
-    this.getUserAuth();
   },
   methods: {
     //Getters
@@ -150,26 +133,15 @@ __webpack_require__.r(__webpack_exports__);
         console.log(e);
       });
     },
-    //Get the user auth
-    getUserAuth: function getUserAuth() {
-      var _this2 = this;
-
-      axios.get('api/athenticated').then(function (res) {
-        _this2.userAuth = res.data;
-      })["catch"](function (e) {
-        console.log("error en Dashboard.vue getUserAuth");
-        console.log(e);
-      });
-    },
     //Crud
     //Delete one user
     deleteUser: function deleteUser(userDelete) {
-      var _this3 = this;
+      var _this2 = this;
 
       console.log("voy a borrar el user: " + userDelete.name + " : " + userDelete.idUsu);
       axios["delete"]('api/users/' + userDelete.idUsu).then(function (e) {
         //Update the array with the users
-        _this3.users = _this3.users.filter(function (u) {
+        _this2.users = _this2.users.filter(function (u) {
           return u.idUsu != userDelete.idUsu;
         });
       })["catch"](function (e) {
@@ -182,12 +154,12 @@ __webpack_require__.r(__webpack_exports__);
       this.userEdit = editUser;
     },
     editSuccess: function editSuccess() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.put('api/users/' + this.userEdit.idUsu, this.userEdit).then(function (e) {
-        _this4.users.map(function (u) {
-          if (u.idUsu == _this4.userEdit.idUsu) {
-            u = _this4.userEdit;
+        _this3.users.map(function (u) {
+          if (u.idUsu == _this3.userEdit.idUsu) {
+            u = _this3.userEdit;
           }
         });
       })["catch"](function (e) {
@@ -392,7 +364,10 @@ var render = function () {
         [
           !_vm.manage
             ? _c("h3", [
-                _vm._v("Do something Mr/s.Admin " + _vm._s(_vm.userAuth.name)),
+                _vm._v(
+                  "Do something Mr/s.Admin " +
+                    _vm._s(this.$store.state.auth.permissions.name)
+                ),
               ])
             : _vm._e(),
           _vm._v(" "),
@@ -512,7 +487,7 @@ var render = function () {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(user.created_at.substr(0, 10)))]),
             _vm._v(" "),
-            user.idUsu != _vm.userAuth.idUsu
+            user.idUsu != _vm.$store.state.auth.permissions.idUsu
               ? _c("td", [
                   !_vm.userEdit
                     ? _c(

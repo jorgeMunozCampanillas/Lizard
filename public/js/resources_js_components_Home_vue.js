@@ -27,12 +27,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      user: '',
       posts: ''
     };
+  },
+  mounted: function mounted() {
+    this.getAllCode();
   },
   methods: {
     getAllCode: function getAllCode() {
@@ -44,24 +48,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Error Home.vue getAllCode");
         console.log(err.data);
       });
-    },
-    showCode: function showCode(post) {
-      this.$router.push({
-        name: "show-code",
-        params: {
-          id: post
-        }
-      });
     }
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    this.getAllCode(), axios.get('/api/athenticated').then(function (res) {
-      _this2.user = res.data;
-    })["catch"](function (e) {
-      console.log("error en Home.vue mounted");
-    });
   }
 });
 
@@ -163,32 +150,34 @@ var render = function () {
         _vm._l(_vm.posts, function (post) {
           return _c(
             "div",
-            {
-              key: post.idPost,
-              staticClass: "post",
-              on: {
-                click: function ($event) {
-                  $event.preventDefault()
-                  return _vm.showCode(post.idPost)
-                },
-              },
-            },
+            { key: post.idPost, staticClass: "post" },
             [
-              post.img != null
-                ? _c("img", {
-                    staticClass: "post-img",
-                    attrs: { src: "storage/" + post.img, alt: "" },
-                  })
-                : _vm._e(),
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: { name: "show-code", params: { id: post.idPost } },
+                  },
+                },
+                [
+                  post.img != null
+                    ? _c("img", {
+                        staticClass: "post-img",
+                        attrs: { src: "storage/" + post.img, alt: "" },
+                      })
+                    : _vm._e(),
+                ]
+              ),
               _vm._v(" "),
               _c("div", [
                 _c("img", {
                   staticClass: "post-user",
                   attrs: { src: "", alt: "" },
                 }),
-                _vm._v("\r\n        " + _vm._s(post.idUsu) + "\r\n      "),
+                _vm._v("\r\n          " + _vm._s(post.idUsu) + "\r\n        "),
               ]),
-            ]
+            ],
+            1
           )
         }),
       ],

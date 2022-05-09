@@ -28,7 +28,7 @@
                 </td>
                 <td>{{user.permissions}}</td>
                 <td>{{user.created_at.substr(0,10)}}</td>
-                <td v-if="user.idUsu != userAuth.idUsu">
+                <td v-if="user.idUsu != $store.state.auth.permissions.idUsu">
                 <button class="btn btn-danger" @click.prevent="deleteUser(user)" v-if="!userEdit">Delete</button>
                 <button class="btn btn-warning" @click.prevent="edit(user)" v-if="!userEdit">Edit</button>
                 <button class="btn btn-success" @click.prevent="editSuccess()" v-if="userEdit.idUsu == user.idUsu">Success</button>
@@ -45,13 +45,11 @@ export default {
     data() {
       return {
         users:[],
-        userAuth: '',
         userEdit:false,
       }
     },
     created() {
       this.getUsers();
-      this.getUserAuth();
     },
     methods: {
       //Getters
@@ -65,17 +63,6 @@ export default {
           console.log(e)
         });
       },
-      //Get the user auth
-      getUserAuth(){
-        axios.get('api/athenticated').then((res)=>{
-          this.userAuth = res.data;
-        })
-        .catch((e)=>{
-          console.log("error en Dashboard.vue getUserAuth");
-          console.log(e);
-        })
-      },
-
 
       //Crud
       //Delete one user

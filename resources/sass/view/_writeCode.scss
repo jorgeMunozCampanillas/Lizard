@@ -1,0 +1,18 @@
+.writeCode{
+}
+.editors{
+    display:flex;
+    border: 2px solid red;
+    width: 100%;
+
+}
+.editor{
+    resize: horizontal;
+    height: 100%;
+    width: 100%;
+}
+#code{
+    width: 100%;
+    
+    border: 5px solid black;
+}

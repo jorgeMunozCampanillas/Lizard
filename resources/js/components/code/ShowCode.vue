@@ -41,9 +41,6 @@ export default {
         test:''
     }
   },
-  mounted() {
-    this.getAuth();
-  },
   created(){
     this.getCode();
   },
@@ -62,16 +59,6 @@ export default {
         .catch(err => {
             console.log("Error ShowCode.vue getCode");
             console.log(err);
-        })
-    },
-        
-    getAuth(){
-        axios.get('/api/athenticated').then((res)=>{
-        this.user = res.data
-        })
-        .catch((e)=>{
-        console.log("error en CreateCode.vue mounted")
-        console.log(e)
         })
     },
 

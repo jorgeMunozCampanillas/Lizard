@@ -24,6 +24,7 @@ Route::get('athenticated', [App\Http\Controllers\UserController::class, 'auth'])
 Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index', 'destroy', 'update'])->middleware(['auth:sanctum']);
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
+Route::get('getPost', [App\Http\Controllers\UserController::class, 'getPosts'])->middleware(['auth:sanctum']);
 
 
 //Code

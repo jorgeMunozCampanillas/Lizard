@@ -1,10 +1,12 @@
 <template>
-<div>
-  <Editor class="editor" lang="xml" v-on:update="updateCode"/>
-  <Editor class="editor" lang="css" v-on:update="updateCode"/>
-  <Editor class="editor" lang="javascript" v-on:update="updateCode"/>
+<div class="writeCode">
+  <div class="editors">
+    <Editor class="editor" lang="xml" v-on:update="updateCode"/>
+    <Editor class="editor" lang="css" v-on:update="updateCode"/>
+    <Editor class="editor" lang="javascript" v-on:update="updateCode"/>
+  </div>
   <div id="code_output">
-    <iframe id="code" :srcdoc="src" style="border: 5px solid;"> </iframe>
+    <iframe id="code" :srcdoc="src"> </iframe>
     <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
   </div>
   
@@ -42,15 +44,6 @@ export default {
       src:'',
       img:'',
     }
-  },
-  mounted() {
-    axios.get('/api/athenticated').then((res)=>{
-      this.user = res.data
-    })
-    .catch((e)=>{
-      console.log("error en CreateCode.vue mounted")
-      console.log(e)
-    })
   },
   methods: {
 

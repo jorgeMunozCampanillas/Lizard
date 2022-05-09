@@ -23,6 +23,11 @@ class UserController extends Controller
         return response()->json($users);
     }
 
+
+    public function getPosts(Request $request){
+        return response()->json(Auth::user()->getPosts());
+    }
+
     /**
      * Show the form for creating a new resource.
      *

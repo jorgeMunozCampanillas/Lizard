@@ -61,6 +61,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 //Code mirror
 
 
@@ -87,16 +89,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       img: ''
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/api/athenticated').then(function (res) {
-      _this.user = res.data;
-    })["catch"](function (e) {
-      console.log("error en CreateCode.vue mounted");
-      console.log(e);
-    });
-  },
   methods: {
     updateCode: function updateCode(lang, code) {
       this[lang] = code;
@@ -106,7 +98,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.src = "\n        <html>\n            <body>".concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </html>");
     },
     save: function save() {
-      var _this2 = this;
+      var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var codeScreenArea;
@@ -117,8 +109,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //set the code background the page to screeshot ( z-index -5 )
                 //shhh this is our secret...
                 codeScreenArea = document.getElementById("codeScreenArea");
-                codeScreenArea.innerHTML = _this2.xml;
-                codeScreenArea.innerHTML += '<style>' + _this2.css + '</style>';
+                codeScreenArea.innerHTML = _this.xml;
+                codeScreenArea.innerHTML += '<style>' + _this.css + '</style>';
                 _context2.next = 5;
                 return html2canvas__WEBPACK_IMPORTED_MODULE_10___default()(codeScreenArea, {
                   //Set properties of the canvas (720p)
@@ -132,21 +124,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                           case 0:
                             //convert the canvas to  blob and this to file :)))
                             canvas.toBlob(function (blob) {
-                              _this2.img = new File([blob], 'prueba.jpg', {
+                              _this.img = new File([blob], 'prueba.jpg', {
                                 type: "image/jpeg"
                               });
                               var data = new FormData();
-                              data.append('idUsu', _this2.user.idUsu);
-                              data.append('html', _this2.xml);
-                              data.append('css', _this2.css);
-                              data.append('js', _this2.js);
-                              data.append('img', _this2.img);
+                              data.append('idUsu', _this.user.idUsu);
+                              data.append('html', _this.xml);
+                              data.append('css', _this.css);
+                              data.append('js', _this.js);
+                              data.append('img', _this.img);
                               axios.post('/api/code', data).then(function (res) {
                                 console.log(res);
                                 console.log("añadido :))");
                               })["catch"](function (error) {
                                 console.log("Error save desde CreateCode.vue");
-                                _this2.errors = error.response.data.errors;
+                                _this.errors = error.response.data.errors;
                               });
                             });
 
@@ -237,7 +229,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fillEditor: function fillEditor() {
-      this.editor.setValue(this.code);
+      if (this.code != null) this.editor.setValue(this.code);
     },
     editorValue: function editorValue() {
       return this.editor.getValue();
@@ -23178,43 +23170,43 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("Editor", {
-        staticClass: "editor",
-        attrs: { lang: "xml" },
-        on: { update: _vm.updateCode },
-      }),
-      _vm._v(" "),
-      _c("Editor", {
-        staticClass: "editor",
-        attrs: { lang: "css" },
-        on: { update: _vm.updateCode },
-      }),
-      _vm._v(" "),
-      _c("Editor", {
-        staticClass: "editor",
-        attrs: { lang: "javascript" },
-        on: { update: _vm.updateCode },
-      }),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "code_output" } }, [
-        _c("iframe", {
-          staticStyle: { border: "5px solid" },
-          attrs: { id: "code", srcdoc: _vm.src },
+  return _c("div", { staticClass: "writeCode" }, [
+    _c(
+      "div",
+      { staticClass: "editors" },
+      [
+        _c("Editor", {
+          staticClass: "editor",
+          attrs: { lang: "xml" },
+          on: { update: _vm.updateCode },
         }),
         _vm._v(" "),
-        _c("div", {
-          staticStyle: { position: "absolute", top: "0", "z-index": "-5" },
-          attrs: { id: "codeScreenArea" },
+        _c("Editor", {
+          staticClass: "editor",
+          attrs: { lang: "css" },
+          on: { update: _vm.updateCode },
         }),
-      ]),
+        _vm._v(" "),
+        _c("Editor", {
+          staticClass: "editor",
+          attrs: { lang: "javascript" },
+          on: { update: _vm.updateCode },
+        }),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "code_output" } }, [
+      _c("iframe", { attrs: { id: "code", srcdoc: _vm.src } }),
       _vm._v(" "),
-      _c("button", { on: { click: _vm.save } }, [_vm._v("Guardar")]),
-    ],
-    1
-  )
+      _c("div", {
+        staticStyle: { position: "absolute", top: "0", "z-index": "-5" },
+        attrs: { id: "codeScreenArea" },
+      }),
+    ]),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.save } }, [_vm._v("Guardar")]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

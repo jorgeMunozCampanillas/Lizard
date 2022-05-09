@@ -70,10 +70,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $idPost)
     {
         return response()->json([
-            'code' => Post::findOrFail($id),
+            'code' => Post::findOrFail($idPost),
         ]);
     }
 

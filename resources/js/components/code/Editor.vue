@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         fillEditor(){
-            this.editor.setValue(this.code)
+            if (this.code!=null) this.editor.setValue(this.code);
         },
         editorValue(){
             return this.editor.getValue();

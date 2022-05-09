@@ -48,8 +48,9 @@ __webpack_require__.r(__webpack_exports__);
       this.axios.post('/api/login', this.form).then(function (res) {
         _this.$store.dispatch('login', res.data);
 
-        console.log(_this.$store.state.auth);
-        _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('updateAuth'); //this.$router.push({name:"home"})
+        _this.$router.push({
+          name: "home"
+        });
       })["catch"](function (error) {
         console.log("Error desde Login.vue ddsfaf");
         console.log(error);
@@ -58,6 +59,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/bus.js":
+/*!*****************************!*\
+  !*** ./resources/js/bus.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue__WEBPACK_IMPORTED_MODULE_0__["default"]());
 
 /***/ }),
 

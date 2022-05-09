@@ -16,7 +16,7 @@
       </ul>
     </div>
     <div>
-      <h3 v-if="!manage">Do something Mr/s.Admin {{userAuth.name}}</h3>
+      <h3 v-if="!manage">Do something Mr/s.Admin {{this.$store.state.auth.permissions.name}}</h3>
         <dash-users v-if="manage == 'manageUsers'"></dash-users>
     </div>
   </div>
@@ -31,27 +31,13 @@ export default {
       return {
         //users
         manage:false,
-        userAuth:'',
       }
-    },
-    beforeMount() {
-      this.getUserAuth()
     },
     methods: {
       //MANAGE CHANGE
       manageChange(option){
         this.manage = option;
       },
-      //Get the user auth
-      getUserAuth(){
-        axios.get('api/athenticated').then((res)=>{
-          this.userAuth = res.data;
-        })
-        .catch((e)=>{
-          console.log("error en Dashboard.vue getUserAuth");
-          console.log(e);
-        })
-      }
     },
 }
 </script>

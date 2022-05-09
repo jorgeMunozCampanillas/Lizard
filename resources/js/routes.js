@@ -1,3 +1,6 @@
+import { store } from './store.js';
+
+/* ===============< COMPONENTS >=============== */
 //Base
 const Base = () => import('./components/Base.vue');
 
@@ -17,27 +20,44 @@ const Index = () => import('./components/Index.vue');
 
 //CODE
 const CreateCode = () => import('./components/code/CreateCode.vue');
-const showAllCode = () => import('./components/code/ShowCode.vue');
+const ShowAllCode = () => import('./components/code/ShowCode.vue');
+const MyCode = () => import('./components/code/CodeProfile.vue');
 
 
 
+/* ===============< MIDDLEWARES >=============== */
+const noAuth = (to, from, next) => {
+    if (store.state.isAuthenticated) {
+        next({name:'home'});
+    }else{
+        next();
+    }
+}
+
+const auth = (to, from, next) => {
+    if (store.state.auth.permissions != 0) {
+        next();
+    }else{
+        next({name:'login'});
+    }
+}
+
+const admin = (to, from, next) => {
+    if (store.state.auth.permissions > 1) {
+        next();
+    }else{
+        next({name:'login'});
+    }
+}
 
 
-
+/* ===============< ROUTES >=============== */
 export const routes = [
-
-    //No Auth (auth -> redirect to home)
     {
+        //No Auth
         path:'',
         component:Base,
-        beforeEnter: (to, from, next) => {
-            axios.get('/api/athenticated')
-            .then((e)=>{
-                if (e.data.permissions != 0) return next({name:'home'});
-                else next();
-            })
-            .catch( e => next() );
-        },
+        beforeEnter: noAuth,
 
         children:[
             {
@@ -56,20 +76,11 @@ export const routes = [
                 component:Register,
             },
         ],
-    },
-
-    //Auth (no auth -> redirect to login)
-    {
+    },{
+        //Auth
         path:'',
         component:Base,
-        beforeEnter: (to, from, next) => {
-            axios.get('/api/athenticated')
-            .then((e)=>{
-                if(e.data.permissions != 0) next()
-                else return next({name:'login'});
-            })
-            .catch((e)=> next({name:'login'}))
-        },
+        beforeEnter: auth,
         children:[
             {
                 name:'home',
@@ -84,30 +95,21 @@ export const routes = [
             {
                 name:'show-code',
                 path:'/show/code/:id',
-                component:showAllCode,
+                component:ShowAllCode,
             },
             {
                 name:'my-code',
                 path:'/show/posts/:id',
-                component:showAllCode,
+                component:MyCode,
             },
 
             
         ]
-    },
-
-    //Admins routes
-    {
+    },{
+        //Admins
         path:'',
         component:Base,
-        beforeEnter: (to, from, next) => {
-            axios.get('/api/athenticated')
-            .then((e)=>{
-                if(e.data.permissions > 1) next()
-                else return next({name:'home'});
-            })
-            .catch((e)=> next({name:'login'}))
-        },
+        beforeEnter: admin,
         children:[
             {
                 name:'dashboard',
@@ -116,7 +118,5 @@ export const routes = [
             }
         ]
     },
-
-
 
 ];
