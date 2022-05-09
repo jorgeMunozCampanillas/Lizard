@@ -5287,7 +5287,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      auth: ''
+      auth: {}
     };
   },
   created: function created() {
@@ -5594,7 +5594,6 @@ var routes = [//No Auth (auth -> redirect to home)
   path: '',
   component: Base,
   beforeEnter: function beforeEnter(to, from, next) {
-    console.log("Voy a entrar bien");
     axios.get('/api/athenticated').then(function (e) {
       if (e.data.permissions != 0) next();else return next({
         name: 'login'
@@ -5615,7 +5614,11 @@ var routes = [//No Auth (auth -> redirect to home)
     component: CreateCode
   }, {
     name: 'show-code',
-    path: '/show/code',
+    path: '/show/code/:id',
+    component: showAllCode
+  }, {
+    name: 'my-code',
+    path: '/show/posts/:id',
     component: showAllCode
   }]
 }, //Admins routes
@@ -5623,7 +5626,6 @@ var routes = [//No Auth (auth -> redirect to home)
   path: '',
   component: Base,
   beforeEnter: function beforeEnter(to, from, next) {
-    console.log("Voy a entrar bien");
     axios.get('/api/athenticated').then(function (e) {
       if (e.data.permissions > 1) next();else return next({
         name: 'home'
@@ -5655,47 +5657,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
 var store = {
-  namespaced: true,
   state: {
-    authenticated: false,
-    user: {}
-  },
-  getters: {
-    authenticated: function authenticated(state) {
-      return state.authenticated;
-    },
-    user: function user(state) {
-      return state.user;
-    }
+    auth: {},
+    isAuthenticated: false
   },
   mutations: {
-    SET_AUTHENTICATED: function SET_AUTHENTICATED(state, value) {
-      state.authenticated = value;
-    },
-    SET_USER: function SET_USER(state, value) {
-      state.user = value;
+    setAuth: function setAuth(data) {
+      this.auth = data;
+      this.isAuthenticated = true;
     }
   },
   actions: {
-    login: function login(_ref) {
+    prueba: function prueba(_ref, data) {
       var commit = _ref.commit;
-      return axios.get('/api/user').then(function (_ref2) {
-        var data = _ref2.data;
-        commit('SET_USER', data);
-        commit('SET_AUTHENTICATED', true);
-        router.push({
-          name: 'dashboard'
-        });
-      })["catch"](function (_ref3) {
-        var data = _ref3.response.data;
-        commit('SET_USER', {});
-        commit('SET_AUTHENTICATED', false);
-      });
-    },
-    logout: function logout(_ref4) {
-      var commit = _ref4.commit;
-      commit('SET_USER', {});
-      commit('SET_AUTHENTICATED', false);
+      commit('setAuth', data);
     }
   }
 };
@@ -28427,11 +28402,19 @@ var render = function () {
                   1
                 ),
                 _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/dashboard" } }, [
+                      _vm._v("Your Profile"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
                 _vm._m(3),
                 _vm._v(" "),
                 _vm._m(4),
-                _vm._v(" "),
-                _vm._m(5),
                 _vm._v(" "),
                 _c("li", [
                   _c("button", { on: { click: _vm.logout } }, [
@@ -28473,12 +28456,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "nav-mains" }, [_c("a", [_vm._v("Views")])])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", [_vm._v("Action")])])
   },
   function () {
     var _vm = this

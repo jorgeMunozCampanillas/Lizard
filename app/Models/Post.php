@@ -12,4 +12,7 @@ class Post extends Model
     protected $primaryKey = 'idPost';
 
     protected $fillable = ['idUsu','html','css','js', 'img'];
+
+
+
 }

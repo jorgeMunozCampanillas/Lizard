@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('athenticated', [App\Http\Controllers\UserController::class, 'auth']);
 
 //Users
-Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index', 'destroy', 'update']);
+Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index', 'destroy', 'update'])->middleware(['auth:sanctum']);
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
 
 
 //Code
-Route::resource('code', App\Http\Controllers\PostController::class)->only(['store', 'index', 'destroy', 'update']);
+Route::resource('code', App\Http\Controllers\PostController::class);

@@ -30,7 +30,6 @@
     "dependencies": {
         "codemirror": "^5.65.3",
         "html2canvas": "^1.4.1",
-        "install": "^0.13.0",
         "vue-axios": "^3.2.5",
         "vue-loader": "^15.9.8",
         "vue-router": "^3.5.2",

@@ -33,7 +33,7 @@
             <ul id="options">
                 <!-- Admin User -->
                 <li><router-link v-if="auth.permissions>1" to="/dashboard">Dashboard</router-link></li>
-                <li><a>Action</a></li>
+                <li><router-link to="/dashboard">Your Profile</router-link></li>
                 <li><a>Another action</a></li>
                 <li><a>Something</a></li>
                 <li><button @click="logout">Sing out</button></li>
@@ -46,6 +46,7 @@
 
 <script>
 import EventBus from './../../bus';
+
 export default {
     name:'naVue',
     props: ['auth'],

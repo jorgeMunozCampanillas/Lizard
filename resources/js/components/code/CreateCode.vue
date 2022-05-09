@@ -1,8 +1,8 @@
 <template>
 <div>
-    <Editor class="editor" lang="xml" v-on:update="updateCode"/>
-    <Editor class="editor" lang="css" v-on:update="updateCode"/>
-    <Editor class="editor" lang="javascript" v-on:update="updateCode"/>
+  <Editor class="editor" lang="xml" v-on:update="updateCode"/>
+  <Editor class="editor" lang="css" v-on:update="updateCode"/>
+  <Editor class="editor" lang="javascript" v-on:update="updateCode"/>
   <div id="code_output">
     <iframe id="code" :srcdoc="src" style="border: 5px solid;"> </iframe>
     <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
@@ -36,8 +36,8 @@ export default {
 
   data() {
     return {
-      xml:'<h1>Hello World!!</h1>',
-      css:'h1{color:red}',
+      xml:'',
+      css:'',
       js:'',
       src:'',
       img:'',

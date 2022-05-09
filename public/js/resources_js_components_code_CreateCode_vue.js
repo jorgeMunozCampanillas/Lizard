@@ -80,8 +80,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      xml: '<h1>Hello World!!</h1>',
-      css: 'h1{color:red}',
+      xml: '',
+      css: '',
       js: '',
       src: '',
       img: ''
@@ -214,7 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Editor',
-  props: ['lang'],
+  props: ['lang', 'code'],
   data: function data() {
     return {
       editor: null
@@ -229,10 +229,16 @@ __webpack_require__.r(__webpack_exports__);
       mode: this.lang
     });
     this.editor.on("change", function () {
+      console.log(_this.editorValue());
+
       _this.$emit('update', _this.lang, _this.editorValue());
     });
+    setTimeout(this.fillEditor, 500);
   },
   methods: {
+    fillEditor: function fillEditor() {
+      this.editor.setValue(this.code);
+    },
     editorValue: function editorValue() {
       return this.editor.getValue();
     }

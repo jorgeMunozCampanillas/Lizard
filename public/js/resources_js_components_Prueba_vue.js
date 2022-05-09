@@ -11,6 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './Area.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 //
 //
 //
@@ -18,12 +19,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  methods: {
-    a: function a() {
-      console.log("AAAAAAAAAAAAAAAAAAAA");
-    }
+  components: {
+    Area: Object(function webpackMissingModule() { var e = new Error("Cannot find module './Area.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  },
+  data: function data() {
+    return {
+      code: "<!-- component -->\n                <!-- This is an example component -->\n                <div class=\"flex items-center justify-center min-h-screen from-gray-100 via-gray-300 to-slate-200 bg-gradient-to-br\">\n                    <div class=\"p-32\">\n                  <button type=\"button\" class=\"flex items-center rounded-lg bg-indigo-500 px-4 py-2 text-white\" disabled>\n                    <svg class=\"-ml-1 mr-3 h-5 w-5 animate-spin text-white\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\">\n                      <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n                      <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path>\n                    </svg>\n                    <span class=\"font-medium subpixel-antialiased\">Processing...</span>\n                  </button>\n                </div>\n                \n                </div>"
+    };
   }
 });
 
@@ -113,13 +117,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v("Soy una prueba")]),
-    _vm._v(" "),
-    _c("p", [_vm._v("Yupiiiii")]),
-    _vm._v(" "),
-    _c("button", { on: { click: _vm.a } }, [_vm._v("a")]),
-  ])
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("Prueba")]),
+      _vm._v(" "),
+      _c("Area", { attrs: { dato: _vm.code } }),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

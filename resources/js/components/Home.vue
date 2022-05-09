@@ -3,9 +3,9 @@
   <div id="menu"><h1>Menu</h1></div>
   <div id="posts">
     <h1 class="title">Tops Componens</h1>
-    <div class="post" v-for="post in posts" :key="post.idPost">
+    <div class="post" v-for="post in posts" :key="post.idPost" @click.prevent="showCode(post.idPost)">
       <img v-if="post.img!=null" :src="'storage/'+post.img" class="post-img" alt="">
-    <div>
+      <div>
         <img class="post-user" src="" alt="">
         {{post.idUsu}}
       </div>
@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       user:'',
-      posts: ''
+      posts: '',
     }
   },
   methods:{
@@ -28,8 +28,12 @@ export default {
             this.posts = res.data;
         })
         .catch(err=>{
-            console.log("Error getAllPost ShhowCode.vue")
+          console.log("Error Home.vue getAllCode")
+          console.log(err.data)
         })
+    },
+    showCode(post){
+      this.$router.push({name:"show-code", params: { id: post }})
     }
   },
   mounted() {

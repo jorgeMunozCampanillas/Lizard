@@ -12,8 +12,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if(!$request->user()) {
+            return response()->json(['error' => 'User does not exist'], 500);
+        }
+
         $posts = Post::all();
         return response()->json($posts);
 
@@ -66,9 +70,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        return response()->json([
+            'code' => Post::findOrFail($id),
+        ]);
     }
 
     /**

@@ -21,6 +21,9 @@ const showAllCode = () => import('./components/code/ShowCode.vue');
 
 
 
+
+
+
 export const routes = [
 
     //No Auth (auth -> redirect to home)
@@ -60,7 +63,6 @@ export const routes = [
         path:'',
         component:Base,
         beforeEnter: (to, from, next) => {
-            console.log("Voy a entrar bien")
             axios.get('/api/athenticated')
             .then((e)=>{
                 if(e.data.permissions != 0) next()
@@ -81,9 +83,15 @@ export const routes = [
             },
             {
                 name:'show-code',
-                path:'/show/code',
+                path:'/show/code/:id',
                 component:showAllCode,
             },
+            {
+                name:'my-code',
+                path:'/show/posts/:id',
+                component:showAllCode,
+            },
+
             
         ]
     },
@@ -93,7 +101,6 @@ export const routes = [
         path:'',
         component:Base,
         beforeEnter: (to, from, next) => {
-            console.log("Voy a entrar bien")
             axios.get('/api/athenticated')
             .then((e)=>{
                 if(e.data.permissions > 1) next()

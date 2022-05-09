@@ -16,26 +16,31 @@ import 'codemirror/mode/gfm/gfm.js';
 
 export default {
     name:'Editor',
-    props: ['lang'],
+    props: ['lang', 'code'],
     data: () => ({
-        editor:null
+        editor:null,
     }),
     mounted() {
         this.editor = CodeMiror.fromTextArea(document.getElementById(this.lang), {
             lineNumbers: true,
             theme: 'dracula',
             mode: this.lang,
-        })
+        });
 
         this.editor.on("change", ()=>{
+            console.log(this.editorValue())
             this.$emit('update', this.lang, this.editorValue());
-        })
+        });
 
+        setTimeout(this.fillEditor, 500);
     },
     methods: {
+        fillEditor(){
+            this.editor.setValue(this.code)
+        },
         editorValue(){
             return this.editor.getValue();
-        },
+        }
     },
 }
 </script>

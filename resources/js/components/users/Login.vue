@@ -10,7 +10,7 @@
         <br>
         <input type="password" name="password" v-model="form.password" placeholder="Pasword...">
         
-        <input @click.prevent="saveForm2" type="submit" value="Login">
+        <input @click.prevent="saveForm" type="submit" value="Login">
     </form>
     <p><i>You dont have account yet?? 😮 </i><b><router-link class="nav-link" to="/register">Register NOW!!</router-link></b></p>
   </div>        
@@ -34,24 +34,16 @@ export default {
                 EventBus.$emit('updateAuth');
                 this.$router.push({name:"home"})
             }).catch((error)=>{
-                console.log("Error desde Login.vue")
+                console.log("Error desde Login.vue ddsfaf")
+                console.log(error)
                 this.errors = error.response.data.errors;
             })
         },
-
-        saveForm2(){
-            //axios.get('/sactum/csrf-cookie').then(() => {
-                this.axios.post('/api/login', this.form).then((res)=>{
-                    console.log(res)
-                    EventBus.$emit('updateAuth');
-                    this.$router.push({name:"home"})
-                }).catch((error)=>{
-                    console.log("Error desde Login.vue ddsfaf")
-                    this.errors = error.response.data.errors;
-                })
-            //})
+        foo(){
+            this.$store.actions.prueba({'nombre':'jorge'})
+            console.log(this.$store.state.auth)
+            console.log(this.$store.state.isAuthenticated)
         }
-
     }
 }
 </script>

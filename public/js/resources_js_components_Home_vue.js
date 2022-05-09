@@ -41,7 +41,16 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/code').then(function (res) {
         _this.posts = res.data;
       })["catch"](function (err) {
-        console.log("Error getAllPost ShhowCode.vue");
+        console.log("Error Home.vue getAllCode");
+        console.log(err.data);
+      });
+    },
+    showCode: function showCode(post) {
+      this.$router.push({
+        name: "show-code",
+        params: {
+          id: post
+        }
       });
     }
   },
@@ -152,22 +161,35 @@ var render = function () {
         _c("h1", { staticClass: "title" }, [_vm._v("Tops Componens")]),
         _vm._v(" "),
         _vm._l(_vm.posts, function (post) {
-          return _c("div", { key: post.idPost, staticClass: "post" }, [
-            post.img != null
-              ? _c("img", {
-                  staticClass: "post-img",
-                  attrs: { src: "storage/" + post.img, alt: "" },
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", [
-              _c("img", {
-                staticClass: "post-user",
-                attrs: { src: "", alt: "" },
-              }),
-              _vm._v("\r\n        " + _vm._s(post.idUsu) + "\r\n      "),
-            ]),
-          ])
+          return _c(
+            "div",
+            {
+              key: post.idPost,
+              staticClass: "post",
+              on: {
+                click: function ($event) {
+                  $event.preventDefault()
+                  return _vm.showCode(post.idPost)
+                },
+              },
+            },
+            [
+              post.img != null
+                ? _c("img", {
+                    staticClass: "post-img",
+                    attrs: { src: "storage/" + post.img, alt: "" },
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", [
+                _c("img", {
+                  staticClass: "post-user",
+                  attrs: { src: "", alt: "" },
+                }),
+                _vm._v("\r\n        " + _vm._s(post.idUsu) + "\r\n      "),
+              ]),
+            ]
+          )
         }),
       ],
       2

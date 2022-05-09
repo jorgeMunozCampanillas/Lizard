@@ -177,12 +177,14 @@ Week 1:
 - User Dashboard
 - Some views to try vue routes
 
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
+Week 2:
+- Show all posts
+- Show one post
+- Sanctum
+- Try to implement Vuex
 
 <!-- ACKNOWLEDGMENTS -->
-## Of great help 🙏 
+## Helpful 🙏 
 
 - Started with codemirror: https://www.youtube.com/watch?v=oDitntruMLc
 - Configure EventBus: https://stackoverflow.com/questions/61034661/vue-js-how-can-i-emit-events-between-router-view-components
