@@ -3,9 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  ![logo2](https://user-images.githubusercontent.com/96957385/167347769-4fcc6655-82f7-4cef-8c8c-eda91458df1e.png)
 
   <h1 align="center">Lizard</h1>
    <h4 align="center">
