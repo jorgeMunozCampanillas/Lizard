@@ -1,10 +1,12 @@
 <template>
 <div>
-    <Editor class="editor" :code="xml" lang="xml" v-on:update="updateCode"/>
-    <Editor class="editor" :code="css" lang="css" v-on:update="updateCode"/>
-    <Editor class="editor" :code="js" lang="javascript" v-on:update="updateCode"/>
-    <div id="code_output">
-        <iframe id="code" :srcdoc="src" style="border: 5px solid;"> </iframe>
+    <div class="code_enter">
+      <Editor class="editor" :code="xml" lang="xml" v-on:update="updateCode"/>
+      <Editor class="editor" :code="css" lang="css" v-on:update="updateCode"/>
+      <Editor class="editor" :code="js" lang="javascript" v-on:update="updateCode"/>
+    </div>
+    <div class="code_output">
+        <iframe id="code" class="code-represent" :srcdoc="src"> </iframe>
         <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
     </div>
 </div>

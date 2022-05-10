@@ -1,8 +1,10 @@
 <template>
 <div id="home">
-  <div id="menu"><h1>Menu</h1></div>
+  <div id="menu">
+    MENU¿?
+  </div>
   <div id="posts">
-    <h1 class="title">Tops Componens</h1>
+    <h1 class="title">Tops Components</h1>
     <div v-for="post in posts" :key="post.idPost" class="post">
       <router-link :to="{name:'show-code', params: { id: post.idPost }}">
         <img v-if="post.img!=null" :src="'storage/'+post.img" class="post-img" alt="">

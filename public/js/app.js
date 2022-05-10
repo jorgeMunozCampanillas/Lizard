@@ -5344,6 +5344,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'naVue',
   data: function data() {
@@ -5363,6 +5364,9 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    foo: function foo() {
+      console.log(this.$store.state.auth);
+    },
     logout: function logout() {
       var _this2 = this;
 
@@ -28314,7 +28318,13 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("nav", { staticClass: "nav-1", attrs: { id: "nav" } }, [
-      _vm._m(0),
+      _c("ul", { attrs: { id: "nav-logo" } }, [
+        _c("img", {
+          attrs: { src: "storage/logo2-bueno.png", id: "logo", alt: "" },
+        }),
+        _vm._v(" "),
+        _c("h2", { attrs: { id: "logo-title" } }, [_vm._v("Lizard")]),
+      ]),
       _vm._v(" "),
       _c("ul", { attrs: { id: "nav-pages" } }, [
         _c(
@@ -28328,9 +28338,9 @@ var render = function () {
           1
         ),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
-        _vm._m(2),
+        _vm._m(1),
       ]),
       _vm._v(" "),
       this.$store.state.isAuthenticated == false
@@ -28351,6 +28361,7 @@ var render = function () {
         ? _c("ul", { attrs: { id: "nav-with-permiss" } }, [
             _c(
               "li",
+              { staticClass: "nav-mains" },
               [
                 _c("router-link", { attrs: { to: { name: "create-code" } } }, [
                   _vm._v("new Component"),
@@ -28406,9 +28417,9 @@ var render = function () {
                   1
                 ),
                 _vm._v(" "),
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
-                _vm._m(4),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("li", [
                   _c("button", { on: { click: _vm.logout } }, [
@@ -28423,20 +28434,6 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { attrs: { id: "nav-logo" } }, [
-      _c("img", {
-        staticStyle: { width: "3rem !important", height: "3rem !important" },
-        attrs: {
-          src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png",
-          alt: "",
-        },
-      }),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

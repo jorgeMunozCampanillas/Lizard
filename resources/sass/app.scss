@@ -6,8 +6,12 @@
 @import './base/reset';
 @import './components/nav';
 @import './utilities/mixins';
+
+//Components
 @import './components/buttons';
 @import './components/table';
+@import './components/form';
+@import './components/editor';
 
 //Views
 @import './view/index';

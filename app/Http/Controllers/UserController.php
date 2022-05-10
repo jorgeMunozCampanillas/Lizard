@@ -75,13 +75,18 @@ class UserController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        
+
         if(Auth::attempt($req->only('email', 'password'))){
-            return response()->json(Auth::user(), 200);
+            return response()->json([
+                'status' => 1,
+                'data' => Auth::user(), 
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 0,
+                'cod-error' => 'login-error'
+            ], 200);
         }
-        throw ValidationException::withMessages([
-            'email' =>['The provided credentials are incorrect']
-        ]);
 
     }
 

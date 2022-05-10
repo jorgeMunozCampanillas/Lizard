@@ -40,6 +40,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -63,15 +64,17 @@ __webpack_require__.r(__webpack_exports__);
       theme: 'dracula',
       mode: this.lang
     });
+    this.editor.setSize("100%", "94%");
     this.editor.on("change", function () {
       console.log(_this.editorValue());
 
       _this.$emit('update', _this.lang, _this.editorValue());
     });
-    setTimeout(this.fillEditor, 500);
+    setTimeout(this.fillEditor, 1000);
   },
   methods: {
     fillEditor: function fillEditor() {
+      console.log("Mi code: " + this.code);
       if (this.code != null) this.editor.setValue(this.code);
     },
     editorValue: function editorValue() {
@@ -118,6 +121,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -23118,7 +23123,11 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("textarea", { attrs: { id: _vm.lang } })])
+  return _c("div", [
+    _c("h3", [_vm._v(_vm._s(_vm.lang))]),
+    _vm._v(" "),
+    _c("textarea", { attrs: { id: _vm.lang } }),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -23143,41 +23152,44 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("Editor", {
-        staticClass: "editor",
-        attrs: { code: _vm.xml, lang: "xml" },
-        on: { update: _vm.updateCode },
-      }),
-      _vm._v(" "),
-      _c("Editor", {
-        staticClass: "editor",
-        attrs: { code: _vm.css, lang: "css" },
-        on: { update: _vm.updateCode },
-      }),
-      _vm._v(" "),
-      _c("Editor", {
-        staticClass: "editor",
-        attrs: { code: _vm.js, lang: "javascript" },
-        on: { update: _vm.updateCode },
-      }),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "code_output" } }, [
-        _c("iframe", {
-          staticStyle: { border: "5px solid" },
-          attrs: { id: "code", srcdoc: _vm.src },
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "code_enter" },
+      [
+        _c("Editor", {
+          staticClass: "editor",
+          attrs: { code: _vm.xml, lang: "xml" },
+          on: { update: _vm.updateCode },
         }),
         _vm._v(" "),
-        _c("div", {
-          staticStyle: { position: "absolute", top: "0", "z-index": "-5" },
-          attrs: { id: "codeScreenArea" },
+        _c("Editor", {
+          staticClass: "editor",
+          attrs: { code: _vm.css, lang: "css" },
+          on: { update: _vm.updateCode },
         }),
-      ]),
-    ],
-    1
-  )
+        _vm._v(" "),
+        _c("Editor", {
+          staticClass: "editor",
+          attrs: { code: _vm.js, lang: "javascript" },
+          on: { update: _vm.updateCode },
+        }),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "code_output" }, [
+      _c("iframe", {
+        staticClass: "code-represent",
+        attrs: { id: "code", srcdoc: _vm.src },
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticStyle: { position: "absolute", top: "0", "z-index": "-5" },
+        attrs: { id: "codeScreenArea" },
+      }),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

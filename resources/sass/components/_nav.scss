@@ -59,7 +59,18 @@
 }
 
 #nav-logo{
-    grid-column-end: span 3
+    grid-column-end: span 3;
+    justify-content: center;
+    align-items: center;
+}
+#logo{
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+    margin-top: .3rem;
+}
+#logo-title{
+    color: $primary-orange;
 }
 #nav-pages{
     grid-column-end: span 6

@@ -1,18 +1,22 @@
-.writeCode{
-}
-.editors{
-    display:flex;
-    border: 2px solid red;
+.code_enter{
+
     width: 100%;
+    display: flex;
+    height: 40vh;
+    border: 3px solid green;
+
+    .editor{
+        width: 33.33%;
+        border: 2px solid ;
+    }
 
 }
-.editor{
-    resize: horizontal;
-    height: 100%;
+.code_output{
     width: 100%;
+    height: calc(60vh - 3rem) ;
+    border: 2px solid red;
 }
-#code{
+.code-represent{
     width: 100%;
-    
-    border: 5px solid black;
+    height: 100%;
 }

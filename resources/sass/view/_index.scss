@@ -3,7 +3,7 @@
     background-size: contain;
     background-color: $primary-dark;
     font-family: $title-typography;
-    height: 93vh;
+    height: calc(100vh - 3rem);
     overflow: hidden;
 
     display: flex;

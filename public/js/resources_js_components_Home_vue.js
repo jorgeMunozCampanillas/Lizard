@@ -29,6 +29,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -139,13 +141,13 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "home" } }, [
-    _vm._m(0),
+    _c("div", { attrs: { id: "menu" } }, [_vm._v("\r\n    MENU¿?\r\n  ")]),
     _vm._v(" "),
     _c(
       "div",
       { attrs: { id: "posts" } },
       [
-        _c("h1", { staticClass: "title" }, [_vm._v("Tops Componens")]),
+        _c("h1", { staticClass: "title" }, [_vm._v("Tops Components")]),
         _vm._v(" "),
         _vm._l(_vm.posts, function (post) {
           return _c(
@@ -185,14 +187,7 @@ var render = function () {
     ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "menu" } }, [_c("h1", [_vm._v("Menu")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -5,13 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" value="{{ csrf_token() }}"/>
         <title>Laravel + Vue</title>
-        
-        <!-- Sass -->
-        <link rel="stylesheet" href="/css/main.css" type="text/css">
 
         <!-- CDNs de Bootstrap icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
+        <!-- SASS -->
         <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
     </head>
     <body>

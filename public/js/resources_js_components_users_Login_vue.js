@@ -11,7 +11,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../bus */ "./resources/js/bus.js");
 //
 //
 //
@@ -30,7 +29,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -38,7 +40,7 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: ''
       },
-      errors: []
+      error: false
     };
   },
   methods: {
@@ -46,35 +48,22 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.axios.post('/api/login', this.form).then(function (res) {
-        _this.$store.dispatch('login', res.data);
+        if (res.data.status) {
+          _this.$store.dispatch('login', res.data.data);
 
-        _this.$router.push({
-          name: "home"
-        });
+          _this.$router.push({
+            name: "home"
+          });
+        } else {
+          _this.error = true;
+        }
       })["catch"](function (error) {
         console.log("Error desde Login.vue ddsfaf");
         console.log(error);
-        _this.errors = error.response.data.errors;
       });
     }
   }
 });
-
-/***/ }),
-
-/***/ "./resources/js/bus.js":
-/*!*****************************!*\
-  !*** ./resources/js/bus.js ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue__WEBPACK_IMPORTED_MODULE_0__["default"]());
 
 /***/ }),
 
@@ -162,100 +151,126 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v("Login")]),
-    _vm._v(" "),
-    _c("form", [
-      _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+  return _c("div", { staticClass: "form" }, [
+    _c("div", { staticClass: "form-container" }, [
+      _c("h1", [_vm._v("Log in")]),
       _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
+      _c("form", [
+        _vm.error
+          ? _c("div", { staticClass: "form-error" }, [
+              _vm._v("The username or password is incorrect"),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.email,
+              expression: "form.email",
+            },
+          ],
+          staticClass: "input-data",
+          attrs: {
+            type: "email",
+            name: "email",
+            placeholder: "Email",
+            required: "",
+            autocomplete: "email",
+          },
+          domProps: { value: _vm.form.email },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "email", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.password,
+              expression: "form.password",
+            },
+          ],
+          staticClass: "input-data",
+          attrs: { type: "password", name: "password", placeholder: "Pasword" },
+          domProps: { value: _vm.form.password },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "password", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "button",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.form.email,
-            expression: "form.email",
+            staticClass: "input-submit",
+            attrs: { type: "submit" },
+            on: {
+              click: function ($event) {
+                $event.preventDefault()
+                return _vm.saveForm.apply(null, arguments)
+              },
+            },
           },
-        ],
-        attrs: {
-          type: "email",
-          name: "email",
-          placeholder: "Email...",
-          required: "",
-          autocomplete: "email",
-        },
-        domProps: { value: _vm.form.email },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.form, "email", $event.target.value)
-          },
-        },
-      }),
+          [_vm._v("LOG IN")]
+        ),
+      ]),
       _vm._v(" "),
-      _c("br"),
+      _vm._m(0),
       _vm._v(" "),
-      _c("label", { attrs: { for: "email" } }, [_vm._v("Password")]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.form.password,
-            expression: "form.password",
-          },
-        ],
-        attrs: {
-          type: "password",
-          name: "password",
-          placeholder: "Pasword...",
-        },
-        domProps: { value: _vm.form.password },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.form, "password", $event.target.value)
-          },
-        },
-      }),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "submit", value: "Login" },
-        on: {
-          click: function ($event) {
-            $event.preventDefault()
-            return _vm.saveForm.apply(null, arguments)
-          },
-        },
-      }),
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _c("i", [_vm._v("You dont have account yet?? 😮 ")]),
-      _c(
-        "b",
-        [
-          _c(
-            "router-link",
-            { staticClass: "nav-link", attrs: { to: "/register" } },
-            [_vm._v("Register NOW!!")]
-          ),
-        ],
-        1
-      ),
+      _c("p", { staticClass: "form-info" }, [
+        _vm._m(1),
+        _c(
+          "b",
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: "/register" } },
+              [_vm._v("Register NOW!!")]
+            ),
+          ],
+          1
+        ),
+      ]),
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-or" }, [
+      _c("hr"),
+      _vm._v(" "),
+      _c("span", { staticClass: "or" }, [_vm._v("OR")]),
+      _vm._v(" "),
+      _c("hr"),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("i", [_vm._v("You dont have account yet?? 😮 "), _c("br")])
+  },
+]
 render._withStripped = true
 
 

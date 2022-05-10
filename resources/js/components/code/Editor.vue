@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>{{lang}}</h3>
     <textarea :id="lang"></textarea>
   </div>
 </template>
@@ -25,17 +26,21 @@ export default {
             lineNumbers: true,
             theme: 'dracula',
             mode: this.lang,
+            
         });
+
+        this.editor.setSize("100%", "94%");
 
         this.editor.on("change", ()=>{
             console.log(this.editorValue())
             this.$emit('update', this.lang, this.editorValue());
         });
 
-        setTimeout(this.fillEditor, 500);
+        setTimeout(this.fillEditor, 1000);
     },
     methods: {
         fillEditor(){
+            console.log("Mi code: "+this.code)
             if (this.code!=null) this.editor.setValue(this.code);
         },
         editorValue(){

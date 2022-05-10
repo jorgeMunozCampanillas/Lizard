@@ -1,23 +1,26 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <form>
-        <label for="email">Email</label>
-        <br>
-        <input type="email" name="email" placeholder="Email..." v-model="form.email" required autocomplete="email">
-        <br>
-        <label for="email">Password</label>
-        <br>
-        <input type="password" name="password" v-model="form.password" placeholder="Pasword...">
-        
-        <input @click.prevent="saveForm" type="submit" value="Login">
-    </form>
-    <p><i>You dont have account yet?? 😮 </i><b><router-link class="nav-link" to="/register">Register NOW!!</router-link></b></p>
+  <div class="form">
+    <div class="form-container">
+        <h1>Log in</h1>
+        <form>
+            <div v-if="error" class="form-error">The username or password is incorrect</div>
+            <input class="input-data" type="email" name="email" placeholder="Email" v-model="form.email" required autocomplete="email">
+            <br>
+            <input class="input-data" type="password" name="password" v-model="form.password" placeholder="Pasword">
+            <br>
+            <button class="input-submit" @click.prevent="saveForm" type="submit" >LOG IN</button>
+        </form>
+        <div class="form-or">
+            <hr>
+            <span class="or">OR</span>
+            <hr>
+        </div>
+        <p class="form-info"><i>You dont have account yet?? 😮 <br></i><b><router-link class="nav-link" to="/register">Register NOW!!</router-link></b></p>
+    </div>
   </div>        
 </template>
 
 <script>
-import EventBus from '../../bus';
 export default {
     data() {
         return {
@@ -25,18 +28,22 @@ export default {
                 email:'',
                 password:'',
             },
-            errors:[]
+            error:false
         }
     },
     methods: {
         saveForm(){
             this.axios.post('/api/login', this.form).then((res)=>{
-                this.$store.dispatch('login', res.data);
-                this.$router.push({name:"home"})
+                if (res.data.status) {
+                    this.$store.dispatch('login', res.data.data);
+                    this.$router.push({name:"home"})
+                }else{
+                    this.error = true;
+                }
             }).catch((error)=>{
                 console.log("Error desde Login.vue ddsfaf")
                 console.log(error)
-                this.errors = error.response.data.errors;
+
             })
         },
     }

@@ -109,11 +109,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //set the code background the page to screeshot ( z-index -5 )
                 //shhh this is our secret...
                 codeScreenArea = document.getElementById("codeScreenArea");
-                codeScreenArea.innerHTML = _this.xml;
+                codeScreenArea.innerHTML += '<script src="https://cdn.tailwindcss.com"><\/script>';
+                codeScreenArea.innerHTML += _this.xml;
                 codeScreenArea.innerHTML += '<style>' + _this.css + '</style>';
-                _context2.next = 5;
+                _context2.next = 6;
                 return html2canvas__WEBPACK_IMPORTED_MODULE_10___default()(codeScreenArea, {
-                  //Set properties of the canvas (720p)
+                  //Set properties of the canvas
                   width: 500,
                   height: 374
                 }).then( /*#__PURE__*/function () {
@@ -128,7 +129,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                                 type: "image/jpeg"
                               });
                               var data = new FormData();
-                              data.append('idUsu', _this.user.idUsu);
+                              data.append('idUsu', _this.$store.state.auth.idUsu);
                               data.append('html', _this.xml);
                               data.append('css', _this.css);
                               data.append('js', _this.js);
@@ -155,7 +156,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   };
                 }());
 
-              case 5:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -197,6 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -220,15 +222,17 @@ __webpack_require__.r(__webpack_exports__);
       theme: 'dracula',
       mode: this.lang
     });
+    this.editor.setSize("100%", "94%");
     this.editor.on("change", function () {
       console.log(_this.editorValue());
 
       _this.$emit('update', _this.lang, _this.editorValue());
     });
-    setTimeout(this.fillEditor, 500);
+    setTimeout(this.fillEditor, 1000);
   },
   methods: {
     fillEditor: function fillEditor() {
+      console.log("Mi code: " + this.code);
       if (this.code != null) this.editor.setValue(this.code);
     },
     editorValue: function editorValue() {
@@ -23173,7 +23177,7 @@ var render = function () {
   return _c("div", { staticClass: "writeCode" }, [
     _c(
       "div",
-      { staticClass: "editors" },
+      { staticClass: "code_enter" },
       [
         _c("Editor", {
           staticClass: "editor",
@@ -23196,8 +23200,11 @@ var render = function () {
       1
     ),
     _vm._v(" "),
-    _c("div", { attrs: { id: "code_output" } }, [
-      _c("iframe", { attrs: { id: "code", srcdoc: _vm.src } }),
+    _c("div", { staticClass: "code_output" }, [
+      _c("iframe", {
+        staticClass: "code-represent",
+        attrs: { id: "code", srcdoc: _vm.src },
+      }),
       _vm._v(" "),
       _c("div", {
         staticStyle: { position: "absolute", top: "0", "z-index": "-5" },
@@ -23231,7 +23238,11 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("textarea", { attrs: { id: _vm.lang } })])
+  return _c("div", [
+    _c("h3", [_vm._v(_vm._s(_vm.lang))]),
+    _vm._v(" "),
+    _c("textarea", { attrs: { id: _vm.lang } }),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

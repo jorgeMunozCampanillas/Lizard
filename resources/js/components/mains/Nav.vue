@@ -2,7 +2,8 @@
 <div>
     <nav id="nav" class="nav-1">
         <ul id="nav-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png" style="width: 3rem !important; height: 3rem !important;" alt="">
+            <img :src="'storage/logo2-bueno.png'" id="logo" alt="">
+            <h2 id="logo-title">Lizard</h2>
         </ul>
 
         <ul id="nav-pages">
@@ -18,7 +19,7 @@
 
         <!-- Options -->
         <ul id="nav-with-permiss" v-if="this.$store.state.auth.permissions>0">
-            <li>
+            <li class="nav-mains">
                 <router-link :to="{name:'create-code'}" >new Component</router-link>
             </li>
             <li>
@@ -64,6 +65,9 @@ export default {
             })
     },
     methods: {
+        foo(){
+            console.log(this.$store.state.auth)
+        },
         logout(){
             axios.post('/api/logout').then(()=>{
                 this.$store.dispatch('logout');

@@ -1,12 +1,12 @@
 <template>
 <div class="writeCode">
-  <div class="editors">
+  <div class="code_enter">
     <Editor class="editor" lang="xml" v-on:update="updateCode"/>
     <Editor class="editor" lang="css" v-on:update="updateCode"/>
     <Editor class="editor" lang="javascript" v-on:update="updateCode"/>
   </div>
-  <div id="code_output">
-    <iframe id="code" :srcdoc="src"> </iframe>
+  <div class="code_output">
+    <iframe id="code" :srcdoc="src" class="code-represent"> </iframe>
     <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
   </div>
   
@@ -67,11 +67,12 @@ export default {
       //set the code background the page to screeshot ( z-index -5 )
       //shhh this is our secret...
       let codeScreenArea = document.getElementById("codeScreenArea");
-      codeScreenArea.innerHTML = this.xml;
+      codeScreenArea.innerHTML += '<script src="https://cdn.tailwindcss.com"><\/script>';
+      codeScreenArea.innerHTML += this.xml;
       codeScreenArea.innerHTML += '<style>'+this.css+'</style>';
 
       await html2canvas(codeScreenArea, {
-        //Set properties of the canvas (720p)
+        //Set properties of the canvas
         width:500,
         height:374,
 
@@ -83,7 +84,7 @@ export default {
           this.img = new File([blob], 'prueba.jpg', {type: "image/jpeg"});
         
           let data = new FormData;
-          data.append('idUsu', this.user.idUsu);
+          data.append('idUsu', this.$store.state.auth.idUsu);
           data.append('html', this.xml);
           data.append('css', this.css);
           data.append('js', this.js);
