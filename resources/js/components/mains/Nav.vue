@@ -20,7 +20,7 @@
         <!-- Options -->
         <ul id="nav-with-permiss" v-if="this.$store.state.auth.permissions>0">
             <li class="nav-mains">
-                <router-link :to="{name:'create-code'}" >new Component</router-link>
+                <button @click="createCode">new Component</button>
             </li>
             <li>
                 <button>
@@ -65,18 +65,19 @@ export default {
             })
     },
     methods: {
-        foo(){
-            console.log(this.$store.state.auth)
-        },
         logout(){
             axios.post('/api/logout').then(()=>{
                 this.$store.dispatch('logout');
-                this.$router.push({name:"login"})
+                this.$router.push({name:"login"});
             })
             .catch((e)=>{
                 console.log("Error en logout Nav.vue")
                 console.log(e)
             })
+        },
+        createCode(){
+            this.$store.dispatch('changeNav', 2);
+            this.$router.push({name:'create-code'});
         }
     },
 }

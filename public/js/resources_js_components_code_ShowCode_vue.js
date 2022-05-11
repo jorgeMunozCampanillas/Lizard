@@ -41,6 +41,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -50,7 +53,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Editor',
-  props: ['lang', 'code'],
+  props: ['lang', 'code', 'language'],
   data: function data() {
     return {
       editor: null
@@ -163,11 +166,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.getCode();
+    console.log(this.$route.params.id);
   },
   methods: {
     getCode: function getCode() {
       var _this = this;
 
+      console.log(this.$route.params.id);
       axios.get('/api/code/' + this.$route.params.id).then(function (res) {
         _this.xml = res.data.code.html;
         _this.css = res.data.code.css;
@@ -23123,8 +23128,12 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h3", [_vm._v(_vm._s(_vm.lang))]),
+  return _c("div", { staticClass: "editor" }, [
+    _c("div", { staticClass: "data" }, [
+      _c("h3", [_vm._v(_vm._s(_vm.language))]),
+      _vm._v(" "),
+      _c("img", { attrs: { src: "storage/codeIcons/HTML.png", alt: "" } }),
+    ]),
     _vm._v(" "),
     _c("textarea", { attrs: { id: _vm.lang } }),
   ])
@@ -23159,19 +23168,19 @@ var render = function () {
       [
         _c("Editor", {
           staticClass: "editor",
-          attrs: { code: _vm.xml, lang: "xml" },
+          attrs: { code: _vm.xml, lang: "xml", language: "HTML" },
           on: { update: _vm.updateCode },
         }),
         _vm._v(" "),
         _c("Editor", {
           staticClass: "editor",
-          attrs: { code: _vm.css, lang: "css" },
+          attrs: { code: _vm.css, lang: "css", language: "CSS" },
           on: { update: _vm.updateCode },
         }),
         _vm._v(" "),
         _c("Editor", {
           staticClass: "editor",
-          attrs: { code: _vm.js, lang: "javascript" },
+          attrs: { code: _vm.js, lang: "javascript", language: "JS" },
           on: { update: _vm.updateCode },
         }),
       ],

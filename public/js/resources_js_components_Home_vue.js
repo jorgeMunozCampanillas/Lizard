@@ -50,7 +50,16 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Error Home.vue getAllCode");
         console.log(err.data);
       });
-    }
+    },
+    showCode: function showCode(idPost) {
+      this.$router.push({
+        name: 'show-code',
+        params: {
+          id: idPost
+        }
+      });
+    },
+    showUser: function showUser($idUsu) {}
   }
 });
 
@@ -150,37 +159,35 @@ var render = function () {
         _c("h1", { staticClass: "title" }, [_vm._v("Tops Components")]),
         _vm._v(" "),
         _vm._l(_vm.posts, function (post) {
-          return _c(
-            "div",
-            { key: post.idPost, staticClass: "post" },
-            [
-              _c(
-                "router-link",
-                {
-                  attrs: {
-                    to: { name: "show-code", params: { id: post.idPost } },
+          return _c("div", { key: post.post.idPost, staticClass: "post" }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function ($event) {
+                    return _vm.showCode(post.post.idPost)
                   },
                 },
-                [
-                  post.img != null
-                    ? _c("img", {
-                        staticClass: "post-img",
-                        attrs: { src: "storage/" + post.img, alt: "" },
-                      })
-                    : _vm._e(),
-                ]
-              ),
+              },
+              [
+                post.post.img != null
+                  ? _c("img", {
+                      staticClass: "post-img",
+                      attrs: { src: "storage/" + post.post.img, alt: "" },
+                    })
+                  : _vm._e(),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", [
+              _c("img", {
+                staticClass: "post-user",
+                attrs: { src: "storage/" + post.user[0].img, alt: "" },
+              }),
               _vm._v(" "),
-              _c("div", [
-                _c("img", {
-                  staticClass: "post-user",
-                  attrs: { src: "", alt: "" },
-                }),
-                _vm._v("\r\n          " + _vm._s(post.idUsu) + "\r\n        "),
-              ]),
-            ],
-            1
-          )
+              _c("h3", [_vm._v(_vm._s(post.user[0].name))]),
+            ]),
+          ])
         }),
       ],
       2

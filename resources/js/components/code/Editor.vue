@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <h3>{{lang}}</h3>
+  <div class="editor">
+    <div class="data">
+        <h3>{{language}}</h3>
+        <img  :src="'storage/codeIcons/HTML.png'" alt="">
+    </div>
     <textarea :id="lang"></textarea>
   </div>
 </template>
@@ -17,7 +20,7 @@ import 'codemirror/mode/gfm/gfm.js';
 
 export default {
     name:'Editor',
-    props: ['lang', 'code'],
+    props: ['lang', 'code', 'language'],
     data: () => ({
         editor:null,
     }),
@@ -26,7 +29,6 @@ export default {
             lineNumbers: true,
             theme: 'dracula',
             mode: this.lang,
-            
         });
 
         this.editor.setSize("100%", "94%");

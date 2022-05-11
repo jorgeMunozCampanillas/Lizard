@@ -23,6 +23,8 @@ const CreateCode = () => import('./components/code/CreateCode.vue');
 const ShowAllCode = () => import('./components/code/ShowCode.vue');
 const MyCode = () => import('./components/code/CodeProfile.vue');
 
+//Errors
+const PermissError = () => import('./components/errors/Permiss.vue')
 
 
 /* ===============< MIDDLEWARES >=============== */
@@ -54,17 +56,32 @@ const admin = (to, from, next) => {
 /* ===============< ROUTES >=============== */
 export const routes = [
     {
+        //Index
+        name:'index',
+        path:'/',
+        component:Index,
+    },
+    {
+        //All
+        path:'',
+        component:Base,
+
+        children:[
+            {
+                name:'permissError',
+                path:'/error',
+                component:PermissError,
+                props:true,
+            },
+        ]
+    },
+    {
         //No Auth
         path:'',
         component:Base,
         beforeEnter: noAuth,
 
         children:[
-            {
-                name:'index',
-                path:'/',
-                component:Index,
-            },
             {
                 name:'login',
                 path:'/login',

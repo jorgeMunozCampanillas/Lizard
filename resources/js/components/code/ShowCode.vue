@@ -1,9 +1,9 @@
 <template>
 <div>
     <div class="code_enter">
-      <Editor class="editor" :code="xml" lang="xml" v-on:update="updateCode"/>
-      <Editor class="editor" :code="css" lang="css" v-on:update="updateCode"/>
-      <Editor class="editor" :code="js" lang="javascript" v-on:update="updateCode"/>
+      <Editor class="editor" :code="xml" lang="xml" language="HTML" v-on:update="updateCode"/>
+      <Editor class="editor" :code="css" lang="css" language="CSS" v-on:update="updateCode"/>
+      <Editor class="editor" :code="js" lang="javascript" language="JS" v-on:update="updateCode"/>
     </div>
     <div class="code_output">
         <iframe id="code" class="code-represent" :srcdoc="src"> </iframe>
@@ -45,10 +45,12 @@ export default {
   },
   created(){
     this.getCode();
+    console.log(this.$route.params.id)
   },
   methods: {
 
     getCode(){
+    console.log(this.$route.params.id) 
         axios.get('/api/code/'+this.$route.params.id)
         .then(res => {
             this.xml = res.data.code.html;

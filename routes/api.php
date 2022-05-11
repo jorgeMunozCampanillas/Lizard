@@ -14,18 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-Route::get('athenticated', [App\Http\Controllers\UserController::class, 'auth']);
-
-//Users
-Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index', 'destroy', 'update'])->middleware(['auth:sanctum']);
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
+Route::get('athenticated', [App\Http\Controllers\UserController::class, 'auth']);
+Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']);
 Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
-Route::get('getPost', [App\Http\Controllers\UserController::class, 'getPosts'])->middleware(['auth:sanctum']);
+
+//Auth routes
+Route::middleware(['auth:sanctum'])->group(function(){
+    //Users
+    Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index']);
+    Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy', 'update'])->middleware(['admin']);
+    
+    //Code
+    Route::resource('code', App\Http\Controllers\PostController::class);
+    Route::get('getPost', [App\Http\Controllers\UserController::class, 'getPosts']);
+
+});
 
 
-//Code
-Route::resource('code', App\Http\Controllers\PostController::class);

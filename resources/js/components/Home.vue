@@ -5,13 +5,13 @@
   </div>
   <div id="posts">
     <h1 class="title">Tops Components</h1>
-    <div v-for="post in posts" :key="post.idPost" class="post">
-      <router-link :to="{name:'show-code', params: { id: post.idPost }}">
-        <img v-if="post.img!=null" :src="'storage/'+post.img" class="post-img" alt="">
-      </router-link>
+    <div v-for="post in posts" :key="post.post.idPost" class="post">
+      <button @click="showCode(post.post.idPost)">
+        <img v-if="post.post.img!=null" :src="'storage/'+post.post.img" class="post-img" alt="">
+      </button>
         <div>
-          <img class="post-user" src="" alt="">
-          {{post.idUsu}}
+          <img :src="'storage/'+post.user[0].img" class="post-user" alt="">
+          <h3>{{post.user[0].name}}</h3>
         </div>
     </div>
   </div>
@@ -34,10 +34,16 @@ export default {
             this.posts = res.data;
         })
         .catch(err=>{
-          console.log("Error Home.vue getAllCode")
-          console.log(err.data)
+          console.log("Error Home.vue getAllCode");
+          console.log(err.data);
         })
     },
+    showCode(idPost){
+      this.$router.push({name:'show-code', params: { id: idPost }})
+    },
+    showUser($idUsu){
+      
+    }
 
   },
 }

@@ -1,9 +1,9 @@
 <template>
-<div class="writeCode">
+<div>
   <div class="code_enter">
-    <Editor class="editor" lang="xml" v-on:update="updateCode"/>
-    <Editor class="editor" lang="css" v-on:update="updateCode"/>
-    <Editor class="editor" lang="javascript" v-on:update="updateCode"/>
+    <Editor class="editor" lang="xml" language="HTML" v-on:update="updateCode"/>
+    <Editor class="editor" lang="css" language="CSS" v-on:update="updateCode"/>
+    <Editor class="editor" lang="javascript" language="JS" v-on:update="updateCode"/>
   </div>
   <div class="code_output">
     <iframe id="code" :srcdoc="src" class="code-represent"> </iframe>
@@ -109,9 +109,5 @@ export default {
 </script>
 
 <style>
-.editor{
-  width: 26rem;
-  height: 20rem;
-  display: inline-block;
-}
+
 </style>

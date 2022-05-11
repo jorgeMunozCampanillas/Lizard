@@ -29,12 +29,16 @@ export default {
   methods:{
     getAllCode(){
         axios.get('/api/getPost').then(res=>{
-          console.log(res.data)
+          if (res.datastatus) {
             this.posts = res.data;
+          }else{
+            console.log(res)
+            this.$router.push({name:'permissError', params: {msg: res.data.error}});
+          }
         })
         .catch(err=>{
           console.log("Error CodeProfile.vue getAllCode")
-          console.log(err.data)
+          console.log(err)
         })
     },
   },

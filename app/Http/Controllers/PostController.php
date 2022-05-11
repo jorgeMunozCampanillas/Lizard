@@ -8,21 +8,28 @@ use App\Models\Post;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the posts with her users.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        if(!$request->user()) {
-            return response()->json(['error' => 'User does not exist'], 500);
+        $posts = Post::all();
+
+        $data = [];
+        $user;
+
+        foreach ($posts as $key => $value) {
+            //User array to user obj
+            $user = (object) $value->user();
+
+            array_push($data, [
+                'post' => $value, 
+                'user' => $user,
+            ]);
         }
 
-        $posts = Post::all();
-        return response()->json($posts);
-
-        $users = User::all();
-        return response()->json($users);
+        return response()->json($data, 200);
     }
 
     /**

@@ -1,7 +1,8 @@
 <template>
 <div>
     <nav>
-        <na-vue></na-vue>
+        <Nav v-if="this.$store.state.navTipe == 1"></Nav>
+        <Nav-Create v-else-if="this.$store.state.navTipe == 2"></Nav-Create>
     </nav>
     <div class="container mt-5">
         <router-view></router-view>
@@ -10,11 +11,13 @@
 </template>
 
 <script>
-import naVue from './mains/Nav.vue';
+import Nav from './mains/Nav.vue';
+import NavCreate from './mains/NavCreate.vue';
 
 export default {
     components:{
-        naVue
+        Nav,
+        NavCreate
     },
 }
 </script>

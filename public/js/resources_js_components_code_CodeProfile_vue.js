@@ -43,11 +43,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/getPost').then(function (res) {
-        console.log(res.data);
-        _this.posts = res.data;
+        if (res.datastatus) {
+          _this.posts = res.data;
+        } else {
+          console.log(res);
+
+          _this.$router.push({
+            name: 'permissError',
+            params: {
+              msg: res.data.error
+            }
+          });
+        }
       })["catch"](function (err) {
         console.log("Error CodeProfile.vue getAllCode");
-        console.log(err.data);
+        console.log(err);
       });
     }
   }

@@ -1,0 +1,15 @@
+#error{
+    color: white;
+    background-color: $primary-dark;
+    height: calc(100vh - 3rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: $title-typography;
+    
+}
+
+.button-err{
+    margin-top: 1rem;
+}
