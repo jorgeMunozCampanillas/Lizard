@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\PostLike;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -18,13 +20,16 @@ class PostController extends Controller
 
         $data = [];
         $user;
+        $likes;
 
         foreach ($posts as $key => $value) {
             //User array to user obj
             $user = (object) $value->user();
+            $likes = PostLike::likePost($value->idPost);
 
             array_push($data, [
                 'post' => $value, 
+                'likes' => $likes,
                 'user' => $user,
             ]);
         }
@@ -60,6 +65,7 @@ class PostController extends Controller
 
         $post = Post::create([
             'idUsu' => $request->idUsu,
+            'postName' => $request->postName,
             'html' => $request->html,
             'css' => $request->css,
             'js' => $request->js,
@@ -81,6 +87,13 @@ class PostController extends Controller
     {
         return response()->json([
             'code' => Post::findOrFail($idPost),
+        ]);
+    }
+
+    public function showFrom(Request $request, $idUsu){
+        $post = DB::table('post')->where('idUsu', '=', $idUsu)->get();
+        return response()->json([
+            'code' => Post::findOrFail($post),
         ]);
     }
 
@@ -116,5 +129,13 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function like(Request $request){
+        $res = PostLike::like($request->idPost);
+        return response()->json([
+            'status' => $request->idUsu,
+            'op' => $res
+        ]);
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -25,7 +26,36 @@ class UserController extends Controller
 
 
     public function getPosts(Request $request){
-        return response()->json(Auth::user()->getPosts());
+        return response()->json([
+            'data' => Auth::user()->getPosts(),
+            'status' => 1,
+        ]);
+    }
+
+    public function getPostOther(Request $request){
+        $post = DB::table('post')->where('idUsu', '=', $request->idUsu)->get();
+
+        return response()->json([
+            'data' => $post,
+            'status' => 1,
+        ]);
+    }
+
+
+    //Return all likes that the user give 
+    public function getLikesGiven(){
+        $likes = Auth::user()->getLikesGiven();
+        // return response()->json(count($likes));
+        //Pass the [{},{}] to [x,x]
+        $likesArr = [];
+        for ($i=0; $i < count($likes); $i++) { 
+            array_push($likesArr, $likes[$i]->idPost);
+        }
+
+        return response()->json([
+            'data' => $likesArr,
+            'status' => 1,
+        ]);
     }
 
     /**

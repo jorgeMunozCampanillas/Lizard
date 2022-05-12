@@ -1,4 +1,4 @@
-/*-_-_-_-_-_-_-_-_- NAV -_-_-_-_-_-_-_-_-*/
+/*-_-_-_-_-_-_-_-_- NAV 1 -_-_-_-_-_-_-_-_-*/
 
 .nav-1{
     font-family: $title-typography;
@@ -59,7 +59,7 @@
 }
 
 
-
+/*-_-_-_-_-_-_-_-_- NAV 2 -_-_-_-_-_-_-_-_-*/
 .nav-2{
     font-family: $title-typography;
     height: 3rem;
@@ -85,12 +85,39 @@
     .nav-options{
         display: flex;
         padding-right: 1rem;
-        li{
+
+        .nav-option{
             padding: 0 1em;
             display: flex;
             justify-content: space-around;
             align-items: center;
+            margin: .3rem .8rem;
+            background-color: rgb(60, 62, 70);
+            border-radius: .3rem;
+
+            &:hover{
+                background-color: rgb(78, 80, 88);
+            }
+
+
+
         }
+
+    }
+
+    #project-title{
+        font-size: 1rem;
+        color: white;
+        font-weight: bold;
+        background-color: $primary-dark;
+        border: none;
+        outline: none;
+        &::placeholder{
+            color: white;
+            opacity: 1;
+        }
+
+   
     }
 }
 

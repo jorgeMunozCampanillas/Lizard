@@ -7,7 +7,11 @@
 
 <script>
 export default {
-    props: ['msg'],
+    props: {
+      'msg': {
+        default: 'You dont have permiss here 😈'
+      }
+    },
     methods:{
         foo(){
             this.$router.push({name:'home'});

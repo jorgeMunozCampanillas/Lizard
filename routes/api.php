@@ -24,11 +24,15 @@ Route::middleware(['auth:sanctum'])->group(function(){
     //Users
     Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index']);
     Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy', 'update'])->middleware(['admin']);
-    
+    Route::get('likesGiven', [App\Http\Controllers\UserController::class, 'getLikesGiven']);
+
     //Code
     Route::resource('code', App\Http\Controllers\PostController::class);
     Route::get('getPost', [App\Http\Controllers\UserController::class, 'getPosts']);
+    Route::post('getPostOther', [App\Http\Controllers\UserController::class, 'getPostOther']);
 
+    //User Post
+    Route::post('like', [App\Http\Controllers\PostController::class, 'like']);
 });
 
 

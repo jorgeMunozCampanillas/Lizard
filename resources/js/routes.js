@@ -22,6 +22,7 @@ const Index = () => import('./components/Index.vue');
 const CreateCode = () => import('./components/code/CreateCode.vue');
 const ShowAllCode = () => import('./components/code/ShowCode.vue');
 const MyCode = () => import('./components/code/CodeProfile.vue');
+const CodeOther = () => import('./components/code/CodeProfileOthers.vue');
 
 //Errors
 const PermissError = () => import('./components/errors/Permiss.vue')
@@ -119,7 +120,11 @@ export const routes = [
                 path:'/show/posts/:id',
                 component:MyCode,
             },
-
+            {
+                name:'codeOthers',
+                path:'/codeOthers/:idUsu',
+                component:CodeOther,
+            },
             
         ]
     },{

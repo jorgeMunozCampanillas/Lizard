@@ -61,8 +61,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 //Code mirror
 
 
@@ -89,6 +87,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       img: ''
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    //this come to nav
+    this.$root.$on('save', function (postName) {
+      return _this.save(postName);
+    });
+  },
   methods: {
     updateCode: function updateCode(lang, code) {
       this[lang] = code;
@@ -97,8 +103,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     updateSrc: function updateSrc() {
       this.src = "\n        <html>\n            <body>".concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </html>");
     },
-    save: function save() {
-      var _this = this;
+    save: function save(postName) {
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var codeScreenArea;
@@ -110,8 +116,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //shhh this is our secret...
                 codeScreenArea = document.getElementById("codeScreenArea");
                 codeScreenArea.innerHTML += '<script src="https://cdn.tailwindcss.com"><\/script>';
-                codeScreenArea.innerHTML += _this.xml;
-                codeScreenArea.innerHTML += '<style>' + _this.css + '</style>';
+                codeScreenArea.innerHTML += _this2.xml;
+                codeScreenArea.innerHTML += '<style>' + _this2.css + '</style>';
                 _context2.next = 6;
                 return html2canvas__WEBPACK_IMPORTED_MODULE_10___default()(codeScreenArea, {
                   //Set properties of the canvas
@@ -125,21 +131,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                           case 0:
                             //convert the canvas to  blob and this to file :)))
                             canvas.toBlob(function (blob) {
-                              _this.img = new File([blob], 'prueba.jpg', {
+                              _this2.img = new File([blob], 'prueba.jpg', {
                                 type: "image/jpeg"
                               });
                               var data = new FormData();
-                              data.append('idUsu', _this.$store.state.auth.idUsu);
-                              data.append('html', _this.xml);
-                              data.append('css', _this.css);
-                              data.append('js', _this.js);
-                              data.append('img', _this.img);
+                              data.append('idUsu', _this2.$store.state.auth.idUsu);
+                              data.append('postName', postName);
+                              data.append('html', _this2.xml);
+                              data.append('css', _this2.css);
+                              data.append('js', _this2.js);
+                              data.append('img', _this2.img);
                               axios.post('/api/code', data).then(function (res) {
                                 console.log(res);
                                 console.log("añadido :))");
                               })["catch"](function (error) {
                                 console.log("Error save desde CreateCode.vue");
-                                _this.errors = error.response.data.errors;
+                                _this2.errors = error.response.data.errors;
                               });
                             });
 
@@ -23145,8 +23152,6 @@ var render = function () {
         attrs: { id: "codeScreenArea" },
       }),
     ]),
-    _vm._v(" "),
-    _c("button", { on: { click: _vm.save } }, [_vm._v("Guardar")]),
   ])
 }
 var staticRenderFns = []

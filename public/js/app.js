@@ -5484,6 +5484,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: "home"
       });
+    },
+    save: function save() {
+      //Emit to save in Create/Edit code with the name
+      var postName = document.getElementById("project-title").value;
+      if (!postName) postName = "Untitled";
+      this.$root.$emit('save', postName);
     }
   }
 });
@@ -5633,6 +5639,10 @@ var ShowAllCode = function ShowAllCode() {
 
 var MyCode = function MyCode() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_code_CodeProfile_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/code/CodeProfile.vue */ "./resources/js/components/code/CodeProfile.vue"));
+};
+
+var CodeOther = function CodeOther() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_code_CodeProfileOthers_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/code/CodeProfileOthers.vue */ "./resources/js/components/code/CodeProfileOthers.vue"));
 }; //Errors
 
 
@@ -5724,6 +5734,10 @@ var routes = [{
     name: 'my-code',
     path: '/show/posts/:id',
     component: MyCode
+  }, {
+    name: 'codeOthers',
+    path: '/codeOthers/:idUsu',
+    component: CodeOther
   }]
 }, {
   //Admins
@@ -33795,7 +33809,7 @@ var render = function () {
       this.$store.state.auth.permissions > 0
         ? _c("ul", { attrs: { id: "nav-with-permiss" } }, [
             _c("li", { staticClass: "nav-mains" }, [
-              _c("button", { on: { click: _vm.createCode } }, [
+              _c("p", { on: { click: _vm.createCode } }, [
                 _vm._v("new Component"),
               ]),
             ]),
@@ -33924,11 +33938,17 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("ul", { staticClass: "nav-options" }, [
-        _c("li", { on: { click: _vm.exit } }, [_vm._v("Home")]),
+        _c("li", { staticClass: "nav-option", on: { click: _vm.exit } }, [
+          _c("i", { staticClass: "bi bi-house-fill" }),
+          _vm._v(" Home"),
+        ]),
         _vm._v(" "),
-        _c("li", [_vm._v("Save")]),
+        _c("li", { staticClass: "nav-option", on: { click: _vm.save } }, [
+          _c("i", { staticClass: "bi bi-cloud-download-fill" }),
+          _vm._v(" Save"),
+        ]),
         _vm._v(" "),
-        _c("li", [_vm._v("Setting")]),
+        _vm._m(1),
         _vm._v(" "),
         _c("li", [
           _c("button", [
@@ -33977,9 +33997,9 @@ var render = function () {
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
                   _vm._m(2),
+                  _vm._v(" "),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("li", [
                     _c("button", { on: { click: _vm.logout } }, [
@@ -34000,9 +34020,20 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("h4", [_vm._v("Untitled")]),
+      _c("input", {
+        attrs: { id: "project-title", type: "text", placeholder: "Untitled" },
+      }),
       _vm._v(" "),
       _c("h6", { attrs: { id: "logo-title" } }, [_vm._v("Holge")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-option" }, [
+      _c("i", { staticClass: "bi bi-gear-fill" }),
+      _vm._v(" Setting"),
     ])
   },
   function () {
@@ -50741,7 +50772,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_users_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1,"resources_js_components_code_ShowCode_vue":1,"resources_js_components_code_CodeProfile_vue":1,"resources_js_components_errors_Permiss_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_users_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1,"resources_js_components_code_ShowCode_vue":1,"resources_js_components_code_CodeProfile_vue":1,"resources_js_components_code_CodeProfileOthers_vue":1,"resources_js_components_errors_Permiss_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

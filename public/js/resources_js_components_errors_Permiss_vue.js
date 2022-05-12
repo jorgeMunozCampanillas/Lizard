@@ -19,7 +19,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['msg'],
+  props: {
+    'msg': {
+      "default": 'You dont have permiss here 😈'
+    }
+  },
   methods: {
     foo: function foo() {
       this.$router.push({

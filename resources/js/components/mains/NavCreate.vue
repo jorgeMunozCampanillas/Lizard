@@ -4,16 +4,16 @@
         <ul class="nav-info">
             <img :src="'storage/logo2-bueno.png'" id="logo" alt="">
             <div>
-                <h4>Untitled</h4>
+                <input id="project-title" type="text" placeholder="Untitled">
                 <h6 id="logo-title">Holge</h6>
             </div>
         </ul>
 
         <!-- Options -->
         <ul class="nav-options">
-            <li @click="exit">Home</li>
-            <li>Save</li>
-            <li>Setting</li>
+            <li class="nav-option" @click="exit"><i class="bi bi-house-fill"></i>&nbsp;Home</li>
+            <li class="nav-option" @click="save"><i class="bi bi-cloud-download-fill"></i>&nbsp;Save</li>
+            <li class="nav-option"><i class="bi bi-gear-fill"></i>&nbsp;Setting</li>
             <li>
                 <button>
                     <i v-if="this.$store.state.isAuthenticated==false" style="font-size:1.6rem" class="bi bi-person-circle"></i>
@@ -73,6 +73,12 @@ export default {
         exit(){
             this.$store.dispatch('changeNav', 1);
             this.$router.push({name:"home"});
+        },
+        save(){
+            //Emit to save in Create/Edit code with the name
+            let postName = document.getElementById("project-title").value;
+            if (!postName) postName = "Untitled";
+            this.$root.$emit('save', postName);
         }
  
     },

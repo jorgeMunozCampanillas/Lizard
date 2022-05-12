@@ -31,13 +31,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      posts: ''
+      posts: '',
+      likes: []
     };
   },
   mounted: function mounted() {
+    this.getAuthLikes();
     this.getAllCode();
   },
   methods: {
@@ -51,6 +67,40 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err.data);
       });
     },
+    getAuthLikes: function getAuthLikes() {
+      var _this2 = this;
+
+      axios.get('/api/likesGiven').then(function (res) {
+        _this2.likes = res.data.data;
+      })["catch"](function (err) {
+        console.log("Error Home.vue getAutLikes");
+        console.log(err.data);
+      });
+    },
+    like: function like(idPost) {
+      var _this3 = this;
+
+      var data = {
+        'idPost': idPost
+      };
+      axios.post('/api/like', data).then(function (res) {
+        //Like action change <3 and number
+        if (_this3.likes.includes(idPost)) {
+          var index = _this3.likes.indexOf(idPost);
+
+          _this3.likes.splice(index, 1);
+
+          _this3.posts[idPost - 1].likes--;
+        } else {
+          _this3.likes.push(idPost);
+
+          _this3.posts[idPost - 1].likes++;
+        }
+      })["catch"](function (err) {
+        console.log("Error Home.vue like");
+        console.log(err.data);
+      });
+    },
     showCode: function showCode(idPost) {
       this.$router.push({
         name: 'show-code',
@@ -59,7 +109,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    showUser: function showUser($idUsu) {}
+    showUser: function showUser(idUsu) {
+      this.$router.push({
+        name: 'codeOthers',
+        params: {
+          id: idUsu
+        }
+      });
+    }
   }
 });
 
@@ -179,13 +236,63 @@ var render = function () {
               ]
             ),
             _vm._v(" "),
-            _c("div", [
+            _c("div", { staticClass: "post_user" }, [
               _c("img", {
-                staticClass: "post-user",
+                staticClass: "post_user-img",
                 attrs: { src: "storage/" + post.user[0].img, alt: "" },
               }),
               _vm._v(" "),
-              _c("h3", [_vm._v(_vm._s(post.user[0].name))]),
+              _c("div", { staticClass: "post_user-names" }, [
+                _c("div", { staticClass: "post_info" }, [
+                  _c("h3", [_vm._v(_vm._s(post.post.postName))]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "post_info-meta" }, [
+                    _vm.likes.includes(post.post.idPost)
+                      ? _c(
+                          "li",
+                          {
+                            attrs: { id: "like-" + post.post.idPost },
+                            on: {
+                              click: function ($event) {
+                                return _vm.like(post.post.idPost)
+                              },
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-heart-fill" }),
+                            _vm._v(_vm._s(post.likes) + "\r\n                "),
+                          ]
+                        )
+                      : _c(
+                          "li",
+                          {
+                            attrs: { id: "like-" + post.post.idPost },
+                            on: {
+                              click: function ($event) {
+                                return _vm.like(post.post.idPost)
+                              },
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-heart" }),
+                            _vm._v(_vm._s(post.likes) + "\r\n                "),
+                          ]
+                        ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "h5",
+                  {
+                    on: {
+                      click: function ($event) {
+                        return _vm.showUser(post.user[0].idUsu)
+                      },
+                    },
+                  },
+                  [_vm._v(_vm._s(post.user[0].name))]
+                ),
+              ]),
             ]),
           ])
         }),

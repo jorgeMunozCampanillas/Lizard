@@ -20,7 +20,7 @@
         <!-- Options -->
         <ul id="nav-with-permiss" v-if="this.$store.state.auth.permissions>0">
             <li class="nav-mains">
-                <button @click="createCode">new Component</button>
+                <p @click="createCode">new Component</p>
             </li>
             <li>
                 <button>

@@ -15,12 +15,12 @@
         <span v-if="errors.password_confirmation" style="color:red;">{{errors.password_confirmation}}<br></span>
         <input class="input-data" type="password" name="password_confirmation" v-model="form.password_confirmation" placeholder="Confrim Password">
         <br>
-        <!-- <input class="input-data" placeholder="img" type="file" name="img" @change="imgSelected"> -->
+        <input class="input-data" placeholder="img" type="file" name="img" @change="imgSelected">
         <button class="input-submit" @click.prevent="saveForm" type="submit">Register</button>
     </form>
     <br>
-    <!-- <p>Preview</p>
-    <img :src="imagepreview" style="max-height:100px;" alt=""> -->
+    <p>Preview</p>
+    <img :src="imagepreview" style="max-height:100px;" alt="">
     <div class="form-or">
         <hr>
         <span class="or">OR</span>

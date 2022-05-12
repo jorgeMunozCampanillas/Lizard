@@ -29,6 +29,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -43,11 +45,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/getPost').then(function (res) {
-        if (res.datastatus) {
-          _this.posts = res.data;
-        } else {
-          console.log(res);
+        console.log(res.data.data);
 
+        if (res.status) {
+          _this.posts = res.data.data;
+        } else {
           _this.$router.push({
             name: 'permissError',
             params: {
@@ -149,7 +151,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "home" } }, [
+  return _c("div", { attrs: { id: "profile" } }, [
     _vm._m(0),
     _vm._v(" "),
     _c(
@@ -159,39 +161,32 @@ var render = function () {
         _c("h1", { staticClass: "title" }, [_vm._v("Your Componens")]),
         _vm._v(" "),
         _vm._l(_vm.posts, function (post) {
-          return _c(
-            "div",
-            { key: post.idPost, staticClass: "post" },
-            [
-              _c(
-                "router-link",
-                {
-                  attrs: {
-                    to: { name: "show-code", params: { id: post.idPost } },
+          return _c("div", { key: post.idPost, staticClass: "post" }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function ($event) {
+                    return _vm.showCode(post.post.idPost)
                   },
                 },
-                [
-                  post.img != null
-                    ? _c("img", {
-                        staticClass: "post-img",
-                        attrs: { src: "storage/" + post.img, alt: "" },
-                      })
-                    : _vm._e(),
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", [
-                _c("img", {
-                  staticClass: "post-user",
-                  attrs: { src: "", alt: "" },
-                }),
-                _vm._v(
-                  "\r\n            " + _vm._s(post.idUsu) + "\r\n        "
-                ),
+              },
+              [
+                post.img != null
+                  ? _c("img", {
+                      staticClass: "post-img",
+                      attrs: { src: "storage/" + post.img, alt: "" },
+                    })
+                  : _vm._e(),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "post_data" }, [
+              _c("div", { staticClass: "post_data-name" }, [
+                _c("h3", [_vm._v(_vm._s(post.postName))]),
               ]),
-            ],
-            1
-          )
+            ]),
+          ])
         }),
       ],
       2

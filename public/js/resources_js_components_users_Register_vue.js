@@ -331,6 +331,12 @@ var render = function () {
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
+          _c("input", {
+            staticClass: "input-data",
+            attrs: { placeholder: "img", type: "file", name: "img" },
+            on: { change: _vm.imgSelected },
+          }),
+          _vm._v(" "),
           _c(
             "button",
             {
@@ -349,6 +355,13 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("br"),
+      _vm._v(" "),
+      _c("p", [_vm._v("Preview")]),
+      _vm._v(" "),
+      _c("img", {
+        staticStyle: { "max-height": "100px" },
+        attrs: { src: _vm.imagepreview, alt: "" },
+      }),
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),

@@ -9,8 +9,6 @@
     <iframe id="code" :srcdoc="src" class="code-represent"> </iframe>
     <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
   </div>
-  
-  <button @click="save">Guardar</button>
 </div>
 </template>
 
@@ -45,6 +43,10 @@ export default {
       img:'',
     }
   },
+  mounted(){
+    //this come to nav
+    this.$root.$on('save', (postName) => this.save(postName));
+  },
   methods: {
 
     updateCode(lang, code){
@@ -62,8 +64,7 @@ export default {
     },
 
 
-    async save(){
-
+    async save(postName){
       //set the code background the page to screeshot ( z-index -5 )
       //shhh this is our secret...
       let codeScreenArea = document.getElementById("codeScreenArea");
@@ -85,6 +86,7 @@ export default {
         
           let data = new FormData;
           data.append('idUsu', this.$store.state.auth.idUsu);
+          data.append('postName', postName);
           data.append('html', this.xml);
           data.append('css', this.css);
           data.append('js', this.js);
@@ -102,7 +104,7 @@ export default {
         });
       });
       
-    }
+    },
   },
 
 }
