@@ -62,7 +62,6 @@ export default {
             data.append('email', this.form.email)
             data.append('password', this.form.password)
             data.append('img', this.form.img)
-            console.log(this.form.img)
             
             axios.post('api/users', data).then((req) =>{
                 this.$router.push({name:"login"});

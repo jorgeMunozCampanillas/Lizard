@@ -8,7 +8,7 @@ ol, ul, menu {
   list-style: none;
 }
 
-button, a, .reset { // reset style of buttons + form controls
+a, .reset { // reset style of buttons + form controls
   background-color: transparent;
   padding: 0;
   border: 0;
@@ -17,5 +17,10 @@ button, a, .reset { // reset style of buttons + form controls
   line-height: inherit;
   appearance: none;
 }
-
+button{
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
  

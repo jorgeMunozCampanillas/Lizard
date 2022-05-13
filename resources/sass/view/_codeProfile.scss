@@ -5,44 +5,78 @@
     grid-auto-rows: min-content;
     background-color: $primary-dark;
     color: $primary-white;
-    height: calc(100vh - 3rem);
+    min-height: calc(100vh - 3rem);
+    max-height: max-content;
 
-    #menu{
-        grid-column-end: span 3
-    }
+    .profile_header{
+        grid-column-end: span 12;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: max-content;
 
-    #posts{
-        padding: 2rem;
-        grid-column-end: span 9;
+        .profile_header-name{
+            margin: 1rem 0;
+        }
 
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 1.8rem;
-    }
-}
-.title{
-    grid-column-end: span 12;
-    text-align: center;
+        .profile_header-img{
+            width: 10rem;
+            border-radius: .5rem .5rem 0 0;
+            border: .5rem solid $primary-dark-strong;
+        }
 
-}
-.post{
-    grid-column-end: span 4;
-    height:max-content;
-    background-color: $secondary-dark;
-    box-shadow: 7px 7px $primary-dark-strong;
-    border-radius: 1rem;
-    padding: .5rem;
-    display: flex;
-    flex-direction: column;
+        .profile_header-data{
+            height: 4rem;
+            width: 100%;
+            background-color:  $primary-dark-strong;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
 
-    .post-img{
-        background-color: rgb(187, 181, 181);
-        border-radius: 1rem;
-        height: 15rem;
-        width: 100%;
         
     }
+    .profile_main{
+        margin: 3rem 5rem 0 5rem;
+        grid-column-end: span 12;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+
+
+        #nav_profile{
+            grid-column-end: span 12;
+        }
+    
+        #profile_posts{
+            padding: 2rem;
+            grid-column-end: span 12;
+    
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.8rem;
+        }
+    }
+
+    .post{
+        grid-column-end: span 3;
+        height:max-content;
+        background-color: $secondary-dark;
+        box-shadow: 7px 7px $primary-dark-strong;
+        border-radius: 1rem;
+        padding: .5rem;
+        display: flex;
+        flex-direction: column;
+    
+        .post-img{
+            background-color: rgb(187, 181, 181);
+            border-radius: 1rem;
+            height: 15rem;
+            width: 100%;
+            
+        }
+    }
 }
+
 
 
 .post_data{

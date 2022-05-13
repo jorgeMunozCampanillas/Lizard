@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
+use App\Models\PostLike;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -26,19 +27,72 @@ class UserController extends Controller
 
 
     public function getPosts(Request $request){
+        $posts = Auth::user()->getPosts();
+        
+        $data = [];
+        $user;
+        $likes;
+
+        
+        foreach ($posts as $key => $value) {
+            //User array to user obj
+            //$user = (object) $value->user();
+            $likes = PostLike::likePost($value->idPost);
+            
+            array_push($data, [
+                'post' => [
+                    'component' => $value, 
+                    'likes' => $likes,
+                    'user' => auth()->user(),
+                ],
+            ]);
+        }
         return response()->json([
-            'data' => Auth::user()->getPosts(),
+            'data' => $data,
+            'status' => 1,
+        ]);
+        
+    }
+
+    public function getUser(Request $request){
+        return response()->json([
+            'data' => $request->idUsu,
+            'status' => 1,
+        ]);
+        $data = User::findOrFail($request->idUsu);
+        return response()->json([
+            'data' => $data,
             'status' => 1,
         ]);
     }
 
     public function getPostOther(Request $request){
-        $post = DB::table('post')->where('idUsu', '=', $request->idUsu)->get();
 
+        $posts = DB::table('post')->where('idUsu', '=', $request->idUsu)->get();
+        
+        $data = [];
+        $user;
+        $likes;
+
+        
+        foreach ($posts as $key => $value) {
+            //User array to user obj
+            //$user = (object) $value->user();
+            $likes = PostLike::likePost($value->idPost);
+            
+            array_push($data, [
+                'post' => [
+                    'component' => $value, 
+                    'likes' => $likes,
+                    'user' => auth()->user(),
+                ],
+            ]);
+        }
         return response()->json([
-            'data' => $post,
+            'data' => $data,
             'status' => 1,
         ]);
+
     }
 
 

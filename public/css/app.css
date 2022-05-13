@@ -9,7 +9,7 @@ ol, ul, menu {
   list-style: none;
 }
 
-button, a, .reset {
+a, .reset {
   background-color: transparent;
   padding: 0;
   border: 0;
@@ -21,6 +21,13 @@ button, a, .reset {
           appearance: none;
 }
 
+button {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
 /*-_-_-_-_-_-_-_-_- NAV 1 -_-_-_-_-_-_-_-_-*/
 .nav-1 {
   font-family: "Segoe UI", "Roboto";
@@ -30,7 +37,7 @@ button, a, .reset {
   font-weight: 600;
   justify-content: space-around;
   background-color: #2B2C34;
-  border-bottom: 4px solid #25252b;
+  border-bottom: 4px solid #1b1b1d;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-auto-rows: -webkit-min-content;
@@ -84,7 +91,7 @@ button, a, .reset {
   font-weight: 600;
   justify-content: space-between;
   background-color: #2B2C34;
-  border-bottom: 4px solid #25252b;
+  border-bottom: 4px solid #1b1b1d;
   display: flex;
 }
 .nav-2 .nav-info {
@@ -132,6 +139,32 @@ button, a, .reset {
 .nav-2 #project-title::placeholder {
   color: white;
   opacity: 1;
+}
+
+/*-_-_-_-_-_-_-_-_- NAV Profile -_-_-_-_-_-_-_-_-*/
+#nav_profile {
+  width: 100%;
+}
+#nav_profile .nav_profile-option {
+  display: flex;
+  font-size: 1.5rem;
+  font-family: "Segoe UI", "Roboto";
+  font-weight: bold;
+  color: #999999;
+}
+#nav_profile .nav_profile-option li {
+  padding: 0 1rem;
+  cursor: pointer;
+}
+#nav_profile .nav_profile-option .active {
+  color: #FFFFFE;
+}
+#nav_profile .nav_profile-main .active {
+  border-bottom: 2px solid #52C7D0;
+}
+#nav_profile .nav_profile-work {
+  margin-top: 1.6rem;
+  font-size: 1rem;
 }
 
 #nav-logo {
@@ -419,7 +452,7 @@ a {
   height: -moz-max-content;
   height: max-content;
   background-color: #44444b;
-  box-shadow: 7px 7px #25252b;
+  box-shadow: 7px 7px #1b1b1d;
   border-radius: 1rem;
   padding: 0.5rem;
   display: flex;
@@ -515,37 +548,65 @@ a {
   grid-auto-rows: min-content;
   background-color: #2B2C34;
   color: #FFFFFE;
-  height: calc(100vh - 3rem);
+  min-height: calc(100vh - 3rem);
+  max-height: -webkit-max-content;
+  max-height: -moz-max-content;
+  max-height: max-content;
 }
-#profile #menu {
-  grid-column-end: span 3;
+#profile .profile_header {
+  grid-column-end: span 12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
 }
-#profile #posts {
+#profile .profile_header .profile_header-name {
+  margin: 1rem 0;
+}
+#profile .profile_header .profile_header-img {
+  width: 10rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  border: 0.5rem solid #1b1b1d;
+}
+#profile .profile_header .profile_header-data {
+  height: 4rem;
+  width: 100%;
+  background-color: #1b1b1d;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+#profile .profile_main {
+  margin: 3rem 5rem 0 5rem;
+  grid-column-end: span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+#profile .profile_main #nav_profile {
+  grid-column-end: span 12;
+}
+#profile .profile_main #profile_posts {
   padding: 2rem;
-  grid-column-end: span 9;
+  grid-column-end: span 12;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 1.8rem;
 }
-
-.title {
-  grid-column-end: span 12;
-  text-align: center;
-}
-
-.post {
-  grid-column-end: span 4;
+#profile .post {
+  grid-column-end: span 3;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   background-color: #44444b;
-  box-shadow: 7px 7px #25252b;
+  box-shadow: 7px 7px #1b1b1d;
   border-radius: 1rem;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
 }
-.post .post-img {
+#profile .post .post-img {
   background-color: rgb(187, 181, 181);
   border-radius: 1rem;
   height: 15rem;

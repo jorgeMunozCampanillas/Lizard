@@ -121,6 +121,40 @@
     }
 }
 
+/*-_-_-_-_-_-_-_-_- NAV Profile -_-_-_-_-_-_-_-_-*/
+#nav_profile{
+    width: 100%;
+
+    .nav_profile-option{
+        display: flex;
+        font-size: 1.5rem;
+        font-family: $title-typography;
+        font-weight: bold;
+        color: $secondary-whitergb;
+
+        li{
+            padding: 0 1rem;
+            cursor: pointer;
+        }
+
+        .active{
+            color: $primary-white;
+        }
+
+    }
+
+    .nav_profile-main{
+        .active{
+            border-bottom: 2px solid $primary-blue;
+        }
+    }
+
+
+    .nav_profile-work{
+        margin-top: 1.6rem;
+        font-size: 1rem;
+    }
+}
 
 
 

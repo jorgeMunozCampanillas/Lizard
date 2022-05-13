@@ -28,14 +28,15 @@ class PostController extends Controller
             $likes = PostLike::likePost($value->idPost);
 
             array_push($data, [
-                'post' => $value, 
+                'component' => $value, 
                 'likes' => $likes,
-                'user' => $user,
+                'user' => $user[0],
             ]);
         }
 
         return response()->json($data, 200);
     }
+
 
     /**
      * Show the form for creating a new resource.

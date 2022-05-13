@@ -14,15 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
-Route::get('athenticated', [App\Http\Controllers\UserController::class, 'auth']);
-Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']);
-Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
+Route::get('athenticated', [App\Http\Controllers\UserController::class, 'auth']);//delete ¿?
 
-//Auth routes
+/*========< No Auth Routes >=========*/
+//Users
+Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
+Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
+Route::resource('users', App\Http\Controllers\UserController::class)->only(['store']);
+Route::get('getUser/{idUsu}', [App\Http\Controllers\UserController::class, 'getUser']);
+
+//Code
+Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']);
+
+/*========< Auth Routes >=========*/
 Route::middleware(['auth:sanctum'])->group(function(){
     //Users
-    Route::resource('users', App\Http\Controllers\UserController::class)->only(['store', 'index']);
+    Route::resource('users', App\Http\Controllers\UserController::class)->only(['index']);
     Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy', 'update'])->middleware(['admin']);
     Route::get('likesGiven', [App\Http\Controllers\UserController::class, 'getLikesGiven']);
 
