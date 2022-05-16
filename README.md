@@ -186,7 +186,6 @@ Week 3:
 - Show post from one user
 - Show profiles
 - Likes
-- Follows
 - Improve security for auths
 
 <!-- ACKNOWLEDGMENTS -->
