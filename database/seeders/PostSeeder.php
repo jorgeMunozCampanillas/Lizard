@@ -166,6 +166,7 @@ class PostSeeder extends Seeder
                     'css' => $codes[$code]['css'],
                     'js' => $codes[$code]['js'],
                     'img' => $codes[$code]['img'],
+                    'views' => $faker->numberBetween(0, 100),
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s")
                 ]

@@ -279,6 +279,14 @@ button {
   transform: translateY(5px);
 }
 
+.button-follow {
+  background-color: green;
+}
+
+.button-Unfollow {
+  background-color: red;
+}
+
 .form {
   height: calc(100vh - 3rem);
   display: flex;
@@ -528,6 +536,9 @@ a {
   width: 33.33%;
   border: 2px solid;
 }
+.code_enter .editor .data img {
+  width: 20px;
+}
 
 .code_output {
   width: 100%;
@@ -577,6 +588,9 @@ a {
   display: flex;
   justify-content: right;
   align-items: center;
+}
+#profile .profile_header .profile_header-data ul {
+  display: flex;
 }
 #profile .profile_main {
   margin: 3rem 5rem 0 5rem;

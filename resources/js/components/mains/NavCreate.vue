@@ -2,7 +2,7 @@
 <div>
     <nav id="nav" class="nav-2">
         <ul class="nav-info">
-            <img :src="'storage/logo2-bueno.png'" id="logo" alt="">
+            <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
             <div>
                 <input id="project-title" type="text" placeholder="Untitled">
                 <h6 id="logo-title">Holge</h6>

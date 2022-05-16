@@ -2,7 +2,7 @@
   <div class="editor">
     <div class="data">
         <h3>{{language}}</h3>
-        <img  :src="'storage/codeIcons/HTML.png'" alt="">
+        <img  :src="'/storage/codeIcons/'+language+'.png'" alt="">
     </div>
     <textarea :id="lang"></textarea>
   </div>
@@ -34,7 +34,6 @@ export default {
         this.editor.setSize("100%", "94%");
 
         this.editor.on("change", ()=>{
-            console.log(this.editorValue())
             this.$emit('update', this.lang, this.editorValue());
         });
 
@@ -42,7 +41,6 @@ export default {
     },
     methods: {
         fillEditor(){
-            console.log("Mi code: "+this.code)
             if (this.code!=null) this.editor.setValue(this.code);
         },
         editorValue(){

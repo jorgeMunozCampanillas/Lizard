@@ -14,6 +14,13 @@ import axios from 'axios';
 import VueRouter from 'vue-router';
 import { routes } from './routes';
 import Vue from 'vue';
+
+//Not to return to the same route
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+};
+
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 

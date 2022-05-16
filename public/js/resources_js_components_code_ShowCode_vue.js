@@ -69,15 +69,12 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.editor.setSize("100%", "94%");
     this.editor.on("change", function () {
-      console.log(_this.editorValue());
-
       _this.$emit('update', _this.lang, _this.editorValue());
     });
     setTimeout(this.fillEditor, 1000);
   },
   methods: {
     fillEditor: function fillEditor() {
-      console.log("Mi code: " + this.code);
       if (this.code != null) this.editor.setValue(this.code);
     },
     editorValue: function editorValue() {
@@ -166,13 +163,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.getCode();
-    console.log(this.$route.params.id);
   },
   methods: {
     getCode: function getCode() {
       var _this = this;
 
-      console.log(this.$route.params.id);
       axios.get('/api/code/' + this.$route.params.id).then(function (res) {
         _this.xml = res.data.code.html;
         _this.css = res.data.code.css;
@@ -231,10 +226,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                               data.append('css', _this2.css);
                               data.append('js', _this2.js);
                               data.append('img', _this2.img);
-                              axios.post('/api/code', data).then(function (res) {
-                                console.log(res);
-                                console.log("añadido :))");
-                              })["catch"](function (error) {
+                              axios.post('/api/code', data).then(function (res) {})["catch"](function (error) {
                                 console.log("Error save desde CreateCode.vue");
                                 _this2.errors = error.response.data.errors;
                               });
@@ -23132,7 +23124,9 @@ var render = function () {
     _c("div", { staticClass: "data" }, [
       _c("h3", [_vm._v(_vm._s(_vm.language))]),
       _vm._v(" "),
-      _c("img", { attrs: { src: "storage/codeIcons/HTML.png", alt: "" } }),
+      _c("img", {
+        attrs: { src: "/storage/codeIcons/" + _vm.language + ".png", alt: "" },
+      }),
     ]),
     _vm._v(" "),
     _c("textarea", { attrs: { id: _vm.lang } }),

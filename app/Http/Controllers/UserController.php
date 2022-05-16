@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Models\PostLike;
+use App\Models\Followers;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -55,15 +56,40 @@ class UserController extends Controller
     }
 
     public function getUser(Request $request){
-        return response()->json([
-            'data' => $request->idUsu,
-            'status' => 1,
-        ]);
-        $data = User::findOrFail($request->idUsu);
+        $usu = $request->idUsu;
+        $data = User::findOrFail($usu);
+
+        $followers = Followers::getFollower($usu);
+        //Pass the [{},{}] to [x,x]
+        $followersArr = [];
+        foreach ($followers as $key => $value) {
+            array_push($followersArr, $value->follower);
+        }
+
+        $followings = Followers::getFollowing($usu);
+        $followingssArr = [];
+        foreach ($followings as $key => $value) {
+            array_push($followingssArr, $value->following);
+        }
+
+        $follows=[
+            'followers'=>$followersArr,
+            'followings'=>$followingssArr,
+        ];
+
         return response()->json([
             'data' => $data,
+            'follows' => $follows,
             'status' => 1,
         ]);
+    }
+    public function getFollowingDetails(Request $request){
+        $following = Followers::getFollowingDetails($request->idUsu);
+        return response()->json(['data'=>$following]);
+    }
+    public function getFollowerDetails(Request $request){
+        $following = Followers::getFollowerDetails($request->idUsu);
+        return response()->json(['data'=>$following]);
     }
 
     public function getPostOther(Request $request){
@@ -76,15 +102,13 @@ class UserController extends Controller
 
         
         foreach ($posts as $key => $value) {
-            //User array to user obj
-            //$user = (object) $value->user();
             $likes = PostLike::likePost($value->idPost);
             
             array_push($data, [
                 'post' => [
                     'component' => $value, 
                     'likes' => $likes,
-                    'user' => auth()->user(),
+                    'user' => User::findOrFail($request->idUsu),
                 ],
             ]);
         }
@@ -110,6 +134,25 @@ class UserController extends Controller
             'data' => $likesArr,
             'status' => 1,
         ]);
+    }
+
+    public function getFollowing(Request $request){
+        $following = Followers::getFollowing($request->idUsu);
+        $followingArr = [];
+        //Pass the [{},{}] to [x,x]
+        foreach ($following as $key => $value) {
+            array_push($followingArr, $value->following);
+        }
+        
+        return response()->json([
+            'following' => $followingArr,
+        ]);
+    }
+
+    public function follow(Request $request){
+        if (Followers::follow($request->idUsu)) {
+            return response()->json([1]);
+        }
     }
 
     /**

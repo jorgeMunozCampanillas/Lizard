@@ -37,6 +37,16 @@ class PostController extends Controller
         return response()->json($data, 200);
     }
 
+    public function addView(Request $request){
+        
+        $post = Post::findOrFail($request->idPost);
+        if ($post) {
+            $post->views++;
+            $post->save();
+        }
+        return response()->json(['hola'=>$post->views]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -45,12 +45,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -58,22 +52,34 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: ''
+      posts: '',
+      user: {},
+      follows: {
+        followers: [],
+        followings: []
+      }
     };
   },
   mounted: function mounted() {
+    this.getUser();
     this.getAuthLikes();
     this.getAllCode();
-    this.getUser();
+  },
+  computed: {
+    followers: function followers() {
+      return this.follows.followers.length;
+    },
+    followings: function followings() {
+      return this.follows.followings.length;
+    }
   },
   methods: {
+    //Get all code from the user passed
     getAllCode: function getAllCode() {
       var _this = this;
 
       var idUsu = this.$route.params.id;
-      var data = new FormData();
-      data.append('idUsu', idUsu);
-      axios.post('/api/getPostOther', data).then(function (res) {
+      axios.get('/api/getPostOther/' + idUsu).then(function (res) {
         if (res.status) {
           _this.posts = res.data.data;
         } else {
@@ -89,25 +95,58 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
+    //Get your likes
     getAuthLikes: function getAuthLikes() {
       var _this2 = this;
 
-      axios.get('/api/likesGiven').then(function (res) {
+      axios.get('/api/user/likesGiven').then(function (res) {
         _this2.likes = res.data.data;
       })["catch"](function (err) {
         console.log("Error CodeOthers.vue getAutLikes");
         console.log(err.data);
       });
     },
+    //Get data from the user passed
     getUser: function getUser() {
+      var _this3 = this;
+
       var idUsu = this.$route.params.id;
-      var data = new FormData();
-      data.append('idUsu', idUsu);
-      axios.get('/api/getUser', data).then(function (res) {
-        console.log(res.data); //this.user = res.data.data;
+      axios.get('/api/user/getUser/' + idUsu).then(function (res) {
+        _this3.user = res.data.data;
+        _this3.follows = res.data.follows;
+        console.log(_this3.follows);
       })["catch"](function (err) {
         console.log("Error CodeOthers.vue getAutLikes");
         console.log(err.data);
+      });
+    },
+    follow: function follow() {
+      var _this4 = this;
+
+      var data = {
+        idUsu: this.user.idUsu
+      };
+      axios.post('/api/user/follow', data).then(function (res) {
+        if (_this4.$store.state.follows.followings.includes(_this4.user.idUsu)) {
+          //Change button
+          var index = _this4.$store.state.follows.followings.indexOf(_this4.user.idUsu);
+
+          _this4.$store.state.follows.followings.splice(index, 1); //Change count
+
+
+          index = _this4.follows.followers.indexOf(_this4.user.idUsu);
+
+          _this4.follows.followers.splice(index, 1);
+        } else {
+          //Change button
+          _this4.$store.state.follows.followings.push(_this4.user.idUsu); //Change count
+
+
+          _this4.follows.followers.push(_this4.user.idUsu);
+        }
+      })["catch"](function (err) {
+        console.log('Error en CodeProfileOthers.vue follow');
+        console.log(err);
       });
     }
   }
@@ -151,6 +190,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -166,6 +210,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     showCode: function showCode() {
+      var data = {
+        idPost: this.post.component.idPost
+      }; //+1 view
+
+      axios.post('/api/addView', data).then(function (res) {
+        console.log("add view");
+        console.log(res);
+      })["catch"](function (err) {
+        console.log('Error in OnePost.vue showCode');
+        console.log(err);
+      }); //Go to code
+
       this.$router.push({
         name: 'show-code',
         params: {
@@ -174,12 +230,26 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     showUser: function showUser() {
-      this.$router.push({
-        name: 'codeOthers',
-        params: {
-          id: this.post.user.idUsu
+      //Not to view your user like other user
+      if (this.post.user.idUsu != this.$store.state.auth.idUsu) {
+        this.$router.push({
+          name: 'code-others',
+          params: {
+            id: this.post.user.idUsu
+          }
+        });
+      } else {
+        var path = '/show/myCode';
+
+        if (this.$route.path != path) {
+          this.$router.push({
+            name: 'my-code',
+            params: {
+              id: this.post.component.idPost
+            }
+          });
         }
-      });
+      }
     },
     like: function like() {
       var _this = this;
@@ -367,15 +437,37 @@ var render = function () {
   return _c("div", { attrs: { id: "profile" } }, [
     _c("div", { staticClass: "profile_header" }, [
       _c("h1", { staticClass: "profile_header-name" }, [
-        _vm._v(_vm._s(this.$store.state.auth.name)),
+        _vm._v(_vm._s(_vm.user.name)),
       ]),
       _vm._v(" "),
       _c("img", {
         staticClass: "profile_header-img",
-        attrs: { src: "storage/" + this.$store.state.auth.img, alt: "" },
+        attrs: { src: "/storage/" + _vm.user.img, alt: "" },
       }),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "profile_header-data" }, [
+        _c("ul", [
+          _c("li", [_vm._v("Components: 0")]),
+          _vm._v(" "),
+          _c("li", [_vm._v("Followers: " + _vm._s(_vm.followers))]),
+          _vm._v(" "),
+          _c("li", [_vm._v("Following: " + _vm._s(_vm.followings))]),
+          _vm._v(" "),
+          _c("li", [
+            this.$store.state.follows.followings.includes(_vm.user.idUsu)
+              ? _c(
+                  "button",
+                  { staticClass: "button-Unfollow", on: { click: _vm.follow } },
+                  [_vm._v(" - Unfollow ")]
+                )
+              : _c(
+                  "button",
+                  { staticClass: "button-follow", on: { click: _vm.follow } },
+                  [_vm._v(" + Follow ")]
+                ),
+          ]),
+        ]),
+      ]),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "profile_main" }, [
@@ -394,20 +486,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile_header-data" }, [
-      _c("div", [_vm._v("Components: 0")]),
-      _vm._v(" "),
-      _c("div", [_vm._v("Followers: 0")]),
-      _vm._v(" "),
-      _c("div", [_vm._v("Following: 0")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -442,7 +521,7 @@ var render = function () {
       [
         _c("img", {
           staticClass: "post-img",
-          attrs: { src: "storage/" + _vm.post.component.img, alt: "" },
+          attrs: { src: "/storage/" + _vm.post.component.img, alt: "" },
         }),
       ]
     ),
@@ -450,7 +529,7 @@ var render = function () {
     _c("div", { staticClass: "post_user" }, [
       _c("img", {
         staticClass: "post_user-img",
-        attrs: { src: "storage/" + _vm.post.user.img, alt: "" },
+        attrs: { src: "/storage/" + _vm.post.user.img, alt: "" },
       }),
       _vm._v(" "),
       _c("div", { staticClass: "post_user-names" }, [
@@ -487,6 +566,13 @@ var render = function () {
                     _vm._v(_vm._s(_vm.post.likes) + "\r\n                    "),
                   ]
                 ),
+            _vm._v(" "),
+            _c("li", [
+              _c("i", { staticClass: "bi bi-eye-fill" }),
+              _vm._v(
+                _vm._s(_vm.post.component.views) + "\r\n                    "
+              ),
+            ]),
           ]),
         ]),
         _vm._v(" "),

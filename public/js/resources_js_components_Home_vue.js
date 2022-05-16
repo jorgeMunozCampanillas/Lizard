@@ -60,7 +60,7 @@ __webpack_require__.r(__webpack_exports__);
     getAuthLikes: function getAuthLikes() {
       var _this2 = this;
 
-      axios.get('/api/likesGiven').then(function (res) {
+      axios.get('/api/user/likesGiven').then(function (res) {
         _this2.likes = res.data.data;
       })["catch"](function (err) {
         console.log("Error Home.vue getAutLikes");
@@ -108,6 +108,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -123,6 +128,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     showCode: function showCode() {
+      var data = {
+        idPost: this.post.component.idPost
+      }; //+1 view
+
+      axios.post('/api/addView', data).then(function (res) {
+        console.log("add view");
+        console.log(res);
+      })["catch"](function (err) {
+        console.log('Error in OnePost.vue showCode');
+        console.log(err);
+      }); //Go to code
+
       this.$router.push({
         name: 'show-code',
         params: {
@@ -131,12 +148,26 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     showUser: function showUser() {
-      this.$router.push({
-        name: 'codeOthers',
-        params: {
-          id: this.post.user.idUsu
+      //Not to view your user like other user
+      if (this.post.user.idUsu != this.$store.state.auth.idUsu) {
+        this.$router.push({
+          name: 'code-others',
+          params: {
+            id: this.post.user.idUsu
+          }
+        });
+      } else {
+        var path = '/show/myCode';
+
+        if (this.$route.path != path) {
+          this.$router.push({
+            name: 'my-code',
+            params: {
+              id: this.post.component.idPost
+            }
+          });
         }
-      });
+      }
     },
     like: function like() {
       var _this = this;
@@ -377,7 +408,7 @@ var render = function () {
       [
         _c("img", {
           staticClass: "post-img",
-          attrs: { src: "storage/" + _vm.post.component.img, alt: "" },
+          attrs: { src: "/storage/" + _vm.post.component.img, alt: "" },
         }),
       ]
     ),
@@ -385,7 +416,7 @@ var render = function () {
     _c("div", { staticClass: "post_user" }, [
       _c("img", {
         staticClass: "post_user-img",
-        attrs: { src: "storage/" + _vm.post.user.img, alt: "" },
+        attrs: { src: "/storage/" + _vm.post.user.img, alt: "" },
       }),
       _vm._v(" "),
       _c("div", { staticClass: "post_user-names" }, [
@@ -422,6 +453,13 @@ var render = function () {
                     _vm._v(_vm._s(_vm.post.likes) + "\r\n                    "),
                   ]
                 ),
+            _vm._v(" "),
+            _c("li", [
+              _c("i", { staticClass: "bi bi-eye-fill" }),
+              _vm._v(
+                _vm._s(_vm.post.component.views) + "\r\n                    "
+              ),
+            ]),
           ]),
         ]),
         _vm._v(" "),

@@ -35,8 +35,10 @@ export default {
         saveForm(){
             this.axios.post('/api/login', this.form).then((res)=>{
                 if (res.data.status) {
-                    this.$store.dispatch('login', res.data.data);
-                    this.$router.push({name:"home"})
+                    axios.get('/api/user/getUser/'+res.data.data.idUsu).then(res => {
+                        this.$store.dispatch('login', res.data);
+                        this.$router.push({name:"home"})
+                    })
                 }else{
                     this.error = true;
                 }

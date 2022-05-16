@@ -44,14 +44,14 @@ export default {
         })
     },
     getAuthLikes(){
-      axios.get('/api/likesGiven').then(res =>{
+      axios.get('/api/user/likesGiven').then(res =>{
         this.likes = res.data.data;
       })
       .catch(err=>{
         console.log("Error Home.vue getAutLikes");
         console.log(err.data);
       })
-    },
+    }
 
 
   },

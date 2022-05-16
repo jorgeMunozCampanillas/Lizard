@@ -21,6 +21,7 @@ class CreatePostTable extends Migration
             $table->longText('css')->nullable();
             $table->longText('js')->nullable();
             $table->string('img')->nullable();
+            $table->bigInteger('views');
             $table->timestamps();
         });
 

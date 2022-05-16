@@ -126,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
     getUsers: function getUsers() {
       var _this = this;
 
-      axios.get('/api/users').then(function (res) {
+      axios.get('/api/user/users').then(function (res) {
         _this.users = res.data;
       })["catch"](function (e) {
         console.log("error en Dashboard.vue getUser");
@@ -139,7 +139,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       console.log("voy a borrar el user: " + userDelete.name + " : " + userDelete.idUsu);
-      axios["delete"]('api/users/' + userDelete.idUsu).then(function (e) {
+      axios["delete"]('api/user/users/' + userDelete.idUsu).then(function (e) {
         //Update the array with the users
         _this2.users = _this2.users.filter(function (u) {
           return u.idUsu != userDelete.idUsu;
@@ -156,7 +156,7 @@ __webpack_require__.r(__webpack_exports__);
     editSuccess: function editSuccess() {
       var _this3 = this;
 
-      axios.put('api/users/' + this.userEdit.idUsu, this.userEdit).then(function (e) {
+      axios.put('api/user/users/' + this.userEdit.idUsu, this.userEdit).then(function (e) {
         _this3.users.map(function (u) {
           if (u.idUsu == _this3.userEdit.idUsu) {
             u = _this3.userEdit;

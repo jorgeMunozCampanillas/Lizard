@@ -45,12 +45,10 @@ export default {
   },
   created(){
     this.getCode();
-    console.log(this.$route.params.id)
   },
   methods: {
 
     getCode(){
-    console.log(this.$route.params.id) 
         axios.get('/api/code/'+this.$route.params.id)
         .then(res => {
             this.xml = res.data.code.html;
@@ -110,8 +108,7 @@ export default {
           data.append('img', this.img);
 
           axios.post('/api/code', data).then(res=>{
-            console.log(res)
-            console.log("añadido :))");
+            
           })
           .catch((error)=>{
             console.log("Error save desde CreateCode.vue")

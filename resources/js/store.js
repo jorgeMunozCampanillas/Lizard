@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
         },
         isAuthenticated: false,
         navTipe: 1,
+        follows: '',
     },  
     plugins: [createPersistedState({
         storage: {
@@ -33,13 +34,17 @@ export const store = new Vuex.Store({
             state.isAuthenticated = false;    
             window.localStorage.clear();
         },
+        setFollows(state, data){
+            state.follows = data;
+        },
         nav(state, nav){
             state.navTipe = nav;
         }
     },
     actions:{
         login({ commit },data){
-            commit('setAuth', data);
+            commit('setAuth', data.data);
+            commit('setFollows', data.follows);
         },
         logout({ commit }){
             commit('dropAuth')

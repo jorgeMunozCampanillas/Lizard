@@ -63,7 +63,7 @@ export default {
             data.append('password', this.form.password)
             data.append('img', this.form.img)
             
-            axios.post('api/users', data).then((req) =>{
+            axios.post('api/user/users', data).then((req) =>{
                 this.$router.push({name:"login"});
             }).catch((error) =>{
                 //this.errors = error.response.data.errors;

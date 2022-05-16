@@ -58,4 +58,7 @@ class User extends Authenticatable
     public function getLikesGiven(){
         return DB::table('post_like')->select('idPost')->where('idUsu', '=', Auth::id())->get();
     }
+
+
+
 }

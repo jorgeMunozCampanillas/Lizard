@@ -160,9 +160,9 @@ or
   - [ ] Change displayed
 
 - [ ] Post
-  - [ ] View
+  - [X] View
   - [ ] Filter
-  - [ ] Likes
+  - [X] Likes
   - [ ] Comment
   - [ ] Add fav
 
@@ -181,6 +181,13 @@ Week 2:
 - Show one post
 - Sanctum
 - Try to implement Vuex
+
+Week 3:
+- Show post from one user
+- Show profiles
+- Likes
+- Follows
+- Improve security for auths
 
 <!-- ACKNOWLEDGMENTS -->
 ## Helpful 🙏 

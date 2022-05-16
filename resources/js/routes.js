@@ -27,7 +27,6 @@ const CodeOther = () => import('./components/code/CodeProfileOthers.vue');
 //Errors
 const PermissError = () => import('./components/errors/Permiss.vue')
 
-
 /* ===============< MIDDLEWARES >=============== */
 const noAuth = (to, from, next) => {
     if (store.state.isAuthenticated) {
@@ -64,13 +63,13 @@ export const routes = [
     },
     {
         //All
-        path:'',
+        path:'/error',
         component:Base,
 
         children:[
             {
                 name:'permissError',
-                path:'/error',
+                path:'/permiss',
                 component:PermissError,
                 props:true,
             },
@@ -117,12 +116,12 @@ export const routes = [
             },
             {
                 name:'my-code',
-                path:'/show/posts/:id',
+                path:'/show/myCode/',
                 component:MyCode,
             },
             {
-                name:'codeOthers',
-                path:'/codeOthers/:idUsu',
+                name:'code-others',
+                path:'/code/others/:idUsu',
                 component:CodeOther,
             },
             

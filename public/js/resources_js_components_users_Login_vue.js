@@ -49,10 +49,12 @@ __webpack_require__.r(__webpack_exports__);
 
       this.axios.post('/api/login', this.form).then(function (res) {
         if (res.data.status) {
-          _this.$store.dispatch('login', res.data.data);
+          axios.get('/api/user/getUser/' + res.data.data.idUsu).then(function (res) {
+            _this.$store.dispatch('login', res.data);
 
-          _this.$router.push({
-            name: "home"
+            _this.$router.push({
+              name: "home"
+            });
           });
         } else {
           _this.error = true;

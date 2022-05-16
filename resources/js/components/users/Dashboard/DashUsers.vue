@@ -55,7 +55,7 @@ export default {
       //Getters
       //Get all users
       getUsers(){
-        axios.get('/api/users').then((res)=>{
+        axios.get('/api/user/users').then((res)=>{
           this.users = res.data;
         })
         .catch((e)=>{
@@ -68,7 +68,7 @@ export default {
       //Delete one user
       deleteUser(userDelete){
         console.log("voy a borrar el user: "+userDelete.name+" : "+userDelete.idUsu)
-        axios.delete('api/users/'+userDelete.idUsu).then((e)=>{
+        axios.delete('api/user/users/'+userDelete.idUsu).then((e)=>{
           //Update the array with the users
           this.users = this.users.filter((u) => u.idUsu != userDelete.idUsu);
         })
@@ -83,7 +83,7 @@ export default {
         this.userEdit = editUser;
       },
       editSuccess(){
-        axios.put('api/users/'+this.userEdit.idUsu, this.userEdit).then((e)=>{
+        axios.put('api/user/users/'+this.userEdit.idUsu, this.userEdit).then((e)=>{
           this.users.map((u)=>{
             if (u.idUsu == this.userEdit.idUsu) {
               u = this.userEdit;

@@ -1,10 +1,10 @@
 <template>
 <div>
     <button @click="showCode()">
-        <img :src="'storage/'+post.component.img" class="post-img" alt="">
+        <img :src="'/storage/'+post.component.img" class="post-img" alt="">
     </button>
     <div class="post_user">
-        <img :src="'storage/'+post.user.img" class="post_user-img" alt="">
+        <img :src="'/storage/'+post.user.img" class="post_user-img" alt="">
         <div class="post_user-names">
             <div class="post_info">
                 <h3>{{post.component.postName}}</h3>
@@ -15,6 +15,11 @@
                     </li>
                     <li @click="like()" v-else>
                         <i class="bi bi-heart"></i>{{post.likes}}
+                    </li>
+
+                    <!-- Views -->
+                    <li>
+                        <i class="bi bi-eye-fill"></i>{{post.component.views}}
                     </li>
                 </ul>
             </div>
@@ -41,10 +46,31 @@ export default {
     },
     methods: {
         showCode(){
+            let data = {
+                idPost:this.post.component.idPost
+            }
+            //+1 view
+            axios.post('/api/addView', data).then(res=>{
+                console.log("add view")
+                console.log(res);
+            }).catch(err=>{
+                console.log('Error in OnePost.vue showCode');
+                console.log(err);
+            })
+            //Go to code
             this.$router.push({name:'show-code', params: { id: this.post.component.idPost }})
+
         },
         showUser(){
-            this.$router.push({name:'codeOthers', params: { id: this.post.user.idUsu }})
+            //Not to view your user like other user
+            if (this.post.user.idUsu != this.$store.state.auth.idUsu) {
+                this.$router.push({name:'code-others', params: { id: this.post.user.idUsu }})
+            }else{
+                let path = '/show/myCode';
+                if (this.$route.path != path) {
+                    this.$router.push({name:'my-code', params: { id: this.post.component.idPost }});
+                }
+            }
         },
         like(){
             let data = {

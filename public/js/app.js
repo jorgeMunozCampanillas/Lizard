@@ -5524,6 +5524,15 @@ window.Vue = vue__WEBPACK_IMPORTED_MODULE_0__["default"];
 
 
 
+ //Not to return to the same route
+
+var originalPush = vue_router__WEBPACK_IMPORTED_MODULE_5__["default"].prototype.push;
+
+vue_router__WEBPACK_IMPORTED_MODULE_5__["default"].prototype.push = function push(location) {
+  return originalPush.call(this, location)["catch"](function (err) {
+    return err;
+  });
+};
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((vue_axios__WEBPACK_IMPORTED_MODULE_2___default()), (axios__WEBPACK_IMPORTED_MODULE_3___default())); //Vuex
@@ -5691,11 +5700,11 @@ var routes = [{
   component: Index
 }, {
   //All
-  path: '',
+  path: '/error',
   component: Base,
   children: [{
     name: 'permissError',
-    path: '/error',
+    path: '/permiss',
     component: PermissError,
     props: true
   }]
@@ -5732,11 +5741,11 @@ var routes = [{
     component: ShowAllCode
   }, {
     name: 'my-code',
-    path: '/show/posts/:id',
+    path: '/show/myCode/',
     component: MyCode
   }, {
-    name: 'codeOthers',
-    path: '/codeOthers/:idUsu',
+    name: 'code-others',
+    path: '/code/others/:idUsu',
     component: CodeOther
   }]
 }, {
@@ -5783,7 +5792,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
       permissions: 0
     },
     isAuthenticated: false,
-    navTipe: 1
+    navTipe: 1,
+    follows: ''
   },
   plugins: [(0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])({
     storage: {
@@ -5808,6 +5818,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
       state.isAuthenticated = false;
       window.localStorage.clear();
     },
+    setFollows: function setFollows(state, data) {
+      state.follows = data;
+    },
     nav: function nav(state, _nav) {
       state.navTipe = _nav;
     }
@@ -5815,7 +5828,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
   actions: {
     login: function login(_ref, data) {
       var commit = _ref.commit;
-      commit('setAuth', data);
+      commit('setAuth', data.data);
+      commit('setFollows', data.follows);
     },
     logout: function logout(_ref2) {
       var commit = _ref2.commit;
@@ -33769,7 +33783,7 @@ var render = function () {
     _c("nav", { staticClass: "nav-1", attrs: { id: "nav" } }, [
       _c("ul", { attrs: { id: "nav-logo" } }, [
         _c("img", {
-          attrs: { src: "storage/logo2-bueno.png", id: "logo", alt: "" },
+          attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
         }),
         _vm._v(" "),
         _c("h2", { attrs: { id: "logo-title" } }, [_vm._v("Lizard")]),
@@ -33931,7 +33945,7 @@ var render = function () {
     _c("nav", { staticClass: "nav-2", attrs: { id: "nav" } }, [
       _c("ul", { staticClass: "nav-info" }, [
         _c("img", {
-          attrs: { src: "storage/logo2-bueno.png", id: "logo", alt: "" },
+          attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
         }),
         _vm._v(" "),
         _vm._m(0),

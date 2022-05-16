@@ -234,15 +234,12 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.editor.setSize("100%", "94%");
     this.editor.on("change", function () {
-      console.log(_this.editorValue());
-
       _this.$emit('update', _this.lang, _this.editorValue());
     });
     setTimeout(this.fillEditor, 1000);
   },
   methods: {
     fillEditor: function fillEditor() {
-      console.log("Mi code: " + this.code);
       if (this.code != null) this.editor.setValue(this.code);
     },
     editorValue: function editorValue() {
@@ -23181,7 +23178,9 @@ var render = function () {
     _c("div", { staticClass: "data" }, [
       _c("h3", [_vm._v(_vm._s(_vm.language))]),
       _vm._v(" "),
-      _c("img", { attrs: { src: "storage/codeIcons/HTML.png", alt: "" } }),
+      _c("img", {
+        attrs: { src: "/storage/codeIcons/" + _vm.language + ".png", alt: "" },
+      }),
     ]),
     _vm._v(" "),
     _c("textarea", { attrs: { id: _vm.lang } }),
