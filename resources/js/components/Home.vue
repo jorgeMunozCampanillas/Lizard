@@ -7,8 +7,8 @@
     <h1 class="title">Tops Components</h1>
 
     <Post 
-      v-for="post in posts" :key="post.component.idPost"
-        :post="post"
+      v-for="post in posts" :key="post.idPost"
+        :data="post"
         :likes="likes"
         class="post" 
     ></Post>
@@ -32,15 +32,16 @@ export default {
   },
   mounted() {
     this.getAuthLikes();
-    this.getAllCode();
+    this.getPosts();
   },
   methods:{
-    getAllCode(){
+    getPosts(){
         axios.get('/api/post/code').then(res=>{
-            this.posts = res.data;
+            console.log(res)
+            this.posts = res.data.data;
         })
         .catch(err=>{
-          console.log("Error Home.vue getAllCode");
+          console.log("Error Home.vue getPosts");
           console.log(err.data);
         })
     },

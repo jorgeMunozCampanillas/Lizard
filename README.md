@@ -11,7 +11,7 @@
   </h4>
 </div>
 <br>
-<h2>Video check point: <a href="https://youtu.be/nBudKXeISSw"> https://youtu.be/nBudKXeISSw </a></h2>
+<h2>🎥Video check point : <a href="https://youtu.be/nBudKXeISSw"> https://youtu.be/nBudKXeISSw </a></h2>
 <!-- ABOUT THE PROJECT -->
 ## About Lizard
 

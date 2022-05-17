@@ -20,8 +20,8 @@
 
     <div id="profile_posts" v-if="optionNav==1">
         <Post 
-        v-for="post in posts" :key="post.post.component.idPost"
-          :post="post.post"
+        v-for="post in posts" :key="post.idPost"
+          :data="post"
           :likes="likes"
           class="post" 
       ></Post>
@@ -71,7 +71,7 @@ export default {
   mounted() {
     this.getUser();
     this.getAuthLikes();
-    this.getAllCode();
+    this.getPosts();
   },
   computed:{
     get_followers(){
@@ -83,7 +83,7 @@ export default {
   },
   methods:{
     //Get all code from the user passed
-    getAllCode(){
+    getPosts(){
         let idUsu = this.$route.params.id;
         axios.get('/api/post/posts/'+idUsu).then(res=>{
           if (res.status) {
@@ -93,7 +93,7 @@ export default {
           }
         })
         .catch(err=>{
-          console.log("Error CodeOthers.vue getAllCode")
+          console.log("Error CodeOthers.vue getPosts")
           console.log(err)
         })
     },

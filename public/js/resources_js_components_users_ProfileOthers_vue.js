@@ -42,14 +42,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
-    post: {
-      "default": "platano"
-    },
-    usu: {
+    data: {
       "default": "platano"
     },
     likes: {
@@ -57,18 +53,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    src: function src() {
-      var aux = "\n            <html>\n                <script src=\"https://cdn.tailwindcss.com\"></script>\n                <body>".concat(this.post.component.html, "</body>\n                <style>").concat(this.post.component.html, "</style>\n                <script>").concat(this.post.component.html, "</script>\n            </html>");
-      return aux;
-    }
+    /*src(){
+        let aux = `
+        <html>
+            <script src="https://cdn.tailwindcss.com"><\/script>
+            <body>${this.post.component.html}</body>
+            <style>${this.post.component.html}</style>
+            <script>${this.post.component.html}<\/script>
+        </html>`;
+        return aux;
+    }*/
   },
   methods: {
-    foo: function foo() {
-      console.log(this.post);
-    },
     showCode: function showCode() {
       var data = {
-        idPost: this.post.component.idPost
+        idPost: this.data.idPost
       }; //+1 view
 
       axios.post('/api/post/view', data).then(function (res) {})["catch"](function (err) {
@@ -79,17 +78,17 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: 'show-code',
         params: {
-          id: this.post.component.idPost
+          id: this.data.idPost
         }
       });
     },
     showUser: function showUser() {
       //Not to view your user like other user
-      if (this.post.user.idUsu != this.$store.state.auth.idUsu) {
+      if (this.data.idUsu != this.$store.state.auth.idUsu) {
         this.$router.push({
           name: 'code-others',
           params: {
-            id: this.post.user.idUsu
+            id: this.data.idUsu
           }
         });
       } else {
@@ -99,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
           this.$router.push({
             name: 'my-code',
             params: {
-              id: this.post.component.idPost
+              id: this.data.idPost
             }
           });
         }
@@ -109,20 +108,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var data = {
-        'idPost': this.post.component.idPost
+        'idPost': this.data.idPost
       };
       axios.post('/api/post/like', data).then(function (res) {
         //Like action change <3 and number
-        if (_this.likes.includes(_this.post.component.idPost)) {
-          var index = _this.likes.indexOf(_this.post.component.idPost);
+        if (_this.likes.includes(_this.data.idPost)) {
+          var index = _this.likes.indexOf(_this.data.idPost);
 
           _this.likes.splice(index, 1);
 
-          _this.post.likes--;
+          _this.data.likes--;
         } else {
-          _this.likes.push(_this.post.component.idPost);
+          _this.likes.push(_this.data.idPost);
 
-          _this.post.likes++;
+          _this.data.likes++;
           ;
         }
       })["catch"](function (err) {
@@ -216,7 +215,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getUser();
     this.getAuthLikes();
-    this.getAllCode();
+    this.getPosts();
   },
   computed: {
     get_followers: function get_followers() {
@@ -228,7 +227,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     //Get all code from the user passed
-    getAllCode: function getAllCode() {
+    getPosts: function getPosts() {
       var _this = this;
 
       var idUsu = this.$route.params.id;
@@ -244,7 +243,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       })["catch"](function (err) {
-        console.log("Error CodeOthers.vue getAllCode");
+        console.log("Error CodeOthers.vue getPosts");
         console.log(err);
       });
     },
@@ -501,7 +500,7 @@ var render = function () {
       [
         _c("img", {
           staticClass: "post-img",
-          attrs: { src: "/storage/" + _vm.post.component.img, alt: "" },
+          attrs: { src: "/storage/" + _vm.data.img, alt: "" },
         }),
       ]
     ),
@@ -509,15 +508,15 @@ var render = function () {
     _c("div", { staticClass: "post_user" }, [
       _c("img", {
         staticClass: "post_user-img",
-        attrs: { src: "/storage/" + _vm.post.user.img, alt: "" },
+        attrs: { src: "/storage/" + _vm.data.userImg, alt: "" },
       }),
       _vm._v(" "),
       _c("div", { staticClass: "post_user-names" }, [
         _c("div", { staticClass: "post_info" }, [
-          _c("h3", [_vm._v(_vm._s(_vm.post.component.postName))]),
+          _c("h3", [_vm._v(_vm._s(_vm.data.postName))]),
           _vm._v(" "),
           _c("ul", { staticClass: "post_info-meta" }, [
-            _vm.likes.includes(_vm.post.component.idPost)
+            _vm.likes.includes(_vm.data.idPost)
               ? _c(
                   "li",
                   {
@@ -529,7 +528,7 @@ var render = function () {
                   },
                   [
                     _c("i", { staticClass: "bi bi-heart-fill" }),
-                    _vm._v(_vm._s(_vm.post.likes) + "\r\n                    "),
+                    _vm._v(_vm._s(_vm.data.likes) + "\r\n                    "),
                   ]
                 )
               : _c(
@@ -543,15 +542,13 @@ var render = function () {
                   },
                   [
                     _c("i", { staticClass: "bi bi-heart" }),
-                    _vm._v(_vm._s(_vm.post.likes) + "\r\n                    "),
+                    _vm._v(_vm._s(_vm.data.likes) + "\r\n                    "),
                   ]
                 ),
             _vm._v(" "),
             _c("li", [
               _c("i", { staticClass: "bi bi-eye-fill" }),
-              _vm._v(
-                _vm._s(_vm.post.component.views) + "\r\n                    "
-              ),
+              _vm._v(_vm._s(_vm.data.views) + "\r\n                    "),
             ]),
           ]),
         ]),
@@ -565,7 +562,7 @@ var render = function () {
               },
             },
           },
-          [_vm._v(_vm._s(_vm.post.user.name))]
+          [_vm._v(_vm._s(_vm.data.name))]
         ),
       ]),
     ]),
@@ -640,9 +637,9 @@ var render = function () {
             { attrs: { id: "profile_posts" } },
             _vm._l(_vm.posts, function (post) {
               return _c("Post", {
-                key: post.post.component.idPost,
+                key: post.idPost,
                 staticClass: "post",
-                attrs: { post: post.post, likes: _vm.likes },
+                attrs: { data: post, likes: _vm.likes },
               })
             }),
             1

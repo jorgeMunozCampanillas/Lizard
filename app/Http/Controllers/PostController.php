@@ -23,25 +23,13 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::all();
 
-        $data = [];
-        $user;
-        $likes;
+        $posts = Post::getPosts();
 
-        foreach ($posts as $key => $value) {
-            //User array to user obj
-            $user = (object) $value->user();
-            $likes = PostLike::likePost($value->idPost);
+        return response()->json([
+            'data' => $posts,
+        ], 200);
 
-            array_push($data, [
-                'component' => $value, 
-                'likes' => $likes,
-                'user' => $user[0],
-            ]);
-        }
-
-        return response()->json($data, 200);
     }
 
 
@@ -138,29 +126,12 @@ class PostController extends Controller
     //-------------------------------------
     //Get all post of the user passed
     public function getPosts(Request $request){
-
-        $posts = DB::table('post')->where('idUsu', '=', $request->idUsu)->get();
         
-        $data = [];
-        $user;
-        $likes;
+        $posts = Post::getPostsUsu($request->idUsu);
 
-        
-        foreach ($posts as $key => $value) {
-            $likes = PostLike::likePost($value->idPost);
-            
-            array_push($data, [
-                'post' => [
-                    'component' => $value, 
-                    'likes' => $likes,
-                    'user' => User::findOrFail($request->idUsu),
-                ],
-            ]);
-        }
         return response()->json([
-            'data' => $data,
-            'status' => 1,
-        ]);
+            'data' => $posts,
+        ], 200);
 
     }
 

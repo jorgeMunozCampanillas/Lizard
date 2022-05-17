@@ -46,20 +46,20 @@
     <!-- Your posts -->
     <div id="profile_posts" v-if="optionMain==1">
       <Post 
-        v-for="post in posts" :key="post.post.component.idPost"
-          :post="post.post"
+        v-for="post in posts" :key="post.idPost"
+          :data="post"
           :likes="likes"
           class="post" 
       ></Post>
     </div>
     <!-- Following posts -->
     <div id="profile_posts" v-if="optionMain==2">
-      <Posttest 
+      <Post 
         v-for="post in followsDetails" :key="post.idPost"
           :data="post"
           :likes="likes"
           class="post" 
-      ></Posttest>
+      ></Post>
     </div>
 
 
@@ -71,11 +71,9 @@
 
 <script>
 import Post from '../code/OnePost.vue';
-import Posttest from '../code/OnePostTest.vue';
 export default {
   components:{
     Post,
-    Posttest
   },
   data() {
     return {
@@ -87,13 +85,11 @@ export default {
 
       //followsUsers/Code
       followsDetails: [],
-
-
     }
   },
   mounted() {
     this.getAuthLikes();
-    this.getAllCode();
+    this.getPosts();
   },
     computed:{
     followers(){
@@ -104,7 +100,7 @@ export default {
     }
   },
   methods:{
-    getAllCode(){
+    getPosts(){
         axios.get('/api/post/posts/'+this.$store.state.auth.idUsu).then(res=>{
           if (res.status) {
             this.posts = res.data.data;
@@ -114,7 +110,7 @@ export default {
           }
         })
         .catch(err=>{
-          console.log("Error CodeProfile.vue getAllCode")
+          console.log("Error CodeProfile.vue getPosts")
           console.log(err)
         })
     },

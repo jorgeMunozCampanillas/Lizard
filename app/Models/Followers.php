@@ -30,10 +30,6 @@ class Followers extends Model
             $posts[$key]->likes = DB::table('post_like')->where('idPost', '=', $value->idPost)->count() ?? 0;
         }
         return $posts;
-        /* select `user`.`name`, `user`.`idUsu`, `post`.`idPost` from `post` 
-            inner join `user` on `user`.`idUsu` = `post`.`idUsu` 
-            inner join `followers` on `followers`.`follower` = `user`.`idUsu` 
-            where `followers`.`following` = 1; */
     }
 
 
