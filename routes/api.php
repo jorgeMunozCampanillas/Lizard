@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('athenticated', [App\Http\Controllers\UserController::class, 'auth']);//delete ¿?
-
 /*========< No Auth Routes >=========*/
 //Users
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
@@ -23,32 +21,49 @@ Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
 Route::resource('users', App\Http\Controllers\UserController::class)->only(['store']);
 
 //Code
+//get all code
 Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']);
-
 
 /*========< Auth Routes >=========*/
 Route::middleware(['auth:sanctum'])->group(function(){
     //Users
     Route::group(["prefix" => "user"], function(){
-        Route::resource('users', App\Http\Controllers\UserController::class)->only(['index']);
-        Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy', 'update'])->middleware(['admin']);
+        //Normal actions with the users
+        Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy', 'update', 'index'])->middleware(['admin']);
+
+        //Get auth
+        Route::get('authId', [App\Http\Controllers\UserController::class, 'authId']);
+
+        //Get all ids of the post with likes given
         Route::get('likesGiven', [App\Http\Controllers\UserController::class, 'getLikesGiven']);
-        Route::get('getUser/{idUsu}', [App\Http\Controllers\UserController::class, 'getUser']);
-        Route::get('getFollowing/{idUsu}', [App\Http\Controllers\UserController::class, 'getFollowing']);
-        Route::post('follow',[App\Http\Controllers\UserController::class, 'follow']);
-        Route::get('following/{idUsu}',[App\Http\Controllers\UserController::class, 'getFollowingDetails']);
-        Route::get('followers/{idUsu}',[App\Http\Controllers\UserController::class, 'getFollowerDetails']);
+
+        //Follows zone
+        Route::group(["prefix" => "follow"], function(){
+            //Get all ids of yours followers and followings
+            Route::get('userData/{idUsu}', [App\Http\Controllers\UserController::class, 'userData']);
+            //Action to follow/unfollow
+            Route::post('follow',[App\Http\Controllers\UserController::class, 'follow']);
+            //Get details of the followers (id, name, img)
+            Route::get('following/{idUsu}',[App\Http\Controllers\UserController::class, 'getFollowingDetails']);
+            Route::get('followers/{idUsu}',[App\Http\Controllers\UserController::class, 'getFollowerDetails']);
+        });
     });
     
+    Route::group(["prefix"=>"post"], function(){ 
+        //Code
+        //Normal actions with code
+        Route::resource('code', App\Http\Controllers\PostController::class);
 
-    //Code
-    Route::resource('code', App\Http\Controllers\PostController::class);
-    Route::post('addView',[ App\Http\Controllers\PostController::class, 'addView']);
-    Route::get('getPost', [App\Http\Controllers\UserController::class, 'getPosts']);
-    Route::get('getPostOther/{idUsu}', [App\Http\Controllers\UserController::class, 'getPostOther']);
-
-    //User Post
-    Route::post('like', [App\Http\Controllers\PostController::class, 'like']);
+        //add one view to post
+        Route::post('view',[ App\Http\Controllers\PostController::class, 'addView']);
+        //Get all posts of the user passed
+        Route::get('posts/{idUsu}', [App\Http\Controllers\PostController::class, 'getPosts']);
+        //Get all posts of the users following
+        Route::get('following', [App\Http\Controllers\PostController::class, 'getPostsFollowing']);
+        //like/dislike action
+        Route::post('like', [App\Http\Controllers\PostController::class, 'like']);
+    });
+        
 });
 
 

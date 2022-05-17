@@ -24,6 +24,23 @@ __webpack_require__.r(__webpack_exports__);
       "default": 'You dont have permiss here 😈'
     }
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    //If we are here, we have problems...
+    //So if the user have bad intentions and he change her permiss or her data, we put the correct ones again
+    axios.get('/api/user/authId').then(function (res) {
+      axios.get('/api/user/follow/userData/' + res.data.data).then(function (res) {
+        _this.$store.dispatch('login', res.data);
+      })["catch"](function (err) {
+        console.log('Error desde Permiss.vue mounted');
+        console.log(err);
+      });
+    })["catch"](function (err) {
+      console.log('Error desde Permiss.vue mounted');
+      console.log(err);
+    });
+  },
   methods: {
     foo: function foo() {
       this.$router.push({

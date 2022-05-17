@@ -71,6 +71,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -102,7 +104,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllCode: function getAllCode() {
       var _this = this;
 
-      axios.get('/api/getPost').then(function (res) {
+      axios.get('/api/post/posts/' + this.$store.state.auth.idUsu).then(function (res) {
         if (res.status) {
           _this.posts = res.data.data;
           _this.postsNumber = res.data.data.length;
@@ -133,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
     getFollowings: function getFollowings() {
       var _this3 = this;
 
-      axios.get('/api/user/following/' + this.$store.state.auth.idUsu).then(function (res) {
+      axios.get('/api/user/follow/following/' + this.$store.state.auth.idUsu).then(function (res) {
         _this3.followingsDetails = res.data.data;
       })["catch"](function (err) {
         console.log('Error en CodeProfile.vue getFollowings');
@@ -144,25 +146,29 @@ __webpack_require__.r(__webpack_exports__);
     getFollowers: function getFollowers() {
       var _this4 = this;
 
-      axios.get('/api/user/followers/' + this.$store.state.auth.idUsu).then(function (res) {
-        console.log(res);
+      axios.get('/api/user/follow/followers/' + this.$store.state.auth.idUsu).then(function (res) {
         _this4.followersDetails = res.data.data;
       })["catch"](function (err) {
         console.log('Error en CodeProfile.vue getFollowings');
         console.log(err);
       });
     },
+    getPostFollowings: function getPostFollowings() {},
     //SETTERS
     SET_OPMAIN: function SET_OPMAIN(id) {
       this.optionMain = id;
 
       switch (id) {
         case 2:
-          this.getFollowings();
+          this.getPostFollowings();
           break;
 
-        case 3:
+        case 4:
           this.getFollowers();
+          break;
+
+        case 5:
+          this.getFollowings();
           break;
 
         default:
@@ -218,6 +224,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -231,16 +238,22 @@ __webpack_require__.r(__webpack_exports__);
       "default": []
     }
   },
+  computed: {
+    src: function src() {
+      var aux = "\n            <html>\n                <script src=\"https://cdn.tailwindcss.com\"></script>\n                <body>".concat(this.post.component.html, "</body>\n                <style>").concat(this.post.component.html, "</style>\n                <script>").concat(this.post.component.html, "</script>\n            </html>");
+      return aux;
+    }
+  },
   methods: {
+    foo: function foo() {
+      console.log(this.post);
+    },
     showCode: function showCode() {
       var data = {
         idPost: this.post.component.idPost
       }; //+1 view
 
-      axios.post('/api/addView', data).then(function (res) {
-        console.log("add view");
-        console.log(res);
-      })["catch"](function (err) {
+      axios.post('/api/post/view', data).then(function (res) {})["catch"](function (err) {
         console.log('Error in OnePost.vue showCode');
         console.log(err);
       }); //Go to code
@@ -280,7 +293,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = {
         'idPost': this.post.component.idPost
       };
-      axios.post('/api/like', data).then(function (res) {
+      axios.post('/api/post/like', data).then(function (res) {
         //Like action change <3 and number
         if (_this.likes.includes(_this.post.component.idPost)) {
           var index = _this.likes.indexOf(_this.post.component.idPost);
@@ -471,14 +484,24 @@ var render = function () {
       _c("div", { staticClass: "profile_header-data" }, [
         _c("div", [_vm._v("Components: " + _vm._s(_vm.postsNumber))]),
         _vm._v(" "),
-        _c("div", [_vm._v("Followers: " + _vm._s(_vm.followers))]),
+        _c(
+          "div",
+          {
+            on: {
+              click: function ($event) {
+                return _vm.SET_OPMAIN(4)
+              },
+            },
+          },
+          [_vm._v("Followers: " + _vm._s(_vm.followers))]
+        ),
         _vm._v(" "),
         _c(
           "div",
           {
             on: {
               click: function ($event) {
-                return _vm.SET_OPMAIN(2)
+                return _vm.SET_OPMAIN(5)
               },
             },
           },
@@ -526,7 +549,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Followers")]
+            [_vm._v("Trending")]
           ),
         ]),
         _vm._v(" "),
@@ -591,21 +614,7 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.optionMain == 2
-        ? _c(
-            "div",
-            _vm._l(_vm.followingsDetails, function (user) {
-              return _c("div", { key: user.idUsu }, [
-                _c("img", { attrs: { src: "/storage/" + user.img, alt: "" } }),
-                _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(user.name))]),
-              ])
-            }),
-            0
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.optionMain == 3
+      _vm.optionMain == 4
         ? _c(
             "div",
             _vm._l(_vm.followersDetails, function (userFollower) {
@@ -616,6 +625,20 @@ var render = function () {
                 }),
                 _vm._v(" "),
                 _c("h3", [_vm._v(_vm._s(userFollower.name))]),
+              ])
+            }),
+            0
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.optionMain == 5
+        ? _c(
+            "div",
+            _vm._l(_vm.followingsDetails, function (user) {
+              return _c("div", { key: user.idUsu }, [
+                _c("img", { attrs: { src: "/storage/" + user.img, alt: "" } }),
+                _vm._v(" "),
+                _c("h3", [_vm._v(_vm._s(user.name))]),
               ])
             }),
             0

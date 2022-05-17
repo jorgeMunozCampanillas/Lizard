@@ -12,7 +12,7 @@ class Post extends Model
     protected $table='post';
     protected $primaryKey = 'idPost';
 
-    protected $fillable = ['idUsu', 'postName','html','css','js', 'img'];
+    protected $fillable = ['idUsu', 'postName','html','css','js', 'img', 'views'];
 
     public function user(){
         return $this->belongsTo('App\Models\User', 'idUsu', 'idUsu')->get(['idUsu', 'name', 'email', 'img']);

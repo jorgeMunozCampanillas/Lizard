@@ -9,7 +9,7 @@ const Base = () => import('./components/Base.vue');
 const Login = () => import('./components/users/Login.vue');
 const Register = () => import('./components/users/Register.vue');
 //Admin
-const Dashboard = () => import('./components/users/Dashboard.vue');
+const Dashboard = () => import('./components/Dashboard.vue');
 
 //GENERALES
 //Auth
@@ -21,8 +21,8 @@ const Index = () => import('./components/Index.vue');
 //CODE
 const CreateCode = () => import('./components/code/CreateCode.vue');
 const ShowAllCode = () => import('./components/code/ShowCode.vue');
-const MyCode = () => import('./components/code/CodeProfile.vue');
-const CodeOther = () => import('./components/code/CodeProfileOthers.vue');
+const MyCode = () => import('./components/users/Profile.vue');
+const CodeOther = () => import('./components/users/ProfileOthers.vue');
 
 //Errors
 const PermissError = () => import('./components/errors/Permiss.vue')

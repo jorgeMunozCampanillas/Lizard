@@ -23,9 +23,8 @@ class Admin
             return $next($request);
         }else{
             return response()->json([
-                'status' => 0,
                 'error' => 'You dont have permiss here 😈'
-            ]);
+            ], 403);
         }
     }
 }

@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+
+    //-------------------------------------
+    // <<<<<<<<<<<- RESOURCES ->>>>>>>>>>>>>
+    //-------------------------------------
+
     /**
      * Display a listing of the resource.
      *
@@ -26,134 +32,6 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-
-    public function getPosts(Request $request){
-        $posts = Auth::user()->getPosts();
-        
-        $data = [];
-        $user;
-        $likes;
-
-        
-        foreach ($posts as $key => $value) {
-            //User array to user obj
-            //$user = (object) $value->user();
-            $likes = PostLike::likePost($value->idPost);
-            
-            array_push($data, [
-                'post' => [
-                    'component' => $value, 
-                    'likes' => $likes,
-                    'user' => auth()->user(),
-                ],
-            ]);
-        }
-        return response()->json([
-            'data' => $data,
-            'status' => 1,
-        ]);
-        
-    }
-
-    public function getUser(Request $request){
-        $usu = $request->idUsu;
-        $data = User::findOrFail($usu);
-
-        $followers = Followers::getFollower($usu);
-        //Pass the [{},{}] to [x,x]
-        $followersArr = [];
-        foreach ($followers as $key => $value) {
-            array_push($followersArr, $value->follower);
-        }
-
-        $followings = Followers::getFollowing($usu);
-        $followingssArr = [];
-        foreach ($followings as $key => $value) {
-            array_push($followingssArr, $value->following);
-        }
-
-        $follows=[
-            'followers'=>$followersArr,
-            'followings'=>$followingssArr,
-        ];
-
-        return response()->json([
-            'data' => $data,
-            'follows' => $follows,
-            'status' => 1,
-        ]);
-    }
-    public function getFollowingDetails(Request $request){
-        $following = Followers::getFollowingDetails($request->idUsu);
-        return response()->json(['data'=>$following]);
-    }
-    public function getFollowerDetails(Request $request){
-        $following = Followers::getFollowerDetails($request->idUsu);
-        return response()->json(['data'=>$following]);
-    }
-
-    public function getPostOther(Request $request){
-
-        $posts = DB::table('post')->where('idUsu', '=', $request->idUsu)->get();
-        
-        $data = [];
-        $user;
-        $likes;
-
-        
-        foreach ($posts as $key => $value) {
-            $likes = PostLike::likePost($value->idPost);
-            
-            array_push($data, [
-                'post' => [
-                    'component' => $value, 
-                    'likes' => $likes,
-                    'user' => User::findOrFail($request->idUsu),
-                ],
-            ]);
-        }
-        return response()->json([
-            'data' => $data,
-            'status' => 1,
-        ]);
-
-    }
-
-
-    //Return all likes that the user give 
-    public function getLikesGiven(){
-        $likes = Auth::user()->getLikesGiven();
-        // return response()->json(count($likes));
-        //Pass the [{},{}] to [x,x]
-        $likesArr = [];
-        for ($i=0; $i < count($likes); $i++) { 
-            array_push($likesArr, $likes[$i]->idPost);
-        }
-
-        return response()->json([
-            'data' => $likesArr,
-            'status' => 1,
-        ]);
-    }
-
-    public function getFollowing(Request $request){
-        $following = Followers::getFollowing($request->idUsu);
-        $followingArr = [];
-        //Pass the [{},{}] to [x,x]
-        foreach ($following as $key => $value) {
-            array_push($followingArr, $value->following);
-        }
-        
-        return response()->json([
-            'following' => $followingArr,
-        ]);
-    }
-
-    public function follow(Request $request){
-        if (Followers::follow($request->idUsu)) {
-            return response()->json([1]);
-        }
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -194,43 +72,6 @@ class UserController extends Controller
         return response()->json([
             'user' => $user
         ]);
-    }
-
-    public function login(Request $req){
-
-        $req->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if(Auth::attempt($req->only('email', 'password'))){
-            return response()->json([
-                'status' => 1,
-                'data' => Auth::user(), 
-            ], 200);
-        }else{
-            return response()->json([
-                'status' => 0,
-                'cod-error' => 'login-error'
-            ], 200);
-        }
-
-    }
-
-    public function logout(){
-        Auth::logout();
-    }
-
-    /**
-     * Return all of the user if that is autenticated
-     * Return permissions=>0 if not is autenticated
-     */
-    public function auth(Request $req){
-        if (Auth::check()) {
-            return $req->user();
-        }
-        $res = ['permissions'=>0];
-        return response()->json($res);
     }
 
     /**
@@ -280,4 +121,117 @@ class UserController extends Controller
     {
         User::destroy($id);
     }
+
+
+    //-------------------------------------
+    // <<<<<<<<<<<- AUTH ->>>>>>>>>>>>>
+    //-------------------------------------
+    public function authId(Request $request){
+        return response()->json([
+            'data'=>Auth::user()->idUsu,
+        
+        ]);
+    }
+
+    //-------------------------------------
+    // <<<<<<<<<<<- LOGIN/OUT ->>>>>>>>>>>>>
+    //-------------------------------------
+    public function login(Request $req){
+
+        $req->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if(Auth::attempt($req->only('email', 'password'))){
+            return response()->json([
+                'status' => 1,
+                'data' => Auth::user(), 
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 0,
+                'cod-error' => 'login-error'
+            ], 200);
+        }
+
+    }
+
+    public function logout(){
+        Auth::logout();
+    }
+
+
+    //-------------------------------------
+    // <<<<<<<<<<<- FOLLOWS ->>>>>>>>>>>>>
+    //-------------------------------------
+
+    //Return data of the user passed and her ids of followers and followings
+    public function userData(Request $request){
+        $usu = $request->idUsu;
+        $data = User::findOrFail($usu);
+
+        $followers = Followers::getFollower($usu);
+        //Pass the [{},{}] to [x,x]
+        $followersArr = [];
+        foreach ($followers as $key => $value) {
+            array_push($followersArr, $value->follower);
+        }
+
+        $followings = Followers::getFollowing($usu);
+        $followingssArr = [];
+        foreach ($followings as $key => $value) {
+            array_push($followingssArr, $value->following);
+        }
+
+        $follows=[
+            'followers'=>$followersArr,
+            'followings'=>$followingssArr,
+        ];
+
+        return response()->json([
+            'data' => $data,
+            'follows' => $follows,
+            'status' => 1,
+        ]);
+    }
+    //Return follows details (id, name, img)
+    public function getFollowingDetails(Request $request){
+        $following = Followers::getFollowingDetails($request->idUsu);
+        return response()->json(['data'=>$following]);
+    }
+    public function getFollowerDetails(Request $request){
+        $following = Followers::getFollowerDetails($request->idUsu);
+        return response()->json(['data'=>$following]);
+    }
+    //Action follow/unfollow
+    public function follow(Request $request){
+        if (Followers::follow($request->idUsu)) {
+            return response()->json([1]);
+        }
+    }
+
+
+
+    //-------------------------------------
+    // <<<<<<<<<<<- LIKES ->>>>>>>>>>>>>
+    //-------------------------------------
+
+    //Return all likes that the user give 
+    public function getLikesGiven(){
+        $likes = Auth::user()->getLikesGiven();
+        // return response()->json(count($likes));
+        //Pass the [{},{}] to [x,x]
+        $likesArr = [];
+        for ($i=0; $i < count($likes); $i++) { 
+            array_push($likesArr, $likes[$i]->idPost);
+        }
+
+        return response()->json([
+            'data' => $likesArr,
+            'status' => 1,
+        ]);
+    }
+
+
 }

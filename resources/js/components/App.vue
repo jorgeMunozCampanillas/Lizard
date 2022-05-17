@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Nav from './mains/Nav.vue';
-import NavCreate from './mains/NavCreate.vue';
+import Nav from './navs/Nav.vue';
+import NavCreate from './navs/NavCreate.vue';
 
 export default {
     components:{

@@ -45,6 +45,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -54,10 +66,17 @@ __webpack_require__.r(__webpack_exports__);
     return {
       posts: '',
       user: {},
+      //Follows
+      //only ids
       follows: {
         followers: [],
         followings: []
-      }
+      },
+      //with info
+      followersDetails: [],
+      followingsDetails: [],
+      //Nav Options
+      optionNav: 1
     };
   },
   mounted: function mounted() {
@@ -66,10 +85,10 @@ __webpack_require__.r(__webpack_exports__);
     this.getAllCode();
   },
   computed: {
-    followers: function followers() {
+    get_followers: function get_followers() {
       return this.follows.followers.length;
     },
-    followings: function followings() {
+    get_followings: function get_followings() {
       return this.follows.followings.length;
     }
   },
@@ -79,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var idUsu = this.$route.params.id;
-      axios.get('/api/getPostOther/' + idUsu).then(function (res) {
+      axios.get('/api/post/posts/' + idUsu).then(function (res) {
         if (res.status) {
           _this.posts = res.data.data;
         } else {
@@ -111,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var idUsu = this.$route.params.id;
-      axios.get('/api/user/getUser/' + idUsu).then(function (res) {
+      axios.get('/api/user/follow/userData/' + idUsu).then(function (res) {
         _this3.user = res.data.data;
         _this3.follows = res.data.follows;
         console.log(_this3.follows);
@@ -126,7 +145,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = {
         idUsu: this.user.idUsu
       };
-      axios.post('/api/user/follow', data).then(function (res) {
+      axios.post('/api/user/follow/follow', data).then(function (res) {
         if (_this4.$store.state.follows.followings.includes(_this4.user.idUsu)) {
           //Change button
           var index = _this4.$store.state.follows.followings.indexOf(_this4.user.idUsu);
@@ -136,7 +155,12 @@ __webpack_require__.r(__webpack_exports__);
 
           index = _this4.follows.followers.indexOf(_this4.user.idUsu);
 
-          _this4.follows.followers.splice(index, 1);
+          _this4.follows.followers.splice(index, 1); //For if we are in view followers
+
+
+          _this4.followersDetails = _this4.followersDetails.map(function (u) {
+            return u.idUsu != _this4.$store.state.auth.idUsu;
+          });
         } else {
           //Change button
           _this4.$store.state.follows.followings.push(_this4.user.idUsu); //Change count
@@ -146,6 +170,29 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (err) {
         console.log('Error en CodeProfileOthers.vue follow');
+        console.log(err);
+      });
+    },
+    showFollowers: function showFollowers() {
+      var _this5 = this;
+
+      axios.get('/api/user/follow/followers/' + this.user.idUsu).then(function (res) {
+        _this5.optionNav = 2;
+        _this5.followersDetails = res.data.data;
+      })["catch"](function (err) {
+        console.log('Error en CodeProfile.vue getFollowings');
+        console.log(err);
+      });
+    },
+    //Followings
+    showFollowings: function showFollowings() {
+      var _this6 = this;
+
+      axios.get('/api/user/follow/following/' + this.user.idUsu).then(function (res) {
+        _this6.optionNav = 3;
+        _this6.followingsDetails = res.data.data;
+      })["catch"](function (err) {
+        console.log('Error en CodeProfile.vue getFollowings');
         console.log(err);
       });
     }
@@ -195,6 +242,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -208,16 +256,22 @@ __webpack_require__.r(__webpack_exports__);
       "default": []
     }
   },
+  computed: {
+    src: function src() {
+      var aux = "\n            <html>\n                <script src=\"https://cdn.tailwindcss.com\"></script>\n                <body>".concat(this.post.component.html, "</body>\n                <style>").concat(this.post.component.html, "</style>\n                <script>").concat(this.post.component.html, "</script>\n            </html>");
+      return aux;
+    }
+  },
   methods: {
+    foo: function foo() {
+      console.log(this.post);
+    },
     showCode: function showCode() {
       var data = {
         idPost: this.post.component.idPost
       }; //+1 view
 
-      axios.post('/api/addView', data).then(function (res) {
-        console.log("add view");
-        console.log(res);
-      })["catch"](function (err) {
+      axios.post('/api/post/view', data).then(function (res) {})["catch"](function (err) {
         console.log('Error in OnePost.vue showCode');
         console.log(err);
       }); //Go to code
@@ -257,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = {
         'idPost': this.post.component.idPost
       };
-      axios.post('/api/like', data).then(function (res) {
+      axios.post('/api/post/like', data).then(function (res) {
         //Like action change <3 and number
         if (_this.likes.includes(_this.post.component.idPost)) {
           var index = _this.likes.indexOf(_this.post.component.idPost);
@@ -449,9 +503,13 @@ var render = function () {
         _c("ul", [
           _c("li", [_vm._v("Components: 0")]),
           _vm._v(" "),
-          _c("li", [_vm._v("Followers: " + _vm._s(_vm.followers))]),
+          _c("li", { on: { click: _vm.showFollowers } }, [
+            _vm._v("Followers: " + _vm._s(_vm.get_followers)),
+          ]),
           _vm._v(" "),
-          _c("li", [_vm._v("Following: " + _vm._s(_vm.followings))]),
+          _c("li", { on: { click: _vm.showFollowings } }, [
+            _vm._v("Following: " + _vm._s(_vm.get_followings)),
+          ]),
           _vm._v(" "),
           _c("li", [
             this.$store.state.follows.followings.includes(_vm.user.idUsu)
@@ -471,18 +529,44 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "profile_main" }, [
-      _c(
-        "div",
-        { attrs: { id: "profile_posts" } },
-        _vm._l(_vm.posts, function (post) {
-          return _c("Post", {
-            key: post.post.component.idPost,
-            staticClass: "post",
-            attrs: { post: post.post, likes: _vm.likes },
-          })
-        }),
-        1
-      ),
+      _vm.optionNav == 1
+        ? _c(
+            "div",
+            { attrs: { id: "profile_posts" } },
+            _vm._l(_vm.posts, function (post) {
+              return _c("Post", {
+                key: post.post.component.idPost,
+                staticClass: "post",
+                attrs: { post: post.post, likes: _vm.likes },
+              })
+            }),
+            1
+          )
+        : _vm.optionNav == 2
+        ? _c(
+            "div",
+            _vm._l(_vm.followersDetails, function (user) {
+              return _c("div", { key: user.idUsu }, [
+                _c("img", { attrs: { src: "/storage/" + user.img, alt: "" } }),
+                _vm._v(" "),
+                _c("h3", [_vm._v(_vm._s(user.name))]),
+              ])
+            }),
+            0
+          )
+        : _vm.optionNav == 3
+        ? _c(
+            "div",
+            _vm._l(_vm.followingsDetails, function (user) {
+              return _c("div", { key: user.idUsu }, [
+                _c("img", { attrs: { src: "/storage/" + user.img, alt: "" } }),
+                _vm._v(" "),
+                _c("h3", [_vm._v(_vm._s(user.name))]),
+              ])
+            }),
+            0
+          )
+        : _vm._e(),
     ]),
   ])
 }

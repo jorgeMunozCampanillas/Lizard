@@ -141,7 +141,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                               data.append('css', _this2.css);
                               data.append('js', _this2.js);
                               data.append('img', _this2.img);
-                              axios.post('/api/code', data).then(function (res) {
+                              axios.post('/api/post/code', data).then(function (res) {
                                 console.log(res);
                                 console.log("añadido :))");
                               })["catch"](function (error) {

@@ -5,8 +5,8 @@
     <img class="profile_header-img" :src="'/storage/'+this.$store.state.auth.img" alt="">
     <div class="profile_header-data">
       <div>Components: {{postsNumber}}</div>
-      <div>Followers: {{followers}}</div>
-      <div @click="SET_OPMAIN(2)">Following: {{followings}}</div>
+      <div @click="SET_OPMAIN(4)">Followers: {{followers}}</div>
+      <div @click="SET_OPMAIN(5)">Following: {{followings}}</div>
     </div>
   </div>
 
@@ -16,7 +16,7 @@
       <ul class="nav_profile-main nav_profile-option">
           <li @click="SET_OPMAIN(1)" :class="{active: optionMain == 1}">Your Work</li>
           <li @click="SET_OPMAIN(2)" :class="{active: optionMain == 2}">Following</li>
-          <li @click="SET_OPMAIN(3)" :class="{active: optionMain == 3}">Followers</li>
+          <li @click="SET_OPMAIN(3)" :class="{active: optionMain == 3}">Trending</li>
       </ul>
       <hr>
       <ul v-if="optionMain == 1" class="nav_profile-work nav_profile-option">
@@ -25,52 +25,70 @@
           <li @click="SET_OPSECOND(3)" :class="{active: optionSecond == 3}">Deleted</li>
       </ul>
     </nav>
+    <!-- <<<<<<<<<<<<<<<<< FOLLOWS USERS >>>>>>>>>>>>>> -->
+    <!-- Followers -->
+    <div v-if="optionMain==4">
+      <div v-for="userFollower in followsDetails" :key="userFollower.idUsu">
+      {{userFollower}}
+        <img :src="'/storage/'+userFollower.img" alt="">
+        <h3>{{userFollower.name}}</h3>
+      </div>
+    </div>
+    <!-- Following -->
+    <div v-if="optionMain==5">
+      <div v-for="user in followsDetails" :key="user.idUsu">
+        <img :src="'/storage/'+user.img" alt="">
+        <h3>{{user.name}}</h3>
+      </div>
+    </div>
 
+    <!-- <<<<<<<<<<<<<<<<< MAIN OPTIONS >>>>>>>>>>>>>> -->
     <!-- Your posts -->
     <div id="profile_posts" v-if="optionMain==1">
-        <Post 
+      <Post 
         v-for="post in posts" :key="post.post.component.idPost"
           :post="post.post"
           :likes="likes"
           class="post" 
       ></Post>
     </div>
-
-    <!-- Following -->
-    <div v-if="optionMain==2">
-      <div v-for="user in followingsDetails" :key="user.idUsu">
-        <img :src="'/storage/'+user.img" alt="">
-        <h3>{{user.name}}</h3>
-      </div>
+    <!-- Following posts -->
+    <div id="profile_posts" v-if="optionMain==2">
+      <Posttest 
+        v-for="post in followsDetails" :key="post.idPost"
+          :data="post"
+          :likes="likes"
+          class="post" 
+      ></Posttest>
     </div>
 
-    <!-- Followers -->
-    <div v-if="optionMain==3">
-      <div v-for="userFollower in followersDetails" :key="userFollower.idUsu">
-      {{userFollower}}
-        <img :src="'/storage/'+userFollower.img" alt="">
-        <h3>{{userFollower.name}}</h3>
-      </div>
-    </div>
+
+
 
   </div>
 </div>
 </template>
 
 <script>
-import Post from './OnePost.vue';
+import Post from '../code/OnePost.vue';
+import Posttest from '../code/OnePostTest.vue';
 export default {
   components:{
-    Post
+    Post,
+    Posttest
   },
   data() {
     return {
       posts: [],
       postsNumber: '',
+      //Nav options
       optionMain: 1,
       optionSecond: 1,
-      followingsDetails: [],
-      followersDetails: [],
+
+      //followsUsers/Code
+      followsDetails: [],
+
+
     }
   },
   mounted() {
@@ -87,7 +105,7 @@ export default {
   },
   methods:{
     getAllCode(){
-        axios.get('/api/getPost').then(res=>{
+        axios.get('/api/post/posts/'+this.$store.state.auth.idUsu).then(res=>{
           if (res.status) {
             this.posts = res.data.data;
             this.postsNumber = res.data.data.length
@@ -111,9 +129,10 @@ export default {
     },
     //Followings
     getFollowings(){
-      axios.get('/api/user/following/'+this.$store.state.auth.idUsu)
+      axios.get('/api/user/follow/following/'+this.$store.state.auth.idUsu)
       .then(res=>{
-        this.followingsDetails = res.data.data
+        console.log(res)
+        this.followsDetails = res.data.data
       })
       .catch(err=>{
         console.log('Error en CodeProfile.vue getFollowings');
@@ -122,15 +141,25 @@ export default {
     },
     //Followers
     getFollowers(){
-      axios.get('/api/user/followers/'+this.$store.state.auth.idUsu)
+      axios.get('/api/user/follow/followers/'+this.$store.state.auth.idUsu)
       .then(res=>{
-        console.log(res)
-        this.followersDetails = res.data.data
+        this.followsDetails = res.data.data
       })
       .catch(err=>{
         console.log('Error en CodeProfile.vue getFollowings');
         console.log(err);
       })
+    },
+    getPostFollowings(){
+      axios.get('/api/post/following')
+      .then(res=>{
+        console.log(res.data.data)
+        this.followsDetails = res.data.data;
+      })
+      .catch(err=>{
+        console.log('Error en Profile.vue getPostFollowers')
+        console.log(err)
+      });
     },
 
     //SETTERS
@@ -139,10 +168,13 @@ export default {
 
       switch (id) {
         case 2:
-          this.getFollowings();
+          this.getPostFollowings();
           break;
-        case 3:
+        case 4:
           this.getFollowers();
+          break;
+        case 5:
+          this.getFollowings();
           break;
       
         default:

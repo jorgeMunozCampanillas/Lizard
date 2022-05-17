@@ -50,7 +50,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllCode: function getAllCode() {
       var _this = this;
 
-      axios.get('/api/code').then(function (res) {
+      axios.get('/api/post/code').then(function (res) {
         _this.posts = res.data;
       })["catch"](function (err) {
         console.log("Error Home.vue getAllCode");
@@ -113,6 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -126,16 +127,22 @@ __webpack_require__.r(__webpack_exports__);
       "default": []
     }
   },
+  computed: {
+    src: function src() {
+      var aux = "\n            <html>\n                <script src=\"https://cdn.tailwindcss.com\"></script>\n                <body>".concat(this.post.component.html, "</body>\n                <style>").concat(this.post.component.html, "</style>\n                <script>").concat(this.post.component.html, "</script>\n            </html>");
+      return aux;
+    }
+  },
   methods: {
+    foo: function foo() {
+      console.log(this.post);
+    },
     showCode: function showCode() {
       var data = {
         idPost: this.post.component.idPost
       }; //+1 view
 
-      axios.post('/api/addView', data).then(function (res) {
-        console.log("add view");
-        console.log(res);
-      })["catch"](function (err) {
+      axios.post('/api/post/view', data).then(function (res) {})["catch"](function (err) {
         console.log('Error in OnePost.vue showCode');
         console.log(err);
       }); //Go to code
@@ -175,7 +182,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = {
         'idPost': this.post.component.idPost
       };
-      axios.post('/api/like', data).then(function (res) {
+      axios.post('/api/post/like', data).then(function (res) {
         //Like action change <3 and number
         if (_this.likes.includes(_this.post.component.idPost)) {
           var index = _this.likes.indexOf(_this.post.component.idPost);

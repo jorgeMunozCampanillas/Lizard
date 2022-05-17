@@ -35,7 +35,7 @@ export default {
         saveForm(){
             this.axios.post('/api/login', this.form).then((res)=>{
                 if (res.data.status) {
-                    axios.get('/api/user/getUser/'+res.data.data.idUsu).then(res => {
+                    axios.get('/api/user/follow/userData/'+res.data.data.idUsu).then(res => {
                         this.$store.dispatch('login', res.data);
                         this.$router.push({name:"home"})
                     })
@@ -45,7 +45,6 @@ export default {
             }).catch((error)=>{
                 console.log("Error desde Login.vue ddsfaf")
                 console.log(error)
-
             })
         },
     }

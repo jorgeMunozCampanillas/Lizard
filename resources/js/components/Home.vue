@@ -27,6 +27,7 @@ export default {
     return {
       posts: '',
       likes: [],
+
     }
   },
   mounted() {
@@ -35,7 +36,7 @@ export default {
   },
   methods:{
     getAllCode(){
-        axios.get('/api/code').then(res=>{
+        axios.get('/api/post/code').then(res=>{
             this.posts = res.data;
         })
         .catch(err=>{

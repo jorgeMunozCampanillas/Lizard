@@ -58,9 +58,10 @@ export default {
         axios.get('/api/user/users').then((res)=>{
           this.users = res.data;
         })
-        .catch((e)=>{
-          console.log("error en Dashboard.vue getUser")
-          console.log(e)
+        .catch((err)=>{
+          if (err.response.status==403) {
+            this.$router.push({name:'permissError'})
+          }
         });
       },
 

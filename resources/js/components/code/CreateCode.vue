@@ -71,15 +71,11 @@ export default {
       codeScreenArea.innerHTML += '<script src="https://cdn.tailwindcss.com"><\/script>';
       codeScreenArea.innerHTML += this.xml;
       codeScreenArea.innerHTML += '<style>'+this.css+'</style>';
-
       await html2canvas(codeScreenArea, {
         //Set properties of the canvas
         width:500,
         height:374,
-
-
       }).then( async (canvas)=>{
-
         //convert the canvas to  blob and this to file :)))
         canvas.toBlob((blob)=>{
           this.img = new File([blob], 'prueba.jpg', {type: "image/jpeg"});
@@ -91,8 +87,7 @@ export default {
           data.append('css', this.css);
           data.append('js', this.js);
           data.append('img', this.img);
-
-          axios.post('/api/code', data).then(res=>{
+          axios.post('/api/post/code', data).then(res=>{
             console.log(res)
             console.log("añadido :))");
           })
@@ -100,7 +95,6 @@ export default {
             console.log("Error save desde CreateCode.vue")
             this.errors = error.response.data.errors;
           })
-
         });
       });
       

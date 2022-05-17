@@ -49,7 +49,7 @@ export default {
   methods: {
 
     getCode(){
-        axios.get('/api/code/'+this.$route.params.id)
+        axios.get('/api/post/code/'+this.$route.params.id)
         .then(res => {
             this.xml = res.data.code.html;
             this.css = res.data.code.css;
@@ -78,47 +78,6 @@ export default {
             <script>${this.js}<\/script>
         </html>`;
     },
-
-
-    async save(){
-
-      //set the code background the page to screeshot ( z-index -5 )
-      //shhh this is our secret...
-      let codeScreenArea = document.getElementById("codeScreenArea");
-      codeScreenArea.innerHTML = this.post.xml;
-      codeScreenArea.innerHTML += '<style>'+this.post.css+'</style>';
-
-      await html2canvas(codeScreenArea, {
-        //Set properties of the canvas (720p)
-        width:500,
-        height:374,
-
-
-      }).then( async (canvas)=>{
-
-        //convert the canvas to  blob and this to file :)))
-        canvas.toBlob((blob)=>{
-          this.img = new File([blob], 'prueba.jpg', {type: "image/jpeg"});
-        
-          let data = new FormData;
-          data.append('idUsu', this.user.idUsu);
-          data.append('html', this.xml);
-          data.append('css', this.css);
-          data.append('js', this.js);
-          data.append('img', this.img);
-
-          axios.post('/api/code', data).then(res=>{
-            
-          })
-          .catch((error)=>{
-            console.log("Error save desde CreateCode.vue")
-            this.errors = error.response.data.errors;
-          })
-
-        });
-      });
-      
-    }
   },
 }
 </script>
