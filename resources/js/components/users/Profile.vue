@@ -4,9 +4,9 @@
     <h1 class="profile_header-name">{{this.$store.state.auth.name}}</h1>
     <img class="profile_header-img" :src="'/storage/'+this.$store.state.auth.img" alt="">
     <div class="profile_header-data">
-      <div>Components: {{postsNumber}}</div>
-      <div @click="SET_OPMAIN(4)">Followers: {{followers}}</div>
-      <div @click="SET_OPMAIN(5)">Following: {{followings}}</div>
+      <div>{{$t('profile.components_count', {msg:postsNumber})}}</div>
+      <div @click="SET_OPMAIN(4)">{{$t('profile.followers_count', {msg:followers})}}</div>
+      <div @click="SET_OPMAIN(5)">{{$t('profile.following_count', {msg:followings})}}</div>
     </div>
   </div>
 
@@ -14,15 +14,15 @@
 
     <nav id="nav_profile">
       <ul class="nav_profile-main nav_profile-option">
-          <li @click="SET_OPMAIN(1)" :class="{active: optionMain == 1}">Your Work</li>
-          <li @click="SET_OPMAIN(2)" :class="{active: optionMain == 2}">Following</li>
-          <li @click="SET_OPMAIN(3)" :class="{active: optionMain == 3}">Trending</li>
+          <li @click="SET_OPMAIN(1)" :class="{active: optionMain == 1}">{{$t('profile.your_work')}}</li>
+          <li @click="SET_OPMAIN(2)" :class="{active: optionMain == 2}">{{$t('profile.following')}}</li>
+          <li @click="SET_OPMAIN(3)" :class="{active: optionMain == 3}">{{$t('profile.trending')}}</li>
       </ul>
       <hr>
       <ul v-if="optionMain == 1" class="nav_profile-work nav_profile-option">
-          <li @click="SET_OPSECOND(1)" :class="{active: optionSecond == 1}">Components</li>
-          <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">Collections</li>
-          <li @click="SET_OPSECOND(3)" :class="{active: optionSecond == 3}">Deleted</li>
+          <li @click="SET_OPSECOND(1)" :class="{active: optionSecond == 1}">{{$t('profile.components')}}</li>
+          <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">{{$t('profile.collections')}}</li>
+          <li @click="SET_OPSECOND(3)" :class="{active: optionSecond == 3}">{{$t('profile.delete')}}</li>
       </ul>
     </nav>
     <!-- <<<<<<<<<<<<<<<<< FOLLOWS USERS >>>>>>>>>>>>>> -->
@@ -157,14 +157,34 @@ export default {
         console.log(err)
       });
     },
+    deletePost($idPost){
+      let newPosts = this.posts.filter(p => p.idPost != $idPost);
+      this.posts = newPosts;
+    },
+    getPostDeleted(){
+      axios.get('/api/post/deleted/'+this.$store.state.auth.idUsu)
+      .then(res=>{
+        console.log(res.data.data)
+        this.posts = res.data.data;
+      })
+      .catch(err=>{
+        console.log('Error en Profile.vue getPostFollowers')
+        console.log(err)
+      });
+    },
 
     //SETTERS
     SET_OPMAIN(id){
       this.optionMain = id;
 
       switch (id) {
+        case 1:
+          this.getPosts();
+          break;
         case 2:
           this.getPostFollowings();
+          break;
+        case 3:
           break;
         case 4:
           this.getFollowers();
@@ -179,6 +199,15 @@ export default {
     },
     SET_OPSECOND(id){
       this.optionSecond = id;
+
+      switch (id) {
+        case 3:
+          this.getPostDeleted();
+          break;
+      
+        default:
+          break;
+      }
     }
 
   },

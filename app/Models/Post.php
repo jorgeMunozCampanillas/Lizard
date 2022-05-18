@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
     protected $table='post';
     protected $primaryKey = 'idPost';
 
@@ -21,33 +24,54 @@ class Post extends Model
 
     //Get all posts
     public static function getPosts(){
-        $posts = DB::table('post')
-        ->join('user', 'user.idUsu', '=', 'post.idUsu')
-        ->select('user.name', 'user.img AS userImg', 'user.idUsu', 'post.*')
-        ->orderBy('views', 'desc')
-        ->get();
-
-        //Ad likes to posts
-        foreach ($posts as $key => $value) {
-            $posts[$key]->likes = DB::table('post_like')->where('idPost', '=', $value->idPost)->count() ?? 0;
-        }
+        $posts = DB::select(
+            DB::raw("
+            Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes` 
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            ORDER BY `post`.`views` DESC;")
+        );
 
         return $posts;
     }
 
     //Get all post of the user passed
     public static function getPostsUsu($idUsu){
-        $posts = DB::table('post')
-        ->join('user', 'user.idUsu', '=', 'post.idUsu')
-        ->select('user.name', 'user.img AS userImg', 'user.idUsu', 'post.*')
-        ->where('post.idUsu', '=', $idUsu)->get();
-
-        //Ad likes to posts
-        foreach ($posts as $key => $value) {
-            $posts[$key]->likes = DB::table('post_like')->where('idPost', '=', $value->idPost)->count() ?? 0;
-        }
+        
+        $posts = DB::select(
+            DB::raw("
+            Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes` 
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            WHERE `post`.`idUsu` = $idUsu
+            AND `post`.`deleted_at` IS null;")
+        );
 
         return $posts;
     }
+    public static function getPostsDeletdUsu($idUsu){
+        
+        $posts = DB::select(
+            DB::raw("
+            Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes` 
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            WHERE `post`.`idUsu` = $idUsu
+            AND `post`.`deleted_at` IS NOT null;")
+        );
 
+        return $posts;
+    }
 }

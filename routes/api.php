@@ -56,10 +56,15 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
         //add one view to post
         Route::post('view',[ App\Http\Controllers\PostController::class, 'addView']);
+
         //Get all posts of the user passed
         Route::get('posts/{idUsu}', [App\Http\Controllers\PostController::class, 'getPosts']);
+        //Get all posts deleteds of the user passed
+        Route::get('deleted/{idUsu}', [App\Http\Controllers\PostController::class, 'getPostsDeleted']);
         //Get all posts of the users following
         Route::get('following', [App\Http\Controllers\PostController::class, 'getPostsFollowing']);
+
+
         //like/dislike action
         Route::post('like', [App\Http\Controllers\PostController::class, 'like']);
     });

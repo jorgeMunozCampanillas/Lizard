@@ -42,6 +42,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -51,6 +61,11 @@ __webpack_require__.r(__webpack_exports__);
     likes: {
       "default": []
     }
+  },
+  data: function data() {
+    return {
+      dropHidden: true
+    };
   },
   computed: {
     /*src(){
@@ -92,16 +107,12 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       } else {
-        var path = '/show/myCode';
-
-        if (this.$route.path != path) {
-          this.$router.push({
-            name: 'my-code',
-            params: {
-              id: this.data.idPost
-            }
-          });
-        }
+        this.$router.push({
+          name: 'my-code',
+          params: {
+            id: this.data.idPost
+          }
+        });
       }
     },
     like: function like() {
@@ -127,6 +138,18 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log("Error Home.vue like");
         console.log(err.data);
+      });
+    },
+    dropMenu: function dropMenu() {
+      this.dropHidden = !this.dropHidden;
+    },
+    drop: function drop() {
+      var _this2 = this;
+
+      axios["delete"]('/api/post/code/' + this.data.idPost).then(function (res) {
+        _this2.$parent.deletePost(_this2.data.idPost);
+      })["catch"](function (err) {
+        console.log(err);
       });
     }
   }
@@ -309,13 +332,37 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
+    deletePost: function deletePost($idPost) {
+      var newPosts = this.posts.filter(function (p) {
+        return p.idPost != $idPost;
+      });
+      this.posts = newPosts;
+    },
+    getPostDeleted: function getPostDeleted() {
+      var _this6 = this;
+
+      axios.get('/api/post/deleted/' + this.$store.state.auth.idUsu).then(function (res) {
+        console.log(res.data.data);
+        _this6.posts = res.data.data;
+      })["catch"](function (err) {
+        console.log('Error en Profile.vue getPostFollowers');
+        console.log(err);
+      });
+    },
     //SETTERS
     SET_OPMAIN: function SET_OPMAIN(id) {
       this.optionMain = id;
 
       switch (id) {
+        case 1:
+          this.getPosts();
+          break;
+
         case 2:
           this.getPostFollowings();
+          break;
+
+        case 3:
           break;
 
         case 4:
@@ -332,6 +379,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     SET_OPSECOND: function SET_OPSECOND(id) {
       this.optionSecond = id;
+
+      switch (id) {
+        case 3:
+          this.getPostDeleted();
+          break;
+
+        default:
+          break;
+      }
     }
   }
 });
@@ -555,8 +611,50 @@ var render = function () {
               _vm._v(_vm._s(_vm.data.views) + "\r\n                    "),
             ]),
           ]),
+          _vm._v(" "),
+          _vm.data.idUsu == this.$store.state.auth.idUsu
+            ? _c("div", { staticClass: "post_info-options" }, [
+                _c(
+                  "ul",
+                  {
+                    staticClass: "post_options-menu",
+                    class: { hidden: _vm.dropHidden },
+                  },
+                  [
+                    _c(
+                      "li",
+                      {
+                        staticClass: "post_options-borrar",
+                        on: { click: _vm.drop },
+                      },
+                      [
+                        _c("i", { staticClass: "bi bi-trash-fill" }),
+                        _vm._v(" Borrar"),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("li", [_vm._v("Colección")]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "post_options-button",
+                    on: {
+                      click: function ($event) {
+                        return _vm.dropMenu()
+                      },
+                    },
+                  },
+                  [_c("i", { staticClass: "bi bi-three-dots" })]
+                ),
+              ])
+            : _vm._e(),
         ]),
-        _vm._v(" "),
+        _vm._v(
+          "\r\n            " + _vm._s(_vm.data.deleted_at) + "\r\n            "
+        ),
         _c(
           "h5",
           {
@@ -606,7 +704,11 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "profile_header-data" }, [
-        _c("div", [_vm._v("Components: " + _vm._s(_vm.postsNumber))]),
+        _c("div", [
+          _vm._v(
+            _vm._s(_vm.$t("profile.components_count", { msg: _vm.postsNumber }))
+          ),
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -617,7 +719,11 @@ var render = function () {
               },
             },
           },
-          [_vm._v("Followers: " + _vm._s(_vm.followers))]
+          [
+            _vm._v(
+              _vm._s(_vm.$t("profile.followers_count", { msg: _vm.followers }))
+            ),
+          ]
         ),
         _vm._v(" "),
         _c(
@@ -629,7 +735,11 @@ var render = function () {
               },
             },
           },
-          [_vm._v("Following: " + _vm._s(_vm.followings))]
+          [
+            _vm._v(
+              _vm._s(_vm.$t("profile.following_count", { msg: _vm.followings }))
+            ),
+          ]
         ),
       ]),
     ]),
@@ -647,7 +757,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Your Work")]
+            [_vm._v(_vm._s(_vm.$t("profile.your_work")))]
           ),
           _vm._v(" "),
           _c(
@@ -660,7 +770,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Following")]
+            [_vm._v(_vm._s(_vm.$t("profile.following")))]
           ),
           _vm._v(" "),
           _c(
@@ -673,7 +783,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Trending")]
+            [_vm._v(_vm._s(_vm.$t("profile.trending")))]
           ),
         ]),
         _vm._v(" "),
@@ -691,7 +801,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Components")]
+                [_vm._v(_vm._s(_vm.$t("profile.components")))]
               ),
               _vm._v(" "),
               _c(
@@ -704,7 +814,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Collections")]
+                [_vm._v(_vm._s(_vm.$t("profile.collections")))]
               ),
               _vm._v(" "),
               _c(
@@ -717,7 +827,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Deleted")]
+                [_vm._v(_vm._s(_vm.$t("profile.delete")))]
               ),
             ])
           : _vm._e(),

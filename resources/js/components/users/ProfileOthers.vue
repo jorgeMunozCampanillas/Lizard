@@ -5,12 +5,12 @@
     <img class="profile_header-img" :src="'/storage/'+user.img" alt="">
     <div class="profile_header-data">
       <ul>
-        <li>Components: 0</li>
-        <li @click="showFollowers">Followers: {{get_followers}}</li>
-        <li @click="showFollowings">Following: {{get_followings}}</li>
+        <li>{{$t('profile.components_count', {msg:'0'})}}</li>
+        <li @click="showFollowers">{{$t('profile.followers_count', {msg:get_followers})}}</li>
+        <li @click="showFollowings">{{$t('profile.following_count', {msg:get_followings})}}</li>
         <li>
-          <button @click="follow" class="button-Unfollow" v-if="this.$store.state.follows.followings.includes(user.idUsu)"> - Unfollow </button>
-          <button @click="follow" class="button-follow" v-else> + Follow </button>
+          <button @click="follow" class="button-Unfollow" v-if="this.$store.state.follows.followings.includes(user.idUsu)">{{$t('profile.unfollow')}}</button>
+          <button @click="follow" class="button-follow" v-else>{{$t('profile.follow')}}</button>
         </li>
       </ul>
     </div>

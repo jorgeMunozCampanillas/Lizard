@@ -43,7 +43,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -180,7 +179,12 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form" }, [
     _c("div", { staticClass: "form-container" }, [
-      _c("h1", [_vm._v("Register")]),
+      _c("h1", [_vm._v(_vm._s(_vm.$t("log.register")))]),
+      _vm._v(" "),
+      _c("img", {
+        staticStyle: { "max-height": "100px" },
+        attrs: { src: _vm.imagepreview, alt: "" },
+      }),
       _vm._v(" "),
       _c(
         "form",
@@ -206,7 +210,7 @@ var render = function () {
             attrs: {
               type: "text",
               name: "name",
-              placeholder: "Name",
+              placeholder: _vm.$t("log.holder_name"),
               required: "",
               autofocus: "",
             },
@@ -243,7 +247,7 @@ var render = function () {
             attrs: {
               type: "email",
               name: "email",
-              placeholder: "Email",
+              placeholder: _vm.$t("log.holder_email"),
               required: "",
               autocomplete: "email",
             },
@@ -280,7 +284,7 @@ var render = function () {
             attrs: {
               type: "password",
               name: "password",
-              placeholder: "Pasword",
+              placeholder: _vm.$t("log.holder_pass"),
             },
             domProps: { value: _vm.form.password },
             on: {
@@ -315,7 +319,7 @@ var render = function () {
             attrs: {
               type: "password",
               name: "password_confirmation",
-              placeholder: "Confrim Password",
+              placeholder: _vm.$t("log.holder_confirm_pas"),
             },
             domProps: { value: _vm.form.password_confirmation },
             on: {
@@ -348,32 +352,31 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Register")]
+            [_vm._v(_vm._s(_vm.$t("log.register")))]
           ),
         ]
       ),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("p", [_vm._v("Preview")]),
-      _vm._v(" "),
-      _c("img", {
-        staticStyle: { "max-height": "100px" },
-        attrs: { src: _vm.imagepreview, alt: "" },
-      }),
-      _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "form-or" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("span", { staticClass: "or" }, [_vm._v(_vm._s(_vm.$t("log.or")))]),
+        _vm._v(" "),
+        _c("hr"),
+      ]),
       _vm._v(" "),
       _c("p", { staticClass: "form-info" }, [
-        _c("i", [_vm._v("Do you already have an account? 😉 ")]),
+        _c("i", [_vm._v(_vm._s(_vm.$t("log.have_account")) + " ")]),
         _c("br"),
         _c(
           "b",
           [
             _c(
               "router-link",
-              { staticClass: "nav-link", attrs: { to: "/login" } },
-              [_vm._v("Login NOW!!")]
+              { staticClass: "nav-link", attrs: { to: { name: "login" } } },
+              [_vm._v(_vm._s(_vm.$t("log.login_now")))]
             ),
           ],
           1
@@ -382,20 +385,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-or" }, [
-      _c("hr"),
-      _vm._v(" "),
-      _c("span", { staticClass: "or" }, [_vm._v("OR")]),
-      _vm._v(" "),
-      _c("hr"),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

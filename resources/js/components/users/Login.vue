@@ -1,21 +1,21 @@
 <template>
   <div class="form">
     <div class="form-container">
-        <h1>Log in</h1>
+        <h1>{{$t('log.login')}}</h1>
         <form>
-            <div v-if="error" class="form-error">The username or password is incorrect</div>
+            <div v-if="error" class="form-error">{{$t('log.err_log')}}</div>
             <input class="input-data" type="email" name="email" placeholder="Email" v-model="form.email" required autocomplete="email">
             <br>
             <input class="input-data" type="password" name="password" v-model="form.password" placeholder="Pasword">
             <br>
-            <button class="input-submit" @click.prevent="saveForm" type="submit" >LOG IN</button>
+            <button class="input-submit" @click.prevent="saveForm" type="submit" >{{$t('log.login')}}</button>
         </form>
         <div class="form-or">
             <hr>
-            <span class="or">OR</span>
+            <span class="or">{{$t('log.or')}}</span>
             <hr>
         </div>
-        <p class="form-info"><i>You dont have account yet?? 😮 <br></i><b><router-link class="nav-link" to="/register">Register NOW!!</router-link></b></p>
+        <p class="form-info"><i>{{$t('log.dont_account_msg')}}<br></i><b><router-link class="nav-link" :to="{name:'register'}">{{$t('log.register_now')}}</router-link></b></p>
     </div>
   </div>        
 </template>

@@ -42,6 +42,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -51,6 +61,11 @@ __webpack_require__.r(__webpack_exports__);
     likes: {
       "default": []
     }
+  },
+  data: function data() {
+    return {
+      dropHidden: true
+    };
   },
   computed: {
     /*src(){
@@ -92,16 +107,12 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       } else {
-        var path = '/show/myCode';
-
-        if (this.$route.path != path) {
-          this.$router.push({
-            name: 'my-code',
-            params: {
-              id: this.data.idPost
-            }
-          });
-        }
+        this.$router.push({
+          name: 'my-code',
+          params: {
+            id: this.data.idPost
+          }
+        });
       }
     },
     like: function like() {
@@ -127,6 +138,18 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log("Error Home.vue like");
         console.log(err.data);
+      });
+    },
+    dropMenu: function dropMenu() {
+      this.dropHidden = !this.dropHidden;
+    },
+    drop: function drop() {
+      var _this2 = this;
+
+      axios["delete"]('/api/post/code/' + this.data.idPost).then(function (res) {
+        _this2.$parent.deletePost(_this2.data.idPost);
+      })["catch"](function (err) {
+        console.log(err);
       });
     }
   }
@@ -551,8 +574,50 @@ var render = function () {
               _vm._v(_vm._s(_vm.data.views) + "\r\n                    "),
             ]),
           ]),
+          _vm._v(" "),
+          _vm.data.idUsu == this.$store.state.auth.idUsu
+            ? _c("div", { staticClass: "post_info-options" }, [
+                _c(
+                  "ul",
+                  {
+                    staticClass: "post_options-menu",
+                    class: { hidden: _vm.dropHidden },
+                  },
+                  [
+                    _c(
+                      "li",
+                      {
+                        staticClass: "post_options-borrar",
+                        on: { click: _vm.drop },
+                      },
+                      [
+                        _c("i", { staticClass: "bi bi-trash-fill" }),
+                        _vm._v(" Borrar"),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("li", [_vm._v("Colección")]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "post_options-button",
+                    on: {
+                      click: function ($event) {
+                        return _vm.dropMenu()
+                      },
+                    },
+                  },
+                  [_c("i", { staticClass: "bi bi-three-dots" })]
+                ),
+              ])
+            : _vm._e(),
         ]),
-        _vm._v(" "),
+        _vm._v(
+          "\r\n            " + _vm._s(_vm.data.deleted_at) + "\r\n            "
+        ),
         _c(
           "h5",
           {
@@ -603,14 +668,24 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "profile_header-data" }, [
         _c("ul", [
-          _c("li", [_vm._v("Components: 0")]),
+          _c("li", [
+            _vm._v(_vm._s(_vm.$t("profile.components_count", { msg: "0" }))),
+          ]),
           _vm._v(" "),
           _c("li", { on: { click: _vm.showFollowers } }, [
-            _vm._v("Followers: " + _vm._s(_vm.get_followers)),
+            _vm._v(
+              _vm._s(
+                _vm.$t("profile.followers_count", { msg: _vm.get_followers })
+              )
+            ),
           ]),
           _vm._v(" "),
           _c("li", { on: { click: _vm.showFollowings } }, [
-            _vm._v("Following: " + _vm._s(_vm.get_followings)),
+            _vm._v(
+              _vm._s(
+                _vm.$t("profile.following_count", { msg: _vm.get_followings })
+              )
+            ),
           ]),
           _vm._v(" "),
           _c("li", [
@@ -618,12 +693,12 @@ var render = function () {
               ? _c(
                   "button",
                   { staticClass: "button-Unfollow", on: { click: _vm.follow } },
-                  [_vm._v(" - Unfollow ")]
+                  [_vm._v(_vm._s(_vm.$t("profile.unfollow")))]
                 )
               : _c(
                   "button",
                   { staticClass: "button-follow", on: { click: _vm.follow } },
-                  [_vm._v(" + Follow ")]
+                  [_vm._v(_vm._s(_vm.$t("profile.follow")))]
                 ),
           ]),
         ]),

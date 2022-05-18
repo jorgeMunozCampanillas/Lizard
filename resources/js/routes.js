@@ -1,4 +1,7 @@
 import { store } from './store.js';
+import i18n from './i18n';
+
+
 
 /* ===============< COMPONENTS >=============== */
 //Base
@@ -29,18 +32,20 @@ const PermissError = () => import('./components/errors/Permiss.vue')
 
 /* ===============< MIDDLEWARES >=============== */
 const noAuth = (to, from, next) => {
+    console.log("solo no auth")
     if (store.state.isAuthenticated) {
-        next({name:'home'});
+        next(`/${i18n.locale}/home`);
     }else{
         next();
     }
 }
 
 const auth = (to, from, next) => {
+    console.log("Solo auth")
     if (store.state.auth.permissions != 0) {
         next();
     }else{
-        next({name:'login'});
+        next(`/${i18n.locale}/login`);
     }
 }
 
@@ -48,28 +53,25 @@ const admin = (to, from, next) => {
     if (store.state.auth.permissions > 1) {
         next();
     }else{
-        next({name:'login'});
+        next(`/${i18n.locale}/login`);
     }
 }
-
 
 /* ===============< ROUTES >=============== */
 export const routes = [
     {
-        //Index
-        name:'index',
-        path:'/',
-        component:Index,
-    },
-    {
         //All
-        path:'/error',
+        path:'',
         component:Base,
 
         children:[
             {
+                path: '/',
+                redirect: `/${i18n.locale}`
+            },
+            {
                 name:'permissError',
-                path:'/permiss',
+                path:'/:lang/error/permiss',
                 component:PermissError,
                 props:true,
             },
@@ -77,67 +79,74 @@ export const routes = [
     },
     {
         //No Auth
-        path:'',
+        path:'/:lang',
         component:Base,
         beforeEnter: noAuth,
 
         children:[
             {
+                //Index
+                name:'index',
+                path:'',
+                component:Index,
+            },
+            {
                 name:'login',
-                path:'/login',
+                path:'login',
                 component:Login,
             },
             {
                 name:'register',
-                path:'/register',
+                path:'register',
                 component:Register,
             },
         ],
     },{
         //Auth
-        path:'',
+        path:'/:lang',
         component:Base,
         beforeEnter: auth,
         children:[
             {
                 name:'home',
-                path:'/home',
+                path:'home',
                 component:Home,
             },
             {
                 name:'create-code',
-                path:'/create/code',
+                path:'create/code',
                 component:CreateCode,
             },
             {
                 name:'show-code',
-                path:'/show/code/:id',
+                path:'show/code/:id',
                 component:ShowAllCode,
             },
             {
                 name:'my-code',
-                path:'/show/myCode/',
+                path:'show/profile/',
                 component:MyCode,
             },
             {
                 name:'code-others',
-                path:'/code/others/:idUsu',
+                path:'code/profile/:idUsu',
                 component:CodeOther,
             },
             
         ]
     },{
         //Admins
-        path:'',
+        path:'/:lang',
         component:Base,
         beforeEnter: admin,
         children:[
             {
                 name:'dashboard',
-                path:'/dashboard',
+                path:'dashboard',
                 component:Dashboard,
             }
         ]
     },
 
 ];
+

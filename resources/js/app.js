@@ -15,6 +15,11 @@ import VueRouter from 'vue-router';
 import { routes } from './routes';
 import Vue from 'vue';
 
+const router = new VueRouter({
+  mode: 'history',
+  routes: routes,
+});
+
 //Not to return to the same route
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -27,13 +32,29 @@ Vue.use(VueAxios, axios);
 //Vuex
 import {store} from './store.js';
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: routes,
-});
+//I18n (Multilangual)
+import i18n from './i18n';
+
+/* ===============< LANGUAGE >=============== */
+// use beforeEach route guard to set the language
+router.beforeEach((to, from, next) => {
+
+  // use the language from the routing param or default language
+  let language = to.params.lang;
+  if (!language) {
+    // search if we have this in localStorage
+    language = localStorage.getItem('language') || 'en'
+  }
+
+  // set the current language for i18n
+  i18n.locale = language
+  next()
+})
+
 
 const app = new Vue({
     el: '#app',
+    i18n,
     store:store,
     router:router,
     render: h => h(App),

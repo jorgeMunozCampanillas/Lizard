@@ -4,8 +4,7 @@
     MENU¿?
   </div>
   <div id="posts">
-    <h1 class="title">Tops Components</h1>
-
+    <h1 class="title">{{$t('home.top_comopnents')}}</h1>
     <Post 
       v-for="post in posts" :key="post.idPost"
         :data="post"

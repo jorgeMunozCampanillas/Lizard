@@ -155,12 +155,12 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form" }, [
     _c("div", { staticClass: "form-container" }, [
-      _c("h1", [_vm._v("Log in")]),
+      _c("h1", [_vm._v(_vm._s(_vm.$t("log.login")))]),
       _vm._v(" "),
       _c("form", [
         _vm.error
           ? _c("div", { staticClass: "form-error" }, [
-              _vm._v("The username or password is incorrect"),
+              _vm._v(_vm._s(_vm.$t("log.err_log"))),
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -230,21 +230,27 @@ var render = function () {
               },
             },
           },
-          [_vm._v("LOG IN")]
+          [_vm._v(_vm._s(_vm.$t("log.login")))]
         ),
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "form-or" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("span", { staticClass: "or" }, [_vm._v(_vm._s(_vm.$t("log.or")))]),
+        _vm._v(" "),
+        _c("hr"),
+      ]),
       _vm._v(" "),
       _c("p", { staticClass: "form-info" }, [
-        _vm._m(1),
+        _c("i", [_vm._v(_vm._s(_vm.$t("log.dont_account_msg"))), _c("br")]),
         _c(
           "b",
           [
             _c(
               "router-link",
-              { staticClass: "nav-link", attrs: { to: "/register" } },
-              [_vm._v("Register NOW!!")]
+              { staticClass: "nav-link", attrs: { to: { name: "register" } } },
+              [_vm._v(_vm._s(_vm.$t("log.register_now")))]
             ),
           ],
           1
@@ -253,26 +259,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-or" }, [
-      _c("hr"),
-      _vm._v(" "),
-      _c("span", { staticClass: "or" }, [_vm._v("OR")]),
-      _vm._v(" "),
-      _c("hr"),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("i", [_vm._v("You dont have account yet?? 😮 "), _c("br")])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

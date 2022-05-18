@@ -23,6 +23,7 @@ class CreatePostTable extends Migration
             $table->string('img')->nullable();
             $table->bigInteger('views');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::table('post', function(Blueprint $table){

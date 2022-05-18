@@ -16,6 +16,7 @@ class PostLike extends Model
         return PostLike::where('idPost', '=', $idPost)->count();
     }
 
+    //Like or dislike
     public static function like($idPost){
         $isLike = PostLike::where('idPost', '=', $idPost)->where('idUsu', '=', Auth::id())->get();
         if (count($isLike)!=0) {

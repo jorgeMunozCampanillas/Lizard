@@ -22,7 +22,17 @@
                         <i class="bi bi-eye-fill"></i>{{data.views}}
                     </li>
                 </ul>
+                <!-- Options -->
+                <div class="post_info-options" v-if="data.idUsu == this.$store.state.auth.idUsu">
+                    <ul class="post_options-menu" :class="{'hidden':dropHidden}">
+                        <li @click="drop" class="post_options-borrar"><i class="bi bi-trash-fill"></i> Borrar</li>
+                        <li>Colección</li>
+                    </ul>
+                    <button @click="dropMenu()" class="post_options-button"><i class="bi bi-three-dots"></i></button>
+                </div>
+ 
             </div>
+            {{data.deleted_at}}
             <h5 @click="showUser()">{{data.name}}</h5>
         </div>
     </div>
@@ -42,7 +52,13 @@ export default {
         },
 
     },
+    data() {
+        return {
+            dropHidden:true,
+        }
+    },
     computed:{
+
         /*src(){
             let aux = `
             <html>
@@ -75,10 +91,7 @@ export default {
             if (this.data.idUsu != this.$store.state.auth.idUsu) {
                 this.$router.push({name:'code-others', params: { id: this.data.idUsu }})
             }else{
-                let path = '/show/myCode';
-                if (this.$route.path != path) {
-                    this.$router.push({name:'my-code', params: { id: this.data.idPost }});
-                }
+                this.$router.push({name:'my-code', params: { id: this.data.idPost }});
             }
         },
         like(){
@@ -102,6 +115,18 @@ export default {
                 console.log(err.data);
             })
         },
+        dropMenu(){
+            this.dropHidden = !this.dropHidden; 
+        },
+        drop(){
+            axios.delete('/api/post/code/'+this.data.idPost)
+            .then(res=>{
+                this.$parent.deletePost(this.data.idPost);
+            })
+            .catch(err =>{
+                console.log(err)
+            })
+        }
 
     },
 }

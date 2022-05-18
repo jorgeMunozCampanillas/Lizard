@@ -23,12 +23,20 @@ class Followers extends Model
     }
     //Get all post that user where we are following
     public static function getFollowingPosts(){
-        $posts = DB::table('post')->join('user', 'user.idUsu', '=', 'post.idUsu')->join('followers', 'followers.follower', '=', 'user.idUsu')->select('user.name', 'user.img AS userImg', 'user.idUsu', 'post.*')->where('followers.following', '=', Auth::id())->get();
 
-        //Ad likes to posts
-        foreach ($posts as $key => $value) {
-            $posts[$key]->likes = DB::table('post_like')->where('idPost', '=', $value->idPost)->count() ?? 0;
-        }
+        $posts = DB::select(
+            DB::raw("
+            Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes` 
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            inner join `followers` on `followers`.`following` = `user`.`idUsu`
+            WHERE `followers`.`follower` = ".Auth::id().";")
+        );
+
         return $posts;
     }
 

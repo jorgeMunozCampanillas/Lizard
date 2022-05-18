@@ -1,0 +1,46 @@
+{
+    "nav":{
+        "home":"Home",
+        "components":"Components",
+        "views":"Views",
+        "new_component":"New Component",
+        "login":"Login",
+        "dashboard":"Dashboard",
+        "profile":"Your Profile",
+        "sing_out":"Sing out"
+    },
+    "log":{
+        "holder_email":"Email",
+        "holder_pass":"Password",
+        "holder_name":"Name",
+        "holder_confirm_pas":"Confirm Password",
+
+        "login":"Log in",
+        "or":"OR",
+        "dont_account_msg":"You dont have account yet?? 😮",
+        "register_now":"Register NOW!!",
+        "err_log":"The username or password is incorrect",
+
+
+        "register":"Register",
+        "have_account":"Do you already have an account? 😉",
+        "login_now":"Login NOW!!"    
+    },
+    "home":{
+        "top_comopnents":"Tops Components"
+    },
+    "profile":{
+        "components_count":"Components {msg}",
+        "followers_count":"Followers: {msg}",
+        "following_count":"Following {msg}",
+        "unfollow":"- Unfollow",
+        "follow":"+ Follow",
+
+        "your_work":"Your Work",
+        "following":"Following",
+        "trending":"Trending",
+        "components":"Components",
+        "collections":"Collections",
+        "delete":"Deleted"
+    }
+}

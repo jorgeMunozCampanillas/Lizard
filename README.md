@@ -147,7 +147,7 @@ or
 - [X] Login/Register
 - [X] SPA
 - [X] Middleware Auth
-- [ ] Multilanguage
+- [X] Multilanguage
 - [ ] Dashboard
   - [X] Users 
   - [ ] Post
@@ -198,3 +198,4 @@ Week 3:
 - Vuex(3): https://v3.vuex.vuejs.org/guide/#the-simplest-store
 - UploadImg: https://www.youtube.com/watch?v=2JteMJzNI44
 - public/permiss for img: https://laravel.com/docs/8.x/filesystem
+- Language Switcher: https://www.youtube.com/watch?v=CFGjn3yKMNc

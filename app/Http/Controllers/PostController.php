@@ -110,14 +110,22 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage,
+     * if it is not in the trash, it is throw away
+     * else it is REMOVED!!!
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $post = Post::withTrashed()->findOrFail($id);
+        if ($post->deleted_at) {
+            $post->forceDelete();
+        }else{
+            $post->delete();
+        }
+        return response()->json(200);
     }
 
 
@@ -128,6 +136,17 @@ class PostController extends Controller
     public function getPosts(Request $request){
         
         $posts = Post::getPostsUsu($request->idUsu);
+
+        return response()->json([
+            'data' => $posts,
+        ], 200);
+
+    }
+
+    //Get all posts deleted
+    public function getPostsDeleted($idUsu){
+        
+        $posts = Post::getPostsDeletdUsu($idUsu);
 
         return response()->json([
             'data' => $posts,

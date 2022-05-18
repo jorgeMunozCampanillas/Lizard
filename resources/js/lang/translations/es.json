@@ -1,0 +1,46 @@
+{
+    "nav":{
+        "home":"Home",
+        "components":"Componentes",
+        "views":"Vistas",
+        "new_component":"Crear Componente",
+        "login":"Entrar",
+        "dashboard":"Administración",
+        "profile":"Tu perfil",
+        "sing_out":"Salir"
+    },
+    "log":{
+        "holder_email":"Email",
+        "holder_pass":"Contraseña",
+        "holder_name":"Nombre",
+        "holder_confirm_pas":"Confirmar contraseña",
+
+        "login":"Entrar",
+        "or":"O",
+        "dont_account_msg":"Aún no tienes una cuenta?? 😮",
+        "register_now":"Registrate AHORA!!",
+        "err_log":"El usuario o contraseña son incorrectas",
+
+
+        "register":"Registrarse",
+        "have_account":"Ya tienes una cuenta? 😉",
+        "login_now":"Entra AHORA!!"    
+    },
+    "home":{
+        "top_comopnents":"Mejores Componentes"
+    },
+    "profile":{
+        "components_count":"Componentes {msg}",
+        "followers_count":"Seguidores: {msg}",
+        "following_count":"Siguiendo {msg}",
+        "unfollow":"- Dejar de seguir",
+        "follow":"+ Seguir",
+
+        "your_work":"Tu trabajo",
+        "following":"Siguiendo",
+        "trending":"Tendencias",
+        "components":"Componentes",
+        "collections":"Colecciones",
+        "delete":"Borrados"
+    }
+}

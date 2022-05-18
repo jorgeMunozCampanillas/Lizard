@@ -5,27 +5,30 @@
             <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
             <h2 id="logo-title">Lizard</h2>
         </ul>
+        
 
         <ul id="nav-pages">
-            <li class="nav-mains"><router-link :to="{name:'home'}" >Home</router-link></li>
-            <li class="nav-mains"><a>Comopnents</a></li>
-            <li class="nav-mains"><a>Views</a></li>
+            <li class="nav-mains"><router-link :to="{name:'home'}" >{{$t('nav.home')}}</router-link></li>
+            <li class="nav-mains"><a>{{$t('nav.components')}}</a></li>
+            <li class="nav-mains"><a>{{$t('nav.views')}}</a></li>
         </ul>
 
         <!-- No registe -->
         <ul id="nav-out-permiss" v-if="this.$store.state.isAuthenticated==false">
-            <li><router-link :to="{name:'login'}" >Login</router-link></li>
+            <LangSwitch></LangSwitch>
+            <li><router-link :to="{name:'login'}" >{{$t('nav.login')}}</router-link></li>
         </ul>
 
         <!-- Options -->
         <ul id="nav-with-permiss" v-if="this.$store.state.auth.permissions>0">
             <li class="nav-mains">
-                <p @click="createCode">new Component</p>
+                <p @click="createCode">{{$t('nav.new_component')}}</p>
             </li>
+            <LangSwitch></LangSwitch>
             <li>
                 <button>
                     <i v-if="this.$store.state.isAuthenticated==false" style="font-size:1.6rem" class="bi bi-person-circle"></i>
-                    <img id="avatar" v-else :src="'storage/'+this.$store.state.auth.img" alt="">
+                    <img id="avatar" v-else :src="'/storage/'+this.$store.state.auth.img" alt="">
                 </button>
             </li>
         </ul>
@@ -33,11 +36,9 @@
             <div>
                 <ul id="options">
                     <!-- Admin User -->
-                    <li><router-link v-if="this.$store.state.auth.permissions>1" :to="{name:'dashboard'}" >Dashboard</router-link></li>
-                    <li><router-link :to="{name:'my-code'}">Your Profile</router-link></li>
-                    <li><a>Another action</a></li>
-                    <li><a>Something</a></li>
-                    <li><button @click="logout">Sing out</button></li>
+                    <li><router-link v-if="this.$store.state.auth.permissions>1" :to="{name:'dashboard'}" >{{$t('nav.dashboard')}}</router-link></li>
+                    <li><router-link :to="{name:'my-code'}">{{$t('nav.profile')}}</router-link></li>
+                    <li><button @click="logout">{{$t('nav.sing_out')}}</button></li>
                 </ul>
             </div>
         </li>    
@@ -46,9 +47,12 @@
 </template>
 
 <script>
+import LangSwitch from './LangSwitch.vue';
 export default {
     name:'naVue',
-
+    components: {
+        LangSwitch
+    },
     data() {
         return {
             options: false,
