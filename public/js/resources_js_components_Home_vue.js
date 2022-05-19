@@ -42,14 +42,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.getAuthLikes();
+    if (this.$store.state.isAuthenticated) {
+      this.getAuthLikes();
+    }
+
     this.getPosts();
   },
   methods: {
     getPosts: function getPosts() {
       var _this = this;
 
-      axios.get('/api/post/code').then(function (res) {
+      axios.get('/api/code').then(function (res) {
         console.log(res);
         _this.posts = res.data.data;
       })["catch"](function (err) {
@@ -123,6 +126,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -138,17 +142,16 @@ __webpack_require__.r(__webpack_exports__);
       dropHidden: true
     };
   },
-  computed: {
-    /*src(){
-        let aux = `
-        <html>
-            <script src="https://cdn.tailwindcss.com"><\/script>
-            <body>${this.post.component.html}</body>
-            <style>${this.post.component.html}</style>
-            <script>${this.post.component.html}<\/script>
-        </html>`;
-        return aux;
-    }*/
+  computed: {// src(){
+    //     let aux = `
+    //     <html>
+    //         <script src="https://cdn.tailwindcss.com"><\/script>
+    //         <body>${this.data.html}</body>
+    //         <style>${this.data.css}</style>
+    //         <script>${this.data.js}<\/script>
+    //     </html>`;
+    //     return aux;
+    // }
   },
   methods: {
     showCode: function showCode() {
@@ -217,10 +220,32 @@ __webpack_require__.r(__webpack_exports__);
     drop: function drop() {
       var _this2 = this;
 
-      axios["delete"]('/api/post/code/' + this.data.idPost).then(function (res) {
-        _this2.$parent.deletePost(_this2.data.idPost);
+      var idPost = this.data.idPost;
+      var idUsu = this.$store.state.auth.idUsu;
+      axios.get('/api/post/delete/' + idPost + '/' + idUsu).then(function (res) {
+        console.log(res);
+
+        _this2.$parent.deletePost(idPost);
       })["catch"](function (err) {
+        if (err.response.status == 403) {
+          _this2.$router.push({
+            name: 'permissError',
+            params: {
+              msg: err.response.data.error
+            }
+          });
+        }
+      });
+    },
+    restore: function restore() {
+      var _this3 = this;
+
+      axios.get('/api/post/restore/' + this.data.idPost).then(function (res) {
+        _this3.$parent.deletePost(_this3.data.idPost);
+      })["catch"](err, function (a) {
+        console.log("Error en OnePost.vue restore");
         console.log(err);
+        console.log(a);
       });
     }
   }
@@ -511,6 +536,20 @@ var render = function () {
                         _vm._v(" Borrar"),
                       ]
                     ),
+                    _vm._v(" "),
+                    _vm.data.deleted_at != null
+                      ? _c(
+                          "li",
+                          {
+                            staticClass: "post_options-restore",
+                            on: { click: _vm.restore },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-recycle" }),
+                            _vm._v(" Restore"),
+                          ]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("li", [_vm._v("Colección")]),
                   ]

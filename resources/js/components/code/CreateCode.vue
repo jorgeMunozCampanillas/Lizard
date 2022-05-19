@@ -3,7 +3,7 @@
   <div class="code_enter">
     <Editor class="editor" lang="xml" language="HTML" v-on:update="updateCode"/>
     <Editor class="editor" lang="css" language="CSS" v-on:update="updateCode"/>
-    <Editor class="editor" lang="javascript" language="JS" v-on:update="updateCode"/>
+    <Editor class="editor" lang="js" language="JS" v-on:update="updateCode"/>
   </div>
   <div class="code_output">
     <iframe id="code" :srcdoc="src" class="code-represent"> </iframe>
@@ -41,11 +41,19 @@ export default {
       js:'',
       src:'',
       img:'',
+      frameworks:'',
+      tags:[],
     }
   },
   mounted(){
-    //this come to nav
+    //this come from nav
     this.$root.$on('save', (postName) => this.save(postName));
+    //this come from settings
+    this.$root.$on('changeFramework', newFrameworks =>{
+      this.frameworks=newFrameworks.cdns;
+      this.tags=newFrameworks.tags;
+      this.updateSrc();
+    });
   },
   methods: {
 
@@ -56,11 +64,14 @@ export default {
 
     updateSrc(){
         this.src = `
-        <html>
+        <head>
+            ${this.frameworks}
+        </head>
+        <body>
             <body>${this.xml}</body>
             <style>${this.css}</style>
             <script>${this.js}<\/script>
-        </html>`;
+        </body>`;
     },
 
 
@@ -68,9 +79,11 @@ export default {
       //set the code background the page to screeshot ( z-index -5 )
       //shhh this is our secret...
       let codeScreenArea = document.getElementById("codeScreenArea");
-      codeScreenArea.innerHTML += '<script src="https://cdn.tailwindcss.com"><\/script>';
+      codeScreenArea.innerHTML += this.frameworks;
       codeScreenArea.innerHTML += this.xml;
       codeScreenArea.innerHTML += '<style>'+this.css+'</style>';
+      console.log("Hola, soy "+this.num)
+      
       await html2canvas(codeScreenArea, {
         //Set properties of the canvas
         width:500,
@@ -88,8 +101,9 @@ export default {
           data.append('js', this.js);
           data.append('img', this.img);
           axios.post('/api/post/code', data).then(res=>{
-            console.log(res)
-            console.log("añadido :))");
+            this.$router.push({name:'my-code'});
+            //Delete this function to bug send multiples createCode
+            this.save =()=>{};
           })
           .catch((error)=>{
             console.log("Error save desde CreateCode.vue")

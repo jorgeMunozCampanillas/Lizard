@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             \App\Models\Followers::factory(20)->create();
         } catch (\Throwable $th) {}
       
-
+        //Tags
+        $this->call(TagSeeder::class);
     }
 }

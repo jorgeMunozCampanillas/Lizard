@@ -30,12 +30,14 @@ export default {
     }
   },
   mounted() {
-    this.getAuthLikes();
+    if (this.$store.state.isAuthenticated) {
+      this.getAuthLikes();
+    }
     this.getPosts();
   },
   methods:{
     getPosts(){
-        axios.get('/api/post/code').then(res=>{
+        axios.get('/api/code').then(res=>{
             console.log(res)
             this.posts = res.data.data;
         })

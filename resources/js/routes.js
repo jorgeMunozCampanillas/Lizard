@@ -41,7 +41,6 @@ const noAuth = (to, from, next) => {
 }
 
 const auth = (to, from, next) => {
-    console.log("Solo auth")
     if (store.state.auth.permissions != 0) {
         next();
     }else{
@@ -56,6 +55,7 @@ const admin = (to, from, next) => {
         next(`/${i18n.locale}/login`);
     }
 }
+
 
 /* ===============< ROUTES >=============== */
 export const routes = [
@@ -74,6 +74,11 @@ export const routes = [
                 path:'/:lang/error/permiss',
                 component:PermissError,
                 props:true,
+            },
+            {
+                name:'home',
+                path:'/:lang/home',
+                component:Home,
             },
         ]
     },
@@ -107,11 +112,6 @@ export const routes = [
         component:Base,
         beforeEnter: auth,
         children:[
-            {
-                name:'home',
-                path:'home',
-                component:Home,
-            },
             {
                 name:'create-code',
                 path:'create/code',

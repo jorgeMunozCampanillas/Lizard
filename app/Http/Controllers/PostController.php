@@ -51,10 +51,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'html' => ['required'],
-        ]);
-        
+
         $file = $request->file('img');
         $path = $request->file('img')->storePublicly('code', 'public');
 
@@ -70,7 +67,7 @@ class PostController extends Controller
 
         return response()->json([
             'post' => $post
-        ]);
+        ], 200);
     }
 
     /**
@@ -82,7 +79,7 @@ class PostController extends Controller
     public function show(Request $request, $idPost)
     {
         return response()->json([
-            'code' => Post::findOrFail($idPost),
+            'data' => Post::getPost($idPost),
         ]);
     }
 
@@ -117,9 +114,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $idPost, $idUsu)
     {
-        $post = Post::withTrashed()->findOrFail($id);
+        $post = Post::withTrashed()->findOrFail($idPost);
         if ($post->deleted_at) {
             $post->forceDelete();
         }else{
@@ -162,6 +159,15 @@ class PostController extends Controller
             'data' => $posts,
         ], 200);
 
+    }
+
+    //Restore one post from the trash
+    public function restorePost(Request $request, $idPost){
+        Post::withTrashed()->find($idPost)->restore();
+
+        return response()->json([
+            true
+        ], 200);
     }
 
     //-------------------------------------

@@ -141,6 +141,21 @@ button {
   opacity: 1;
 }
 
+#settings {
+  position: absolute;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  z-index: 20;
+}
+
 /*-_-_-_-_-_-_-_-_- NAV Profile -_-_-_-_-_-_-_-_-*/
 #nav_profile {
   width: 100%;
@@ -428,6 +443,30 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+#setting_nav {
+  font-family: "Segoe UI", "Roboto";
+  background-color: bisque;
+  color: #2B2C34;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: -webkit-min-content;
+  grid-auto-rows: min-content;
+  width: 100%;
+}
+#setting_nav #setting_main {
+  border: 3px solid red;
+  width: 100%;
+  grid-column-end: span 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#setting_nav #setting_options {
+  grid-column-end: span 8;
+  border: 3px solid green;
 }
 
 .body-index {

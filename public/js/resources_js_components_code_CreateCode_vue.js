@@ -84,15 +84,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       css: '',
       js: '',
       src: '',
-      img: ''
+      img: '',
+      frameworks: '',
+      tags: []
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    //this come to nav
+    //this come from nav
     this.$root.$on('save', function (postName) {
       return _this.save(postName);
+    }); //this come from settings
+
+    this.$root.$on('changeFramework', function (newFrameworks) {
+      _this.frameworks = newFrameworks.cdns;
+      _this.tags = newFrameworks.tags;
+
+      _this.updateSrc();
     });
   },
   methods: {
@@ -101,7 +110,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.updateSrc();
     },
     updateSrc: function updateSrc() {
-      this.src = "\n        <html>\n            <body>".concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </html>");
+      this.src = "\n        <head>\n            ".concat(this.frameworks, "\n        </head>\n        <body>\n            <body>").concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </body>");
     },
     save: function save(postName) {
       var _this2 = this;
@@ -115,10 +124,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //set the code background the page to screeshot ( z-index -5 )
                 //shhh this is our secret...
                 codeScreenArea = document.getElementById("codeScreenArea");
-                codeScreenArea.innerHTML += '<script src="https://cdn.tailwindcss.com"><\/script>';
+                codeScreenArea.innerHTML += _this2.frameworks;
                 codeScreenArea.innerHTML += _this2.xml;
                 codeScreenArea.innerHTML += '<style>' + _this2.css + '</style>';
-                _context2.next = 6;
+                console.log("Hola, soy " + _this2.num);
+                _context2.next = 7;
                 return html2canvas__WEBPACK_IMPORTED_MODULE_10___default()(codeScreenArea, {
                   //Set properties of the canvas
                   width: 500,
@@ -142,8 +152,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                               data.append('js', _this2.js);
                               data.append('img', _this2.img);
                               axios.post('/api/post/code', data).then(function (res) {
-                                console.log(res);
-                                console.log("añadido :))");
+                                _this2.$router.push({
+                                  name: 'my-code'
+                                }); //Delete this function to bug send multiples createCode
+
+
+                                //Delete this function to bug send multiples createCode
+                                _this2.save = function () {};
                               })["catch"](function (error) {
                                 console.log("Error save desde CreateCode.vue");
                                 _this2.errors = error.response.data.errors;
@@ -163,7 +178,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   };
                 }());
 
-              case 6:
+              case 7:
               case "end":
                 return _context2.stop();
             }
@@ -23131,7 +23146,7 @@ var render = function () {
         _vm._v(" "),
         _c("Editor", {
           staticClass: "editor",
-          attrs: { lang: "javascript", language: "JS" },
+          attrs: { lang: "js", language: "JS" },
           on: { update: _vm.updateCode },
         }),
       ],

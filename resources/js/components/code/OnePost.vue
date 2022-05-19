@@ -2,7 +2,7 @@
 <div>
     <button @click="showCode()">
         <img :src="'/storage/'+data.img" class="post-img" alt="">
-        <!-- <iframe :srcdoc="src" frameborder="0" class="post-img"></iframe> -->
+        <!-- <iframe :srcdoc="src" frameborder="0" class="post-img" style=""></iframe> -->
     </button>
     <div class="post_user">
         <img :src="'/storage/'+data.userImg" class="post_user-img" alt="">
@@ -26,6 +26,7 @@
                 <div class="post_info-options" v-if="data.idUsu == this.$store.state.auth.idUsu">
                     <ul class="post_options-menu" :class="{'hidden':dropHidden}">
                         <li @click="drop" class="post_options-borrar"><i class="bi bi-trash-fill"></i> Borrar</li>
+                        <li v-if="data.deleted_at != null" @click="restore" class="post_options-restore"><i class="bi bi-recycle"></i> Restore</li>
                         <li>Colección</li>
                     </ul>
                     <button @click="dropMenu()" class="post_options-button"><i class="bi bi-three-dots"></i></button>
@@ -59,16 +60,16 @@ export default {
     },
     computed:{
 
-        /*src(){
-            let aux = `
-            <html>
-                <script src="https://cdn.tailwindcss.com"><\/script>
-                <body>${this.post.component.html}</body>
-                <style>${this.post.component.html}</style>
-                <script>${this.post.component.html}<\/script>
-            </html>`;
-            return aux;
-        }*/
+        // src(){
+        //     let aux = `
+        //     <html>
+        //         <script src="https://cdn.tailwindcss.com"><\/script>
+        //         <body>${this.data.html}</body>
+        //         <style>${this.data.css}</style>
+        //         <script>${this.data.js}<\/script>
+        //     </html>`;
+        //     return aux;
+        // }
     },
     methods: {
         showCode(){
@@ -119,12 +120,28 @@ export default {
             this.dropHidden = !this.dropHidden; 
         },
         drop(){
-            axios.delete('/api/post/code/'+this.data.idPost)
+            let idPost = this.data.idPost;
+            let idUsu = this.$store.state.auth.idUsu;
+            axios.get('/api/post/delete/'+idPost+'/'+idUsu)
+            .then(res=>{
+                console.log(res)
+                this.$parent.deletePost(idPost);
+            })
+            .catch(err =>{
+                if (err.response.status == 403) {
+                    this.$router.push({name:'permissError', params: {msg: err.response.data.error}})
+                }
+            })
+        },
+        restore(){
+            axios.get('/api/post/restore/'+this.data.idPost)
             .then(res=>{
                 this.$parent.deletePost(this.data.idPost);
             })
-            .catch(err =>{
-                console.log(err)
+            .catch(err, a =>{
+                console.log("Error en OnePost.vue restore");
+                console.log(err);
+                console.log(a);
             })
         }
 

@@ -22,6 +22,7 @@ Route::resource('users', App\Http\Controllers\UserController::class)->only(['sto
 
 //Code
 //get all code
+//Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']); borrar?? 18/05/22
 Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']);
 
 /*========< Auth Routes >=========*/
@@ -52,8 +53,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::group(["prefix"=>"post"], function(){ 
         //Code
         //Normal actions with code
-        Route::resource('code', App\Http\Controllers\PostController::class);
+        Route::resource('code', App\Http\Controllers\PostController::class)->except(['index', 'destroy']);
+        Route::get('delete/{idPost}/{idUsu}', [ App\Http\Controllers\PostController::class, 'destroy'])->middleware(['sameUser']);
+        Route::get('restore/{idPost}', [ App\Http\Controllers\PostController::class, 'restorePost']);
 
+        
         //add one view to post
         Route::post('view',[ App\Http\Controllers\PostController::class, 'addView']);
 

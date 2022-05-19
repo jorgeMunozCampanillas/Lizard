@@ -17,7 +17,8 @@ class CreatePostTable extends Migration
             $table->increments('idPost');
             $table->unsignedInteger('idUsu');
             $table->string('postName');
-            $table->longText('html');
+            $table->longText('script')->nullable();
+            $table->longText('html')->nullable();
             $table->longText('css')->nullable();
             $table->longText('js')->nullable();
             $table->string('img')->nullable();

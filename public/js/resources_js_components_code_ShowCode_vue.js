@@ -116,6 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 //Code mirror
 
 
@@ -136,10 +137,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       src: '',
-      xml: '',
-      css: '',
-      js: '',
-      test: ''
+      post: '',
+      scripts: ''
     };
   },
   created: function created() {
@@ -150,26 +149,18 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/post/code/' + this.$route.params.id).then(function (res) {
-        _this.xml = res.data.code.html;
-        _this.css = res.data.code.css;
-        _this.js = res.data.code.js;
-
-        _this.updateCode('xml', res.data.code.html);
-
-        _this.updateCode('css', res.data.code.css);
-
-        _this.updateCode('js', res.data.code.js);
+        _this.post = res.data.data[0];
       })["catch"](function (err) {
         console.log("Error ShowCode.vue getCode");
         console.log(err);
       });
     },
     updateCode: function updateCode(lang, code) {
-      this[lang] = code;
+      this.post[lang] = code;
       this.updateSrc();
     },
     updateSrc: function updateSrc() {
-      this.src = "\n        <html>\n            <script src=\"https://cdn.tailwindcss.com\"></script>\n            <body>".concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </html>");
+      this.src = "\n           <head>".concat(this.post.script, "</head>\n           <body>").concat(this.post.html, "</body>\n           <style>").concat(this.post.css, "</style>\n           <script>").concat(this.js, "</script>\n           ");
     }
   }
 });
@@ -22316,25 +22307,25 @@ var render = function () {
       [
         _c("Editor", {
           staticClass: "editor",
-          attrs: { code: _vm.xml, lang: "xml", language: "HTML" },
+          attrs: { code: _vm.post.html, lang: "xml", language: "HTML" },
           on: { update: _vm.updateCode },
         }),
         _vm._v(" "),
         _c("Editor", {
           staticClass: "editor",
-          attrs: { code: _vm.css, lang: "css", language: "CSS" },
+          attrs: { code: _vm.post.css, lang: "css", language: "CSS" },
           on: { update: _vm.updateCode },
         }),
         _vm._v(" "),
         _c("Editor", {
           staticClass: "editor",
-          attrs: { code: _vm.js, lang: "javascript", language: "JS" },
+          attrs: { code: _vm.post.js, lang: "javascript", language: "JS" },
           on: { update: _vm.updateCode },
         }),
       ],
       1
     ),
-    _vm._v(" "),
+    _vm._v("\r\n    " + _vm._s(_vm.post.script) + "\r\n    "),
     _c("div", { staticClass: "code_output" }, [
       _c("iframe", {
         staticClass: "code-represent",

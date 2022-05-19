@@ -1,0 +1,26 @@
+#setting_nav{
+    font-family: $title-typography;
+    background-color: bisque;
+    color: $primary-dark;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: min-content;
+    width: 100%;
+
+    #setting_main{
+        border: 3px solid red;
+        width: 100%;
+        grid-column-end: span 4;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #setting_options{
+        grid-column-end: span 8;
+        border: 3px solid green;
+
+    }
+
+}

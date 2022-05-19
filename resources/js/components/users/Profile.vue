@@ -157,10 +157,6 @@ export default {
         console.log(err)
       });
     },
-    deletePost($idPost){
-      let newPosts = this.posts.filter(p => p.idPost != $idPost);
-      this.posts = newPosts;
-    },
     getPostDeleted(){
       axios.get('/api/post/deleted/'+this.$store.state.auth.idUsu)
       .then(res=>{
@@ -208,7 +204,12 @@ export default {
         default:
           break;
       }
-    }
+    },
+
+    deletePost(idPost){
+      let newPosts = this.posts.filter(p => p.idPost != idPost);
+      this.posts = newPosts;
+    },
 
   },
 }

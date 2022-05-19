@@ -1,10 +1,11 @@
 <template>
 <div>
     <div class="code_enter">
-      <Editor class="editor" :code="xml" lang="xml" language="HTML" v-on:update="updateCode"/>
-      <Editor class="editor" :code="css" lang="css" language="CSS" v-on:update="updateCode"/>
-      <Editor class="editor" :code="js" lang="javascript" language="JS" v-on:update="updateCode"/>
+      <Editor class="editor" :code="post.html" lang="xml" language="HTML" v-on:update="updateCode"/>
+      <Editor class="editor" :code="post.css" lang="css" language="CSS" v-on:update="updateCode"/>
+      <Editor class="editor" :code="post.js" lang="javascript" language="JS" v-on:update="updateCode"/>
     </div>
+    {{post.script}}
     <div class="code_output">
         <iframe id="code" class="code-represent" :srcdoc="src"> </iframe>
         <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
@@ -37,10 +38,8 @@ export default {
   data() {
     return {
         src:'',
-        xml:'',
-        css:'',
-        js:'',
-        test:''
+        post:'',
+        scripts:'',
     }
   },
   created(){
@@ -51,12 +50,8 @@ export default {
     getCode(){
         axios.get('/api/post/code/'+this.$route.params.id)
         .then(res => {
-            this.xml = res.data.code.html;
-            this.css = res.data.code.css;
-            this.js = res.data.code.js;
-            this.updateCode('xml', res.data.code.html)
-            this.updateCode('css', res.data.code.css)
-            this.updateCode('js', res.data.code.js)
+            this.post = res.data.data[0];
+            
         })
         .catch(err => {
             console.log("Error ShowCode.vue getCode");
@@ -65,18 +60,17 @@ export default {
     },
 
     updateCode(lang, code){
-      this[lang] = code;
+      this.post[lang] = code;
       this.updateSrc();
     },
 
     updateSrc(){
-        this.src = `
-        <html>
-            <script src="https://cdn.tailwindcss.com"><\/script>
-            <body>${this.xml}</body>
-            <style>${this.css}</style>
-            <script>${this.js}<\/script>
-        </html>`;
+         this.src = `
+           <head>${this.post.script}</head>
+           <body>${this.post.html}</body>
+           <style>${this.post.css}</style>
+           <script>${this.js}<\/script>
+           `;
     },
   },
 }

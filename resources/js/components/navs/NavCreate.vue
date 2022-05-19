@@ -12,12 +12,12 @@
         <!-- Options -->
         <ul class="nav-options">
             <li class="nav-option" @click="exit"><i class="bi bi-house-fill"></i>&nbsp;Home</li>
-            <li class="nav-option" @click="save"><i class="bi bi-cloud-download-fill"></i>&nbsp;Save</li>
-            <li class="nav-option"><i class="bi bi-gear-fill"></i>&nbsp;Setting</li>
+            <li class="nav-option" @click.prevent="save"><i class="bi bi-cloud-download-fill"></i>&nbsp;Save</li>
+            <li class="nav-option" @click="settings"><i class="bi bi-gear-fill"></i>&nbsp;Setting</li>
             <li>
                 <button>
                     <i v-if="this.$store.state.isAuthenticated==false" style="font-size:1.6rem" class="bi bi-person-circle"></i>
-                    <img id="avatar" v-else :src="'storage/'+this.$store.state.auth.img" alt="">
+                    <img id="avatar" v-else :src="'/storage/'+this.$store.state.auth.img" alt="">
                 </button>
             </li>
             <li v-if="options">
@@ -34,53 +34,63 @@
             </li>    
         </ul>
     </nav>
+    <!-- Settings -->
+    <Settings id="settings" v-if="settingsMode"/>
 </div>
 </template>
 
 <script>
+import Settings from './Settings.vue';
 export default {
-    name:'naVue',
-
+    components: { Settings },
+    name: "naVue",
     data() {
         return {
             options: false,
-        }
+            settingsMode:false,
+        };
     },
-    mounted(){
-            document.addEventListener('click', (e)=>{
-                if(e.target.id == 'avatar'){
-                    if (this.options) this.options = false
-                    else this.options = true;
-                }else{
+    mounted() {
+        document.addEventListener("click", (e) => {
+            if (e.target.id == "avatar") {
+                if (this.options)
                     this.options = false;
-                }
-            })
+                else
+                    this.options = true;
+            }
+            else {
+                this.options = false;
+            }
+        });
     },
     methods: {
-        foo(){
-            console.log(this.$store.state.auth)
+        foo() {
+            console.log(this.$store.state.auth);
         },
-        logout(){
-            axios.post('/api/logout').then(()=>{
-                this.$store.dispatch('logout');
-                this.$router.push({name:"login"})
+        logout() {
+            axios.post("/api/logout").then(() => {
+                this.$store.dispatch("logout");
+                this.$router.push({ name: "login" });
             })
-            .catch((e)=>{
-                console.log("Error en logout Nav.vue")
-                console.log(e)
-            })
+                .catch((e) => {
+                console.log("Error en logout Nav.vue");
+                console.log(e);
+            });
         },
-        exit(){
-            this.$store.dispatch('changeNav', 1);
-            this.$router.push({name:"home"});
+        exit() {
+            this.$router.push({ name: "home" });
         },
-        save(){
+        save() {
+            console.log("Emito guardar")
             //Emit to save in Create/Edit code with the name
             let postName = document.getElementById("project-title").value;
-            if (!postName) postName = "Untitled";
-            this.$root.$emit('save', postName);
+            if (!postName)
+                postName = "Untitled";
+            this.$root.$emit("save", postName);
+        },
+        settings(){
+            this.settingsMode=!this.settingsMode;
         }
- 
     },
 }
 </script>

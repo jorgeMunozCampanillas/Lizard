@@ -35,10 +35,10 @@ import {store} from './store.js';
 //I18n (Multilangual)
 import i18n from './i18n';
 
-/* ===============< LANGUAGE >=============== */
-// use beforeEach route guard to set the language
+// use beforeEach route guard 
 router.beforeEach((to, from, next) => {
-
+  
+  /* ===============< LANGUAGE >=============== */
   // use the language from the routing param or default language
   let language = to.params.lang;
   if (!language) {
@@ -48,6 +48,14 @@ router.beforeEach((to, from, next) => {
 
   // set the current language for i18n
   i18n.locale = language
+
+ /* ===============< NAV TIPE >=============== */
+  if (to.path.includes("/create/code")) {
+    store.dispatch("changeNav", 2);
+  }else{
+    store.dispatch("changeNav", 1);
+  }
+
   next()
 })
 

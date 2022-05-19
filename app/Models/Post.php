@@ -16,10 +16,29 @@ class Post extends Model
     protected $table='post';
     protected $primaryKey = 'idPost';
 
-    protected $fillable = ['idUsu', 'postName','html','css','js', 'img', 'views'];
+    protected $fillable = ['idUsu', 'postName','html','css','js', 'img', 'views', 'script'];
 
     public function user(){
         return $this->belongsTo('App\Models\User', 'idUsu', 'idUsu')->get(['idUsu', 'name', 'email', 'img']);
+    }
+
+    //Get all posts
+    public static function getPost($idPost){
+        $posts = DB::select(
+            DB::raw("
+            Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes` 
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            WHERE `post`.`deleted_at` IS null
+            AND `post`.`idPost` = $idPost
+            ORDER BY `post`.`views` DESC;")
+        );
+
+        return $posts;
     }
 
     //Get all posts
@@ -33,6 +52,7 @@ class Post extends Model
             ) as `likes` 
             from `post` 
             inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            WHERE `post`.`deleted_at` IS null
             ORDER BY `post`.`views` DESC;")
         );
 
