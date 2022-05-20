@@ -24,6 +24,17 @@ class Post extends Model
 
     //Get all posts
     public static function getPost($idPost){
+                /*
+Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+GROUP_CONCAT(`tag`.`tag`) as 'tags', 
+( SELECT COUNT(`post_like`.`idPost`) FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost` ) as `likes` 
+from `post` 
+inner join `user` on `user`.`idUsu` = `post`.`idUsu` 
+inner join `post_tag` on `post`.`idPost` = `post_tag`.`idPost` 
+inner join `tag` on `tag`.`idTag` = `post_tag`.`idTag`
+WHERE `post`.`deleted_at` IS null AND `post`.`idPost` = 3 
+ORDER BY `post`.`views` DESC;
+        */
         $posts = DB::select(
             DB::raw("
             Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
@@ -37,6 +48,20 @@ class Post extends Model
             AND `post`.`idPost` = $idPost
             ORDER BY `post`.`views` DESC;")
         );
+
+        $tags = DB::table('tag')
+                ->select('tag.tag')
+                ->join('post_tag', 'tag.idTag', '=', 'post_tag.idTag')
+                ->where('post_tag.idPost', '=', '3')
+                ->get();
+
+
+        //Ad tags to posts
+        $posts["tags"]=[];
+        foreach ($tags as $key => $value) {
+            array_push($posts["tags"], $value->tag);
+        }
+
 
         return $posts;
     }

@@ -116,7 +116,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 //Code mirror
 
 
@@ -160,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
       this.updateSrc();
     },
     updateSrc: function updateSrc() {
-      this.src = "\n           <head>".concat(this.post.script, "</head>\n           <body>").concat(this.post.html, "</body>\n           <style>").concat(this.post.css, "</style>\n           <script>").concat(this.js, "</script>\n           ");
+      this.src = "\n           <head>".concat(this.post.script, "</head>\n           <body>").concat(this.post.html, "</body>\n           <style>").concat(this.post.css, "</style>\n           <script>").concat(this.post.js, "</script>\n           ");
     }
   }
 });
@@ -22325,7 +22324,7 @@ var render = function () {
       ],
       1
     ),
-    _vm._v("\r\n    " + _vm._s(_vm.post.script) + "\r\n    "),
+    _vm._v(" "),
     _c("div", { staticClass: "code_output" }, [
       _c("iframe", {
         staticClass: "code-represent",

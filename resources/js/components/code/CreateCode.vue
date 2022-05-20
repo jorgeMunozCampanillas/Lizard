@@ -43,6 +43,7 @@ export default {
       img:'',
       frameworks:'',
       tags:[],
+      idPost:'',
     }
   },
   mounted(){
@@ -63,6 +64,7 @@ export default {
     },
 
     updateSrc(){
+        console.log(this.tags)
         this.src = `
         <head>
             ${this.frameworks}
@@ -82,13 +84,14 @@ export default {
       codeScreenArea.innerHTML += this.frameworks;
       codeScreenArea.innerHTML += this.xml;
       codeScreenArea.innerHTML += '<style>'+this.css+'</style>';
-      console.log("Hola, soy "+this.num)
       
       await html2canvas(codeScreenArea, {
         //Set properties of the canvas
         width:500,
         height:374,
-      }).then( async (canvas)=>{
+      })
+      //POST
+      .then( async (canvas)=>{
         //convert the canvas to  blob and this to file :)))
         canvas.toBlob((blob)=>{
           this.img = new File([blob], 'prueba.jpg', {type: "image/jpeg"});
@@ -100,18 +103,31 @@ export default {
           data.append('css', this.css);
           data.append('js', this.js);
           data.append('img', this.img);
+          data.append('script', this.frameworks);
+
           axios.post('/api/post/code', data).then(res=>{
+            this.idPost = res.data.post.idPost;
             this.$router.push({name:'my-code'});
+
             //Delete this function to bug send multiples createCode
             this.save =()=>{};
           })
-          .catch((error)=>{
-            console.log("Error save desde CreateCode.vue")
-            this.errors = error.response.data.errors;
+          //TAGS
+          .then(()=>{
+            let data = {
+              tags:["#cacaa"],
+              idPost:this.idPost,
+            }
+            axios.post('/api/tag/tag', data);
           })
+
         });
+      })
+      .catch((err)=>{
+        console.log("Error save desde CreateCode.vue");
+        console.log(err)
+        this.errors = error.response.data.errors;
       });
-      
     },
   },
 

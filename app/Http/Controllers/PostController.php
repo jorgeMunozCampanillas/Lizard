@@ -52,9 +52,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        //Save img
         $file = $request->file('img');
         $path = $request->file('img')->storePublicly('code', 'public');
 
+        //Create Post
         $post = Post::create([
             'views' => '0',
             'idUsu' => $request->idUsu,
@@ -63,6 +65,7 @@ class PostController extends Controller
             'css' => $request->css,
             'js' => $request->js,
             'img' => $path,
+            'script' => $request->script,
         ]);
 
         return response()->json([

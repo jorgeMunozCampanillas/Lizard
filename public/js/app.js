@@ -5618,13 +5618,13 @@ __webpack_require__.r(__webpack_exports__);
         var index = this.frameworksToUse.indexOf(this.frameworks[framework]);
         this.frameworksToUse.splice(index, 1); //TAGS
 
-        index = this.tags.indexOf(tag);
+        index = this.tags.indexOf("#" + tag);
         this.tags.splice(index, 1);
       } else {
         //CDN
         this.frameworksToUse.push(this.frameworks[framework]); //TAGS
 
-        this.tags.push(tag);
+        this.tags.push("#" + tag);
       } //send tags and cdns to create code
 
 

@@ -5,7 +5,6 @@
       <Editor class="editor" :code="post.css" lang="css" language="CSS" v-on:update="updateCode"/>
       <Editor class="editor" :code="post.js" lang="javascript" language="JS" v-on:update="updateCode"/>
     </div>
-    {{post.script}}
     <div class="code_output">
         <iframe id="code" class="code-represent" :srcdoc="src"> </iframe>
         <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
@@ -69,7 +68,7 @@ export default {
            <head>${this.post.script}</head>
            <body>${this.post.html}</body>
            <style>${this.post.css}</style>
-           <script>${this.js}<\/script>
+           <script>${this.post.js}<\/script>
            `;
     },
   },

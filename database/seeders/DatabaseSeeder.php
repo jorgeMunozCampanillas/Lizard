@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
         //Users
         $this->call(UserSeeder::class);
         
+        //Tags
+        $this->call(TagSeeder::class);
+        
         //Post
         $this->call(PostSeeder::class);
         try {
@@ -27,7 +30,5 @@ class DatabaseSeeder extends Seeder
             \App\Models\Followers::factory(20)->create();
         } catch (\Throwable $th) {}
       
-        //Tags
-        $this->call(TagSeeder::class);
     }
 }

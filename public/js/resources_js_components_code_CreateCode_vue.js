@@ -86,7 +86,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       src: '',
       img: '',
       frameworks: '',
-      tags: []
+      tags: [],
+      idPost: ''
     };
   },
   mounted: function mounted() {
@@ -110,6 +111,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.updateSrc();
     },
     updateSrc: function updateSrc() {
+      console.log(this.tags);
       this.src = "\n        <head>\n            ".concat(this.frameworks, "\n        </head>\n        <body>\n            <body>").concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </body>");
     },
     save: function save(postName) {
@@ -127,13 +129,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 codeScreenArea.innerHTML += _this2.frameworks;
                 codeScreenArea.innerHTML += _this2.xml;
                 codeScreenArea.innerHTML += '<style>' + _this2.css + '</style>';
-                console.log("Hola, soy " + _this2.num);
-                _context2.next = 7;
+                _context2.next = 6;
                 return html2canvas__WEBPACK_IMPORTED_MODULE_10___default()(codeScreenArea, {
                   //Set properties of the canvas
                   width: 500,
                   height: 374
-                }).then( /*#__PURE__*/function () {
+                }) //POST
+                .then( /*#__PURE__*/function () {
                   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(canvas) {
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
                       while (1) {
@@ -151,7 +153,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                               data.append('css', _this2.css);
                               data.append('js', _this2.js);
                               data.append('img', _this2.img);
+                              data.append('script', _this2.frameworks);
                               axios.post('/api/post/code', data).then(function (res) {
+                                _this2.idPost = res.data.post.idPost;
+
                                 _this2.$router.push({
                                   name: 'my-code'
                                 }); //Delete this function to bug send multiples createCode
@@ -159,9 +164,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                                 //Delete this function to bug send multiples createCode
                                 _this2.save = function () {};
-                              })["catch"](function (error) {
-                                console.log("Error save desde CreateCode.vue");
-                                _this2.errors = error.response.data.errors;
+                              }) //TAGS
+                              .then(function () {
+                                var data = {
+                                  tags: ["#cacaa"],
+                                  idPost: _this2.idPost
+                                };
+                                axios.post('/api/tag/tag', data);
                               });
                             });
 
@@ -176,9 +185,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return function (_x) {
                     return _ref.apply(this, arguments);
                   };
-                }());
+                }())["catch"](function (err) {
+                  console.log("Error save desde CreateCode.vue");
+                  console.log(err);
+                  _this2.errors = error.response.data.errors;
+                });
 
-              case 7:
+              case 6:
               case "end":
                 return _context2.stop();
             }

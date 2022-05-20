@@ -833,7 +833,7 @@ var render = function () {
                   class: { active: _vm.optionSecond == 1 },
                   on: {
                     click: function ($event) {
-                      return _vm.SET_OPSECOND(1)
+                      return _vm.SET_OPMAIN(1)
                     },
                   },
                 },

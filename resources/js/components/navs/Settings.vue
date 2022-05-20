@@ -55,7 +55,7 @@ export default {
                 this.frameworksToUse.splice(index, 1);
 
                 //TAGS
-                index = this.tags.indexOf(tag);
+                index = this.tags.indexOf("#"+tag);
                 this.tags.splice(index, 1);
 
             }else{
@@ -63,7 +63,7 @@ export default {
                 this.frameworksToUse.push(this.frameworks[framework]);
 
                 //TAGS
-                this.tags.push(tag);
+                this.tags.push("#"+tag);
             }
             //send tags and cdns to create code
             let data = {

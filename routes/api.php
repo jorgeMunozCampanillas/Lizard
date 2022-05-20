@@ -50,6 +50,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
         });
     });
     
+    //Post
     Route::group(["prefix"=>"post"], function(){ 
         //Code
         //Normal actions with code
@@ -71,6 +72,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
         //like/dislike action
         Route::post('like', [App\Http\Controllers\PostController::class, 'like']);
+    });
+
+    //Tags
+    Route::group(["prefix"=>"tag"], function(){
+        Route::resource('tag', App\Http\Controllers\TagController::class);
     });
         
 });

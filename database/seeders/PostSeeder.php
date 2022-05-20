@@ -36,7 +36,8 @@ class PostSeeder extends Seeder
                 </div>',
                 'css' => 'h1{color: red ;}',
                 'js' => 'console.log("I am a User!")',
-                'img' => 'fake/uno.jpg'
+                'img' => 'fake/uno.jpg',
+                'tag' => '1',
             ],
             [
                 'script'=>'<script src="https://cdn.tailwindcss.com"></script>',
@@ -48,7 +49,8 @@ class PostSeeder extends Seeder
                 </div>',
                 'css' => 'h1{color: red ;}',
                 'js' => 'console.log("I am a User!")',
-                'img' => 'fake/dos.jpg'
+                'img' => 'fake/dos.jpg',
+                'tag' => '1',
             ],
             [
                 'script'=>'<script src="https://cdn.tailwindcss.com"></script>',
@@ -76,7 +78,8 @@ class PostSeeder extends Seeder
             </div>',
                 'css' => 'h1{color: red ;}',
                 'js' => 'console.log("I am a User!")',
-                'img' => 'fake/tres.jpg'
+                'img' => 'fake/tres.jpg',
+                'tag' => '1',
             ],
             [
                 'script'=>'<script src="https://cdn.tailwindcss.com"></script>',
@@ -99,7 +102,8 @@ class PostSeeder extends Seeder
                 </div>',
                 'css' => 'h1{color: red ;}',
                 'js' => 'console.log("I am a User!")',
-                'img' => 'fake/cuatro.jpg'
+                'img' => 'fake/cuatro.jpg',
+                'tag' => '1',
             ],
             [
                 'script'=>'<script src="https://cdn.tailwindcss.com"></script>',
@@ -136,7 +140,8 @@ class PostSeeder extends Seeder
                 </div>',
                 'css' => 'h1{color: red ;}',
                 'js' => 'console.log("I am a User!")',
-                'img' => 'fake/cinco.jpg'
+                'img' => 'fake/cinco.jpg',
+                'tag' => '1',
             ],
             [
                 'script'=>'<script src="https://cdn.tailwindcss.com"></script>',
@@ -156,7 +161,8 @@ class PostSeeder extends Seeder
                 </div>',
                 'css' => 'h1{color: red ;}',
                 'js' => 'console.log("I am a User!")',
-                'img' => 'fake/seis.jpg'
+                'img' => 'fake/seis.jpg',
+                'tag' => '1',
             ],
             [
                 'script'=>"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></script>",
@@ -186,7 +192,8 @@ class PostSeeder extends Seeder
               </div>',
               'css' => '',
                 'js' => 'console.log("I am a User!")',
-                'img' => 'fake/siete.PNG'
+                'img' => 'fake/siete.PNG',
+                'tag' => '2',
             ],
             [
                 'script'=>"<script src='https://code.jquery.com/jquery-3.6.0.js' integrity='sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk='' crossorigin='anonymous'></script>",
@@ -349,15 +356,18 @@ class PostSeeder extends Seeder
                   
                     }
                   });',
-                'img' => 'fake/ocho.PNG'
+                'img' => 'fake/ocho.PNG',
+                'tag' => '4',
             ]
         ];
+
+        $usu = $code = $idPost = null;
 
         for ($i=0; $i < 20; $i++) { 
     
             $usu = $faker->numberBetween(1,5);
             $code = $faker->numberBetween(0,7);
-            DB::table('post')->insert(
+            $idPost = DB::table('post')->insertGetId(
                 [
                     'idUsu' => $usu,
                     'postName' => 'Component '.$faker->word(),
@@ -371,7 +381,11 @@ class PostSeeder extends Seeder
                     'updated_at' => date("Y-m-d H:i:s")
                 ]
             );
-            
+
+            DB::table('post_tag')->insert([
+              'idPost' => $idPost,
+              'idTag' => $codes[$code]['tag'],
+            ]);
         }
     }
 }

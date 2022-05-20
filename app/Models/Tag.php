@@ -10,5 +10,7 @@ class Tag extends Model
     use HasFactory;
     protected $table = "tag";
     protected $primaryKey = "idTag";
-    public $timestamp = false;
+    public $timestamps = false;
+
+    protected $fillable = ["tag"];
 }
