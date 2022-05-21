@@ -52,6 +52,8 @@ router.beforeEach((to, from, next) => {
  /* ===============< NAV TIPE >=============== */
   if (to.path.includes("/create/code")) {
     store.dispatch("changeNav", 2);
+  }else if(to.path.includes("/show/code")){
+    store.dispatch("changeNav", 3);
   }else{
     store.dispatch("changeNav", 1);
   }

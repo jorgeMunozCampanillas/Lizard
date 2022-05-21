@@ -195,7 +195,7 @@ export default {
           //TAGS
           .then(()=>{
             let data = {
-              tags:["#cacaa"],
+              tags:this.tags,
               idPost:this.idPost,
             }
             axios.post('/api/tag/tag', data);

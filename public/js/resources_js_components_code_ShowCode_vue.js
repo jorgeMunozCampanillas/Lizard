@@ -149,6 +149,13 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/post/code/' + this.$route.params.id).then(function (res) {
         _this.post = res.data.data[0];
+        var dataToNav = {
+          userName: _this.post.name,
+          postName: _this.post.postName,
+          idPost: _this.post.idPost
+        };
+
+        _this.$root.$emit('navOthers', _this.post);
       })["catch"](function (err) {
         console.log("Error ShowCode.vue getCode");
         console.log(err);

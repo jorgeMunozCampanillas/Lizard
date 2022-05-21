@@ -23,6 +23,7 @@ class CreatePostTable extends Migration
             $table->longText('js')->nullable();
             $table->string('img')->nullable();
             $table->bigInteger('views');
+            $table->string('fork')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

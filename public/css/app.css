@@ -164,8 +164,8 @@ button {
   display: flex;
   font-size: 1.5rem;
   font-family: "Segoe UI", "Roboto";
-  font-weight: bold;
   color: #999999;
+  font-weight: bold;
 }
 #nav_profile .nav_profile-option li {
   padding: 0 1rem;
@@ -243,6 +243,39 @@ button {
   border-radius: 100%;
 }
 
+/*-_-_-_-_-_-_-_-_- NAV 3 -_-_-_-_-_-_-_-_-*/
+.nav-3 {
+  font-family: "Segoe UI", "Roboto";
+  color: #999999;
+  background-color: #2B2C34;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0.5rem;
+}
+.nav-3 #nav_data {
+  display: flex;
+  align-items: center;
+}
+.nav-3 #nav_data #data_post-name {
+  color: #E45858;
+}
+.nav-3 #nav_data #data_user-name {
+  color: #FFFFFE;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.nav-3 #nav_actions {
+  display: flex;
+  align-items: center;
+}
+.nav-3 #nav_actions ul {
+  margin: 0 0.8rem;
+}
+.nav-3 #nav_actions .button-fork {
+  font-weight: bold;
+}
+
 .button-normal {
   background: none;
   border: 0;
@@ -300,6 +333,18 @@ button {
 
 .button-Unfollow {
   background-color: red;
+}
+
+.button-like {
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.button-fork {
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
 }
 
 .form {
@@ -668,11 +713,13 @@ a {
   height: 40%;
   background-color: white;
   position: relative;
+  border: 2px solid green;
 }
 .code_preview-wrapper .code_preview .code_previw-code .code_preview-iframe {
-  zoom: 0.75;
-  -moz-transform: scale(0.75);
-  -moz-transform-origin: 0 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid red;
+  position: relative;
   pointer-events: none;
 }
 .code_preview-wrapper .code_preview .code_preview-options {

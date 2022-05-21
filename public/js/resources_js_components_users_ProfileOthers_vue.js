@@ -311,7 +311,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/user/follow/userData/' + idUsu).then(function (res) {
         _this3.user = res.data.data;
         _this3.follows = res.data.follows;
-        console.log(_this3.follows);
       })["catch"](function (err) {
         console.log("Error CodeOthers.vue getAutLikes");
         console.log(err.data);

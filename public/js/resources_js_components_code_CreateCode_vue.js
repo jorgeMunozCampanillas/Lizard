@@ -237,7 +237,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                               }) //TAGS
                               .then(function () {
                                 var data = {
-                                  tags: ["#cacaa"],
+                                  tags: _this2.tags,
                                   idPost: _this2.idPost
                                 };
                                 axios.post('/api/tag/tag', data);

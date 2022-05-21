@@ -113,7 +113,6 @@ export default {
       axios.get('/api/user/follow/userData/'+idUsu).then(res =>{
         this.user = res.data.data;
         this.follows = res.data.follows;
-        console.log(this.follows)
       })
       .catch(err=>{
         console.log("Error CodeOthers.vue getAutLikes");

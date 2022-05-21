@@ -50,6 +50,12 @@ export default {
         axios.get('/api/post/code/'+this.$route.params.id)
         .then(res => {
             this.post = res.data.data[0];
+            let dataToNav = {
+              userName:this.post.name,
+              postName:this.post.postName,
+              idPost:this.post.idPost
+            }
+            this.$root.$emit('navOthers', this.post);
             
         })
         .catch(err => {
