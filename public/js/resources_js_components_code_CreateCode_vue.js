@@ -61,6 +61,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //Code mirror
 
 
@@ -85,22 +130,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       js: '',
       src: '',
       img: '',
-      frameworks: '',
+      frameworksCDN: '',
+      frameworksName: '',
+      idPost: '',
+      element: '',
+      previewMode: false,
+      postName: '',
       tags: [],
-      idPost: ''
+      newTag: ''
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     //this come from nav
+    //this.$root.$on('save', (postName) => this.save(postName));
     this.$root.$on('save', function (postName) {
-      return _this.save(postName);
+      return _this.preView(postName);
     }); //this come from settings
 
     this.$root.$on('changeFramework', function (newFrameworks) {
-      _this.frameworks = newFrameworks.cdns;
+      _this.frameworksCDN = newFrameworks.cdns;
       _this.tags = newFrameworks.tags;
+      _this.frameworksName = newFrameworks.name;
 
       _this.updateSrc();
     });
@@ -111,10 +163,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.updateSrc();
     },
     updateSrc: function updateSrc() {
-      console.log(this.tags);
-      this.src = "\n        <head>\n            ".concat(this.frameworks, "\n        </head>\n        <body>\n            <body>").concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </body>");
+      this.src = "\n        <head>\n            ".concat(this.frameworksCDN, "\n        </head>\n        <body>\n            <body>").concat(this.xml, "</body>\n            <style>").concat(this.css, "</style>\n            <script>").concat(this.js, "</script>\n        </body>");
     },
-    save: function save(postName) {
+    preView: function preView(postName) {
+      this.postName = postName;
+      this.previewMode = !this.previewMode;
+    },
+    addTag: function addTag() {
+      //Add #
+      if (this.newTag.charAt(0) != "#") this.newTag = "#" + this.newTag; //Capitalize
+
+      var newTagLower = this.newTag.toLowerCase();
+      var cap = newTagLower.charAt(1).toUpperCase();
+      this.newTag = this.newTag.charAt(0) + cap + newTagLower.slice(2); //Add to tags
+
+      if (!this.tags.includes(this.newTag)) this.tags.push(this.newTag);
+      this.newTag = '';
+    },
+    deleteTag: function deleteTag(tag) {
+      var index = this.tags.indexOf(tag);
+      this.tags.splice(index);
+    },
+    save: function save() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -126,7 +196,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //set the code background the page to screeshot ( z-index -5 )
                 //shhh this is our secret...
                 codeScreenArea = document.getElementById("codeScreenArea");
-                codeScreenArea.innerHTML += _this2.frameworks;
+                codeScreenArea.innerHTML += _this2.frameworksCDN;
                 codeScreenArea.innerHTML += _this2.xml;
                 codeScreenArea.innerHTML += '<style>' + _this2.css + '</style>';
                 _context2.next = 6;
@@ -148,12 +218,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                               });
                               var data = new FormData();
                               data.append('idUsu', _this2.$store.state.auth.idUsu);
-                              data.append('postName', postName);
+                              data.append('postName', _this2.postName);
                               data.append('html', _this2.xml);
                               data.append('css', _this2.css);
                               data.append('js', _this2.js);
                               data.append('img', _this2.img);
-                              data.append('script', _this2.frameworks);
+                              data.append('script', _this2.frameworksCDN);
                               axios.post('/api/post/code', data).then(function (res) {
                                 _this2.idPost = res.data.post.idPost;
 
@@ -23165,6 +23235,146 @@ var render = function () {
       ],
       1
     ),
+    _vm._v(" "),
+    _vm.previewMode
+      ? _c("div", { staticClass: "code_preview-wrapper" }, [
+          _c("div", {
+            staticClass: "code_preview-back",
+            on: {
+              click: function ($event) {
+                return _vm.preView()
+              },
+            },
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "code_preview" }, [
+            _c("div", { staticClass: "code_previw-code" }, [
+              _c("iframe", {
+                staticClass: "code_preview-iframe",
+                attrs: { srcdoc: _vm.src, frameborder: "0" },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "code_preview-options" }, [
+              _c("div", { staticClass: "preview-name" }, [
+                _c("h3", [_vm._v("Nombre de proyecto:")]),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.postName },
+                }),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "preview-stacks" },
+                [
+                  _c("h3", [_vm._v("Stacks")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.frameworksName, function (name) {
+                    return _c("img", {
+                      key: name,
+                      attrs: {
+                        src: "/storage/codeIcons/" + name + ".png",
+                        width: "20px",
+                        alt: "",
+                      },
+                    })
+                  }),
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "preview-tag" }, [
+                _c(
+                  "div",
+                  { staticClass: "tags" },
+                  _vm._l(_vm.tags, function (tag) {
+                    return _c("div", { key: tag, staticClass: "tag" }, [
+                      _vm._v("\r\n              " + _vm._s(tag)),
+                      _c(
+                        "div",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.deleteTag(tag)
+                            },
+                          },
+                        },
+                        [_vm._v(" x")]
+                      ),
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "tag-options" }, [
+                  _c("label", { attrs: { for: "" } }, [_vm._v("Add new Tag")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newTag,
+                        expression: "newTag",
+                      },
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.newTag },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.newTag = $event.target.value
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.addTag()
+                        },
+                      },
+                    },
+                    [_vm._v("Add")]
+                  ),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function ($event) {
+                      return _vm.save()
+                    },
+                  },
+                },
+                [_vm._v("Save")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function ($event) {
+                      return _vm.preView()
+                    },
+                  },
+                },
+                [_vm._v("Cancel")]
+              ),
+            ]),
+          ]),
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "code_output" }, [
       _c("iframe", {

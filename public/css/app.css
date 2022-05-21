@@ -640,6 +640,66 @@ a {
   height: 100%;
 }
 
+.code_preview-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.code_preview-wrapper .code_preview-back {
+  background-color: rgba(121, 121, 121, 0.434);
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 100vh;
+}
+.code_preview-wrapper .code_preview {
+  height: 70vh;
+  border: 3px solid #1b1b1d;
+  width: 30%;
+  background-color: #2B2C34;
+  z-index: 10;
+}
+.code_preview-wrapper .code_preview .code_previw-code {
+  width: 100%;
+  height: 40%;
+  background-color: white;
+  position: relative;
+}
+.code_preview-wrapper .code_preview .code_previw-code .code_preview-iframe {
+  zoom: 0.75;
+  -moz-transform: scale(0.75);
+  -moz-transform-origin: 0 0;
+  pointer-events: none;
+}
+.code_preview-wrapper .code_preview .code_preview-options {
+  height: 60%;
+  width: 100%;
+  padding: 1rem;
+  color: #FFFFFE;
+  font-family: "Segoe UI", "Roboto";
+}
+.code_preview-wrapper .code_preview .code_preview-options .preview-name {
+  display: flex;
+}
+.code_preview-wrapper .code_preview .code_preview-options .tags {
+  display: flex;
+}
+.code_preview-wrapper .code_preview .code_preview-options .tags .tag {
+  background-color: rgb(75, 75, 75);
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.3rem;
+  margin: 0.2rem;
+  display: flex;
+  transition: all 0.3s;
+}
+.code_preview-wrapper .code_preview .code_preview-options .tags .tag div {
+  color: red;
+}
+
 #profile {
   font-family: "Segoe UI", "Roboto";
   display: grid;

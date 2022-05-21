@@ -5600,6 +5600,7 @@ __webpack_require__.r(__webpack_exports__);
         jquery: "<script src='https://code.jquery.com/jquery-3.6.0.js' integrity='sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk='' crossorigin='anonymous'><\/script>"
       },
       frameworksToUse: [],
+      frameworksName: [],
       tags: []
     };
   },
@@ -5616,13 +5617,17 @@ __webpack_require__.r(__webpack_exports__);
       if (this.frameworksToUse.includes(this.frameworks[framework])) {
         //CDN
         var index = this.frameworksToUse.indexOf(this.frameworks[framework]);
-        this.frameworksToUse.splice(index, 1); //TAGS
+        this.frameworksToUse.splice(index, 1); //Name
+
+        this.frameworksName.splice(index, 1); //TAGS
 
         index = this.tags.indexOf("#" + tag);
         this.tags.splice(index, 1);
       } else {
         //CDN
-        this.frameworksToUse.push(this.frameworks[framework]); //TAGS
+        this.frameworksToUse.push(this.frameworks[framework]); //Name
+
+        this.frameworksName.push(framework); //TAGS
 
         this.tags.push("#" + tag);
       } //send tags and cdns to create code
@@ -5630,6 +5635,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var data = {
         'cdns': this.frameworksToUse.join(''),
+        'name': this.frameworksName,
         'tags': this.tags
       };
       this.$root.$emit("changeFramework", data);
