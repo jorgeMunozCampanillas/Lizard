@@ -109,7 +109,16 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->postName = $request->postName;
+        $post->html = $request->html;
+        $post->css = $request->css;
+        $post->js = $request->js;
+        $post->img = $request->img;
+        $post->script = $request->script;
+
+        $post->save();
     }
 
     /**
@@ -165,6 +174,17 @@ class PostController extends Controller
             'data' => $posts,
         ], 200);
 
+    }
+
+    public function api(Request $request, $idPost){
+        $post= Post::findOrFail($idPost);
+        $data = [
+            "html"=>$post->html,
+            "css"=>$post->css,
+            "js"=>$post->js,
+            "script"=>$post->script,
+        ];
+        return response()->json(["data", $data]);
     }
 
     //Restore one post from the trash

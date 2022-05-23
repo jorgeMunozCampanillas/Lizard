@@ -54,6 +54,8 @@ router.beforeEach((to, from, next) => {
     store.dispatch("changeNav", 2);
   }else if(to.path.includes("/show/code")){
     store.dispatch("changeNav", 3);
+  }else if(to.path.includes("/code/update")){
+    store.dispatch("changeNav", 4);
   }else{
     store.dispatch("changeNav", 1);
   }

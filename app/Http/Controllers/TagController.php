@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Tag;
+use App\Models\Post;
 
 class TagController extends Controller
 {
@@ -37,6 +38,11 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $tags = $request->tags;
+        $idPost = $request->idPost;
+
+        //Delete all tags from the post to update it
+        Post::deleteTags($idPost);
+        
         foreach ($tags as $key => $value) {
             //If not exists, we create this tag
             if (!Tag::where('tag', '=', $value)->exists()) {
@@ -44,12 +50,14 @@ class TagController extends Controller
             }else{
                 $idTag = Tag::where('tag', '=', $value)->get()[0]->idTag;
             }
-            
-            DB::table('post_tag')->insert([
-                'idPost'=>$request->idPost, 
+
+            DB::table('post_tag')->insertOrIgnore([
+                'idPost'=>$idPost, 
                 'idTag'=>$idTag,
             ]);
+
         }
+
         return response()->json(200);
 
     }

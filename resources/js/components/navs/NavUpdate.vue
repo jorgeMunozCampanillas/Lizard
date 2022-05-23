@@ -4,7 +4,7 @@
         <ul class="nav-info">
             <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
             <div>
-                <input id="project-title" type="text" placeholder="Untitled">
+                <input id="project-title" type="text" placeholder="Untitled" :value="post.postName">
                 <h6 id="logo-title">{{this.$store.state.auth.name}}</h6>
             </div>
         </ul>
@@ -12,7 +12,7 @@
         <!-- Options -->
         <ul class="nav-options">
             <li class="nav-option" @click="exit"><i class="bi bi-house-fill"></i>&nbsp;Home</li>
-            <li class="nav-option" @click.prevent="save"><i class="bi bi-cloud-download-fill"></i>&nbsp;Save</li>
+            <li class="nav-option" @click.prevent="update"><i class="bi bi-cloud-download-fill"></i>&nbsp;Update</li>
             <li class="nav-option" @click="settings"><i class="bi bi-gear-fill"></i>&nbsp;Setting</li>
             <li>
                 <button>
@@ -23,7 +23,7 @@
         </ul>
     </nav>
     <!-- Settings -->
-    <Settings id="settings" v-if="settingsMode"/>
+    <Settings id="settings" v-if="settingsMode" />
 </div>
 </template>
 
@@ -35,33 +35,25 @@ export default {
     name: "naVue",
     data() {
         return {
-            options: false,
             settingsMode:false,
+            post:{},
         };
     },
-    mounted() {
-        document.addEventListener("click", (e) => {
-            if (e.target.id == "avatar") {
-                if (this.options)
-                    this.options = false;
-                else
-                    this.options = true;
-            }
-            else {
-                this.options = false;
-            }
+    mounted(){
+        this.$root.$on('navUpdate', (post)=>{
+            this.post = post;
         });
     },
     methods: {
         exit() {
             this.$router.push({ name: "home" });
         },
-        save() {
+        update() {
+            console.log("Emito guardar")
             //Emit to save in Create/Edit code with the name
             let postName = document.getElementById("project-title").value;
-            if (!postName)
-                postName = "Untitled";
-            this.$root.$emit("preview", postName);
+            if (!postName) postName = "Untitled";
+            this.$root.$emit("update", postName);
         },
         settings(){
             this.settingsMode=!this.settingsMode;
@@ -69,7 +61,3 @@ export default {
     },
 }
 </script>
-
-<style>
-
-</style>

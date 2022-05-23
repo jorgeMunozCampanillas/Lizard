@@ -8,46 +8,12 @@
   </div>
 
   <!-- PREVIEW -->
-  <div v-if="previewMode" class="code_preview-wrapper">
-    <div class="code_preview-back" @click="preView()"></div>
-    <div class="code_preview">
-      <div class="code_previw-code">
-        <iframe class="code_preview-iframe" :srcdoc="src" frameborder="0"></iframe>
-      </div>
-      <div class="code_preview-options">
-
-        <!-- name -->
-        <div class="preview-name">
-          <h3>Nombre de proyecto:</h3>
-          <input type="text" :value="postName">
-        </div>
-        <!-- stacks -->
-        <div class="preview-stacks">
-          <h3>Stacks</h3>
-          <img v-for="name in frameworksName" :key="name" :src="`/storage/codeIcons/`+name+`.png`" width="20px" alt="">
-        </div>
-        <!-- tags -->
-        <div class="preview-tag">
-          <div class="tags">
-            <div class="tag" v-for="tag in tags" :key="tag">
-              {{tag}}<div @click="deleteTag(tag)">&nbsp;x</div>
-            </div>
-          </div>
-          <div class="tag-options">
-            <label for="">Add new Tag</label>
-            <input v-model="newTag" type="text">
-            <div @click="addTag()">Add</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div>
-        <button @click="save()">Save</button>
-        <button @click="preView()">Cancel</button>
-      </div>
-    </div>
-  </div>
+  <Preview v-if="previewMode" 
+    :src="src" 
+    :postName="postName" 
+    :frameworksName="frameworksName" 
+    :tags="tags"
+  class="code_preview-wrapper"></Preview>
 
   <!-- OUTPUT -->
   <div class="code_output">
@@ -72,6 +38,7 @@ import 'codemirror/mode/gfm/gfm.js';
 
 //Editor
 import Editor from './Editor.vue';
+import Preview from './../navs/Preview.vue';
 
 //Html2canvas
 import html2canvas from 'html2canvas';
@@ -79,6 +46,7 @@ import html2canvas from 'html2canvas';
 export default {
   components: { 
     Editor,
+    Preview,
   },
 
   data() {
@@ -95,19 +63,23 @@ export default {
       previewMode: false,
       postName:'',
       tags:[],
-      newTag:'',
     }
   },
   mounted(){
     //this come from nav
-    //this.$root.$on('save', (postName) => this.save(postName));
-    this.$root.$on('save', (postName) => this.preView(postName));
+    this.$root.$on('preview', (postName) => this.preView(postName));
+
     //this come from settings
     this.$root.$on('changeFramework', newFrameworks =>{
       this.frameworksCDN=newFrameworks.cdns;
       this.tags=newFrameworks.tags;
       this.frameworksName=newFrameworks.name
       this.updateSrc();
+    });
+    this.$root.$on('cancelPreview', ()=>{this.preView(this.postName)});
+    this.$root.$on('save', (tags)=>{
+      this.tags=tags;
+      this.save();
     });
   },
   methods: {
@@ -132,28 +104,6 @@ export default {
     preView(postName){
       this.postName = postName;
       this.previewMode = !this.previewMode;
-    },
-
-    addTag(){
-
-      //Add #
-      if (this.newTag.charAt(0) != "#") this.newTag = "#"+this.newTag;
-
-      //Capitalize
-      let newTagLower = this.newTag.toLowerCase();
-      let cap = newTagLower.charAt(1).toUpperCase();
-      this.newTag = this.newTag.charAt(0)+cap+newTagLower.slice(2);
-
-      //Add to tags
-      if (!this.tags.includes(this.newTag)) this.tags.push(this.newTag);
-      this.newTag = '';
-
-    },
-
-    deleteTag(tag){
-      let index = this.tags.indexOf(tag);
-      this.tags.splice(index);
-
     },
 
 

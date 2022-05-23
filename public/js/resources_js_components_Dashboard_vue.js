@@ -141,7 +141,6 @@ __webpack_require__.r(__webpack_exports__);
     deleteUser: function deleteUser(userDelete) {
       var _this2 = this;
 
-      console.log("voy a borrar el user: " + userDelete.name + " : " + userDelete.idUsu);
       axios["delete"]('api/user/users/' + userDelete.idUsu).then(function (e) {
         //Update the array with the users
         _this2.users = _this2.users.filter(function (u) {

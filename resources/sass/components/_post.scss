@@ -6,6 +6,31 @@
     // pointer-events: none;
 }
 
+
+.text {
+    pointer-events: none;
+    height: 15rem;
+    width: 100%;
+    overflow: hidden;
+}
+  
+  
+  .iframe-preview {
+    height:100%;
+    width: 100%;
+    overflow:hidden;
+    
+    iframe {
+      transform:scale(.4);
+      transform-origin:0 0;
+    }
+  }
+  
+  
+
+
+
+
 .post_info-options{
 
     position: relative;

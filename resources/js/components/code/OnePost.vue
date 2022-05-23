@@ -1,8 +1,18 @@
 <template>
 <div>
     <button @click="showCode()">
-        <img :src="'/storage/'+data.img" class="post-img" alt="">
-        <!-- <iframe :srcdoc="src" frameborder="0" class="post-img" style=""></iframe> -->
+        <!-- <img :src="'/storage/'+data.img" class="post-img" alt=""> -->
+        
+        <!-- <div class="iframe-preview">
+            <iframe :srcdoc="src" class="post-img" style="border:0px #FFFFFF none;" name="test" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="2000px" width="1000px"></iframe>
+        </div> -->
+
+        <div class="text" style="background-color:white;">
+            <div class="iframe-preview">
+                <iframe :srcdoc="src" style="border:0px #FFFFFF none;" name="test" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="2000px" width="250%"></iframe>
+            </div>
+        </div>
+
     </button>
     <div class="post_user">
         <img :src="'/storage/'+data.userImg" class="post_user-img" alt="">
@@ -59,17 +69,15 @@ export default {
         }
     },
     computed:{
-
-        // src(){
-        //     let aux = `
-        //     <html>
-        //         <script src="https://cdn.tailwindcss.com"><\/script>
-        //         <body>${this.data.html}</body>
-        //         <style>${this.data.css}</style>
-        //         <script>${this.data.js}<\/script>
-        //     </html>`;
-        //     return aux;
-        // }
+        src(){
+            let aux = `
+            <html>
+                ${this.data.script}
+                <body>${this.data.html}</body>
+                <style>${this.data.css}</style>
+            </html>`;
+            return aux;
+        }
     },
     methods: {
         showCode(){
@@ -84,7 +92,11 @@ export default {
                 console.log(err);
             })
             //Go to code
-            this.$router.push({name:'show-code', params: { id: this.data.idPost }})
+            if (this.data.idUsu == this.$store.state.auth.idUsu) {
+                this.$router.push({name:'update-code', params: { id: this.data.idPost }})             
+            }else{
+                this.$router.push({name:'show-code', params: { id: this.data.idPost }})
+            }
 
         },
         showUser(){
@@ -138,10 +150,9 @@ export default {
             .then(res=>{
                 this.$parent.deletePost(this.data.idPost);
             })
-            .catch(err, a =>{
+            .catch(err=>{
                 console.log("Error en OnePost.vue restore");
                 console.log(err);
-                console.log(a);
             })
         }
 

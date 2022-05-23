@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*========< CDN Route >=========*/
+Route::get('cdn/{idPost}', [App\Http\Controllers\PostController::class, 'api'])->middleware('cors');
+
 /*========< No Auth Routes >=========*/
 //Users
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
@@ -54,7 +57,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::group(["prefix"=>"post"], function(){ 
         //Code
         //Normal actions with code
-        Route::resource('code', App\Http\Controllers\PostController::class)->except(['index', 'destroy']);
+        Route::resource('code', App\Http\Controllers\PostController::class)->except(['index']);
         Route::get('delete/{idPost}/{idUsu}', [ App\Http\Controllers\PostController::class, 'destroy'])->middleware(['sameUser']);
         Route::get('restore/{idPost}', [ App\Http\Controllers\PostController::class, 'restorePost']);
 

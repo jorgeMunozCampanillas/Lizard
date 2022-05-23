@@ -35,7 +35,7 @@ inner join `tag` on `tag`.`idTag` = `post_tag`.`idTag`
 WHERE `post`.`deleted_at` IS null AND `post`.`idPost` = 3 
 ORDER BY `post`.`views` DESC;
         */
-        $posts = DB::select(
+        $post = DB::select(
             DB::raw("
             Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
             (
@@ -52,22 +52,37 @@ ORDER BY `post`.`views` DESC;
         $tags = DB::table('tag')
                 ->select('tag.tag')
                 ->join('post_tag', 'tag.idTag', '=', 'post_tag.idTag')
-                ->where('post_tag.idPost', '=', '3')
+                ->where('post_tag.idPost', '=', $idPost)
                 ->get();
 
 
+
         //Ad tags to posts
-        $posts["tags"]=[];
+        $post[0]->tags=[];
         foreach ($tags as $key => $value) {
-            array_push($posts["tags"], $value->tag);
+            array_push($post[0]->tags, $value->tag);
         }
 
-
-        return $posts;
+        return $post;
     }
 
     //Get all posts
     public static function getPosts(){
+        /*not found well
+Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+            ( 
+                SELECT GROUP_CONCAT(`tag`.`tag`) FROM `tag`
+                inner join `post_tag` on `post`.`idPost` = `post_tag`.`idPost`
+            ) as `tags`,
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes` 
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            WHERE `post`.`deleted_at` IS null
+            ORDER BY `post`.`views` DESC;
+        */
         $posts = DB::select(
             DB::raw("
             Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
@@ -80,6 +95,23 @@ ORDER BY `post`.`views` DESC;
             WHERE `post`.`deleted_at` IS null
             ORDER BY `post`.`views` DESC;")
         );
+
+        
+        foreach ($posts as $postKey => $postValue) {
+            $tags = DB::table('tag')
+            ->select('tag.tag')
+            ->join('post_tag', 'tag.idTag', '=', 'post_tag.idTag')
+            ->where('post_tag.idPost', '=', $postValue->idPost)
+            ->get();
+            //Ad tags to posts
+            $postValue->tags=[];
+            foreach ($tags as $key => $value) {
+                array_push($postValue->tags, $value->tag);
+            }
+        }
+
+
+
 
         return $posts;
     }
@@ -118,5 +150,9 @@ ORDER BY `post`.`views` DESC;
         );
 
         return $posts;
+    }
+
+    public static function deleteTags($idPost){
+        DB::select(DB::raw("DELETE FROM `post_tag` WHERE `post_tag`.`idPost` = $idPost"));
     }
 }

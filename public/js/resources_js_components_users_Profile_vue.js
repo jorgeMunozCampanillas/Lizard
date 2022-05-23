@@ -53,6 +53,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -68,16 +78,11 @@ __webpack_require__.r(__webpack_exports__);
       dropHidden: true
     };
   },
-  computed: {// src(){
-    //     let aux = `
-    //     <html>
-    //         <script src="https://cdn.tailwindcss.com"><\/script>
-    //         <body>${this.data.html}</body>
-    //         <style>${this.data.css}</style>
-    //         <script>${this.data.js}<\/script>
-    //     </html>`;
-    //     return aux;
-    // }
+  computed: {
+    src: function src() {
+      var aux = "\n            <html>\n                ".concat(this.data.script, "\n                <body>").concat(this.data.html, "</body>\n                <style>").concat(this.data.css, "</style>\n            </html>");
+      return aux;
+    }
   },
   methods: {
     showCode: function showCode() {
@@ -90,12 +95,21 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       }); //Go to code
 
-      this.$router.push({
-        name: 'show-code',
-        params: {
-          id: this.data.idPost
-        }
-      });
+      if (this.data.idUsu == this.$store.state.auth.idUsu) {
+        this.$router.push({
+          name: 'update-code',
+          params: {
+            id: this.data.idPost
+          }
+        });
+      } else {
+        this.$router.push({
+          name: 'show-code',
+          params: {
+            id: this.data.idPost
+          }
+        });
+      }
     },
     showUser: function showUser() {
       //Not to view your user like other user
@@ -168,10 +182,9 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/post/restore/' + this.data.idPost).then(function (res) {
         _this3.$parent.deletePost(_this3.data.idPost);
-      })["catch"](err, function (a) {
+      })["catch"](function (err) {
         console.log("Error en OnePost.vue restore");
         console.log(err);
-        console.log(a);
       });
     }
   }
@@ -580,10 +593,27 @@ var render = function () {
         },
       },
       [
-        _c("img", {
-          staticClass: "post-img",
-          attrs: { src: "/storage/" + _vm.data.img, alt: "" },
-        }),
+        _c(
+          "div",
+          { staticClass: "text", staticStyle: { "background-color": "white" } },
+          [
+            _c("div", { staticClass: "iframe-preview" }, [
+              _c("iframe", {
+                staticStyle: { border: "0px #FFFFFF none" },
+                attrs: {
+                  srcdoc: _vm.src,
+                  name: "test",
+                  scrolling: "no",
+                  frameborder: "0",
+                  marginheight: "0px",
+                  marginwidth: "0px",
+                  height: "2000px",
+                  width: "250%",
+                },
+              }),
+            ]),
+          ]
+        ),
       ]
     ),
     _vm._v(" "),

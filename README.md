@@ -154,7 +154,7 @@ or
   
 - [ ] Code
   - [X] Code beautiful
-  - [ ] Code Crud
+  - [X] Code Crud
   - [X] Code Screenshot
   - [ ] Change theme
   - [ ] Change displayed
@@ -187,6 +187,12 @@ Week 3:
 - Show profiles
 - Likes
 - Improve security for auths
+
+Week 3:
+- Follows
+- Tags
+- Preview
+- Multilanguage
 
 <!-- ACKNOWLEDGMENTS -->
 ## Helpful 🙏 

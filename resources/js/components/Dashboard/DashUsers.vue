@@ -68,7 +68,6 @@ export default {
       //Crud
       //Delete one user
       deleteUser(userDelete){
-        console.log("voy a borrar el user: "+userDelete.name+" : "+userDelete.idUsu)
         axios.delete('api/user/users/'+userDelete.idUsu).then((e)=>{
           //Update the array with the users
           this.users = this.users.filter((u) => u.idUsu != userDelete.idUsu);

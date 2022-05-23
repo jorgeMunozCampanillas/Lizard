@@ -24,6 +24,7 @@ const Index = () => import('./components/Index.vue');
 //CODE
 const CreateCode = () => import('./components/code/CreateCode.vue');
 const ShowAllCode = () => import('./components/code/ShowCode.vue');
+const UpdateCode = () => import('./components/code/UpdateCode.vue');
 const MyCode = () => import('./components/users/Profile.vue');
 const CodeOther = () => import('./components/users/ProfileOthers.vue');
 
@@ -32,7 +33,6 @@ const PermissError = () => import('./components/errors/Permiss.vue')
 
 /* ===============< MIDDLEWARES >=============== */
 const noAuth = (to, from, next) => {
-    console.log("solo no auth")
     if (store.state.isAuthenticated) {
         next(`/${i18n.locale}/home`);
     }else{
@@ -131,6 +131,11 @@ export const routes = [
                 name:'code-others',
                 path:'code/profile/:idUsu',
                 component:CodeOther,
+            },
+            {
+                name:'update-code',
+                path:'code/update/:id',
+                component:UpdateCode,
             },
             
         ]

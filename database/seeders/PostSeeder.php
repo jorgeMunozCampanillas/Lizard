@@ -21,7 +21,7 @@ class PostSeeder extends Seeder
             [
                 'script'=>'<script src="https://cdn.tailwindcss.com"></script>',
                 'html' => '<!-- background -->
-                <div class="relative flex min-h-screen flex-col justify-center bg-gradient-to-r from-rose-100 to-teal-100">
+                <div class="relative flex min-h-screen flex-col bg-gradient-to-r from-rose-100 to-teal-100">
                 <!-- card -->
                 <div class="mx-auto flex w-96 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-slate-300/60">
                     <!-- img -->
@@ -84,7 +84,7 @@ class PostSeeder extends Seeder
             [
                 'script'=>'<script src="https://cdn.tailwindcss.com"></script>',
                 'html' => '<!-- This is an example component -->
-                <div class="h-screen w-screen bg-gray-50 flex items-center">
+                <div class="bg-gray-50 flex items-center">
                     <div class="container flex flex-col md:flex-row items-center justify-between px-5 text-gray-700">
                             <div class="w-full lg:w-1/2 mx-8">
                                 <div class="text-7xl text-green-500 font-dark font-extrabold mb-8"> 404</div>
@@ -147,7 +147,7 @@ class PostSeeder extends Seeder
                 'script'=>'<script src="https://cdn.tailwindcss.com"></script>',
                 'html' => '<!-- component -->
                 <!-- This is an example component -->
-                <div class="flex items-center justify-center min-h-screen from-gray-100 via-gray-300 to-slate-200 bg-gradient-to-br">
+                <div class="flex justify-center min-h-screen from-gray-100 via-gray-300 to-slate-200 bg-gradient-to-br">
                     <div class="p-32">
                   <button type="button" class="flex items-center rounded-lg bg-indigo-500 px-4 py-2 text-white" disabled>
                     <svg class="-ml-1 mr-3 h-5 w-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -233,12 +233,6 @@ class PostSeeder extends Seeder
                 width: 300px;
                 margin: 0 auto;
                 background-color: #374954;
-              }
-              
-              .dropdown {
-                position: absolute;
-                top:50%;
-                transform: translateY(-50%);
               }
               
               a {

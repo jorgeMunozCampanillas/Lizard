@@ -447,6 +447,23 @@ button {
   width: 100%;
 }
 
+.text {
+  pointer-events: none;
+  height: 15rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.iframe-preview {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.iframe-preview iframe {
+  transform: scale(0.4);
+  transform-origin: 0 0;
+}
+
 .post_info-options {
   position: relative;
   height: 2rem;
