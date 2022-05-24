@@ -3,8 +3,8 @@
   <!-- EDITOR -->
   <div class="code_enter">
     <Editor class="editor" lang="xml" language="HTML" v-on:update="updateCode"/>
-    <Editor class="editor" lang="css" language="CSS" v-on:update="updateCode"/>
-    <Editor class="editor" lang="js" language="JS" v-on:update="updateCode"/>
+    <!-- <Editor class="editor" lang="css" language="CSS" v-on:update="updateCode"/> -->
+    <!-- <Editor class="editor" lang="js" language="JS" v-on:update="updateCode"/> -->
   </div>
 
   <!-- PREVIEW -->

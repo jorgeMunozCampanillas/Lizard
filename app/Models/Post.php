@@ -63,6 +63,19 @@ ORDER BY `post`.`views` DESC;
             array_push($post[0]->tags, $value->tag);
         }
 
+        // $post = DB::select(
+        //     DB::raw("
+        //     Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+        //     GROUP_CONCAT(`tag`.`tag`) as 'tags', 
+        //     ( SELECT COUNT(`post_like`.`idPost`) FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost` ) as `likes` 
+        //     from `post` 
+        //     inner join `user` on `user`.`idUsu` = `post`.`idUsu` 
+        //     inner join `post_tag` on `post`.`idPost` = `post_tag`.`idPost` 
+        //     inner join `tag` on `tag`.`idTag` = `post_tag`.`idTag`
+        //     WHERE `post`.`deleted_at` IS null AND `post`.`idPost` = $idPost 
+        //     ORDER BY `post`.`views` DESC;")
+        // );
+
         return $post;
     }
 

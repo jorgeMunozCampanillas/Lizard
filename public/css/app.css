@@ -686,9 +686,13 @@ a {
 .code_enter .editor {
   width: 33.33%;
   border: 2px solid;
+  height: 100%;
 }
 .code_enter .editor .data img {
   width: 20px;
+}
+.code_enter .editor html {
+  height: 100%;
 }
 
 .code_output {
