@@ -5,66 +5,138 @@
     grid-auto-rows: min-content;
     background-color: $primary-dark;
     color: $primary-white;
+    min-height: calc(100vh - 3rem);
+    row-gap: 7rem;
 
     #menu{
-        grid-column-end: span 3
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        background-color: black;
+
     }
 
-    #posts{
-        padding: 2rem;
-        grid-column-end: span 9;
+    #search{
+        grid-column-start: 3;
+        grid-column-end: 11;
+    }
 
+    #post-wrapper{
         display: grid;
+        grid-column-end: span 11;
         grid-template-columns: repeat(12, 1fr);
-        gap: 1.8rem;
+
+        #before_posts{
+            padding: 2rem;
+            grid-column-start: 1;
+            grid-column-end: 4;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.8rem;
+            justify-items: center;
+            align-items: center;
+            filter: brightness(0.4);
+
+            .post{
+                grid-column-end: span 4;
+            }
+        }
+
+        #posts{
+            padding: 2rem;
+            grid-column-start: 4;
+            grid-column-end: 10;
+    
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.8rem;
+            justify-items: center;
+            align-items: center;
+
+            position: relative;
+
+            
+            .post_next{
+                position: absolute;
+                background-color: $primary-blue-strong;
+                width: 2rem;
+                height: 4rem;
+                border-radius: 100rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                right: -1rem;
+            }
+            .post_back{
+                position: absolute;
+                background-color: $primary-blue-strong;
+                width: 2rem;
+                height: 4rem;
+                border-radius: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                left: -1rem;
+            }
+            .post{
+                grid-column-end: span 2;
+                width: 100%;
+            }
+            
+        }
+
+        #after_posts{
+            padding: 2rem;
+            grid-column-start: 10;
+            grid-column-end: 13;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.8rem;
+            justify-items: center;
+            align-items: center;
+            filter: brightness(0.4);
+
+            .post{
+                grid-column-end: span 4;
+            }
+        }
+
+
+
+
     }
+
+    #users_wrapper{
+        display: grid;
+        grid-column-end: span 11;
+        grid-template-columns: repeat(12, 1fr);
+        row-gap: 3rem;
+
+        #users-title{
+            grid-column-start: 3;
+            grid-column-end: span 8;
+        }
+
+        #users{
+            grid-column-start: 4;
+            grid-column-end: 10;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+
+            .user{
+                grid-column-end: span 1;
+            }
+        }
+
+    }
+
 }
 .title{
     grid-column-end: span 12;
     text-align: center;
 
 }
-.post{
-    grid-column-end: span 4;
-    height:max-content;
-    background-color: $secondary-dark;
-    box-shadow: 7px 7px $primary-dark-strong;
-    border-radius: 1rem;
-    padding: .5rem;
-    display: flex;
-    flex-direction: column;
 
-    .post-img{
-        background-color: rgb(187, 181, 181);
-        border-radius: 1rem;
-        height: 15rem;
-        width: 100%;
-    }
-}
-
-.post_user{
-    padding-top: .7rem;
-    display: flex;
-
-}
-.post_user-names{
-    padding-left: .5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-}
-.post_info{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-.post_info-meta{
-
-}
-.post_user-img{
-    background-size: cover;
-    height: 3.5rem;
-    width: 3.5rem;
-    border-radius: 100rem;
-}

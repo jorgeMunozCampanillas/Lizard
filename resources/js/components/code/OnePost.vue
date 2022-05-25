@@ -2,10 +2,6 @@
 <div>
     <button @click="showCode()">
         <!-- <img :src="'/storage/'+data.img" class="post-img" alt=""> -->
-        
-        <!-- <div class="iframe-preview">
-            <iframe :srcdoc="src" class="post-img" style="border:0px #FFFFFF none;" name="test" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="2000px" width="1000px"></iframe>
-        </div> -->
 
         <div class="text" style="background-color:white;">
             <div class="iframe-preview">
@@ -56,7 +52,7 @@ export default {
     name: "Post",
     props:{
         data:{
-            default: "platano"
+            default: ''
         },
         likes:{
             default: []

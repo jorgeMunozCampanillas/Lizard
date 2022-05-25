@@ -6083,6 +6083,10 @@ var Dashboard = function Dashboard() {
 
 var Home = function Home() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Home_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home.vue */ "./resources/js/components/Home.vue"));
+};
+
+var SearchResults = function SearchResults() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_SearchResults_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/SearchResults.vue */ "./resources/js/components/SearchResults.vue"));
 }; //No / Auth
 
 
@@ -6171,6 +6175,10 @@ var routes = [{
     name: 'index',
     path: '',
     component: Index
+  }, {
+    name: 'search',
+    path: 'search/:name',
+    component: SearchResults
   }, {
     name: 'login',
     path: 'login',
@@ -54309,7 +54317,7 @@ module.exports = JSON.parse('{"nav":{"home":"Home","components":"Componentes","v
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1,"resources_js_components_code_ShowCode_vue":1,"resources_js_components_code_UpdateCode_vue":1,"resources_js_components_users_Profile_vue":1,"resources_js_components_users_ProfileOthers_vue":1,"resources_js_components_errors_Permiss_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_SearchResults_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1,"resources_js_components_code_ShowCode_vue":1,"resources_js_components_code_UpdateCode_vue":1,"resources_js_components_users_Profile_vue":1,"resources_js_components_users_ProfileOthers_vue":1,"resources_js_components_errors_Permiss_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

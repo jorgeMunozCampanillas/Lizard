@@ -29,6 +29,7 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 
+
 //Vuex
 import {store} from './store.js';
 

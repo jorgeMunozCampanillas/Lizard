@@ -22,6 +22,9 @@
       <ul v-if="optionMain == 1" class="nav_profile-work nav_profile-option">
           <li @click="SET_OPMAIN(1)" :class="{active: optionSecond == 1}">{{$t('profile.components')}}</li>
           <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">{{$t('profile.collections')}}</li>
+          <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">All posts</li>
+          <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">Tags</li>
+          <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">Loved</li>
           <li @click="SET_OPSECOND(3)" :class="{active: optionSecond == 3}">{{$t('profile.delete')}}</li>
       </ul>
     </nav>

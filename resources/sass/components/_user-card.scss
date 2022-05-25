@@ -1,0 +1,22 @@
+.user_card-wrapper{
+    display: flex;
+    align-content: center;
+    background-color: $secondary-dark;
+    box-shadow: 7px 7px $primary-dark-strong;
+    border-radius: 1rem;
+    padding: .5rem;
+
+    .user_card-img{
+        width: 7rem;
+        border-radius: 100%;
+    }
+
+    .user_card-details{
+        font-size: $text-big-size;
+        font-weight: bold;
+        font-family: $title-typography;
+    }
+
+
+
+}

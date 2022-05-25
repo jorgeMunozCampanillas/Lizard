@@ -26,7 +26,7 @@ Route::resource('users', App\Http\Controllers\UserController::class)->only(['sto
 //Code
 //get all code
 //Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']); borrar?? 18/05/22
-Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']);
+Route::resource('code/{offset}', App\Http\Controllers\PostController::class)->only(['index']);
 
 /*========< Auth Routes >=========*/
 Route::middleware(['auth:sanctum'])->group(function(){
@@ -40,6 +40,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
         //Get all ids of the post with likes given
         Route::get('likesGiven', [App\Http\Controllers\UserController::class, 'getLikesGiven']);
+
+        //Get random users that you dont follow
+        Route::get('random', [App\Http\Controllers\UserController::class, 'randomUsers']);
 
         //Follows zone
         Route::group(["prefix" => "follow"], function(){
@@ -72,6 +75,10 @@ Route::middleware(['auth:sanctum'])->group(function(){
         //Get all posts of the users following
         Route::get('following', [App\Http\Controllers\PostController::class, 'getPostsFollowing']);
 
+        //Get post name for like %word%
+        Route::get('getPostName/{name}', [App\Http\Controllers\PostController::class, 'getPostName']);
+        //Get post for like %word%
+        Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 'getPostByName']);
 
         //like/dislike action
         Route::post('like', [App\Http\Controllers\PostController::class, 'like']);

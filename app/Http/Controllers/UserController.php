@@ -234,4 +234,15 @@ class UserController extends Controller
     }
 
 
+    //-------------------------------------
+    // <<<<<<<<<<<- MISCELLANIA ->>>>>>>>>>>>>
+    //-------------------------------------
+    public function randomUsers(){
+        $users = [
+            "data" => User::getRandomUserNotFollow()
+        ];
+        return response()->json(User::getRandomUserNotFollow(), 200);
+    }
+
+
 }

@@ -17,6 +17,7 @@ const Dashboard = () => import('./components/Dashboard.vue');
 //GENERALES
 //Auth
 const Home = () => import('./components/Home.vue');
+const SearchResults = () => import('./components/SearchResults.vue');
 
 //No / Auth
 const Index = () => import('./components/Index.vue');
@@ -94,6 +95,11 @@ export const routes = [
                 name:'index',
                 path:'',
                 component:Index,
+            },
+            {
+                name:'search',
+                path:'search/:name',
+                component:SearchResults,
             },
             {
                 name:'login',

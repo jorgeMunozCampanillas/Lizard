@@ -21,10 +21,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $offset)
     {
 
-        $posts = Post::getPosts();
+        $posts = Post::getPostsLimit($offset);
 
         return response()->json([
             'data' => $posts,
@@ -193,6 +193,24 @@ class PostController extends Controller
 
         return response()->json([
             true
+        ], 200);
+    }
+
+    //Get name of post for like %word%
+    public function getPostName(Request $request, $name){
+        $names = Post::getPostName($name);
+
+        return response()->json([
+            'data' => $names
+        ], 200);
+    }
+
+    //Get name of post for like %word%
+    public function getPostByName(Request $request, $name){
+        $names = Post::getPostByName($name);
+
+        return response()->json([
+            'data' => $names
         ], 200);
     }
 

@@ -59,15 +59,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
     data: {
-      "default": "platano"
+      "default": ''
     },
     likes: {
       "default": []
@@ -203,6 +199,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _code_OnePost_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../code/OnePost.vue */ "./resources/js/components/code/OnePost.vue");
+//
+//
+//
 //
 //
 //
@@ -881,6 +880,45 @@ var render = function () {
                   },
                 },
                 [_vm._v(_vm._s(_vm.$t("profile.collections")))]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  class: { active: _vm.optionSecond == 2 },
+                  on: {
+                    click: function ($event) {
+                      return _vm.SET_OPSECOND(2)
+                    },
+                  },
+                },
+                [_vm._v("All posts")]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  class: { active: _vm.optionSecond == 2 },
+                  on: {
+                    click: function ($event) {
+                      return _vm.SET_OPSECOND(2)
+                    },
+                  },
+                },
+                [_vm._v("Tags")]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  class: { active: _vm.optionSecond == 2 },
+                  on: {
+                    click: function ($event) {
+                      return _vm.SET_OPSECOND(2)
+                    },
+                  },
+                },
+                [_vm._v("Loved")]
               ),
               _vm._v(" "),
               _c(

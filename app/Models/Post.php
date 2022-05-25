@@ -22,7 +22,7 @@ class Post extends Model
         return $this->belongsTo('App\Models\User', 'idUsu', 'idUsu')->get(['idUsu', 'name', 'email', 'img']);
     }
 
-    //Get all posts
+    //Get one posts
     public static function getPost($idPost){
                 /*
 Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
@@ -79,6 +79,7 @@ ORDER BY `post`.`views` DESC;
         return $post;
     }
 
+
     //Get all posts
     public static function getPosts(){
         /*not found well
@@ -107,6 +108,41 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
             inner join `user` on `user`.`idUsu` = `post`.`idUsu`
             WHERE `post`.`deleted_at` IS null
             ORDER BY `post`.`views` DESC;")
+        );
+
+        
+        foreach ($posts as $postKey => $postValue) {
+            $tags = DB::table('tag')
+            ->select('tag.tag')
+            ->join('post_tag', 'tag.idTag', '=', 'post_tag.idTag')
+            ->where('post_tag.idPost', '=', $postValue->idPost)
+            ->get();
+            //Ad tags to posts
+            $postValue->tags=[];
+            foreach ($tags as $key => $value) {
+                array_push($postValue->tags, $value->tag);
+            }
+        }
+
+        return $posts;
+    }
+
+    
+    //Get all posts
+    public static function getPostsLimit($offset){
+
+        $posts = DB::select(
+            DB::raw("
+            Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes` 
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            WHERE `post`.`deleted_at` IS null
+            ORDER BY `post`.`views` DESC
+            LIMIT $offset, 7;")
         );
 
         
@@ -167,5 +203,26 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
 
     public static function deleteTags($idPost){
         DB::select(DB::raw("DELETE FROM `post_tag` WHERE `post_tag`.`idPost` = $idPost"));
+    }
+
+    public static function getPostName($name){
+        $names = DB::select(DB::raw("SELECT `post`.`postName`, `post`.`idPost` FROM `post` 
+        WHERE `post`.`postName` LIKE '%$name%' 
+        ORDER BY `post`.`postName` ASC 
+        LIMIT 6"));
+        return $names;
+    }
+
+    public static function getPostByName($name){
+        $names = DB::select(DB::raw("Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+        (
+            SELECT COUNT(`post_like`.`idPost`) 
+            FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+        ) as `likes` 
+        from `post` 
+        inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+        WHERE `post`.`deleted_at` IS null AND `post`.`postName` LIKE '%$name%'
+        ORDER BY `post`.`postName` ASC;"));
+        return $names;
     }
 }

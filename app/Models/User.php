@@ -59,6 +59,24 @@ class User extends Authenticatable
         return DB::table('post_like')->select('idPost')->where('idUsu', '=', Auth::id())->get();
     }
 
+    public static function getRandomUserNotFollow(){
+        $id = Auth::id();
 
+        $users = DB::select(
+            DB::raw("
+            Select DISTINCT `user`.`name`, `user`.`img`,  `user`.`idUsu`, 
+            (
+                SELECT COUNT(`post`.`idPost`) 
+                FROM `post` WHERE `post`.`idUsu` = `user`.`idUsu`
+            ) as `posts` 
+            from `user` 
+            WHERE `user`.`idUsu` != 1
+            ORDER BY RAND ( )  
+            LIMIT 3;")
+        );
+
+        return $users;
+
+    }
 
 }
