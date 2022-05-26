@@ -21,8 +21,13 @@ $text-color: $primary-white;
 
 
 //------------------- FONTS --------------//
+$text-low-size: .8rem;
 $text-normal-size: 1rem;
 $text-big-size:1.2rem;
 $text-long-size:1.6rem;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $title-typography: 'Segoe UI', 'Roboto';
+
+
+//------------------- Media Querys --------------//
+$breakpoint-portatil: 1850px;

@@ -409,7 +409,7 @@ __webpack_require__.r(__webpack_exports__);
     searchNames: function searchNames() {
       var _this2 = this;
 
-      axios.get('/api/post/getPostName/' + this.toSearch).then(function (res) {
+      axios.get('/api/getPostName/' + this.toSearch).then(function (res) {
         _this2.namesSearch = res.data.data;
       })["catch"](function (err) {
         console.log("Error en Home.vue search");
@@ -417,6 +417,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     search: function search() {
+      console.log("hola");
+      console.log(this.toSearch);
       this.$router.push({
         name: 'search',
         params: {
@@ -947,7 +949,10 @@ var render = function () {
       [
         _c(
           "div",
-          { staticClass: "text", staticStyle: { "background-color": "white" } },
+          {
+            staticClass: "iframe",
+            staticStyle: { "background-color": "white" },
+          },
           [
             _c("div", { staticClass: "iframe-preview" }, [
               _c("iframe", {
@@ -1147,7 +1152,15 @@ var render = function () {
             _vm._l(_vm.namesSearch, function (name) {
               return _c(
                 "div",
-                { key: name.idPost, staticClass: "searc_result" },
+                {
+                  key: name.idPost,
+                  staticClass: "searc_result",
+                  on: {
+                    click: function ($event) {
+                      return _vm.search()
+                    },
+                  },
+                },
                 [_vm._v(_vm._s(name.postName))]
               )
             }),

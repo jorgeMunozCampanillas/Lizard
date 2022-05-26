@@ -6164,6 +6164,10 @@ var routes = [{
     name: 'home',
     path: '/:lang/home',
     component: Home
+  }, {
+    name: 'search',
+    path: 'search/:name',
+    component: SearchResults
   }]
 }, {
   //No Auth
@@ -6175,10 +6179,6 @@ var routes = [{
     name: 'index',
     path: '',
     component: Index
-  }, {
-    name: 'search',
-    path: 'search/:name',
-    component: SearchResults
   }, {
     name: 'login',
     path: 'login',

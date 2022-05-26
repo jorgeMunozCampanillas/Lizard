@@ -81,6 +81,11 @@ export const routes = [
                 path:'/:lang/home',
                 component:Home,
             },
+            {
+                name:'search',
+                path:'search/:name',
+                component:SearchResults,
+            },
         ]
     },
     {
@@ -95,11 +100,6 @@ export const routes = [
                 name:'index',
                 path:'',
                 component:Index,
-            },
-            {
-                name:'search',
-                path:'search/:name',
-                component:SearchResults,
             },
             {
                 name:'login',

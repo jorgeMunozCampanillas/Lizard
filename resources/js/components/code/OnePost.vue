@@ -3,7 +3,7 @@
     <button @click="showCode()">
         <!-- <img :src="'/storage/'+data.img" class="post-img" alt=""> -->
 
-        <div class="text" style="background-color:white;">
+        <div class="iframe" style="background-color:white;">
             <div class="iframe-preview">
                 <iframe :srcdoc="src" style="border:0px #FFFFFF none;" name="test" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="2000px" width="250%"></iframe>
             </div>

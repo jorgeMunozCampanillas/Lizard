@@ -461,7 +461,7 @@ button {
   transform: scale(0.4);
   transform-origin: 0 0;
 }
-.post .text {
+.post .iframe {
   pointer-events: none;
   height: 15rem;
   width: 100%;
@@ -530,6 +530,28 @@ button {
   justify-content: space-around;
 }
 
+@media (max-width: 1850px) {
+  .post .iframe {
+    height: 12rem !important;
+  }
+  .post .post_info {
+    font-size: 0.8rem;
+  }
+  .post .post_user .post_user-img {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+  .post .post_info-options {
+    height: 2rem;
+  }
+  .post .post_info-options .post_options-button {
+    font-size: 1.5rem;
+    color: #FFFFFE;
+  }
+  .post .post_info-options .post_options-menu .post_options-borrar {
+    color: red;
+  }
+}
 #setting_nav {
   font-family: "Segoe UI", "Roboto";
   background-color: bisque;
@@ -688,14 +710,11 @@ a {
   grid-column-start: 1;
   grid-column-end: 4;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.8rem;
   justify-items: center;
   align-items: center;
   filter: brightness(0.4);
-}
-#home #post-wrapper #before_posts .post {
-  grid-column-end: span 4;
 }
 #home #post-wrapper #posts {
   padding: 2rem;
@@ -741,14 +760,12 @@ a {
   grid-column-start: 10;
   grid-column-end: 13;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.8rem;
   justify-items: center;
   align-items: center;
   filter: brightness(0.4);
-}
-#home #post-wrapper #after_posts .post {
-  grid-column-end: span 4;
+  width: 100%;
 }
 #home #users_wrapper {
   display: grid;
@@ -776,6 +793,41 @@ a {
   text-align: center;
 }
 
+@media (max-width: 1850px) {
+  #post-wrapper {
+    overflow: hidden;
+  }
+  #post-wrapper #before_posts {
+    padding: 2rem 0 !important;
+    grid-column-end: 0 !important;
+    display: none !important;
+  }
+  #post-wrapper #before_posts .post {
+    width: 100% !important;
+  }
+  #post-wrapper #posts {
+    padding: 2rem;
+    grid-column-start: 2 !important;
+    grid-column-end: 11 !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.8rem;
+    position: relative;
+  }
+  #post-wrapper #posts .post {
+    grid-column-end: span 2;
+    width: 100%;
+  }
+  #post-wrapper #after_posts {
+    padding: 2rem 0 !important;
+    grid-column-start: 11 !important;
+    align-items: flex-end !important;
+    margin-left: 4rem;
+  }
+  #post-wrapper #after_posts .post {
+    width: 100% !important;
+  }
+}
 #dashboard {
   color: white;
   background-color: #2B2C34;

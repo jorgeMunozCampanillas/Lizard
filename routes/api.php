@@ -22,6 +22,11 @@ Route::get('cdn/{idPost}', [App\Http\Controllers\PostController::class, 'api'])-
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
 Route::resource('users', App\Http\Controllers\UserController::class)->only(['store']);
+//Get post name for like %word%
+Route::get('getPostName/{name}', [App\Http\Controllers\PostController::class, 'getPostName']);
+//Get post for like %word%
+Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 'getPostByName']);
+
 
 //Code
 //get all code
@@ -74,11 +79,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
         Route::get('deleted/{idUsu}', [App\Http\Controllers\PostController::class, 'getPostsDeleted']);
         //Get all posts of the users following
         Route::get('following', [App\Http\Controllers\PostController::class, 'getPostsFollowing']);
-
-        //Get post name for like %word%
-        Route::get('getPostName/{name}', [App\Http\Controllers\PostController::class, 'getPostName']);
-        //Get post for like %word%
-        Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 'getPostByName']);
 
         //like/dislike action
         Route::post('like', [App\Http\Controllers\PostController::class, 'like']);

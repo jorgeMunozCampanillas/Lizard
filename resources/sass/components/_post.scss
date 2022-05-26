@@ -29,7 +29,7 @@
     //     width: 100%;
     // }
 
-    .text {
+    .iframe {
         pointer-events: none;
         height: 15rem;
         width: 100%;
@@ -96,10 +96,6 @@
             }
         }
     }
-    
-    .post_info-meta{
-    
-    }
 
     .post_data{
         padding-top: .7rem;
@@ -114,4 +110,63 @@
     }
     
 
+}
+
+
+@media (max-width: $breakpoint-portatil){
+    .post{
+
+        .iframe{
+            height: 12rem !important;
+        }
+
+        .post_info{
+            font-size: $text-low-size;
+        }
+
+
+        .post_user{
+            //
+            
+            .post_user-names{
+                //
+            }
+    
+            .post_user-img{
+                height: 2.5rem;
+                width: 2.5rem;
+            }
+        }
+
+        .post_info-options{
+
+            height: 2rem;
+        
+            
+            .post_options-button{
+                font-size: 1.5rem;
+                color: $primary-white;
+            }
+            
+            .post_options-menu{
+
+        
+                .post_options-borrar{
+                    color: red;
+                }
+                
+                li{
+                    //
+                }
+            }
+        }
+    
+        .post_data{
+            //
+        }
+        
+        .post_data-name{
+            //
+        }
+    }
 }

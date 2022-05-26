@@ -31,15 +31,12 @@
             grid-column-start: 1;
             grid-column-end: 4;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: 1fr;
             gap: 1.8rem;
             justify-items: center;
             align-items: center;
             filter: brightness(0.4);
 
-            .post{
-                grid-column-end: span 4;
-            }
         }
 
         #posts{
@@ -92,15 +89,12 @@
             grid-column-start: 10;
             grid-column-end: 13;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: 1fr;
             gap: 1.8rem;
             justify-items: center;
             align-items: center;
             filter: brightness(0.4);
-
-            .post{
-                grid-column-end: span 4;
-            }
+            width: 100%;
         }
 
 
@@ -140,3 +134,59 @@
 
 }
 
+@media (max-width: $breakpoint-portatil){
+    #post-wrapper{
+        overflow: hidden;
+
+        #before_posts{
+            padding: 2rem 0 !important;
+            grid-column-end: 0 !important;
+            display: none !important;
+            
+
+            .post{
+                width: 100% !important;
+            }
+        }
+
+        #posts{
+            padding: 2rem;
+            grid-column-start: 2 !important;
+            grid-column-end: 11 !important;
+    
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.8rem;
+
+            position: relative;
+
+            
+            .post_next{
+                //
+            }
+            .post_back{
+                //
+            }
+            .post{
+                grid-column-end: span 2;
+                width: 100%;
+            }
+            
+        }
+
+        #after_posts{
+            padding: 2rem 0 !important;
+            grid-column-start: 11 !important;
+            align-items: flex-end !important;
+            margin-left: 4rem;
+
+            .post{
+                width: 100% !important;
+            }
+        }
+
+
+
+
+    }
+}

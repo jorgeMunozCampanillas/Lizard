@@ -594,7 +594,10 @@ var render = function () {
       [
         _c(
           "div",
-          { staticClass: "text", staticStyle: { "background-color": "white" } },
+          {
+            staticClass: "iframe",
+            staticStyle: { "background-color": "white" },
+          },
           [
             _c("div", { staticClass: "iframe-preview" }, [
               _c("iframe", {

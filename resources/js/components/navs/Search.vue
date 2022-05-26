@@ -4,7 +4,7 @@
       <i class="bi bi-search"></i>
       <input @keyup="searchNames" v-model="toSearch" type="text" id="search-input" placeholder="Search Post...">
       <div id="searc_results" v-if="toSearch!=''">
-        <div v-for="name in namesSearch" :key="name.idPost" class="searc_result" >{{name.postName}}</div>
+        <div @click="search()" v-for="name in namesSearch" :key="name.idPost" class="searc_result" >{{name.postName}}</div>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@ export default {
     },
     methods:{
         searchNames(){
-            axios.get('/api/post/getPostName/'+this.toSearch)
+            axios.get('/api/getPostName/'+this.toSearch)
             .then(res=>{
                 this.namesSearch = res.data.data;
             })
@@ -37,6 +37,8 @@ export default {
             })
         },
         search(){
+            console.log("hola")
+            console.log(this.toSearch)
             this.$router.push({name:'search', params: {name: this.toSearch}})
         }
     }

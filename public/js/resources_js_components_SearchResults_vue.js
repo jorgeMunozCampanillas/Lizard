@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
-      axios.get('/api/post/getPostByName/' + this.toSearch).then(function (res) {
+      axios.get('/api/getPostByName/' + this.toSearch).then(function (res) {
         _this.toSearch = '';
         console.log(res);
       })["catch"](function (err) {
@@ -467,7 +467,10 @@ var render = function () {
       [
         _c(
           "div",
-          { staticClass: "text", staticStyle: { "background-color": "white" } },
+          {
+            staticClass: "iframe",
+            staticStyle: { "background-color": "white" },
+          },
           [
             _c("div", { staticClass: "iframe-preview" }, [
               _c("iframe", {

@@ -32,7 +32,7 @@ export default {
   },
   methods:{
     getPosts(){
-        axios.get('/api/post/getPostByName/'+this.toSearch)
+        axios.get('/api/getPostByName/'+this.toSearch)
         .then(res=>{
             this.toSearch='';
             console.log(res)
