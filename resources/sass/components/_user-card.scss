@@ -8,15 +8,33 @@
 
     .user_card-img{
         width: 7rem;
+        height: 7rem;
         border-radius: 100%;
     }
 
     .user_card-details{
         font-size: $text-big-size;
-        font-weight: bold;
         font-family: $title-typography;
     }
 
+    .user_card-name{
+        font-weight: bold;
+    }
 
+}
 
+@media (max-width: $breakpoint-portatil){
+    .user_card-wrapper{
+    
+        .user_card-img{
+            width: 5rem !important;
+            height: 5rem !important;
+            border-radius: 100%;
+        }
+    
+        .user_card-details{
+            font-size: 1rem;
+        }
+    
+    }
 }

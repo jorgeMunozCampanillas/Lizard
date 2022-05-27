@@ -1,13 +1,17 @@
 <template>
 <div>
-  <div id="posts">
-    <h1 class="title">{{$t('home.top_comopnents')}}</h1>
-    <Post 
-      v-for="post in posts" :key="post.idPost"
-        :data="post"
-        :likes="likes"
-        class="post" 
-    ></Post>
+  <div id="seach_wrapper">
+    <div id="posts">
+    <h1 class="title">Results of search: '<i>{{$route.params.name}}</i>'</h1>
+      <div id="post_search">
+        <Post 
+          v-for="post in posts" :key="post.idPost"
+            :data="post"
+            :likes="likes"
+            class="post" 
+        ></Post>
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -32,10 +36,9 @@ export default {
   },
   methods:{
     getPosts(){
-        axios.get('/api/getPostByName/'+this.toSearch)
+        axios.get('/api/getPostByName/'+this.$route.params.name)
         .then(res=>{
-            this.toSearch='';
-            console.log(res)
+            this.posts = res.data.data;
         })
         .catch(err => {
             console.log("Error en Search.vue getPosts");

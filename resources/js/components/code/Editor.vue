@@ -1,5 +1,5 @@
 <template>
-  <div class="editor">
+  <div>
     <div class="data">
         <h3>{{language}}</h3>
         <img  :src="'/storage/codeIcons/'+language+'.png'" alt="">
@@ -16,8 +16,6 @@ import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/htmlmixed/htmlmixed.js';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/gfm/gfm.js';
-
-
 export default {
     name:'Editor',
     props: ['lang', 'code', 'language'],

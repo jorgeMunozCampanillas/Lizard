@@ -225,4 +225,21 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
         ORDER BY `post`.`postName` ASC;"));
         return $names;
     }
+
+    public static function getPostFeatured(){
+        $posts = DB::select(
+            DB::raw("
+            Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes`
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            WHERE `post`.`deleted_at` IS null
+            ORDER BY `likes` DESC LIMIT 1;")
+            );
+
+        return $posts;
+    }
 }

@@ -208,7 +208,14 @@ class PostController extends Controller
     //Get name of post for like %word%
     public function getPostByName(Request $request, $name){
         $names = Post::getPostByName($name);
+        return response()->json([
+            'data' => $names
+        ], 200);
+    }
 
+    //Get post featured
+    public function getPostFeatured(Request $request){
+        $names = Post::getPostFeatured();
         return response()->json([
             'data' => $names
         ], 200);

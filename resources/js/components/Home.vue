@@ -1,18 +1,10 @@
 <template>
 <div id="home">
-  <div id="menu">
-    MENU¿?
-  </div>
-
-  <div id="search">
-    <Search/>
-  </div>
-
   <!-- ---- -->
   <!-- POST -->
   <!-- ---- -->
   <div id="post-wrapper">
-    <h1 class="title">{{$t('home.top_comopnents')}}</h1>
+    <h2 class="title">{{$t('home.top_comopnents')}} <hr> </h2>
     <!-- BEFORE POSTS -->
     <div id="before_posts">
       <Post 
@@ -69,18 +61,24 @@
     </div>
   </div>
 
+
+  <!-- ------ -->
+  <!-- FOOTER -->
+  <!-- ------ -->
+  <footer id="footer_wrapper">
+
+  </footer>
+
 </div>
 </template>
 
 <script>
 import Post from './code/OnePost.vue';
 import UserCard from './users/UserCard.vue';
-import Search from './navs/Search.vue';
 export default {
   components:{
     Post,
     UserCard,
-    Search
   },
   data() {
     return {

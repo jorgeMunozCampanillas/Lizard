@@ -3,27 +3,15 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: min-content;
-    background-color: $primary-dark;
+    background-color: $primary-dark-strong;
     color: $primary-white;
     min-height: calc(100vh - 3rem);
-    row-gap: 7rem;
-
-    #menu{
-        grid-column-end: span 1;
-        grid-row-start: 1;
-        grid-row-end: 3;
-        background-color: black;
-
-    }
-
-    #search{
-        grid-column-start: 3;
-        grid-column-end: 11;
-    }
+    row-gap: 3rem;
 
     #post-wrapper{
+        margin-top: 2.5rem;
         display: grid;
-        grid-column-end: span 11;
+        grid-column-end: span 12;
         grid-template-columns: repeat(12, 1fr);
 
         #before_posts{
@@ -104,17 +92,17 @@
 
     #users_wrapper{
         display: grid;
-        grid-column-end: span 11;
+        grid-column-end: span 12;
         grid-template-columns: repeat(12, 1fr);
         row-gap: 3rem;
 
         #users-title{
-            grid-column-start: 3;
-            grid-column-end: span 8;
+            grid-column-start: 2;
+            grid-column-end: span 10;
         }
 
         #users{
-            grid-column-start: 4;
+            grid-column-start: 2;
             grid-column-end: 10;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -127,11 +115,16 @@
 
     }
 
+    #footer_wrapper{
+        height: 10rem;
+        grid-column-end: span 12;
+        background-color: black;
+    }
+
 }
 .title{
-    grid-column-end: span 12;
-    text-align: center;
-
+    grid-column-start: 2;
+    grid-column-end: span 10;
 }
 
 @media (max-width: $breakpoint-portatil){
@@ -184,9 +177,26 @@
                 width: 100% !important;
             }
         }
+    }
 
+    #users_wrapper{
 
+        #users-title{
+            grid-column-start: 2;
+            grid-column-end: span 9;
+        }
 
+        #users{
+            grid-column-start: 2 !important;
+            grid-column-end: 11 !important;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem !important;
+
+            .user{
+                grid-column-end: span 1;
+            }
+        }
 
     }
 }

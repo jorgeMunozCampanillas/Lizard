@@ -233,6 +233,7 @@ class PostSeeder extends Seeder
                 width: 300px;
                 margin: 0 auto;
                 background-color: #374954;
+                width:30vw;
               }
               
               a {
@@ -352,7 +353,8 @@ class PostSeeder extends Seeder
                   });',
                 'img' => 'fake/ocho.PNG',
                 'tag' => '4',
-            ]
+            ],
+            
         ];
 
         $usu = $code = $idPost = null;

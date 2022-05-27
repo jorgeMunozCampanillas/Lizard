@@ -26,6 +26,7 @@ Route::resource('users', App\Http\Controllers\UserController::class)->only(['sto
 Route::get('getPostName/{name}', [App\Http\Controllers\PostController::class, 'getPostName']);
 //Get post for like %word%
 Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 'getPostByName']);
+Route::get('getPostFeatured', [App\Http\Controllers\PostController::class, 'getPostFeatured']);
 
 
 //Code

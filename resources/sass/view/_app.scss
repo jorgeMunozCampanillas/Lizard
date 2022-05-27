@@ -1,0 +1,27 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(2, max-content);
+
+    #nav_main-top{
+        grid-column-end: span 10;
+    }
+    #nav_main-lateral{
+        grid-row-start: 1;
+        grid-row-end: 4;
+        grid-column-end: span 2;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+    .nav-full{
+        grid-column-end: span 12;
+    }
+    .container-full{
+        grid-column-end: span 12;
+    }
+
+    .container-parcial{
+        grid-column-end: span 10;
+    }
+}

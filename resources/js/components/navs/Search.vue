@@ -37,9 +37,8 @@ export default {
             })
         },
         search(){
-            console.log("hola")
-            console.log(this.toSearch)
             this.$router.push({name:'search', params: {name: this.toSearch}})
+            this.toSearch = '';
         }
     }
 }

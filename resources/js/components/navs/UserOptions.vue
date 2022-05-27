@@ -1,22 +1,27 @@
 <template>
     <div>
-        <li>
-            <button>
-                <i v-if="this.$store.state.isAuthenticated==false" style="font-size:1.6rem" class="bi bi-person-circle"></i>
-                <img id="avatar" v-else :src="'/storage/'+this.$store.state.auth.img" alt="">
-            </button>
-        </li>
+        <button>
+            <i v-if="this.$store.state.isAuthenticated==false" style="font-size:1.6rem" class="bi bi-person-circle"></i>
+            <img id="avatar" v-else :src="'/storage/'+this.$store.state.auth.img" alt="">
+        </button>
         <ul id="options" v-if="options">
             <!-- Admin User -->
             <li><router-link v-if="this.$store.state.auth.permissions>1" :to="{name:'dashboard'}" >{{$t('nav.dashboard')}}</router-link></li>
+            <!-- Users -->
             <li><router-link :to="{name:'my-code'}">{{$t('nav.profile')}}</router-link></li>
+            <li>Settings</li>
+            <LangSwitch id="lang_switch"></LangSwitch>
             <li><button @click="logout">{{$t('nav.sing_out')}}</button></li>
         </ul>
     </div>
 </template>
 
 <script>
+import LangSwitch from './LangSwitch.vue';
 export default {
+    components: {
+        LangSwitch,
+    },
     data() {
         return {
             options: false,
@@ -24,11 +29,13 @@ export default {
     },
     mounted(){
         document.addEventListener('click', (e)=>{
+            console.log(e.target.nodeName)
             if(e.target.id == 'avatar'){
-                if (this.options) this.options = false
-                else this.options = true;
+                this.options = !this.options
             }else{
-                this.options = false;
+                if (e.target.nodeName != "SELECT" && e.target.nodeName != "OPTION") {
+                    this.options = false;
+                }
             }
         })
     },

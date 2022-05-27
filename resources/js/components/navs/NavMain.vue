@@ -1,7 +1,13 @@
 <template>
 <div>
-    <nav id="nav" class="nav-1">
-
+    <nav id="nav" class="nav-5">
+        <ul id="nav-logo">
+            <router-link :to="{name:'home'}" id="nav_logo-home">
+                <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
+                <h2 id="logo-title">Lizard</h2>
+            </router-link>
+        </ul>
+        
         <ul id="search">
             <Search/>
         </ul>
@@ -13,8 +19,14 @@
         </ul>
 
         <!-- Options -->
-        <!-- <div @click="createCode" id="user_create" v-if="this.$store.state.auth.permissions>0">{{$t('nav.new_component')}}</div> -->
-        <User-Options id="user_options" v-if="this.$store.state.auth.permissions>0"></User-Options>
+        <ul id="nav-with-permiss" v-if="this.$store.state.auth.permissions>0">
+            <li class="nav-mains">
+                <p @click="createCode">{{$t('nav.new_component')}}</p>
+            </li>
+            <li>
+                <User-Options></User-Options>
+            </li>    
+        </ul>
     </nav>
 </div>
 </template>

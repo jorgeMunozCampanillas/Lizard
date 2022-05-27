@@ -1,14 +1,15 @@
 <template>
 <div>
-    <div class="code_enter">
-      <Editor class="editor" :code="post.html" lang="xml" language="HTML" v-on:update="updateCode"/>
-      <Editor class="editor" :code="post.css" lang="css" language="CSS" v-on:update="updateCode"/>
-      <Editor class="editor" :code="post.js" lang="javascript" language="JS" v-on:update="updateCode"/>
-    </div>
+  <div id="editor">
+      <div class="code_enter">
+        <Editor class="editor" :code="post.html" lang="xml" language="HTML" v-on:update="updateCode"/>
+        <Editor class="editor" :code="post.css" lang="css" language="CSS" v-on:update="updateCode"/>
+        <Editor class="editor" :code="post.js" lang="js" language="JS" v-on:update="updateCode"/>
+      </div>
     <div class="code_output">
-        <iframe id="code" class="code-represent" :srcdoc="src"> </iframe>
-        <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
+      <iframe id="code" :srcdoc="src" class="code-represent"> </iframe>
     </div>
+  </div>
 </div>
 </template>
 
@@ -33,7 +34,6 @@ import html2canvas from 'html2canvas';
 
 export default {
   components: { Editor },
-
   data() {
     return {
         src:'',
@@ -45,36 +45,26 @@ export default {
     this.getCode();
   },
   methods: {
-
     getCode(){
         axios.get('/api/post/code/'+this.$route.params.id)
         .then(res => {
-            this.post = res.data.data[0];
-            let dataToNav = {
-              userName:this.post.name,
-              postName:this.post.postName,
-              idPost:this.post.idPost
-            }
-            this.$root.$emit('navOthers', this.post);
-            
+          this.post = res.data.data[0];
         })
         .catch(err => {
             console.log("Error ShowCode.vue getCode");
             console.log(err);
         })
     },
-
     updateCode(lang, code){
       this.post[lang] = code;
       this.updateSrc();
     },
-
     updateSrc(){
          this.src = `
            <head>${this.post.script}</head>
            <body>${this.post.html}</body>
            <style>${this.post.css}</style>
-           <script>${this.post.js}<\/script>
+           <script>${this.js}<\/script>
            `;
     },
   },

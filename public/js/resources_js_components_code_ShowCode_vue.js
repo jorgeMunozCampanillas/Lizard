@@ -116,6 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 //Code mirror
 
 
@@ -149,13 +150,6 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/post/code/' + this.$route.params.id).then(function (res) {
         _this.post = res.data.data[0];
-        var dataToNav = {
-          userName: _this.post.name,
-          postName: _this.post.postName,
-          idPost: _this.post.idPost
-        };
-
-        _this.$root.$emit('navOthers', _this.post);
       })["catch"](function (err) {
         console.log("Error ShowCode.vue getCode");
         console.log(err);
@@ -166,7 +160,7 @@ __webpack_require__.r(__webpack_exports__);
       this.updateSrc();
     },
     updateSrc: function updateSrc() {
-      this.src = "\n           <head>".concat(this.post.script, "</head>\n           <body>").concat(this.post.html, "</body>\n           <style>").concat(this.post.css, "</style>\n           <script>").concat(this.post.js, "</script>\n           ");
+      this.src = "\n           <head>".concat(this.post.script, "</head>\n           <body>").concat(this.post.html, "</body>\n           <style>").concat(this.post.css, "</style>\n           <script>").concat(this.js, "</script>\n           ");
     }
   }
 });
@@ -22271,7 +22265,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "editor" }, [
+  return _c("div", [
     _c("div", { staticClass: "data" }, [
       _c("h3", [_vm._v(_vm._s(_vm.language))]),
       _vm._v(" "),
@@ -22307,41 +22301,38 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "code_enter" },
-      [
-        _c("Editor", {
-          staticClass: "editor",
-          attrs: { code: _vm.post.html, lang: "xml", language: "HTML" },
-          on: { update: _vm.updateCode },
-        }),
-        _vm._v(" "),
-        _c("Editor", {
-          staticClass: "editor",
-          attrs: { code: _vm.post.css, lang: "css", language: "CSS" },
-          on: { update: _vm.updateCode },
-        }),
-        _vm._v(" "),
-        _c("Editor", {
-          staticClass: "editor",
-          attrs: { code: _vm.post.js, lang: "javascript", language: "JS" },
-          on: { update: _vm.updateCode },
-        }),
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "code_output" }, [
-      _c("iframe", {
-        staticClass: "code-represent",
-        attrs: { id: "code", srcdoc: _vm.src },
-      }),
+    _c("div", { attrs: { id: "editor" } }, [
+      _c(
+        "div",
+        { staticClass: "code_enter" },
+        [
+          _c("Editor", {
+            staticClass: "editor",
+            attrs: { code: _vm.post.html, lang: "xml", language: "HTML" },
+            on: { update: _vm.updateCode },
+          }),
+          _vm._v(" "),
+          _c("Editor", {
+            staticClass: "editor",
+            attrs: { code: _vm.post.css, lang: "css", language: "CSS" },
+            on: { update: _vm.updateCode },
+          }),
+          _vm._v(" "),
+          _c("Editor", {
+            staticClass: "editor",
+            attrs: { code: _vm.post.js, lang: "js", language: "JS" },
+            on: { update: _vm.updateCode },
+          }),
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("div", {
-        staticStyle: { position: "absolute", top: "0", "z-index": "-5" },
-        attrs: { id: "codeScreenArea" },
-      }),
+      _c("div", { staticClass: "code_output" }, [
+        _c("iframe", {
+          staticClass: "code-represent",
+          attrs: { id: "code", srcdoc: _vm.src },
+        }),
+      ]),
     ]),
   ])
 }

@@ -51,14 +51,16 @@ router.beforeEach((to, from, next) => {
   i18n.locale = language
 
  /* ===============< NAV TIPE >=============== */
-  if (to.path.includes("/create/code")) {
+  if (to.path.includes("/home")) {
+    store.dispatch("changeNav", 1);
+  }else if (to.path.includes("/create/code")) {
     store.dispatch("changeNav", 2);
   }else if(to.path.includes("/show/code")){
     store.dispatch("changeNav", 3);
   }else if(to.path.includes("/code/update")){
     store.dispatch("changeNav", 4);
   }else{
-    store.dispatch("changeNav", 1);
+    store.dispatch("changeNav", 5);
   }
 
   next()
