@@ -188,11 +188,16 @@ Week 3:
 - Likes
 - Improve security for auths
 
-Week 3:
+Week 4:
 - Follows
 - Tags
 - Preview
 - Multilanguage
+
+Week 5:
+- Some styles
+- Search bar
+- cdn
 
 <!-- ACKNOWLEDGMENTS -->
 ## Helpful 🙏 
