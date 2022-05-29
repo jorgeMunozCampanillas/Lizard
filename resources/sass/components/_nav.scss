@@ -174,18 +174,33 @@
 
 
 }
-#settings{
+#settings_wrapper{
     position: absolute;
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
+    width: 100%;
+    height: 100vh;
     top: 0;
-    bottom: 0;
-    width: 30%;
-    height: max-content;
-    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+
+    .settings_back{
+        background-color: rgba(121, 121, 121, 0.434);
+        position: absolute;
+        z-index: 20;
+        width: 100%;
+        height: 100vh;
+    }
+    
+    .settings{
+        height: 70vh;
+        border: 3px solid $primary-dark-strong;
+        width: 30%;
+        background-color: $primary-dark;
+        z-index: 30;
+    }
 }
+
 
 /*-_-_-_-_-_-_-_-_- NAV Profile -_-_-_-_-_-_-_-_-*/
 #nav_profile{

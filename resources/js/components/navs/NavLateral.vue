@@ -17,11 +17,11 @@
                 </li>
               </div>
               <div class="menu_options-stack">
-                <li class="menu_options-option">Your Work</li>
+                <li class="menu_options-option"><router-link :to="{name:'my-code'}">Your Work</router-link></li>
                 <li class="menu_options-option">Activity</li>
               </div>
               <div class="menu_options-stack">
-                <li class="menu_options-option">Following</li>
+                <li class="menu_options-option"><router-link :to="{name:'my-code', params: { opmain: 'following' }}">Following</router-link></li>
                 <li class="menu_options-option">Trending</li>
                 <li class="menu_options-option">Loved</li>
               </div>

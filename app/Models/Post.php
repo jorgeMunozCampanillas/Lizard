@@ -74,7 +74,7 @@ ORDER BY `post`.`views` DESC;
         //     inner join `tag` on `tag`.`idTag` = `post_tag`.`idTag`
         //     WHERE `post`.`deleted_at` IS null AND `post`.`idPost` = $idPost 
         //     ORDER BY `post`.`views` DESC;")
-        // );
+        // )->groupBy('likes');
 
         return $post;
     }
@@ -167,7 +167,7 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
 
     //Get all post of the user passed
     public static function getPostsUsu($idUsu){
-        
+        //DB::table('POSTS')->select('....')->select('....')->raw(....)->where(....)->get()
         $posts = DB::select(
             DB::raw("
             Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 

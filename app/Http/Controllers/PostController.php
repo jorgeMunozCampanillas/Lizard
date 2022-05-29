@@ -176,7 +176,7 @@ class PostController extends Controller
 
     }
 
-    public function api(Request $request, $idPost){
+    public function cdn(Request $request, $idPost){
         $post= Post::findOrFail($idPost);
         $data = [
             "html"=>$post->html,
@@ -184,7 +184,7 @@ class PostController extends Controller
             "js"=>$post->js,
             "script"=>$post->script,
         ];
-        return response()->json(["data", $data]);
+        return response()->json([$data]);
     }
 
     //Restore one post from the trash

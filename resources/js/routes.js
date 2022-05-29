@@ -130,7 +130,7 @@ export const routes = [
             },
             {
                 name:'my-code',
-                path:'show/profile/',
+                path:'show/profile/:opmain',
                 component:MyCode,
             },
             {

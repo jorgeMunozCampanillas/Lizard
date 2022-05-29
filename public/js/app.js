@@ -5638,6 +5638,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6632,7 +6635,7 @@ var routes = [{
     component: ShowAllCode
   }, {
     name: 'my-code',
-    path: 'show/profile/',
+    path: 'show/profile/:opmain',
     component: MyCode
   }, {
     name: 'code-others',
@@ -37932,81 +37935,86 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("nav", { staticClass: "nav-2", attrs: { id: "nav" } }, [
-        _c("ul", { staticClass: "nav-info" }, [
-          _c("img", {
-            attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
+  return _c("div", [
+    _c("nav", { staticClass: "nav-2", attrs: { id: "nav" } }, [
+      _c("ul", { staticClass: "nav-info" }, [
+        _c("img", {
+          attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
+        }),
+        _vm._v(" "),
+        _c("div", [
+          _c("input", {
+            attrs: {
+              id: "project-title",
+              type: "text",
+              placeholder: "Untitled",
+            },
           }),
           _vm._v(" "),
-          _c("div", [
-            _c("input", {
-              attrs: {
-                id: "project-title",
-                type: "text",
-                placeholder: "Untitled",
-              },
-            }),
-            _vm._v(" "),
-            _c("h6", { attrs: { id: "logo-title" } }, [
-              _vm._v(_vm._s(this.$store.state.auth.name)),
-            ]),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "nav-options" }, [
-          _c("li", { staticClass: "nav-option", on: { click: _vm.exit } }, [
-            _c("i", { staticClass: "bi bi-house-fill" }),
-            _vm._v(" Home"),
-          ]),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "nav-option",
-              on: {
-                click: function ($event) {
-                  $event.preventDefault()
-                  return _vm.save.apply(null, arguments)
-                },
-              },
-            },
-            [
-              _c("i", { staticClass: "bi bi-cloud-download-fill" }),
-              _vm._v(" Save"),
-            ]
-          ),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-option", on: { click: _vm.settings } }, [
-            _c("i", { staticClass: "bi bi-gear-fill" }),
-            _vm._v(" Setting"),
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "button",
-              [
-                this.$store.state.isAuthenticated == false
-                  ? _c("i", {
-                      staticClass: "bi bi-person-circle",
-                      staticStyle: { "font-size": "1.6rem" },
-                    })
-                  : _c("User-Options"),
-              ],
-              1
-            ),
+          _c("h6", { attrs: { id: "logo-title" } }, [
+            _vm._v(_vm._s(this.$store.state.auth.name)),
           ]),
         ]),
       ]),
       _vm._v(" "),
+      _c("ul", { staticClass: "nav-options" }, [
+        _c("li", { staticClass: "nav-option", on: { click: _vm.exit } }, [
+          _c("i", { staticClass: "bi bi-house-fill" }),
+          _vm._v(" Home"),
+        ]),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            staticClass: "nav-option",
+            on: {
+              click: function ($event) {
+                $event.preventDefault()
+                return _vm.save.apply(null, arguments)
+              },
+            },
+          },
+          [
+            _c("i", { staticClass: "bi bi-cloud-download-fill" }),
+            _vm._v(" Save"),
+          ]
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-option", on: { click: _vm.settings } }, [
+          _c("i", { staticClass: "bi bi-gear-fill" }),
+          _vm._v(" Setting"),
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c(
+            "button",
+            [
+              this.$store.state.isAuthenticated == false
+                ? _c("i", {
+                    staticClass: "bi bi-person-circle",
+                    staticStyle: { "font-size": "1.6rem" },
+                  })
+                : _c("User-Options"),
+            ],
+            1
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
       _vm.settingsMode
-        ? _c("Settings", { attrs: { id: "settings" } })
+        ? _c(
+            "div",
+            { attrs: { id: "settings_wrapper" } },
+            [
+              _c("div", { staticClass: "settings_back" }),
+              _vm._v(" "),
+              _c("Settings", { staticClass: "settings" }),
+            ],
+            1
+          )
         : _vm._e(),
-    ],
-    1
-  )
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38060,9 +38068,47 @@ var render = function () {
           _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "menu_options-stack" }, [
+            _c(
+              "li",
+              { staticClass: "menu_options-option" },
+              [
+                _c("router-link", { attrs: { to: { name: "my-code" } } }, [
+                  _vm._v("Your Work"),
+                ]),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "menu_options-option" }, [
+              _vm._v("Activity"),
+            ]),
+          ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "menu_options-stack" }, [
+            _c(
+              "li",
+              { staticClass: "menu_options-option" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: { name: "my-code", params: { opmain: "following" } },
+                    },
+                  },
+                  [_vm._v("Following")]
+                ),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "menu_options-option" }, [
+              _vm._v("Trending"),
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "menu_options-option" }, [_vm._v("Loved")]),
+          ]),
         ]),
         _vm._v(" "),
         _c("div", [
@@ -38105,28 +38151,6 @@ var staticRenderFns = [
         _vm._v(" Create Post "),
         _c("i", { staticClass: "bi bi-chevron-down" }),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "menu_options-stack" }, [
-      _c("li", { staticClass: "menu_options-option" }, [_vm._v("Your Work")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "menu_options-option" }, [_vm._v("Activity")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "menu_options-stack" }, [
-      _c("li", { staticClass: "menu_options-option" }, [_vm._v("Following")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "menu_options-option" }, [_vm._v("Trending")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "menu_options-option" }, [_vm._v("Loved")]),
     ])
   },
 ]

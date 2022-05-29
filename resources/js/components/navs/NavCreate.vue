@@ -21,9 +21,12 @@
                 </button>
             </li>
         </ul>
+        <!-- Settings -->
+        <div id="settings_wrapper" v-if="settingsMode">
+            <div class="settings_back"></div>
+            <Settings class="settings"/>
+        </div>
     </nav>
-    <!-- Settings -->
-    <Settings id="settings" v-if="settingsMode"/>
 </div>
 </template>
 

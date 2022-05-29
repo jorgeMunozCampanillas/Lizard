@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*========< CDN Route >=========*/
-Route::get('cdn/{idPost}', [App\Http\Controllers\PostController::class, 'api'])->middleware('cors');
+//Route::get('cdn/{idPost}', [App\Http\Controllers\PostController::class, 'api'])->middleware('cors');
+Route::get('cdn/{idPost}',  [App\Http\Controllers\PostController::class, 'cdn']);
 
 /*========< No Auth Routes >=========*/
 //Users

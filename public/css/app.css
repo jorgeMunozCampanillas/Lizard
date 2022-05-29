@@ -178,19 +178,29 @@ button {
   opacity: 1;
 }
 
-#settings {
+#settings_wrapper {
   position: absolute;
-  position: absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
+  width: 100%;
+  height: 100vh;
   top: 0;
-  bottom: 0;
-  width: 30%;
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+#settings_wrapper .settings_back {
+  background-color: rgba(121, 121, 121, 0.434);
+  position: absolute;
   z-index: 20;
+  width: 100%;
+  height: 100vh;
+}
+#settings_wrapper .settings {
+  height: 70vh;
+  border: 3px solid #1b1b1d;
+  width: 30%;
+  background-color: #2B2C34;
+  z-index: 30;
 }
 
 /*-_-_-_-_-_-_-_-_- NAV Profile -_-_-_-_-_-_-_-_-*/
@@ -516,7 +526,6 @@ button {
   text-align: center;
   margin: 0.6rem 0 !important;
   padding: 1rem 0;
-  border: 2px solid red;
   font-weight: bold;
 }
 
@@ -656,27 +665,24 @@ button {
   }
 }
 #setting_nav {
-  font-family: "Segoe UI", "Roboto";
-  background-color: bisque;
-  color: #2B2C34;
-  font-weight: bold;
+  height: 70vh;
+  border: 3px solid #1b1b1d;
+  background-color: #2B2C34;
+  z-index: 10;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: -webkit-min-content;
-  grid-auto-rows: min-content;
-  width: 100%;
 }
 #setting_nav #setting_main {
-  border: 3px solid red;
   width: 100%;
-  grid-column-end: span 4;
+  height: 100%;
+  grid-column-end: span 3;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border-right: 3px solid black;
 }
 #setting_nav #setting_options {
   grid-column-end: span 8;
-  border: 3px solid green;
 }
 
 .user_card-wrapper {
@@ -993,7 +999,7 @@ a {
 }
 .code_enter .editor {
   width: 33.33%;
-  border: 2px solid red;
+  border: 2px solid black;
   height: 100%;
   overflow: hidden;
 }
@@ -1043,12 +1049,10 @@ a {
   height: 40%;
   background-color: white;
   position: relative;
-  border: 2px solid green;
 }
 .code_preview-wrapper .code_preview .code_previw-code .code_preview-iframe {
   width: 100%;
   height: 100%;
-  border: 2px solid red;
   position: relative;
   pointer-events: none;
 }

@@ -14,13 +14,13 @@
 
     <nav id="nav_profile">
       <ul class="nav_profile-main nav_profile-option">
-          <li @click="SET_OPMAIN(1)" :class="{active: optionMain == 1}">{{$t('profile.your_work')}}</li>
-          <li @click="SET_OPMAIN(2)" :class="{active: optionMain == 2}">{{$t('profile.following')}}</li>
+          <li @click="SET_OPMAIN('your_work')" :class="{active: optionMain == 'your_work'}">{{$t('profile.your_work')}}</li>
+          <li @click="SET_OPMAIN('following')" :class="{active: optionMain == 'following'}">{{$t('profile.following')}}</li>
           <li @click="SET_OPMAIN(3)" :class="{active: optionMain == 3}">{{$t('profile.trending')}}</li>
       </ul>
       <hr>
-      <ul v-if="optionMain == 1" class="nav_profile-work nav_profile-option">
-          <li @click="SET_OPMAIN(1)" :class="{active: optionSecond == 1}">{{$t('profile.components')}}</li>
+      <ul v-if="optionMain == 'your_work'" class="nav_profile-work nav_profile-option">
+          <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('your_work')" :class="{active: optionSecond == 'your_work'}">{{$t('profile.components')}}</li>
           <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">{{$t('profile.collections')}}</li>
           <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">All posts</li>
           <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">Tags</li>
@@ -47,7 +47,7 @@
 
     <!-- <<<<<<<<<<<<<<<<< MAIN OPTIONS >>>>>>>>>>>>>> -->
     <!-- Your posts -->
-    <div id="profile_posts" v-if="optionMain==1">
+    <div id="profile_posts" v-if="optionMain=='your_work'">
       <Post 
         v-for="post in posts" :key="post.idPost"
           :data="post"
@@ -56,7 +56,7 @@
       ></Post>
     </div>
     <!-- Following posts -->
-    <div id="profile_posts" v-if="optionMain==2">
+    <div id="profile_posts" v-if="optionMain=='following'">
       <Post 
         v-for="post in followsDetails" :key="post.idPost"
           :data="post"
@@ -64,10 +64,6 @@
           class="post" 
       ></Post>
     </div>
-
-
-
-
   </div>
 </div>
 </template>
@@ -83,8 +79,8 @@ export default {
       posts: [],
       postsNumber: '',
       //Nav options
-      optionMain: 1,
-      optionSecond: 1,
+      optionMain: 'your_work',
+      optionSecond: 'your_work',
 
       //followsUsers/Code
       followsDetails: [],
@@ -93,6 +89,9 @@ export default {
   mounted() {
     this.getAuthLikes();
     this.getPosts();
+    if (this.$route.params.opmain) this.optionMain = this.$route.params.opmain
+    this.SET_OPMAIN(this.optionMain)
+
   },
     computed:{
     followers(){
@@ -105,6 +104,7 @@ export default {
   methods:{
     getPosts(){
         axios.get('/api/post/posts/'+this.$store.state.auth.idUsu).then(res=>{
+          console.log(res.data.data)
           if (res.status) {
             this.posts = res.data.data;
             this.postsNumber = res.data.data.length
@@ -177,10 +177,10 @@ export default {
       this.optionMain = id;
 
       switch (id) {
-        case 1:
+        case 'your_work':
           this.getPosts();
           break;
-        case 2:
+        case 'following':
           this.getPostFollowings();
           break;
         case 3:

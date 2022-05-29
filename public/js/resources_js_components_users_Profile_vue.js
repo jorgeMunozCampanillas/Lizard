@@ -82,10 +82,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -96,8 +92,8 @@ __webpack_require__.r(__webpack_exports__);
       posts: [],
       postsNumber: '',
       //Nav options
-      optionMain: 1,
-      optionSecond: 1,
+      optionMain: 'your_work',
+      optionSecond: 'your_work',
       //followsUsers/Code
       followsDetails: []
     };
@@ -105,6 +101,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getAuthLikes();
     this.getPosts();
+    if (this.$route.params.opmain) this.optionMain = this.$route.params.opmain;
+    this.SET_OPMAIN(this.optionMain);
   },
   computed: {
     followers: function followers() {
@@ -119,6 +117,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/post/posts/' + this.$store.state.auth.idUsu).then(function (res) {
+        console.log(res.data.data);
+
         if (res.status) {
           _this.posts = res.data.data;
           _this.postsNumber = res.data.data.length;
@@ -195,11 +195,11 @@ __webpack_require__.r(__webpack_exports__);
       this.optionMain = id;
 
       switch (id) {
-        case 1:
+        case 'your_work':
           this.getPosts();
           break;
 
-        case 2:
+        case 'following':
           this.getPostFollowings();
           break;
 
@@ -383,10 +383,10 @@ var render = function () {
           _c(
             "li",
             {
-              class: { active: _vm.optionMain == 1 },
+              class: { active: _vm.optionMain == "your_work" },
               on: {
                 click: function ($event) {
-                  return _vm.SET_OPMAIN(1)
+                  return _vm.SET_OPMAIN("your_work")
                 },
               },
             },
@@ -396,10 +396,10 @@ var render = function () {
           _c(
             "li",
             {
-              class: { active: _vm.optionMain == 2 },
+              class: { active: _vm.optionMain == "following" },
               on: {
                 click: function ($event) {
-                  return _vm.SET_OPMAIN(2)
+                  return _vm.SET_OPMAIN("following")
                 },
               },
             },
@@ -422,15 +422,15 @@ var render = function () {
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
-        _vm.optionMain == 1
+        _vm.optionMain == "your_work"
           ? _c("ul", { staticClass: "nav_profile-work nav_profile-option" }, [
               _c(
                 "li",
                 {
-                  class: { active: _vm.optionSecond == 1 },
+                  class: { active: _vm.optionSecond == "your_work" },
                   on: {
                     click: function ($event) {
-                      return _vm.SET_OPMAIN(1)
+                      _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("your_work")
                     },
                   },
                 },
@@ -536,7 +536,7 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.optionMain == 1
+      _vm.optionMain == "your_work"
         ? _c(
             "div",
             { attrs: { id: "profile_posts" } },
@@ -551,7 +551,7 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.optionMain == 2
+      _vm.optionMain == "following"
         ? _c(
             "div",
             { attrs: { id: "profile_posts" } },
