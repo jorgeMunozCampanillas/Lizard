@@ -48,7 +48,7 @@ export default {
     getCode(){
         axios.get('/api/post/code/'+this.$route.params.id)
         .then(res => {
-          this.post = res.data.data[0];
+            this.post = res.data.data[0];
         })
         .catch(err => {
             console.log("Error ShowCode.vue getCode");
@@ -57,15 +57,18 @@ export default {
     },
     updateCode(lang, code){
       this.post[lang] = code;
+      console.log(lang)
+      console.log(this.post[lang])
       this.updateSrc();
     },
     updateSrc(){
-         this.src = `
+      this.src = `
            <head>${this.post.script}</head>
-           <body>${this.post.html}</body>
+           <body>${this.post.xml}</body>
            <style>${this.post.css}</style>
            <script>${this.js}<\/script>
            `;
+      this.$root.$emit('navOthers', this.post);
     },
   },
 }

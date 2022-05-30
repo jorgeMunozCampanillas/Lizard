@@ -84,11 +84,10 @@ export default {
             })
         },
         fork(){
-
             let data = new FormData;
             data.append('idUsu', this.$store.state.auth.idUsu);
             data.append('postName', this.post.postName);
-            data.append('html', this.post.html);
+            data.append('html', this.post.xml);
             data.append('css', this.post.css);
             data.append('js', this.post.js);
             //data.append('img', this.post.img);

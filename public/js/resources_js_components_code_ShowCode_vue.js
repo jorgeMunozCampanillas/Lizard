@@ -157,10 +157,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateCode: function updateCode(lang, code) {
       this.post[lang] = code;
+      console.log(lang);
+      console.log(this.post[lang]);
       this.updateSrc();
     },
     updateSrc: function updateSrc() {
-      this.src = "\n           <head>".concat(this.post.script, "</head>\n           <body>").concat(this.post.html, "</body>\n           <style>").concat(this.post.css, "</style>\n           <script>").concat(this.js, "</script>\n           ");
+      this.src = "\n           <head>".concat(this.post.script, "</head>\n           <body>").concat(this.post.xml, "</body>\n           <style>").concat(this.post.css, "</style>\n           <script>").concat(this.js, "</script>\n           ");
+      this.$root.$emit('navOthers', this.post);
     }
   }
 });

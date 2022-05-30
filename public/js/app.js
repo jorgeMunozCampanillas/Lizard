@@ -5659,11 +5659,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     document.addEventListener("click", function (e) {
-      if (e.target.id == "avatar") {
-        if (_this.options) _this.options = false;else _this.options = true;
-      } else {
-        _this.options = false;
-      }
+      if (e.target.id == "close") _this.settingsMode = !_this.settingsMode;
     });
   },
   methods: {
@@ -5845,6 +5841,11 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: 'create-code'
       });
+    },
+    home: function home() {
+      this.$router.push({
+        name: 'home'
+      });
     }
   }
 });
@@ -5957,7 +5958,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('idUsu', this.$store.state.auth.idUsu);
       data.append('postName', this.post.postName);
-      data.append('html', this.post.html);
+      data.append('html', this.post.xml);
       data.append('css', this.post.css);
       data.append('js', this.post.js); //data.append('img', this.post.img);
 
@@ -6099,11 +6100,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       toSearch: '',
-      namesSearch: []
+      namesSearch: [],
+      optionsSearch: ['component']
     };
   },
   mounted: function mounted() {
@@ -6119,7 +6128,8 @@ __webpack_require__.r(__webpack_exports__);
     searchNames: function searchNames() {
       var _this2 = this;
 
-      axios.get('/api/getPostName/' + this.toSearch).then(function (res) {
+      axios.get('/api/getSearchName/' + this.toSearch + '/' + this.optionsSearch).then(function (res) {
+        console.log(res.data.data);
         _this2.namesSearch = res.data.data;
       })["catch"](function (err) {
         console.log("Error en Home.vue search");
@@ -6134,6 +6144,13 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
       this.toSearch = '';
+    },
+    changeOptionSearch: function changeOptionSearch(option) {
+      this.optionsSearch = option;
+      this.searchNames();
+    },
+    existOption: function existOption(option) {
+      return this.optionsSearch.includes(option);
     }
   }
 });
@@ -6175,6 +6192,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6190,10 +6224,14 @@ __webpack_require__.r(__webpack_exports__);
       tags: []
     };
   },
+  computed: {},
   methods: {
     // Options 
     SET_MAIN: function SET_MAIN(mode) {
       this.optionMain = mode;
+    },
+    isUsed: function isUsed(framework) {
+      return this.frameworksToUse.includes(this.frameworks[framework]);
     },
     // CSS
     changeFramework: function changeFramework(framework) {
@@ -6275,8 +6313,6 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     document.addEventListener('click', function (e) {
-      console.log(e.target.nodeName);
-
       if (e.target.id == 'avatar') {
         _this.options = !_this.options;
       } else {
@@ -38006,7 +38042,10 @@ var render = function () {
             "div",
             { attrs: { id: "settings_wrapper" } },
             [
-              _c("div", { staticClass: "settings_back" }),
+              _c("div", {
+                staticClass: "settings_back",
+                on: { click: _vm.settings },
+              }),
               _vm._v(" "),
               _c("Settings", { staticClass: "settings" }),
             ],
@@ -38178,24 +38217,15 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("nav", { staticClass: "nav-5", attrs: { id: "nav" } }, [
-      _c(
-        "ul",
-        { attrs: { id: "nav-logo" } },
-        [
-          _c(
-            "router-link",
-            { attrs: { to: { name: "home" }, id: "nav_logo-home" } },
-            [
-              _c("img", {
-                attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
-              }),
-              _vm._v(" "),
-              _c("h2", { attrs: { id: "logo-title" } }, [_vm._v("Lizard")]),
-            ]
-          ),
-        ],
-        1
-      ),
+      _c("ul", { attrs: { id: "nav-logo" } }, [
+        _c("div", { attrs: { id: "nav_logo-home" }, on: { click: _vm.home } }, [
+          _c("img", {
+            attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
+          }),
+          _vm._v(" "),
+          _c("h2", { attrs: { id: "logo-title" } }, [_vm._v("Lizard")]),
+        ]),
+      ]),
       _vm._v(" "),
       _c("ul", { attrs: { id: "search" } }, [_c("Search")], 1),
       _vm._v(" "),
@@ -38465,51 +38495,97 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { attrs: { id: "search_nav" } }, [
-      _c("i", { staticClass: "bi bi-search" }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.toSearch,
-            expression: "toSearch",
+      _c("div", { attrs: { id: "search_bar" } }, [
+        _c("i", { staticClass: "bi bi-search" }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.toSearch,
+              expression: "toSearch",
+            },
+          ],
+          attrs: {
+            type: "text",
+            id: "search-input",
+            placeholder: "Search Post...",
           },
-        ],
-        attrs: {
-          type: "text",
-          id: "search-input",
-          placeholder: "Search Post...",
-        },
-        domProps: { value: _vm.toSearch },
-        on: {
-          keyup: _vm.searchNames,
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.toSearch = $event.target.value
+          domProps: { value: _vm.toSearch },
+          on: {
+            keyup: _vm.searchNames,
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.toSearch = $event.target.value
+            },
           },
-        },
-      }),
+        }),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "search_options" } }, [
+          _c(
+            "div",
+            {
+              staticClass: "search_option",
+              class: { "search_option-select": _vm.existOption("tags") },
+              on: {
+                click: function ($event) {
+                  return _vm.changeOptionSearch("tags")
+                },
+              },
+            },
+            [_vm._v("#tags")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "search_option",
+              class: { "search_option-select": _vm.existOption("component") },
+              on: {
+                click: function ($event) {
+                  return _vm.changeOptionSearch("component")
+                },
+              },
+            },
+            [_vm._v("#component")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "search_option",
+              class: { "search_option-select": _vm.existOption("profile") },
+              on: {
+                click: function ($event) {
+                  return _vm.changeOptionSearch("profile")
+                },
+              },
+            },
+            [_vm._v("#profile")]
+          ),
+        ]),
+      ]),
       _vm._v(" "),
       _vm.toSearch != ""
         ? _c(
             "div",
             { attrs: { id: "searc_results" } },
-            _vm._l(_vm.namesSearch, function (name) {
+            _vm._l(_vm.namesSearch, function (search) {
               return _c(
                 "div",
                 {
-                  key: name.idPost,
+                  key: search.id,
                   staticClass: "searc_result",
                   on: {
                     click: function ($event) {
-                      return _vm.search()
+                      return search()
                     },
                   },
                 },
-                [_vm._v(_vm._s(name.postName))]
+                [_vm._v(_vm._s(search.namee))]
               )
             }),
             0
@@ -38543,6 +38619,8 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { attrs: { id: "setting_nav" } }, [
+      _c("div", { attrs: { id: "close" } }, [_vm._v("x")]),
+      _vm._v(" "),
       _c("nav", { attrs: { id: "setting_main" } }, [
         _c("ul", [
           _c(
@@ -38554,7 +38632,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("CSS")]
+            [_vm._v("CSS ")]
           ),
           _vm._v(" "),
           _c(
@@ -38585,43 +38663,95 @@ var render = function () {
       _vm._v(" "),
       _c("nav", { attrs: { id: "setting_options" } }, [
         _vm.optionMain == "css"
-          ? _c("ul", { attrs: { id: "setting_options-css" } }, [
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function ($event) {
-                      return _vm.changeFramework("bootstrap")
+          ? _c(
+              "ul",
+              {
+                staticClass: "setting_option",
+                attrs: { id: "setting_options-css" },
+              },
+              [
+                _c(
+                  "li",
+                  {
+                    staticClass: "card_technology",
+                    on: {
+                      click: function ($event) {
+                        return _vm.changeFramework("bootstrap")
+                      },
                     },
                   },
-                },
-                [_vm._v("Bootstrap")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function ($event) {
-                      return _vm.changeFramework("tailwind")
+                  [
+                    _c("img", {
+                      attrs: {
+                        src: "/storage/codeIcons/BOOTSTRAP.png",
+                        alt: "",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _vm.isUsed("bootstrap")
+                      ? _c("div", { staticClass: "quitFramework" }, [
+                          _vm._v("X"),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Bootstrap")]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass: "card_technology",
+                    on: {
+                      click: function ($event) {
+                        return _vm.changeFramework("tailwind")
+                      },
                     },
                   },
-                },
-                [_vm._v("Tailwind")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function ($event) {
-                      return _vm.changeFramework("css")
+                  [
+                    _c("img", {
+                      attrs: {
+                        src: "/storage/codeIcons/TAILWIND.png",
+                        alt: "",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _vm.isUsed("tailwind")
+                      ? _c("div", { staticClass: "quitFramework" }, [
+                          _vm._v("X"),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Tailwind")]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass: "card_technology",
+                    on: {
+                      click: function ($event) {
+                        return _vm.changeFramework("css")
+                      },
                     },
                   },
-                },
-                [_vm._v("Pure CSS")]
-              ),
-            ])
+                  [
+                    _c("img", {
+                      attrs: { src: "/storage/codeIcons/CSS.png", alt: "" },
+                    }),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Pure CSS")]),
+                    _vm._v(" "),
+                    _vm.isUsed("css")
+                      ? _c("div", { staticClass: "quitFramework" }, [
+                          _vm._v("X"),
+                        ])
+                      : _vm._e(),
+                  ]
+                ),
+              ]
+            )
           : _vm._e(),
         _vm._v(" "),
         _vm.optionMain == "js"
@@ -38629,13 +38759,24 @@ var render = function () {
               _c(
                 "li",
                 {
+                  staticClass: "card_technology",
                   on: {
                     click: function ($event) {
                       return _vm.changeFramework("jquery")
                     },
                   },
                 },
-                [_vm._v("JQuey")]
+                [
+                  _c("img", {
+                    attrs: { src: "/storage/codeIcons/JQUERY.png", alt: "" },
+                  }),
+                  _vm._v(" "),
+                  _vm.isUsed("jquery")
+                    ? _c("div", { staticClass: "quitFramework" }, [_vm._v("X")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", [_vm._v("JQuey")]),
+                ]
               ),
             ])
           : _vm._e(),

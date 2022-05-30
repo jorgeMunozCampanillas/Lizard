@@ -23,7 +23,7 @@
         </ul>
         <!-- Settings -->
         <div id="settings_wrapper" v-if="settingsMode">
-            <div class="settings_back"></div>
+            <div @click="settings" class="settings_back"></div>
             <Settings class="settings"/>
         </div>
     </nav>
@@ -44,15 +44,7 @@ export default {
     },
     mounted() {
         document.addEventListener("click", (e) => {
-            if (e.target.id == "avatar") {
-                if (this.options)
-                    this.options = false;
-                else
-                    this.options = true;
-            }
-            else {
-                this.options = false;
-            }
+            if (e.target.id == "close") this.settingsMode=!this.settingsMode;
         });
     },
     methods: {
@@ -68,7 +60,7 @@ export default {
         },
         settings(){
             this.settingsMode=!this.settingsMode;
-        }
+        },
     },
 }
 </script>

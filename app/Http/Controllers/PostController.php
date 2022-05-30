@@ -196,9 +196,25 @@ class PostController extends Controller
         ], 200);
     }
 
-    //Get name of post for like %word%
-    public function getPostName(Request $request, $name){
-        $names = Post::getPostName($name);
+    //Get name for like %word%
+    public function getSearchName(Request $request, $name, $option){
+        switch ($option) {
+            case 'tags':
+                $names = Post::getTagsName($name);
+                break;
+
+            case 'component':
+                $names = Post::getPostName($name);
+                break;
+
+            case 'profile':
+                $names = Post::getProfileName($name);
+                break;
+            
+            default:
+                $names = Post::getPostName($name);
+                break;
+        }
 
         return response()->json([
             'data' => $names
@@ -207,6 +223,14 @@ class PostController extends Controller
 
     //Get name of post for like %word%
     public function getPostByName(Request $request, $name){
+        $names = Post::getPostByName($name);
+        return response()->json([
+            'data' => $names
+        ], 200);
+    }
+
+    //Get name of post for like %word%
+    public function getPostByTag(Request $request, $name){
         $names = Post::getPostByName($name);
         return response()->json([
             'data' => $names

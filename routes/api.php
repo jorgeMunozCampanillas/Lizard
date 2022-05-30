@@ -23,9 +23,11 @@ Route::get('cdn/{idPost}',  [App\Http\Controllers\PostController::class, 'cdn'])
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\UserController::class, 'logout']);
 Route::resource('users', App\Http\Controllers\UserController::class)->only(['store']);
-//Get post name for like %word%
-Route::get('getPostName/{name}', [App\Http\Controllers\PostController::class, 'getPostName']);
-//Get post for like %word%
+//Get search name for like %word%
+Route::get('getSearchName/{name}/{options}', [App\Http\Controllers\PostController::class, 'getSearchName']);
+//Get search for like %word%
+Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 'getPostByName']);
+Route::get('getPostByTag/{name}', [App\Http\Controllers\PostController::class, 'getPostByTag']);
 Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 'getPostByName']);
 Route::get('getPostFeatured', [App\Http\Controllers\PostController::class, 'getPostFeatured']);
 

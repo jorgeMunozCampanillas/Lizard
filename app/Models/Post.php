@@ -205,10 +205,26 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
         DB::select(DB::raw("DELETE FROM `post_tag` WHERE `post_tag`.`idPost` = $idPost"));
     }
 
+    public static function getTagsName($name){
+        $names = DB::select(DB::raw("SELECT `tag`.`tag` as namee, `tag`.`idTag` as id FROM `tag` 
+        WHERE `tag`.`tag` LIKE '%$name%' 
+        ORDER BY `tag`.`tag` ASC 
+        LIMIT 6"));
+        return $names;
+    }
+
     public static function getPostName($name){
-        $names = DB::select(DB::raw("SELECT `post`.`postName`, `post`.`idPost` FROM `post` 
+        $names = DB::select(DB::raw("SELECT `post`.`postName` as namee, `post`.`idPost` as id FROM `post` 
         WHERE `post`.`postName` LIKE '%$name%' 
         ORDER BY `post`.`postName` ASC 
+        LIMIT 6"));
+        return $names;
+    }
+
+    public static function getProfileName($name){
+        $names = DB::select(DB::raw("SELECT `user`.`name` as namee, `user`.`idUsu` as id FROM `user` 
+        WHERE `user`.`name` LIKE '%$name%' 
+        ORDER BY `user`.`name` ASC 
         LIMIT 6"));
         return $names;
     }

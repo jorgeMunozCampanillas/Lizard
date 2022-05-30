@@ -107,7 +107,28 @@
         display: block;
         grid-column-end: span 10;
         height: 80%;
+
     }
+
+    #search_bar{
+        display: flex;
+
+        #search_options{
+            display: flex;
+            .search_option{
+                background-color: rgba(179, 179, 179, 0.171);
+                border: 2px solid black;
+                margin: 0 .3rem;
+                padding: .2rem .5rem;
+                border-radius: .3rem;
+            }
+            .search_option-select{
+                background-color: rgba(228, 228, 228, 0.5);
+
+            }
+        }
+    }
+
 }
 
 

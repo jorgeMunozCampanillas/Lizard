@@ -29,7 +29,6 @@ export default {
     },
     mounted(){
         document.addEventListener('click', (e)=>{
-            console.log(e.target.nodeName)
             if(e.target.id == 'avatar'){
                 this.options = !this.options
             }else{

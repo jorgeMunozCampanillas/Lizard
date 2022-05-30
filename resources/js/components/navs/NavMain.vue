@@ -2,10 +2,10 @@
 <div>
     <nav id="nav" class="nav-5">
         <ul id="nav-logo">
-            <router-link :to="{name:'home'}" id="nav_logo-home">
+            <div @click="home" id="nav_logo-home">
                 <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
                 <h2 id="logo-title">Lizard</h2>
-            </router-link>
+            </div>
         </ul>
         
         <ul id="search">
@@ -46,6 +46,9 @@ export default {
         createCode(){
             this.$store.dispatch('changeNav', 2);
             this.$router.push({name:'create-code'});
+        },
+        home(){
+            this.$router.push({name:'home'});
         }
     },
 }
