@@ -36,8 +36,10 @@ export default {
   },
   methods:{
     getPosts(){
-        axios.get('/api/getPostByName/'+this.$route.params.name)
+        console.log(this.$route.params.route)
+        axios.get(this.$route.params.route)
         .then(res=>{
+          console.log(res)
             this.posts = res.data.data;
         })
         .catch(err => {

@@ -397,7 +397,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "home" } }, [
     _c("div", { attrs: { id: "post-wrapper" } }, [
-      _c("h2", { staticClass: "title" }, [
+      _c("h1", { staticClass: "title" }, [
         _vm._v(_vm._s(_vm.$t("home.top_comopnents")) + " "),
         _c("hr"),
       ]),
@@ -429,9 +429,11 @@ var render = function () {
         "div",
         { attrs: { id: "posts" } },
         [
-          _c("div", { staticClass: "post_next", on: { click: _vm.next } }, [
-            _c("i", { staticClass: "bi bi-arrow-bar-right" }),
-          ]),
+          _c(
+            "button",
+            { staticClass: "button-post_next", on: { click: _vm.next } },
+            [_c("i", { staticClass: "bi bi-arrow-bar-right" })]
+          ),
           _vm._v(" "),
           _vm.offset >= 4
             ? _c("div", { staticClass: "post_back", on: { click: _vm.back } }, [

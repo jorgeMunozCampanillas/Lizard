@@ -1,32 +1,31 @@
 <template>
 <div>
     <nav id="nav" class="nav-5">
-        <ul id="nav-logo">
-            <div @click="home" id="nav_logo-home">
-                <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
-                <h2 id="logo-title">Lizard</h2>
-            </div>
+        <ul @click="home()" id="nav-logo">
+            <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
+            <h2 id="logo-title">Lizard</h2>
         </ul>
-        
-        <ul id="search">
-            <Search/>
-        </ul>
+        <div id="nav-options">
+            <ul id="search">
+                <Search/>
+            </ul>
 
-        <!-- No registe -->
-        <ul id="nav-out-permiss" v-if="this.$store.state.isAuthenticated==false">
-            <LangSwitch></LangSwitch>
-            <li><router-link :to="{name:'login'}" >{{$t('nav.login')}}</router-link></li>
-        </ul>
+            <!-- No registe -->
+            <ul id="nav-out-permiss" v-if="this.$store.state.isAuthenticated==false">
+                <LangSwitch></LangSwitch>
+                <li><router-link :to="{name:'login'}" >{{$t('nav.login')}}</router-link></li>
+            </ul>
 
-        <!-- Options -->
-        <ul id="nav-with-permiss" v-if="this.$store.state.auth.permissions>0">
-            <li class="nav-mains">
-                <p @click="createCode">{{$t('nav.new_component')}}</p>
-            </li>
-            <li>
-                <User-Options></User-Options>
-            </li>    
-        </ul>
+            <!-- Options -->
+            <ul id="nav-with-permiss" v-if="this.$store.state.auth.permissions>0">
+                <li class="nav-mains">
+                    <button class="button-create-code" @click="createCode"><i class="bi bi-pencil-square"></i></button>
+                </li>
+                <li>
+                    <User-Options></User-Options>
+                </li>    
+            </ul>
+        </div>
     </nav>
 </div>
 </template>

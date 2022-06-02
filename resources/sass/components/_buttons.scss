@@ -9,7 +9,15 @@
     border: .2rem solid $primary-white;
     transition: all .3s;
 }
-
+@mixin normalize-btn-basic {
+    background: none;
+    border: 0;
+    color: inherit;
+    line-height: normal;
+    font-family: $title-typography;
+    color: $primary-white;
+    cursor: pointer;
+}
 .button-normal {
     @include normalize-btn();
     color: $primary-dark;
@@ -66,4 +74,90 @@
     background-color: white;
     padding: .5rem 1rem;
     border-radius: 10px;
+}
+
+.button-navSearch{
+    @include normalize-btn-basic();
+    font-size: $text-big-size;
+    font-weight: 600;
+    background-color: $secondary-dark;
+    border: 2px solid black;
+    margin: 0 .3rem;
+    padding: .2rem .5rem;
+    border-radius: .3rem;
+    box-shadow: 
+    0px 1px 0px $primary-dark, 
+    0px 2px 0px $primary-dark, 
+    0px 3px 0px rgb(0,0,0), 
+    0px 5px 3px rgb(0,0,0);
+
+    &:hover{
+        transform: translateY(-1.5px);
+        box-shadow: 
+        0px 1px 0px $primary-dark, 
+        0px 2px 0px $primary-dark, 
+        0px 3px 0px $primary-dark, 
+        0px 4px 0px $primary-dark, 
+        0px 5px 0px rgb(0,0,0), 
+        0px 6px 3px rgb(0,0,0);
+    }
+
+    &:active{
+        transform: translateY(2px);
+        box-shadow: 
+        0px 1px 0px $primary-dark, 
+        0px 2px 2px rgb(0,0,0), 
+    }
+}
+.button-navSearch-select{
+    background-color: $secondary-dark;
+    border: 2px solid black;
+    margin: 0 .3rem;
+    padding: .2rem .5rem;
+    border-radius: .3rem;
+    box-shadow: 
+    0px 1px 0px $primary-dark, 
+    0px 2px 0px $primary-dark, 
+    0px 3px 0px rgb(0,0,0), 
+    0px 4px 5px rgb(0,0,0);
+}
+
+.button-text{
+    @include normalize-btn-basic();
+}
+
+.button-post_next{
+    @include normalize-btn-basic();
+    background-color: $primary-blue-strong;
+    background-color: white;
+    color: black;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+
+    border: 2px solid black;
+    box-shadow: 
+    0px 1px 0px $primary-dark, 
+    0px 2px 0px $primary-dark, 
+    0px 3px 0px rgb(0,0,0), 
+    0px 4px 5px rgb(0,0,0);
+}
+
+.button-create-code{
+    @include normalize-btn-basic();
+    border: 2px solid rgb(190, 190, 190);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: $primary-white;
+    font-size: $text-big-size;
+    font-weight: 600;
+    
 }

@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
-      var idUsu = this.$route.params.id;
+      var idUsu = this.$route.params.idUsu;
       axios.get('/api/post/posts/' + idUsu).then(function (res) {
         if (res.status) {
           _this.posts = res.data.data;
@@ -129,7 +129,7 @@ __webpack_require__.r(__webpack_exports__);
     getUser: function getUser() {
       var _this3 = this;
 
-      var idUsu = this.$route.params.id;
+      var idUsu = this.$route.params.idUsu;
       axios.get('/api/user/follow/userData/' + idUsu).then(function (res) {
         _this3.user = res.data.data;
         _this3.follows = res.data.follows;

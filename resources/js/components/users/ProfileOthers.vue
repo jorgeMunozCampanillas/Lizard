@@ -84,7 +84,7 @@ export default {
   methods:{
     //Get all code from the user passed
     getPosts(){
-        let idUsu = this.$route.params.id;
+        let idUsu = this.$route.params.idUsu;
         axios.get('/api/post/posts/'+idUsu).then(res=>{
           if (res.status) {
             this.posts = res.data.data;
@@ -109,7 +109,7 @@ export default {
     },
     //Get data from the user passed
     getUser(){
-      let idUsu = this.$route.params.id;
+      let idUsu = this.$route.params.idUsu;
       axios.get('/api/user/follow/userData/'+idUsu).then(res =>{
         this.user = res.data.data;
         this.follows = res.data.follows;

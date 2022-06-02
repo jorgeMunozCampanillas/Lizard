@@ -75,3 +75,50 @@
         flex-direction: column;
     }
 }
+
+
+@media (max-width: $breakpoint-portatil){
+    #profile{
+        //
+    
+        .profile_header{
+            //
+    
+            .profile_header-name{
+                //
+            }
+    
+            .profile_header-img{
+                //@include
+            }
+    
+            .profile_header-data{
+                //
+                ul{
+                    //@error
+                }
+            }
+    
+            
+        }
+        .profile_main{
+            margin: 3rem 2.5rem 0 2.5rem;
+    
+    
+            #nav_profile{
+                //
+            }
+        
+            #profile_posts{
+                //
+            }
+        }
+    
+        .post{
+            grid-column-end: span 4;
+            justify-self: center;
+            width: 100%;
+        }
+    }
+    
+}

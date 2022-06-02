@@ -14,6 +14,7 @@
 
         <!-- Options -->
         <!-- <div @click="createCode" id="user_create" v-if="this.$store.state.auth.permissions>0">{{$t('nav.new_component')}}</div> -->
+        <i class="bi bi-pencil-square"></i>
         <User-Options id="user_options" v-if="this.$store.state.auth.permissions>0"></User-Options>
     </nav>
 </div>

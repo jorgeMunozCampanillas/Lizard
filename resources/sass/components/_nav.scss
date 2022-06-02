@@ -79,7 +79,7 @@
 
 .nav-1{
     font-family: $title-typography;
-    height: 3.5rem;
+    height: 4.5rem;
     color: $primary-white;
     font-size: $text-big-size;
     font-weight: 600;
@@ -89,8 +89,8 @@
     grid-template-columns: repeat(12, 1fr);
     align-items: center;
     justify-items: center;
-    padding: .9rem 1rem;
-
+    padding: 0 1rem;
+    border-bottom: 5px solid $primary-dark;
 
     // #user_create{
     //     grid-column-start: 9;
@@ -110,24 +110,6 @@
 
     }
 
-    #search_bar{
-        display: flex;
-
-        #search_options{
-            display: flex;
-            .search_option{
-                background-color: rgba(179, 179, 179, 0.171);
-                border: 2px solid black;
-                margin: 0 .3rem;
-                padding: .2rem .5rem;
-                border-radius: .3rem;
-            }
-            .search_option-select{
-                background-color: rgba(228, 228, 228, 0.5);
-
-            }
-        }
-    }
 
 }
 
@@ -353,16 +335,16 @@
     }
 }
 
-/*-_-_-_-_-_-_-_-_- NAV 1 -_-_-_-_-_-_-_-_-*/
+/*-_-_-_-_-_-_-_-_- NAV 5 MAIN -_-_-_-_-_-_-_-_-*/
 
 .nav-5{
     font-family: $title-typography;
-    height: 3.5rem;
+    height: 4.5rem;
     color: $primary-white;
     font-size: $text-big-size;
     font-weight: 600;
     justify-content: space-around;
-    background-color: $primary-dark;
+    background-color: $primary-dark-strong;
     border-bottom: 4px solid $primary-dark-strong;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -373,57 +355,32 @@
         justify-content: center;
         align-items: center;
         height: 100%;
-        
-        .nav-mains{
-            width: max-content;
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 0 1rem .7rem 1rem;
-
-            a:hover{
-                transition: .2s;
-                color: $primary-orange ;
-            }
-
-            &:hover{
-                &::before{
-                    background: $primary-orange;
-                    width: 100%;
-                    transition: all .3s;
-                    height: .3rem;
-
-                }
-            }
-        }
-
-        li::before{
-            content: '';
-            width: 100%;
-            display: block;
-            height: 0rem;
-            border-radius: 0 0 6rem 6rem;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: all .3s;
-        }
     }
 
     #nav-logo{
         grid-column-end: span 2;
-    }
-
-    #nav_logo-home{
         display: flex;
     }
 
-    #search{
-        width: 100%;
-        display: block;
-        grid-column-end: span 7;
-        height: 80%;
+    #nav-options{
+        grid-column-end: span 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+
+        #search{
+            width: 80%;
+            display: block;
+            height: 80%;
+        }
+
+        #nav-with-permiss{
+            margin-right: 3rem;
+            height: 80%;
+            li{
+                margin: 0 1rem;
+            }
+        }
     }
 }

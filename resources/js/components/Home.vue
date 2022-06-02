@@ -4,7 +4,7 @@
   <!-- POST -->
   <!-- ---- -->
   <div id="post-wrapper">
-    <h2 class="title">{{$t('home.top_comopnents')}} <hr> </h2>
+    <h1 class="title">{{$t('home.top_comopnents')}} <hr> </h1>
     <!-- BEFORE POSTS -->
     <div id="before_posts">
       <Post 
@@ -18,7 +18,7 @@
     </div>
     <div id="posts">
     <!-- ACTUAL POSTS -->
-      <div class="post_next" @click="next"><i class="bi bi-arrow-bar-right"></i></div>
+      <button class="button-post_next" @click="next"><i class="bi bi-arrow-bar-right"></i></button>
       <div v-if="offset>=4" class="post_back" @click="back"><i class="bi bi-arrow-bar-left"></i></div>
       <Post 
         v-for="post in posts" :key="post.idPost"

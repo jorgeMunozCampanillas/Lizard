@@ -83,7 +83,7 @@ export const routes = [
             },
             {
                 name:'search',
-                path:'search/:name',
+                path:'/:lang/search',
                 component:SearchResults,
             },
         ]
@@ -125,17 +125,17 @@ export const routes = [
             },
             {
                 name:'show-code',
-                path:'show/code/:id',
+                path:'/:lang/show/code/:id',
                 component:ShowAllCode,
             },
             {
                 name:'my-code',
-                path:'show/profile/:opmain',
+                path:'show/profile',
                 component:MyCode,
             },
             {
                 name:'code-others',
-                path:'code/profile/:idUsu',
+                path:'/:lang/code/profile/:idUsu',
                 component:CodeOther,
             },
             {

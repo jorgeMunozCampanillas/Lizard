@@ -5,13 +5,13 @@
             <i class="bi bi-search"></i>
             <input @keyup="searchNames" v-model="toSearch" type="text" id="search-input" placeholder="Search Post...">
             <div id="search_options">
-                <div :class="{'search_option-select': existOption('tags')}" @click="changeOptionSearch('tags')" class="search_option">#tags</div>
-                <div :class="{'search_option-select': existOption('component')}" @click="changeOptionSearch('component')" class="search_option">#component</div>
-                <div :class="{'search_option-select': existOption('profile')}" @click="changeOptionSearch('profile')" class="search_option">#profile</div>
+                <button class="button-navSearch" :class="{'search_option-select': existOption('tags')}" @click="changeOptionSearch('tags')">#tags</button>
+                <button class="button-navSearch" :class="{'search_option-select': existOption('component')}" @click="changeOptionSearch('component')">#component</button>
+                <button class="button-navSearch" :class="{'search_option-select': existOption('profile')}" @click="changeOptionSearch('profile')">#profile</button>
             </div>
         </div>
       <div id="searc_results" v-if="toSearch!=''">
-        <div @click="search()" v-for="search in namesSearch" :key="search.id" class="searc_result" >{{search.namee}}</div>
+        <div @click="foo()" v-for="search in namesSearch" :key="search.id" class="searc_result" >{{search.namee}}</div>
       </div>
     </div>
   </div>
@@ -23,13 +23,13 @@ export default {
         return {
             toSearch:'',
             namesSearch:[],
-            optionsSearch:['component'],
+            optionsSearch:'component',
         }
     },
     mounted(){
         document.getElementById("search-input").addEventListener("keypress", (e)=>{
             if (e.key == "Enter") {
-                this.search();
+                this.foo();
             }
         })
     },
@@ -45,9 +45,23 @@ export default {
                 console.log(err)
             })
         },
-        search(){
-
-            this.$router.push({name:'search', params: {name: this.toSearch}})
+        aa(){
+            console.log("gello")
+        },
+        foo(){
+            let routeToPass='';
+            switch (this.optionsSearch) {
+                case 'tags':
+                    routeToPass = '/api/getPostByTag/'+this.toSearch;
+                    break;
+                case 'component':
+                    routeToPass = '/api/getPostByName/'+this.toSearch;
+                    break;
+            
+                default:
+                    break;
+            }
+            this.$router.push({name:'search', params: {route: routeToPass}})
             this.toSearch = '';
         },
         changeOptionSearch(option){

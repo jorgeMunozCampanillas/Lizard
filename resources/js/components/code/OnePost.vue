@@ -3,18 +3,23 @@
     <button @click="showCode()">
         <!-- <img :src="'/storage/'+data.img" class="post-img" alt=""> -->
 
-        <div class="iframe" style="background-color:white;">
+        <div class="iframe">
             <div class="iframe-preview">
-                <iframe :srcdoc="src" style="border:0px #FFFFFF none;" name="test" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="2000px" width="250%"></iframe>
+                <iframe :srcdoc="src" name="test" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="2000px" width="250%"></iframe>
             </div>
         </div>
 
     </button>
     <div class="post_user">
         <img :src="'/storage/'+data.userImg" class="post_user-img" alt="">
-        <div class="post_user-names">
             <div class="post_info">
-                <h3>{{data.postName}}</h3>
+                <!-- Names -->
+                <div class="post_info-names">
+                    <button class="button-text"><h3>{{data.postName}}</h3></button>
+                    <!-- <button class="button-text"><h5 @click="showUser()">{{data.name}}</h5></button> -->
+                </div>
+
+
                 <ul class="post_info-meta">
                     <!-- Likes -->
                     <li @click="like()" v-if="likes.includes(data.idPost)">
@@ -27,21 +32,20 @@
                     <li>
                         <i class="bi bi-eye-fill"></i>{{data.views}}
                     </li>
+                    <!-- Options -->
+                    <li class="post_info-options" v-if="data.idUsu == this.$store.state.auth.idUsu">
+                        <ul class="post_options-menu" :class="{'hidden':dropHidden}">
+                            <li @click="drop" class="post_options-borrar"><i class="bi bi-trash-fill"></i> Borrar</li>
+                            <li v-if="data.deleted_at != null" @click="restore" class="post_options-restore"><i class="bi bi-recycle"></i> Restore</li>
+                            <li>Colección</li>
+                        </ul>
+                        <button @click="dropMenu()" class="post_options-button"><i class="bi bi-three-dots"></i></button>
+                    </li>
                 </ul>
-                <!-- Options -->
-                <div class="post_info-options" v-if="data.idUsu == this.$store.state.auth.idUsu">
-                    <ul class="post_options-menu" :class="{'hidden':dropHidden}">
-                        <li @click="drop" class="post_options-borrar"><i class="bi bi-trash-fill"></i> Borrar</li>
-                        <li v-if="data.deleted_at != null" @click="restore" class="post_options-restore"><i class="bi bi-recycle"></i> Restore</li>
-                        <li>Colección</li>
-                    </ul>
-                    <button @click="dropMenu()" class="post_options-button"><i class="bi bi-three-dots"></i></button>
-                </div>
+
  
             </div>
             {{data.deleted_at}}
-            <h5 @click="showUser()">{{data.name}}</h5>
-        </div>
     </div>
 </div>
 </template>
@@ -98,7 +102,7 @@ export default {
         showUser(){
             //Not to view your user like other user
             if (this.data.idUsu != this.$store.state.auth.idUsu) {
-                this.$router.push({name:'code-others', params: { id: this.data.idUsu }})
+                this.$router.push({name:'code-others', params: { idUsu: this.data.idUsu }})
             }else{
                 this.$router.push({name:'my-code', params: { id: this.data.idPost }});
             }

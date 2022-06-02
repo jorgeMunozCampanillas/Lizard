@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Tag;
 use App\Models\PostLike;
 use App\Models\Followers;
 use Illuminate\Support\Facades\DB;
@@ -231,7 +232,7 @@ class PostController extends Controller
 
     //Get name of post for like %word%
     public function getPostByTag(Request $request, $name){
-        $names = Post::getPostByName($name);
+        $names = Tag::getPostByTag($name);
         return response()->json([
             'data' => $names
         ], 200);

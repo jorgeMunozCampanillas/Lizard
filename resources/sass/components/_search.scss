@@ -1,3 +1,11 @@
+#search_bar{
+    display: flex;
+
+    #search_options{
+        display: flex;
+    }
+}
+
 #search_nav{
     background-color: $primary-dark;
     font-weight: 600;

@@ -3,9 +3,9 @@
     //grid-column-end: span 2;
     height:max-content;
     background-color: $secondary-dark;
-    box-shadow: 7px 7px $primary-dark-strong;
+    box-shadow: 7px 7px black;
     border-radius: 1rem;
-    padding: .5rem;
+    //padding: .5rem;
     display: flex;
     flex-direction: column;
     color: $primary-white;
@@ -16,10 +16,12 @@
         height:100%;
         width: 100%;
         overflow:hidden;
-        
+
         iframe {
           transform:scale(.4);
           transform-origin:0 0;
+          background-color:white;
+
         }
     }
 
@@ -35,18 +37,39 @@
         height: 15rem;
         width: 100%;
         overflow: hidden;
+        border-radius: 1rem 1rem 0 0;
     }
 
     .post_user{
-        padding-top: .7rem;
+        padding: .7rem;
         display: flex;
+        border-top: 2px solid black;
+
         
-        .post_user-names{
-            padding-left: .5rem;
+        .post_info-names{
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            width: 100%;
+            align-items: flex-start;
+            margin-left: 1rem;
+            button{
+                padding: .15rem 0;
+            }
+        }
+
+        .post_info-meta{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            li{
+                padding: .3rem;
+                margin: 0 .3rem;
+                font-size: 1rem;
+                i{
+                    padding-right: .2rem;
+                }
+            }
         }
 
         .post_user-img{
@@ -59,6 +82,7 @@
     .post_info{
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
     }
 
@@ -83,9 +107,9 @@
             right: 0;
             width: max-content;
             background: #fff;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
             border-radius: 10px;
-    
+        
             .post_options-borrar{
                 color: red;
             }
@@ -121,8 +145,8 @@
             height: 12rem !important;
         }
 
-        .post_info{
-            font-size: $text-low-size;
+        .button-text{
+            font-size: .8rem;
         }
 
 
@@ -134,8 +158,8 @@
             }
     
             .post_user-img{
-                height: 2.5rem;
-                width: 2.5rem;
+                height: 3rem;
+                width: 3rem;
             }
         }
 

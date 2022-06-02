@@ -7,7 +7,8 @@
     color: $primary-white;
     min-height: calc(100vh - 3rem);
     row-gap: 3rem;
-
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+ 
     #post-wrapper{
         margin-top: 2.5rem;
         display: grid;
@@ -41,17 +42,9 @@
             position: relative;
 
             
-            .post_next{
+            .button-post_next{
                 position: absolute;
-                background-color: $primary-blue-strong;
-                width: 2rem;
-                height: 4rem;
-                border-radius: 100rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-weight: bold;
-                right: -1rem;
+                right: -2rem;
             }
             .post_back{
                 position: absolute;
@@ -125,6 +118,10 @@
 .title{
     grid-column-start: 2;
     grid-column-end: span 10;
+    hr{
+        margin-top: .5rem;
+        border: 1.5px solid white;
+    }
 }
 
 @media (max-width: $breakpoint-portatil){

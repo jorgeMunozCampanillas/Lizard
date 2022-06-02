@@ -20,9 +20,9 @@
       </ul>
       <hr>
       <ul v-if="optionMain == 'your_work'" class="nav_profile-work nav_profile-option">
-          <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('your_work')" :class="{active: optionSecond == 'your_work'}">{{$t('profile.components')}}</li>
+          <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('components')" :class="{active: optionSecond == 'your_work'}">{{$t('profile.components')}}</li>
           <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">{{$t('profile.collections')}}</li>
-          <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">All posts</li>
+          <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('your_work')" :class="{active: optionSecond == 2}">All posts</li>
           <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">Tags</li>
           <li @click="SET_OPSECOND(2)" :class="{active: optionSecond == 2}">Loved</li>
           <li @click="SET_OPSECOND(3)" :class="{active: optionSecond == 3}">{{$t('profile.delete')}}</li>
@@ -46,7 +46,7 @@
     </div>
 
     <!-- <<<<<<<<<<<<<<<<< MAIN OPTIONS >>>>>>>>>>>>>> -->
-    <!-- Your posts -->
+        <!-- Components -->
     <div id="profile_posts" v-if="optionMain=='your_work'">
       <Post 
         v-for="post in posts" :key="post.idPost"
@@ -55,6 +55,17 @@
           class="post" 
       ></Post>
     </div>
+
+    <!-- All posts / Deleted -->
+    <div id="profile_posts" v-if="optionMain=='your_work'">
+      <Post 
+        v-for="post in posts" :key="post.idPost"
+          :data="post"
+          :likes="likes"
+          class="post" 
+      ></Post>
+    </div>
+    
     <!-- Following posts -->
     <div id="profile_posts" v-if="optionMain=='following'">
       <Post 
@@ -100,6 +111,7 @@ export default {
     followings(){
       return this.$store.state.follows.followings.length;
     }
+    
   },
   methods:{
     getPosts(){
@@ -200,6 +212,9 @@ export default {
       this.optionSecond = id;
 
       switch (id) {
+        case 'components':
+          
+          break;
         case 3:
           this.getPostDeleted();
           break;

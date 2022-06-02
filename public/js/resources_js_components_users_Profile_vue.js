@@ -82,6 +82,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -222,6 +233,9 @@ __webpack_require__.r(__webpack_exports__);
       this.optionSecond = id;
 
       switch (id) {
+        case 'components':
+          break;
+
         case 3:
           this.getPostDeleted();
           break;
@@ -430,7 +444,8 @@ var render = function () {
                   class: { active: _vm.optionSecond == "your_work" },
                   on: {
                     click: function ($event) {
-                      _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("your_work")
+                      _vm.SET_OPMAIN("your_work"),
+                        _vm.SET_OPSECOND("components")
                     },
                   },
                 },
@@ -456,7 +471,7 @@ var render = function () {
                   class: { active: _vm.optionSecond == 2 },
                   on: {
                     click: function ($event) {
-                      return _vm.SET_OPSECOND(2)
+                      _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("your_work")
                     },
                   },
                 },
@@ -533,6 +548,21 @@ var render = function () {
               ])
             }),
             0
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.optionMain == "your_work"
+        ? _c(
+            "div",
+            { attrs: { id: "profile_posts" } },
+            _vm._l(_vm.posts, function (post) {
+              return _c("Post", {
+                key: post.idPost,
+                staticClass: "post",
+                attrs: { data: post, likes: _vm.likes },
+              })
+            }),
+            1
           )
         : _vm._e(),
       _vm._v(" "),

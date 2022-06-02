@@ -28,8 +28,9 @@ class Tag extends Model
             inner join `user` on `user`.`idUsu` = `post`.`idUsu`
             inner join `post_tag` on `post`.`idPost` = `post_tag`.`idPost`
             inner join `tag` on `tag`.`idTag` = `post_tag`.`idTag`
-            WHERE `post`.`deleted_at` IS null AND `tag`.`tag`= '$tag'
-            ORDER BY `post`.`views` DESC;")
+            WHERE `post`.`deleted_at` IS null AND `tag`.`tag` LIKE '%$tag%'
+            GROUP BY `post`.`idPost`
+            ORDER BY `post`.`postName` DESC;")
         );
 
         

@@ -5369,6 +5369,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: {
@@ -5423,7 +5427,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$router.push({
           name: 'code-others',
           params: {
-            id: this.data.idUsu
+            idUsu: this.data.idUsu
           }
         });
       } else {
@@ -5553,6 +5557,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LangSwitch_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LangSwitch.vue */ "./resources/js/components/navs/LangSwitch.vue");
 /* harmony import */ var _UserOptions_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserOptions.vue */ "./resources/js/components/navs/UserOptions.vue");
 /* harmony import */ var _Search_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Search.vue */ "./resources/js/components/navs/Search.vue");
+//
 //
 //
 //
@@ -5792,7 +5797,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LangSwitch_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LangSwitch.vue */ "./resources/js/components/navs/LangSwitch.vue");
 /* harmony import */ var _UserOptions_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserOptions.vue */ "./resources/js/components/navs/UserOptions.vue");
 /* harmony import */ var _Search_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Search.vue */ "./resources/js/components/navs/Search.vue");
-//
 //
 //
 //
@@ -6112,7 +6116,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       toSearch: '',
       namesSearch: [],
-      optionsSearch: ['component']
+      optionsSearch: 'component'
     };
   },
   mounted: function mounted() {
@@ -6120,7 +6124,7 @@ __webpack_require__.r(__webpack_exports__);
 
     document.getElementById("search-input").addEventListener("keypress", function (e) {
       if (e.key == "Enter") {
-        _this.search();
+        _this.foo();
       }
     });
   },
@@ -6136,11 +6140,29 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    search: function search() {
+    aa: function aa() {
+      console.log("gello");
+    },
+    foo: function foo() {
+      var routeToPass = '';
+
+      switch (this.optionsSearch) {
+        case 'tags':
+          routeToPass = '/api/getPostByTag/' + this.toSearch;
+          break;
+
+        case 'component':
+          routeToPass = '/api/getPostByName/' + this.toSearch;
+          break;
+
+        default:
+          break;
+      }
+
       this.$router.push({
         name: 'search',
         params: {
-          name: this.toSearch
+          route: routeToPass
         }
       });
       this.toSearch = '';
@@ -6634,7 +6656,7 @@ var routes = [{
     component: Home
   }, {
     name: 'search',
-    path: 'search/:name',
+    path: '/:lang/search',
     component: SearchResults
   }]
 }, {
@@ -6667,15 +6689,15 @@ var routes = [{
     component: CreateCode
   }, {
     name: 'show-code',
-    path: 'show/code/:id',
+    path: '/:lang/show/code/:id',
     component: ShowAllCode
   }, {
     name: 'my-code',
-    path: 'show/profile/:opmain',
+    path: 'show/profile',
     component: MyCode
   }, {
     name: 'code-others',
-    path: 'code/profile/:idUsu',
+    path: '/:lang/code/profile/:idUsu',
     component: CodeOther
   }, {
     name: 'update-code',
@@ -37671,30 +37693,22 @@ var render = function () {
         },
       },
       [
-        _c(
-          "div",
-          {
-            staticClass: "iframe",
-            staticStyle: { "background-color": "white" },
-          },
-          [
-            _c("div", { staticClass: "iframe-preview" }, [
-              _c("iframe", {
-                staticStyle: { border: "0px #FFFFFF none" },
-                attrs: {
-                  srcdoc: _vm.src,
-                  name: "test",
-                  scrolling: "no",
-                  frameborder: "0",
-                  marginheight: "0px",
-                  marginwidth: "0px",
-                  height: "2000px",
-                  width: "250%",
-                },
-              }),
-            ]),
-          ]
-        ),
+        _c("div", { staticClass: "iframe" }, [
+          _c("div", { staticClass: "iframe-preview" }, [
+            _c("iframe", {
+              attrs: {
+                srcdoc: _vm.src,
+                name: "test",
+                scrolling: "no",
+                frameborder: "0",
+                marginheight: "0px",
+                marginwidth: "0px",
+                height: "2000px",
+                width: "250%",
+              },
+            }),
+          ]),
+        ]),
       ]
     ),
     _vm._v(" "),
@@ -37704,49 +37718,51 @@ var render = function () {
         attrs: { src: "/storage/" + _vm.data.userImg, alt: "" },
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "post_user-names" }, [
-        _c("div", { staticClass: "post_info" }, [
-          _c("h3", [_vm._v(_vm._s(_vm.data.postName))]),
+      _c("div", { staticClass: "post_info" }, [
+        _c("div", { staticClass: "post_info-names" }, [
+          _c("button", { staticClass: "button-text" }, [
+            _c("h3", [_vm._v(_vm._s(_vm.data.postName))]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "post_info-meta" }, [
+          _vm.likes.includes(_vm.data.idPost)
+            ? _c(
+                "li",
+                {
+                  on: {
+                    click: function ($event) {
+                      return _vm.like()
+                    },
+                  },
+                },
+                [
+                  _c("i", { staticClass: "bi bi-heart-fill" }),
+                  _vm._v(_vm._s(_vm.data.likes) + "\r\n                    "),
+                ]
+              )
+            : _c(
+                "li",
+                {
+                  on: {
+                    click: function ($event) {
+                      return _vm.like()
+                    },
+                  },
+                },
+                [
+                  _c("i", { staticClass: "bi bi-heart" }),
+                  _vm._v(_vm._s(_vm.data.likes) + "\r\n                    "),
+                ]
+              ),
           _vm._v(" "),
-          _c("ul", { staticClass: "post_info-meta" }, [
-            _vm.likes.includes(_vm.data.idPost)
-              ? _c(
-                  "li",
-                  {
-                    on: {
-                      click: function ($event) {
-                        return _vm.like()
-                      },
-                    },
-                  },
-                  [
-                    _c("i", { staticClass: "bi bi-heart-fill" }),
-                    _vm._v(_vm._s(_vm.data.likes) + "\r\n                    "),
-                  ]
-                )
-              : _c(
-                  "li",
-                  {
-                    on: {
-                      click: function ($event) {
-                        return _vm.like()
-                      },
-                    },
-                  },
-                  [
-                    _c("i", { staticClass: "bi bi-heart" }),
-                    _vm._v(_vm._s(_vm.data.likes) + "\r\n                    "),
-                  ]
-                ),
-            _vm._v(" "),
-            _c("li", [
-              _c("i", { staticClass: "bi bi-eye-fill" }),
-              _vm._v(_vm._s(_vm.data.views) + "\r\n                    "),
-            ]),
+          _c("li", [
+            _c("i", { staticClass: "bi bi-eye-fill" }),
+            _vm._v(_vm._s(_vm.data.views) + "\r\n                    "),
           ]),
           _vm._v(" "),
           _vm.data.idUsu == this.$store.state.auth.idUsu
-            ? _c("div", { staticClass: "post_info-options" }, [
+            ? _c("li", { staticClass: "post_info-options" }, [
                 _c(
                   "ul",
                   {
@@ -37799,21 +37815,8 @@ var render = function () {
               ])
             : _vm._e(),
         ]),
-        _vm._v(
-          "\r\n            " + _vm._s(_vm.data.deleted_at) + "\r\n            "
-        ),
-        _c(
-          "h5",
-          {
-            on: {
-              click: function ($event) {
-                return _vm.showUser()
-              },
-            },
-          },
-          [_vm._v(_vm._s(_vm.data.name))]
-        ),
       ]),
+      _vm._v("\r\n            " + _vm._s(_vm.data.deleted_at) + "\r\n    "),
     ]),
   ])
 }
@@ -37939,6 +37942,8 @@ var render = function () {
               1
             )
           : _vm._e(),
+        _vm._v(" "),
+        _c("i", { staticClass: "bi bi-pencil-square" }),
         _vm._v(" "),
         this.$store.state.auth.permissions > 0
           ? _c("User-Options", { attrs: { id: "user_options" } })
@@ -38217,50 +38222,66 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("nav", { staticClass: "nav-5", attrs: { id: "nav" } }, [
-      _c("ul", { attrs: { id: "nav-logo" } }, [
-        _c("div", { attrs: { id: "nav_logo-home" }, on: { click: _vm.home } }, [
+      _c(
+        "ul",
+        {
+          attrs: { id: "nav-logo" },
+          on: {
+            click: function ($event) {
+              return _vm.home()
+            },
+          },
+        },
+        [
           _c("img", {
             attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
           }),
           _vm._v(" "),
           _c("h2", { attrs: { id: "logo-title" } }, [_vm._v("Lizard")]),
-        ]),
-      ]),
+        ]
+      ),
       _vm._v(" "),
-      _c("ul", { attrs: { id: "search" } }, [_c("Search")], 1),
-      _vm._v(" "),
-      this.$store.state.isAuthenticated == false
-        ? _c(
-            "ul",
-            { attrs: { id: "nav-out-permiss" } },
-            [
-              _c("LangSwitch"),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: { name: "login" } } }, [
-                    _vm._v(_vm._s(_vm.$t("nav.login"))),
-                  ]),
-                ],
-                1
-              ),
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      this.$store.state.auth.permissions > 0
-        ? _c("ul", { attrs: { id: "nav-with-permiss" } }, [
-            _c("li", { staticClass: "nav-mains" }, [
-              _c("p", { on: { click: _vm.createCode } }, [
-                _vm._v(_vm._s(_vm.$t("nav.new_component"))),
+      _c("div", { attrs: { id: "nav-options" } }, [
+        _c("ul", { attrs: { id: "search" } }, [_c("Search")], 1),
+        _vm._v(" "),
+        this.$store.state.isAuthenticated == false
+          ? _c(
+              "ul",
+              { attrs: { id: "nav-out-permiss" } },
+              [
+                _c("LangSwitch"),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: { name: "login" } } }, [
+                      _vm._v(_vm._s(_vm.$t("nav.login"))),
+                    ]),
+                  ],
+                  1
+                ),
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        this.$store.state.auth.permissions > 0
+          ? _c("ul", { attrs: { id: "nav-with-permiss" } }, [
+              _c("li", { staticClass: "nav-mains" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button-create-code",
+                    on: { click: _vm.createCode },
+                  },
+                  [_c("i", { staticClass: "bi bi-pencil-square" })]
+                ),
               ]),
-            ]),
-            _vm._v(" "),
-            _c("li", [_c("User-Options")], 1),
-          ])
-        : _vm._e(),
+              _vm._v(" "),
+              _c("li", [_c("User-Options")], 1),
+            ])
+          : _vm._e(),
+      ]),
     ]),
   ])
 }
@@ -38526,9 +38547,9 @@ var render = function () {
         _vm._v(" "),
         _c("div", { attrs: { id: "search_options" } }, [
           _c(
-            "div",
+            "button",
             {
-              staticClass: "search_option",
+              staticClass: "button-navSearch",
               class: { "search_option-select": _vm.existOption("tags") },
               on: {
                 click: function ($event) {
@@ -38540,9 +38561,9 @@ var render = function () {
           ),
           _vm._v(" "),
           _c(
-            "div",
+            "button",
             {
-              staticClass: "search_option",
+              staticClass: "button-navSearch",
               class: { "search_option-select": _vm.existOption("component") },
               on: {
                 click: function ($event) {
@@ -38554,9 +38575,9 @@ var render = function () {
           ),
           _vm._v(" "),
           _c(
-            "div",
+            "button",
             {
-              staticClass: "search_option",
+              staticClass: "button-navSearch",
               class: { "search_option-select": _vm.existOption("profile") },
               on: {
                 click: function ($event) {
@@ -38581,7 +38602,7 @@ var render = function () {
                   staticClass: "searc_result",
                   on: {
                     click: function ($event) {
-                      return search()
+                      return _vm.foo()
                     },
                   },
                 },
