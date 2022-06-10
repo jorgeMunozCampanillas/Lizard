@@ -166,6 +166,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.get('/api/user/random').then(function (res) {
+        console.log("People random:");
+        console.log(res);
         _this3.interestingUsers = res.data;
       })["catch"](function (err) {
         console.log("Error en Home.vue getPeople");
@@ -233,7 +235,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: 'code-others',
         params: {
-          id: this.user.idUsu
+          idUsu: this.user.idUsu
         }
       });
     }

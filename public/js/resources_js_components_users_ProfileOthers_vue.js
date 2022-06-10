@@ -134,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.user = res.data.data;
         _this3.follows = res.data.follows;
       })["catch"](function (err) {
-        console.log("Error CodeOthers.vue getAutLikes");
+        console.log("Error CodeOthers.vue getUser");
         console.log(err.data);
       });
     },

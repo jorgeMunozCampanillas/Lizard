@@ -52,7 +52,6 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
-      console.log(this.$route.params.route);
       axios.get(this.$route.params.route).then(function (res) {
         console.log(res);
         _this.posts = res.data.data;

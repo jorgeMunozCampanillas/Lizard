@@ -127,7 +127,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 //Code mirror
 
 
@@ -163,7 +162,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    //this come from navUdate
+    this.check(); //this come from navUdate
+
     this.$root.$on('update', function (postName) {
       return _this.preView(postName);
     });
@@ -185,21 +185,41 @@ __webpack_require__.r(__webpack_exports__);
     this.getCode();
   },
   methods: {
-    getCode: function getCode() {
+    check: function check() {
       var _this2 = this;
 
+      setTimeout(function () {
+        console.log("Post: " + _this2.post.idPost);
+        axios.get('/api/post/isMyOwn/' + _this2.post.idPost).then(function (res) {
+          if (!res.data) {
+            console.log("NO ES MI CODIGO");
+
+            _this2.$router.push({
+              name: 'show-code',
+              id: _this2.post.idPost
+            });
+          }
+        })["catch"](function (err) {
+          console.log("Error en UpdateCode.vue check");
+          console.log(err);
+        });
+      }, 400);
+    },
+    getCode: function getCode() {
+      var _this3 = this;
+
       axios.get('/api/post/code/' + this.$route.params.id).then(function (res) {
-        _this2.post = res.data.data[0];
-        _this2.tags = _this2.post.tags;
+        _this3.post = res.data.data[0];
+        _this3.tags = _this3.post.tags;
         var dataToNav = {
-          userName: _this2.post.name,
-          postName: _this2.post.postName,
-          idPost: _this2.post.idPost
+          userName: _this3.post.name,
+          postName: _this3.post.postName,
+          idPost: _this3.post.idPost
         };
         console.log("si soy");
-        console.log(_this2.post);
+        console.log(_this3.post);
 
-        _this2.$root.$emit('navUpdate', _this2.post);
+        _this3.$root.$emit('navUpdate', _this3.post);
       })["catch"](function (err) {
         console.log("Error ShowCode.vue getCode");
         console.log(err);
@@ -218,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
       this.previewMode = !this.previewMode;
     },
     update: function update() {
-      var _this3 = this;
+      var _this4 = this;
 
       //POST
       axios.put('/api/post/code/' + this.post.idPost, {
@@ -230,23 +250,29 @@ __webpack_require__.r(__webpack_exports__);
       }) //TAGS
       .then(function () {
         var data = {
-          tags: _this3.tags,
-          idPost: _this3.post.idPost
+          tags: _this4.tags,
+          idPost: _this4.post.idPost
         };
         axios.post('/api/tag/tag', data);
       }) //Go to prpofile
       .then(function () {
-        _this3.$router.push({
+        _this4.$router.push({
           name: 'my-code'
         });
 
-        _this3.update = function () {
+        _this4.update = function () {
           console.log("hola");
         };
       })["catch"](function (err) {
+        if (err.response.status == 403) {
+          _this4.$router.push({
+            name: 'permissError'
+          });
+        }
+
         console.log("Error save desde CreateCode.vue");
         console.log(err);
-        _this3.errors = error.response.data.errors;
+        _this4.errors = error.response.data.errors;
       });
     }
   }

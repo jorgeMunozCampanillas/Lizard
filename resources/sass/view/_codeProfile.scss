@@ -15,6 +15,7 @@
         align-items: center;
         height: max-content;
         background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg");
+        // background-image: url("https://publicaciondigitaliespuertabonita.files.wordpress.com/2017/11/power_camp.gif");
         background-position: center;
         background-repeat: repeat;
         background-size: 4%;
@@ -62,10 +63,128 @@
             grid-template-columns: repeat(12, 1fr);
             gap: 1.8rem;
         }
+
+        #profile_resume{
+            padding: 2rem;
+            grid-column-end: span 12;
+            // grid-template-rows: 80% max-content;
+            
+    
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.8rem;
+
+            .profile_resume-part{
+                grid-column-end: span 12;
+            }
+            
+            .resume-container{
+
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                grid-column-end: span 6;
+
+                .profile_resume-title{
+                    grid-column-end: span 12;
+                    text-align: center;
+                }
+                .post{
+                    grid-column-end: span 12;
+                    height: 100%;
+
+                    justify-content: space-between;
+                    z-index: 5;
+                    .iframe{
+                        height: 40vh !important;
+                        iframe {
+                            transform:scale(.4);
+                            transform-origin:0 0;
+                        }
+                    }
+                }
+                // .profile_resume-data{
+                //     grid-column-end: span 2;
+                // }
+            }
+
+            .resume-container-best{
+                .post{
+                    grid-column-end: span 12;
+                    .iframe{
+                        height: 60vh !important;
+                        iframe {
+                            transform:scale(.5);
+                        }
+                    }
+                }
+            }
+
+            .resume-container:nth-child(2){
+                grid-column-start: 2;
+                grid-column-end: 12;
+                position: relative;
+
+                &::after{
+                    position: absolute;
+                    top: 5rem;
+                    right: -12rem;
+                    font-size: 13rem;
+                    transform: rotateZ(30deg);
+                    z-index: 0;
+                    content: '🏆';
+                }
+                &::before{
+                    position: absolute;
+                    top: 5rem;
+                    left: -12rem;
+                    font-size: 13rem;
+                    transform: rotateZ(-30deg);
+                    z-index: 0;
+                    content: '🏆';
+                }
+            }
+
+            // .resume-container:nth-child(odd){
+            //     grid-column: 1/9;
+            // }
+
+            // .resume-container:nth-child(even){
+            //     grid-column: 3/12;
+            //     .post{
+            //         grid-column-start: 3;
+            //         grid-column-end: 13;
+            //     }
+            //     .profile_resume-data{
+            //         grid-row-start: 2;
+            //         grid-column-start: 1;
+            //         grid-column-end: 3;
+            //     }
+            // }
+
+            
+        }
+        #profile_tags{
+            margin: 3rem 5rem 0 5rem;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-column-end: span 12;
+            
+            h2{
+                grid-column-end: span 12;
+            }
+            #tags{
+                display: flex;
+                grid-column-end: span 12;
+
+                .tag{
+                    margin: .4rem;
+                }
+            }
+        }
     }
 
     .post{
-        grid-column-end: span 3;
+        grid-column-end: span 4;
         height:max-content;
         background-color: $secondary-dark;
         box-shadow: 7px 7px $primary-dark-strong;

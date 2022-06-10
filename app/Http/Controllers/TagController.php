@@ -106,4 +106,14 @@ class TagController extends Controller
     {
         //
     }
+
+    public function own(Request $request){
+        $tags = Tag::getOwnTags();
+        return response()->json($tags);
+    }
+    
+    public function getOwnPostByTag(Request $request, $idTag){
+        $posts = Tag::getOwnPostByTag($idTag);
+        return response()->json($posts);
+    }
 }

@@ -36,7 +36,6 @@ export default {
   },
   methods:{
     getPosts(){
-        console.log(this.$route.params.route)
         axios.get(this.$route.params.route)
         .then(res=>{
           console.log(res)

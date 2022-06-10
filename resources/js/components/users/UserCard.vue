@@ -22,28 +22,28 @@ export default {
 
     methods:{
         follow(){
-        let data = {
-            idUsu:this.user.idUsu,
-        }
-        axios.post('/api/user/follow/follow',data)
-        .then(res=>{
-            if(this.$store.state.follows.followings.includes(this.user.idUsu)){
-                //Change button
-                let index = this.$store.state.follows.followings.indexOf(this.user.idUsu);
-                this.$store.state.follows.followings.splice(index,1);
-
-            }else{
-                //Change button
-                this.$store.state.follows.followings.push(this.user.idUsu);
+            let data = {
+                idUsu:this.user.idUsu,
             }
-        })
-        .catch(err=>{
-            console.log('Error en CodeProfileOthers.vue follow');
-            console.log(err)
-        });
+            axios.post('/api/user/follow/follow',data)
+            .then(res=>{
+                if(this.$store.state.follows.followings.includes(this.user.idUsu)){
+                    //Change button
+                    let index = this.$store.state.follows.followings.indexOf(this.user.idUsu);
+                    this.$store.state.follows.followings.splice(index,1);
+
+                }else{
+                    //Change button
+                    this.$store.state.follows.followings.push(this.user.idUsu);
+                }
+            })
+            .catch(err=>{
+                console.log('Error en CodeProfileOthers.vue follow');
+                console.log(err)
+            });
         },
         showUser(){
-            this.$router.push({name:'code-others', params: { id: this.user.idUsu }})
+            this.$router.push({name:'code-others', params: { idUsu: this.user.idUsu }})
         }
     }
 }

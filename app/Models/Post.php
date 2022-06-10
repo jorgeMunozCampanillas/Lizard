@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 class Post extends Model
 {
@@ -254,6 +255,32 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
             inner join `user` on `user`.`idUsu` = `post`.`idUsu`
             WHERE `post`.`deleted_at` IS null
             ORDER BY `likes` DESC LIMIT 1;")
+            );
+
+        return $posts;
+    }
+
+    public static function isMyOwn($idPost){
+        $assert = DB::table('post')
+        ->where('post.idPost', $idPost)
+        ->where('post.idUsu', Auth::id())
+        ->count();
+
+        return $assert;
+    }
+
+    public static function postLoved(){
+        $posts = DB::select(
+            DB::raw("
+            Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*, 
+            (
+                SELECT COUNT(`post_like`.`idPost`) 
+                FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+            ) as `likes` 
+            from `post` 
+            inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+            inner join `post_like` on `post_like`.`idPost` = `post`.`idPost`
+            WHERE `post`.`deleted_at` IS null AND `post_like`.`idUsu` = ".Auth::id().";")
             );
 
         return $posts;

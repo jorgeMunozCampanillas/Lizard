@@ -93,6 +93,105 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -104,9 +203,12 @@ __webpack_require__.r(__webpack_exports__);
       postsNumber: '',
       //Nav options
       optionMain: 'your_work',
-      optionSecond: 'your_work',
+      optionSecond: 'resume',
       //followsUsers/Code
-      followsDetails: []
+      followsDetails: [],
+      likes: [],
+      tags: [],
+      searchTags: []
     };
   },
   mounted: function mounted() {
@@ -146,11 +248,33 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    getAuthLikes: function getAuthLikes() {
+    getResume: function getResume() {
       var _this2 = this;
 
+      axios.get('/api/post/posts/' + this.$store.state.auth.idUsu).then(function (res) {
+        console.log(res.data.data);
+
+        if (res.status) {
+          _this2.posts = res.data.data;
+          _this2.postsNumber = res.data.data.length;
+        } else {
+          _this2.$router.push({
+            name: 'permissError',
+            params: {
+              msg: res.data.error
+            }
+          });
+        }
+      })["catch"](function (err) {
+        console.log("Error CodeProfile.vue getPosts");
+        console.log(err);
+      });
+    },
+    getAuthLikes: function getAuthLikes() {
+      var _this3 = this;
+
       axios.get('/api/user/likesGiven').then(function (res) {
-        _this2.likes = res.data.data;
+        _this3.likes = res.data.data;
       })["catch"](function (err) {
         console.log("Error CodeProfile.vue getAutLikes");
         console.log(err.data);
@@ -158,11 +282,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     //Followings
     getFollowings: function getFollowings() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('/api/user/follow/following/' + this.$store.state.auth.idUsu).then(function (res) {
         console.log(res);
-        _this3.followsDetails = res.data.data;
+        _this4.followsDetails = res.data.data;
       })["catch"](function (err) {
         console.log('Error en CodeProfile.vue getFollowings');
         console.log(err);
@@ -170,34 +294,66 @@ __webpack_require__.r(__webpack_exports__);
     },
     //Followers
     getFollowers: function getFollowers() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get('/api/user/follow/followers/' + this.$store.state.auth.idUsu).then(function (res) {
-        _this4.followsDetails = res.data.data;
+        _this5.followsDetails = res.data.data;
       })["catch"](function (err) {
         console.log('Error en CodeProfile.vue getFollowings');
         console.log(err);
       });
     },
     getPostFollowings: function getPostFollowings() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.get('/api/post/following').then(function (res) {
         console.log(res.data.data);
-        _this5.followsDetails = res.data.data;
+        _this6.followsDetails = res.data.data;
       })["catch"](function (err) {
         console.log('Error en Profile.vue getPostFollowers');
         console.log(err);
       });
     },
     getPostDeleted: function getPostDeleted() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get('/api/post/deleted/' + this.$store.state.auth.idUsu).then(function (res) {
         console.log(res.data.data);
-        _this6.posts = res.data.data;
+        _this7.posts = res.data.data;
       })["catch"](function (err) {
         console.log('Error en Profile.vue getPostFollowers');
+        console.log(err);
+      });
+    },
+    getTags: function getTags() {
+      var _this8 = this;
+
+      axios.get('/api/tag/own/').then(function (res) {
+        _this8.tags = res.data;
+      })["catch"](function (err) {
+        console.log('Error en Profile.vue getTags');
+        console.log(err);
+      });
+    },
+    searchTag: function searchTag(idTag) {
+      var _this9 = this;
+
+      axios.get('/api/tag/getOwnPostByTag/' + idTag).then(function (res) {
+        console.log(res.data);
+        _this9.posts = res.data;
+      })["catch"](function (err) {
+        console.log("Error en Profile.vue getTags");
+        console.log(err);
+      });
+    },
+    getPostLoved: function getPostLoved() {
+      var _this10 = this;
+
+      axios.get('/api/post/getLastPostLoved').then(function (res) {
+        console.log(res);
+        _this10.posts = res.data;
+      })["catch"](function (err) {
+        console.log('Error en Profile.vue getTags');
         console.log(err);
       });
     },
@@ -214,7 +370,8 @@ __webpack_require__.r(__webpack_exports__);
           this.getPostFollowings();
           break;
 
-        case 3:
+        case 'resume':
+          this.getResume();
           break;
 
         case 4:
@@ -231,13 +388,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     SET_OPSECOND: function SET_OPSECOND(id) {
       this.optionSecond = id;
+      this.posts = [];
 
       switch (id) {
         case 'components':
           break;
 
-        case 3:
+        case 'tags':
+          this.getTags();
+          break;
+
+        case 'deleted':
           this.getPostDeleted();
+          break;
+
+        case 'loved':
+          this.getPostLoved();
           break;
 
         default:
@@ -400,7 +566,7 @@ var render = function () {
               class: { active: _vm.optionMain == "your_work" },
               on: {
                 click: function ($event) {
-                  return _vm.SET_OPMAIN("your_work")
+                  _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("resume")
                 },
               },
             },
@@ -413,7 +579,7 @@ var render = function () {
               class: { active: _vm.optionMain == "following" },
               on: {
                 click: function ($event) {
-                  return _vm.SET_OPMAIN("following")
+                  _vm.SET_OPMAIN("following"), _vm.SET_OPSECOND("none")
                 },
               },
             },
@@ -426,7 +592,7 @@ var render = function () {
               class: { active: _vm.optionMain == 3 },
               on: {
                 click: function ($event) {
-                  return _vm.SET_OPMAIN(3)
+                  _vm.SET_OPMAIN(3), _vm.SET_OPSECOND("none")
                 },
               },
             },
@@ -441,11 +607,10 @@ var render = function () {
               _c(
                 "li",
                 {
-                  class: { active: _vm.optionSecond == "your_work" },
+                  class: { active: _vm.optionSecond == "resume" },
                   on: {
                     click: function ($event) {
-                      _vm.SET_OPMAIN("your_work"),
-                        _vm.SET_OPSECOND("components")
+                      _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("resume")
                     },
                   },
                 },
@@ -455,20 +620,7 @@ var render = function () {
               _c(
                 "li",
                 {
-                  class: { active: _vm.optionSecond == 2 },
-                  on: {
-                    click: function ($event) {
-                      return _vm.SET_OPSECOND(2)
-                    },
-                  },
-                },
-                [_vm._v(_vm._s(_vm.$t("profile.collections")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  class: { active: _vm.optionSecond == 2 },
+                  class: { active: _vm.optionSecond == "your_work" },
                   on: {
                     click: function ($event) {
                       _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("your_work")
@@ -481,10 +633,10 @@ var render = function () {
               _c(
                 "li",
                 {
-                  class: { active: _vm.optionSecond == 2 },
+                  class: { active: _vm.optionSecond == "tags" },
                   on: {
                     click: function ($event) {
-                      return _vm.SET_OPSECOND(2)
+                      _vm.SET_OPSECOND(2), _vm.SET_OPSECOND("tags")
                     },
                   },
                 },
@@ -494,10 +646,10 @@ var render = function () {
               _c(
                 "li",
                 {
-                  class: { active: _vm.optionSecond == 2 },
+                  class: { active: _vm.optionSecond == "loved" },
                   on: {
                     click: function ($event) {
-                      return _vm.SET_OPSECOND(2)
+                      _vm.SET_OPSECOND(2), _vm.SET_OPSECOND("loved")
                     },
                   },
                 },
@@ -507,10 +659,10 @@ var render = function () {
               _c(
                 "li",
                 {
-                  class: { active: _vm.optionSecond == 3 },
+                  class: { active: _vm.optionSecond == "deleted" },
                   on: {
                     click: function ($event) {
-                      return _vm.SET_OPSECOND(3)
+                      _vm.SET_OPSECOND("your_work"), _vm.SET_OPSECOND("deleted")
                     },
                   },
                 },
@@ -551,7 +703,134 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.optionMain == "your_work"
+      _vm.optionSecond == "resume"
+        ? _c("div", { attrs: { id: "profile_resume" } }, [
+            _c("h1", { staticClass: "profile_resume-part" }, [
+              _vm._v("Your Best Posts"),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "resume-container resume-container-best" },
+              [
+                _c("h2", { staticClass: "profile_resume-title" }, [
+                  _vm._v(" First place #1"),
+                ]),
+                _vm._v(" "),
+                _c("Post", {
+                  staticClass: "post",
+                  attrs: { data: _vm.posts[0], likes: _vm.likes },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "resume-container" },
+              [
+                _c("h2", { staticClass: "profile_resume-title" }, [
+                  _vm._v(" Second place #2 🥈"),
+                ]),
+                _vm._v(" "),
+                _c("Post", {
+                  staticClass: "post",
+                  attrs: { data: _vm.posts[1], likes: _vm.likes },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "resume-container" },
+              [
+                _c("h2", { staticClass: "profile_resume-title" }, [
+                  _vm._v(" Third place #3 🥉"),
+                ]),
+                _vm._v(" "),
+                _c("Post", {
+                  staticClass: "post",
+                  attrs: { data: _vm.posts[1], likes: _vm.likes },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("h1", { staticClass: "profile_resume-part" }, [
+              _vm._v("💙 More Likes 💙"),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "resume-container" },
+              [
+                _c("Post", {
+                  staticClass: "post",
+                  attrs: { data: _vm.posts[1], likes: _vm.likes },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "resume-container" },
+              [
+                _c("h2", { staticClass: "profile_resume-title" }, [
+                  _vm._v("👀 More Views 👀"),
+                ]),
+                _vm._v(" "),
+                _c("Post", {
+                  staticClass: "post",
+                  attrs: { data: _vm.posts[2], likes: _vm.likes },
+                }),
+                _vm._v(" "),
+                _vm._m(0),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "resume-container" },
+              [
+                _c("h2", { staticClass: "profile_resume-title" }, [
+                  _vm._v(" More Forked"),
+                ]),
+                _vm._v(" "),
+                _c("Post", {
+                  staticClass: "post",
+                  attrs: { data: _vm.posts[2], likes: _vm.likes },
+                }),
+                _vm._v(" "),
+                _vm._m(1),
+              ],
+              1
+            ),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.optionSecond == "deleted"
+        ? _c(
+            "div",
+            { attrs: { id: "profile_tags" } },
+            [
+              _c("h2", [_vm._v("Deleteds")]),
+              _vm._v(" "),
+              _vm._l(_vm.posts, function (post) {
+                return _c("Post", {
+                  key: post.idPost,
+                  staticClass: "post",
+                  attrs: { data: post, likes: _vm.likes },
+                })
+              }),
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.optionSecond == "your_work"
         ? _c(
             "div",
             { attrs: { id: "profile_posts" } },
@@ -566,18 +845,63 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.optionMain == "your_work"
+      _vm.optionSecond == "loved"
         ? _c(
             "div",
-            { attrs: { id: "profile_posts" } },
-            _vm._l(_vm.posts, function (post) {
-              return _c("Post", {
-                key: post.idPost,
-                staticClass: "post",
-                attrs: { data: post, likes: _vm.likes },
-              })
-            }),
-            1
+            { attrs: { id: "profile_tags" } },
+            [
+              _c("h2", [_vm._v('Last loveds "<3" ')]),
+              _vm._v(" "),
+              _vm._l(_vm.posts, function (post) {
+                return _c("Post", {
+                  key: post.idPost,
+                  staticClass: "post",
+                  attrs: { data: post, likes: _vm.likes },
+                })
+              }),
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.optionSecond == "tags"
+        ? _c(
+            "div",
+            { attrs: { id: "profile_tags" } },
+            [
+              _c("br"),
+              _vm._v(" "),
+              _c("h2", { attrs: { id: "" } }, [_vm._v("All your tags")]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { attrs: { id: "tags" } },
+                _vm._l(_vm.tags, function (tag) {
+                  return _c(
+                    "li",
+                    {
+                      staticClass: "button-tag tag",
+                      on: {
+                        click: function ($event) {
+                          return _vm.searchTag(tag.idTag)
+                        },
+                      },
+                    },
+                    [_vm._v(_vm._s(tag.tag))]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.posts, function (post) {
+                return _c("Post", {
+                  key: post.idPost,
+                  staticClass: "post",
+                  attrs: { data: post, likes: _vm.likes },
+                })
+              }),
+            ],
+            2
           )
         : _vm._e(),
       _vm._v(" "),
@@ -598,7 +922,40 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "profile_resume-data" }, [
+      _c("ul", [
+        _c("li", [_vm._v("Likes: 3")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Views: 90")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Forks: 12")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Date: 12-01-2021")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "profile_resume-data" }, [
+      _c("ul", [
+        _c("li", [_vm._v("Likes: 3")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Views: 90")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Forks: 12")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Date: 12-01-2021")]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 

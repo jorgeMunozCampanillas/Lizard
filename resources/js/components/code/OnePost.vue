@@ -5,7 +5,7 @@
 
         <div class="iframe">
             <div class="iframe-preview">
-                <iframe :srcdoc="src" name="test" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="2000px" width="250%"></iframe>
+                <iframe :srcdoc="src" name="test" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" width="250%"></iframe>
             </div>
         </div>
 
@@ -15,8 +15,8 @@
             <div class="post_info">
                 <!-- Names -->
                 <div class="post_info-names">
-                    <button class="button-text"><h3>{{data.postName}}</h3></button>
-                    <!-- <button class="button-text"><h5 @click="showUser()">{{data.name}}</h5></button> -->
+                    <button class="button-text"><h3>{{postName}}</h3></button>
+                    <button class="button-text"><h5 @click="showUser()">{{data.name}}</h5></button>
                 </div>
 
 
@@ -51,15 +51,27 @@
 </template>
 
 <script>
+import { stringify } from 'querystring';
+
 
 export default {
     name: "Post",
     props:{
         data:{
-            default: ''
+            type: Object,
+            default() {
+                return {
+                    postName:''
+                }
+            }
         },
         likes:{
-            default: []
+            type: Array,
+            default() {
+                return {
+                    postName:''
+                }
+            }
         },
 
     },
@@ -77,6 +89,13 @@ export default {
                 <style>${this.data.css}</style>
             </html>`;
             return aux;
+        },
+        postName(){
+            console.log(this.data.postName.length)
+            if (this.data.postName.length > 15) {
+                return this.data.postName.slice(0, 12)+"...";
+            }
+            return this.data.postName;
         }
     },
     methods: {

@@ -115,7 +115,7 @@ export default {
         this.follows = res.data.follows;
       })
       .catch(err=>{
-        console.log("Error CodeOthers.vue getAutLikes");
+        console.log("Error CodeOthers.vue getUser");
         console.log(err.data);
       })
     },

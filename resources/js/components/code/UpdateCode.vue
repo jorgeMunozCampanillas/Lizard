@@ -6,7 +6,6 @@
     <Editor class="editor" :code="post.css" lang="css" language="CSS" v-on:update="updateCode"/>
     <Editor class="editor" :code="post.js" lang="js" language="JS" v-on:update="updateCode"/>
   </div>
-
   <!-- PREVIEW -->
   <Preview v-if="previewMode" 
     :src="src" 
@@ -63,6 +62,7 @@ export default {
   },
 
   mounted() {
+    this.check();
     //this come from navUdate
     this.$root.$on('update', (postName) => this.preView(postName));
     this.$root.$on('changeFramework', newFrameworks =>{
@@ -77,8 +77,25 @@ export default {
       this.update();
     });
     this.getCode();
+
   },
   methods: {
+    check(){
+      setTimeout(()=>{
+        console.log("Post: "+this.post.idPost)
+        axios.get('/api/post/isMyOwn/'+this.post.idPost)
+        .then(res=>{
+          if (!res.data) {
+            console.log("NO ES MI CODIGO");
+            this.$router.push({name:'show-code', id:this.post.idPost});
+          }
+        })
+        .catch(err=>{
+          console.log("Error en UpdateCode.vue check")
+          console.log(err)
+        })
+      },400)
+    },
 
     getCode(){
       axios.get('/api/post/code/'+this.$route.params.id)
@@ -147,6 +164,9 @@ export default {
         this.update = ()=>{ console.log("hola")};
       })
       .catch((err)=>{
+        if (err.response.status==403) {
+          this.$router.push({name:'permissError'})
+        }
         console.log("Error save desde CreateCode.vue");
         console.log(err)
         this.errors = error.response.data.errors;

@@ -110,16 +110,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
-
-        $post->postName = $request->postName;
-        $post->html = $request->html;
-        $post->css = $request->css;
-        $post->js = $request->js;
-        $post->img = $request->img;
-        $post->script = $request->script;
-
-        $post->save();
+        if (Post::isMyOwn($id)) {
+            $post = Post::findOrFail($id);
+    
+            $post->postName = $request->postName;
+            $post->html = $request->html;
+            $post->css = $request->css;
+            $post->js = $request->js;
+            $post->img = $request->img;
+            $post->script = $request->script;
+    
+            $post->save();
+        }else{
+            return response()->json([
+                'error' => 'You dont have permiss here 😈'
+            ], 403);
+        }
     }
 
     /**
@@ -246,6 +252,11 @@ class PostController extends Controller
         ], 200);
     }
 
+    public function getLastPostLoved(Request $request){
+        $posts = Post::postLoved();
+        return response()->json($posts);
+    }
+
     //-------------------------------------
     // <<<<<<<<<<<- VIEWS ->>>>>>>>>>>>>
     //-------------------------------------
@@ -273,4 +284,14 @@ class PostController extends Controller
             'op' => $res
         ]);
     }
+
+    //------------------------------------
+    // <<<<<<<<<<<- CHECK ->>>>>>>>>>>>>
+    //------------------------------------
+    public function isMyOwn(Request $request, $idPost){
+        return response()->json(Post::isMyOwn($idPost));
+    }
+
+
 }
+

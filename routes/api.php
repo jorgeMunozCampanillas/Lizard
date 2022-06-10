@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*========< CDN Route >=========*/
-//Route::get('cdn/{idPost}', [App\Http\Controllers\PostController::class, 'api'])->middleware('cors');
 Route::get('cdn/{idPost}',  [App\Http\Controllers\PostController::class, 'cdn']);
 
 /*========< No Auth Routes >=========*/
@@ -28,13 +27,11 @@ Route::get('getSearchName/{name}/{options}', [App\Http\Controllers\PostControlle
 //Get search for like %word%
 Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 'getPostByName']);
 Route::get('getPostByTag/{name}', [App\Http\Controllers\PostController::class, 'getPostByTag']);
-Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 'getPostByName']);
 Route::get('getPostFeatured', [App\Http\Controllers\PostController::class, 'getPostFeatured']);
 
 
 //Code
 //get all code
-//Route::resource('code', App\Http\Controllers\PostController::class)->only(['index']); borrar?? 18/05/22
 Route::resource('code/{offset}', App\Http\Controllers\PostController::class)->only(['index']);
 
 /*========< Auth Routes >=========*/
@@ -73,6 +70,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
         Route::get('delete/{idPost}/{idUsu}', [ App\Http\Controllers\PostController::class, 'destroy'])->middleware(['sameUser']);
         Route::get('restore/{idPost}', [ App\Http\Controllers\PostController::class, 'restorePost']);
 
+        //Check if is my own code
+        Route::get('isMyOwn/{idPost}', [App\Http\Controllers\PostController::class, 'isMyOwn']);
         
         //add one view to post
         Route::post('view',[ App\Http\Controllers\PostController::class, 'addView']);
@@ -86,11 +85,14 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
         //like/dislike action
         Route::post('like', [App\Http\Controllers\PostController::class, 'like']);
+        Route::get('getLastPostLoved', [App\Http\Controllers\PostController::class, 'getLastPostLoved']);
     });
-
+    
     //Tags
     Route::group(["prefix"=>"tag"], function(){
         Route::resource('tag', App\Http\Controllers\TagController::class);
+        Route::get('own', [App\Http\Controllers\TagController::class, 'own']);
+        Route::get('getOwnPostByTag/{idTag}', [App\Http\Controllers\TagController::class, 'getOwnPostByTag']);
     });
         
 });

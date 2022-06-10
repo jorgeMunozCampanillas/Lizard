@@ -37,16 +37,12 @@ export default {
         searchNames(){
             axios.get('/api/getSearchName/'+this.toSearch+'/'+this.optionsSearch)
             .then(res=>{
-                console.log(res.data.data)
                 this.namesSearch = res.data.data;
             })
             .catch(err => {
                 console.log("Error en Home.vue search");
                 console.log(err)
             })
-        },
-        aa(){
-            console.log("gello")
         },
         foo(){
             let routeToPass='';

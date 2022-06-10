@@ -147,6 +147,8 @@ export default {
     getPeople(){
       axios.get('/api/user/random')
       .then(res => {
+        console.log("People random:");
+        console.log(res);
         this.interestingUsers = res.data;
       })
       .catch(err=>{
