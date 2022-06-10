@@ -12,6 +12,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _code_OnePost_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../code/OnePost.vue */ "./resources/js/components/code/OnePost.vue");
+/* harmony import */ var _UserCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserCard.vue */ "./resources/js/components/users/UserCard.vue");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -193,9 +223,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Post: _code_OnePost_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Post: _code_OnePost_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    UserCard: _UserCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -203,17 +235,18 @@ __webpack_require__.r(__webpack_exports__);
       postsNumber: '',
       //Nav options
       optionMain: 'your_work',
-      optionSecond: 'resume',
+      optionSecond: 'profile',
       //followsUsers/Code
       followsDetails: [],
       likes: [],
       tags: [],
-      searchTags: []
+      searchTags: [],
+      nameTagSearch: '',
+      limit: 0
     };
   },
   mounted: function mounted() {
     this.getAuthLikes();
-    this.getPosts();
     if (this.$route.params.opmain) this.optionMain = this.$route.params.opmain;
     this.SET_OPMAIN(this.optionMain);
   },
@@ -223,17 +256,37 @@ __webpack_require__.r(__webpack_exports__);
     },
     followings: function followings() {
       return this.$store.state.follows.followings.length;
+    },
+    dayWork: function dayWork(day) {
+      var _iterator = _createForOfIteratorHelper(this.work),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var i = _step.value;
+
+          if (i.day == day) {
+            return i.count;
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return false;
     }
   },
   methods: {
     getPosts: function getPosts() {
       var _this = this;
 
-      axios.get('/api/post/posts/' + this.$store.state.auth.idUsu).then(function (res) {
-        console.log(res.data.data);
-
+      axios.get('/api/post/posts/' + this.$store.state.auth.idUsu + '/' + this.limit).then(function (res) {
         if (res.status) {
-          _this.posts = res.data.data;
+          res.data.data.map(function (p) {
+            return _this.posts.push(p);
+          });
           _this.postsNumber = res.data.data.length;
         } else {
           _this.$router.push({
@@ -252,7 +305,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/api/post/posts/' + this.$store.state.auth.idUsu).then(function (res) {
-        console.log(res.data.data);
+        console.log(res);
 
         if (res.status) {
           _this2.posts = res.data.data;
@@ -308,7 +361,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/post/following').then(function (res) {
         console.log(res.data.data);
-        _this6.followsDetails = res.data.data;
+        _this6.posts = res.data.data;
       })["catch"](function (err) {
         console.log('Error en Profile.vue getPostFollowers');
         console.log(err);
@@ -335,12 +388,12 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    searchTag: function searchTag(idTag) {
+    searchTag: function searchTag(idTag, nameTag) {
       var _this9 = this;
 
       axios.get('/api/tag/getOwnPostByTag/' + idTag).then(function (res) {
-        console.log(res.data);
         _this9.posts = res.data;
+        _this9.nameTagSearch = nameTag;
       })["catch"](function (err) {
         console.log("Error en Profile.vue getTags");
         console.log(err);
@@ -357,9 +410,22 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
+    getWork: function getWork() {
+      var _this11 = this;
+
+      axios.get('/api/user/getWork').then(function (res) {
+        console.log("getWork");
+        console.log(res.data);
+        _this11.work = res.data;
+      })["catch"](function (err) {
+        console.log("Error en Profile.vue getWork");
+        console.log(err);
+      });
+    },
     //SETTERS
     SET_OPMAIN: function SET_OPMAIN(id) {
       this.optionMain = id;
+      this.posts = [];
 
       switch (id) {
         case 'your_work':
@@ -370,7 +436,7 @@ __webpack_require__.r(__webpack_exports__);
           this.getPostFollowings();
           break;
 
-        case 'resume':
+        case 'profile':
           this.getResume();
           break;
 
@@ -387,11 +453,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     SET_OPSECOND: function SET_OPSECOND(id) {
+      console.log("Voy a ponser: " + id);
       this.optionSecond = id;
       this.posts = [];
+      this.limit = 0;
 
       switch (id) {
-        case 'components':
+        case 'profile':
+          this.getWork();
           break;
 
         case 'tags':
@@ -415,6 +484,75 @@ __webpack_require__.r(__webpack_exports__);
         return p.idPost != idPost;
       });
       this.posts = newPosts;
+    },
+    load: function load() {
+      this.limit += 6;
+      this.getPosts();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/users/UserCard.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/users/UserCard.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    user: {
+      "default": ''
+    }
+  },
+  methods: {
+    follow: function follow() {
+      var _this = this;
+
+      var data = {
+        idUsu: this.user.idUsu
+      };
+      axios.post('/api/user/follow/follow', data).then(function (res) {
+        if (_this.$store.state.follows.followings.includes(_this.user.idUsu)) {
+          //Change button
+          var index = _this.$store.state.follows.followings.indexOf(_this.user.idUsu);
+
+          _this.$store.state.follows.followings.splice(index, 1);
+        } else {
+          //Change button
+          _this.$store.state.follows.followings.push(_this.user.idUsu);
+        }
+      })["catch"](function (err) {
+        console.log('Error en CodeProfileOthers.vue follow');
+        console.log(err);
+      });
+    },
+    showUser: function showUser() {
+      this.$router.push({
+        name: 'code-others',
+        params: {
+          idUsu: this.user.idUsu
+        }
+      });
     }
   }
 });
@@ -459,6 +597,44 @@ component.options.__file = "resources/js/components/users/Profile.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/users/UserCard.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/users/UserCard.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UserCard_vue_vue_type_template_id_2b5d0866___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserCard.vue?vue&type=template&id=2b5d0866& */ "./resources/js/components/users/UserCard.vue?vue&type=template&id=2b5d0866&");
+/* harmony import */ var _UserCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserCard.vue?vue&type=script&lang=js& */ "./resources/js/components/users/UserCard.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserCard_vue_vue_type_template_id_2b5d0866___WEBPACK_IMPORTED_MODULE_0__.render,
+  _UserCard_vue_vue_type_template_id_2b5d0866___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/users/UserCard.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/users/Profile.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/users/Profile.vue?vue&type=script&lang=js& ***!
@@ -474,6 +650,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/users/UserCard.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/users/UserCard.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/users/UserCard.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/users/Profile.vue?vue&type=template&id=3cde2f47&":
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/users/Profile.vue?vue&type=template&id=3cde2f47& ***!
@@ -486,6 +677,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_template_id_3cde2f47___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_template_id_3cde2f47___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Profile.vue?vue&type=template&id=3cde2f47& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/users/Profile.vue?vue&type=template&id=3cde2f47&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/users/UserCard.vue?vue&type=template&id=2b5d0866&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/users/UserCard.vue?vue&type=template&id=2b5d0866& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_template_id_2b5d0866___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_template_id_2b5d0866___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_template_id_2b5d0866___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserCard.vue?vue&type=template&id=2b5d0866& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/users/UserCard.vue?vue&type=template&id=2b5d0866&");
 
 
 /***/ }),
@@ -517,18 +724,13 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "profile_header-data" }, [
-        _c("div", [
-          _vm._v(
-            _vm._s(_vm.$t("profile.components_count", { msg: _vm.postsNumber }))
-          ),
-        ]),
-        _vm._v(" "),
         _c(
           "div",
           {
+            staticClass: "follows-button",
             on: {
               click: function ($event) {
-                return _vm.SET_OPMAIN(4)
+                _vm.SET_OPMAIN(4), _vm.SET_OPSECOND("none")
               },
             },
           },
@@ -542,9 +744,10 @@ var render = function () {
         _c(
           "div",
           {
+            staticClass: "follows-button",
             on: {
               click: function ($event) {
-                return _vm.SET_OPMAIN(5)
+                _vm.SET_OPMAIN(5), _vm.SET_OPSECOND("none")
               },
             },
           },
@@ -566,7 +769,7 @@ var render = function () {
               class: { active: _vm.optionMain == "your_work" },
               on: {
                 click: function ($event) {
-                  _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("resume")
+                  _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("profile")
                 },
               },
             },
@@ -589,14 +792,14 @@ var render = function () {
           _c(
             "li",
             {
-              class: { active: _vm.optionMain == 3 },
+              class: { active: _vm.optionMain == 4 || _vm.optionMain == 5 },
               on: {
                 click: function ($event) {
-                  _vm.SET_OPMAIN(3), _vm.SET_OPSECOND("none")
+                  _vm.SET_OPMAIN(5), _vm.SET_OPSECOND("none")
                 },
               },
             },
-            [_vm._v(_vm._s(_vm.$t("profile.trending")))]
+            [_vm._v("Friends")]
           ),
         ]),
         _vm._v(" "),
@@ -607,23 +810,23 @@ var render = function () {
               _c(
                 "li",
                 {
-                  class: { active: _vm.optionSecond == "resume" },
+                  class: { active: _vm.optionSecond == "profile" },
                   on: {
                     click: function ($event) {
-                      _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("resume")
+                      _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("profile")
                     },
                   },
                 },
-                [_vm._v(_vm._s(_vm.$t("profile.components")))]
+                [_vm._v("Profile")]
               ),
               _vm._v(" "),
               _c(
                 "li",
                 {
-                  class: { active: _vm.optionSecond == "your_work" },
+                  class: { active: _vm.optionSecond == "all" },
                   on: {
                     click: function ($event) {
-                      _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("your_work")
+                      _vm.SET_OPMAIN("your_work"), _vm.SET_OPSECOND("all")
                     },
                   },
                 },
@@ -675,139 +878,67 @@ var render = function () {
       _vm.optionMain == 4
         ? _c(
             "div",
-            _vm._l(_vm.followsDetails, function (userFollower) {
-              return _c("div", { key: userFollower.idUsu }, [
-                _vm._v("\r\n      " + _vm._s(userFollower) + "\r\n        "),
-                _c("img", {
-                  attrs: { src: "/storage/" + userFollower.img, alt: "" },
-                }),
-                _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(userFollower.name))]),
-              ])
-            }),
-            0
+            { staticClass: "profile_main-follows" },
+            [
+              _vm._l(_vm.followsDetails, function (user) {
+                return _c("User-Card", {
+                  key: user.idUsu,
+                  staticClass: "user",
+                  attrs: { user: user },
+                })
+              }),
+              _vm._v(" "),
+              _vm.followsDetails[0] == null
+                ? _c("div", { staticClass: "profile_follows-msg" }, [
+                    _c("h3", [_vm._v("You dont follow to any")]),
+                  ])
+                : _vm._e(),
+            ],
+            2
           )
         : _vm._e(),
       _vm._v(" "),
       _vm.optionMain == 5
         ? _c(
             "div",
+            { staticClass: "profile_main-follows" },
             _vm._l(_vm.followsDetails, function (user) {
-              return _c("div", { key: user.idUsu }, [
-                _c("img", { attrs: { src: "/storage/" + user.img, alt: "" } }),
-                _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(user.name))]),
-              ])
+              return _c("User-Card", {
+                key: user.idUsu,
+                staticClass: "user",
+                attrs: { user: user },
+              })
             }),
-            0
+            1
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.optionSecond == "resume"
+      _vm.optionSecond == "profile"
         ? _c("div", { attrs: { id: "profile_resume" } }, [
-            _c("h1", { staticClass: "profile_resume-part" }, [
-              _vm._v("Your Best Posts"),
+            _c("div", { attrs: { id: "profile_resume-month" } }, [
+              _c("h2", [_vm._v("📅 Your work this month 📅")]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("June")]),
+              _vm._v(" "),
+              _c(
+                "table",
+                { attrs: { id: "month_table" } },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(4, function (semana) {
+                    return _c(
+                      "tr",
+                      _vm._l(7, function (dia) {
+                        return _c("td", [_vm._v(_vm._s(semana * 7 + dia - 7))])
+                      }),
+                      0
+                    )
+                  }),
+                ],
+                2
+              ),
             ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "resume-container resume-container-best" },
-              [
-                _c("h2", { staticClass: "profile_resume-title" }, [
-                  _vm._v(" First place #1"),
-                ]),
-                _vm._v(" "),
-                _c("Post", {
-                  staticClass: "post",
-                  attrs: { data: _vm.posts[0], likes: _vm.likes },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "resume-container" },
-              [
-                _c("h2", { staticClass: "profile_resume-title" }, [
-                  _vm._v(" Second place #2 🥈"),
-                ]),
-                _vm._v(" "),
-                _c("Post", {
-                  staticClass: "post",
-                  attrs: { data: _vm.posts[1], likes: _vm.likes },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "resume-container" },
-              [
-                _c("h2", { staticClass: "profile_resume-title" }, [
-                  _vm._v(" Third place #3 🥉"),
-                ]),
-                _vm._v(" "),
-                _c("Post", {
-                  staticClass: "post",
-                  attrs: { data: _vm.posts[1], likes: _vm.likes },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("h1", { staticClass: "profile_resume-part" }, [
-              _vm._v("💙 More Likes 💙"),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "resume-container" },
-              [
-                _c("Post", {
-                  staticClass: "post",
-                  attrs: { data: _vm.posts[1], likes: _vm.likes },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "resume-container" },
-              [
-                _c("h2", { staticClass: "profile_resume-title" }, [
-                  _vm._v("👀 More Views 👀"),
-                ]),
-                _vm._v(" "),
-                _c("Post", {
-                  staticClass: "post",
-                  attrs: { data: _vm.posts[2], likes: _vm.likes },
-                }),
-                _vm._v(" "),
-                _vm._m(0),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "resume-container" },
-              [
-                _c("h2", { staticClass: "profile_resume-title" }, [
-                  _vm._v(" More Forked"),
-                ]),
-                _vm._v(" "),
-                _c("Post", {
-                  staticClass: "post",
-                  attrs: { data: _vm.posts[2], likes: _vm.likes },
-                }),
-                _vm._v(" "),
-                _vm._m(1),
-              ],
-              1
-            ),
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -816,7 +947,7 @@ var render = function () {
             "div",
             { attrs: { id: "profile_tags" } },
             [
-              _c("h2", [_vm._v("Deleteds")]),
+              _vm._m(1),
               _vm._v(" "),
               _vm._l(_vm.posts, function (post) {
                 return _c("Post", {
@@ -830,18 +961,35 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.optionSecond == "your_work"
+      _vm.optionSecond == "all"
         ? _c(
             "div",
-            { attrs: { id: "profile_posts" } },
-            _vm._l(_vm.posts, function (post) {
-              return _c("Post", {
-                key: post.idPost,
-                staticClass: "post",
-                attrs: { data: post, likes: _vm.likes },
-              })
-            }),
-            1
+            { attrs: { id: "profile_tags" } },
+            [
+              _c("h2", [_vm._v("All your posts")]),
+              _vm._v(" "),
+              _vm._l(_vm.posts, function (post) {
+                return _c("Post", {
+                  key: post.idPost,
+                  staticClass: "post",
+                  attrs: { data: post, likes: _vm.likes },
+                })
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "profile_load button-load",
+                  on: {
+                    click: function ($event) {
+                      return _vm.load()
+                    },
+                  },
+                },
+                [_vm._v("Load")]
+              ),
+            ],
+            2
           )
         : _vm._e(),
       _vm._v(" "),
@@ -859,6 +1007,12 @@ var render = function () {
                   attrs: { data: post, likes: _vm.likes },
                 })
               }),
+              _vm._v(" "),
+              _vm.posts[0] == null
+                ? _c("div", { staticClass: "profile_tags-msg" }, [
+                    _c("h3", [_vm._v("You dont love any post </3")]),
+                  ])
+                : _vm._e(),
             ],
             2
           )
@@ -871,7 +1025,7 @@ var render = function () {
             [
               _c("br"),
               _vm._v(" "),
-              _c("h2", { attrs: { id: "" } }, [_vm._v("All your tags")]),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "ul",
@@ -883,7 +1037,7 @@ var render = function () {
                       staticClass: "button-tag tag",
                       on: {
                         click: function ($event) {
-                          return _vm.searchTag(tag.idTag)
+                          return _vm.searchTag(tag.idTag, tag.tag)
                         },
                       },
                     },
@@ -893,6 +1047,10 @@ var render = function () {
                 0
               ),
               _vm._v(" "),
+              _c("h3", { staticClass: "profile_tags-title" }, [
+                _vm._v(_vm._s(_vm.nameTagSearch)),
+              ]),
+              _vm._v(" "),
               _vm._l(_vm.posts, function (post) {
                 return _c("Post", {
                   key: post.idPost,
@@ -900,6 +1058,18 @@ var render = function () {
                   attrs: { data: post, likes: _vm.likes },
                 })
               }),
+              _vm._v(" "),
+              _vm.nameTagSearch == ""
+                ? _c("div", { staticClass: "profile_tags-msg" }, [
+                    _c("h1", [_vm._v("👆 Select one #Tag 👆")]),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.posts[0] == null && _vm.nameTagSearch != ""
+                ? _c("div", { staticClass: "profile_tags-msg" }, [
+                    _c("h3", [_vm._v("You dont have any post :/")]),
+                  ])
+                : _vm._e(),
             ],
             2
           )
@@ -908,15 +1078,23 @@ var render = function () {
       _vm.optionMain == "following"
         ? _c(
             "div",
-            { attrs: { id: "profile_posts" } },
-            _vm._l(_vm.followsDetails, function (post) {
-              return _c("Post", {
-                key: post.idPost,
-                staticClass: "post",
-                attrs: { data: post, likes: _vm.likes },
-              })
-            }),
-            1
+            { attrs: { id: "profile_tags" } },
+            [
+              _vm._l(_vm.posts, function (post) {
+                return _c("Post", {
+                  key: post.idPost,
+                  staticClass: "post",
+                  attrs: { data: post, likes: _vm.likes },
+                })
+              }),
+              _vm._v(" "),
+              _vm.posts[0] == null
+                ? _c("div", { staticClass: "profile_tags-msg" }, [
+                    _c("h3", [_vm._v("Have you friends?? 🤔")]),
+                  ])
+                : _vm._e(),
+            ],
+            2
           )
         : _vm._e(),
     ]),
@@ -927,35 +1105,94 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile_resume-data" }, [
-      _c("ul", [
-        _c("li", [_vm._v("Likes: 3")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Views: 90")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Forks: 12")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Date: 12-01-2021")]),
-      ]),
+    return _c("thead", [
+      _c("th", [_vm._v("Lu")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ma")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Mi")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ju")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Vi")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Sa")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Do")]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile_resume-data" }, [
-      _c("ul", [
-        _c("li", [_vm._v("Likes: 3")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Views: 90")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Forks: 12")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Date: 12-01-2021")]),
-      ]),
+    return _c("h2", [
+      _vm._v("Deleted "),
+      _c("i", { staticClass: "bi bi-trash-fill" }),
     ])
   },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [_vm._v("All your tags "), _c("hr")])
+  },
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/users/UserCard.vue?vue&type=template&id=2b5d0866&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/users/UserCard.vue?vue&type=template&id=2b5d0866& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "user_card-wrapper" }, [
+      _c("img", {
+        staticClass: "user_card-img",
+        attrs: { src: "/storage/" + _vm.user.img, alt: "" },
+        on: { click: _vm.showUser },
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "user_card-details" }, [
+        _c(
+          "div",
+          { staticClass: "user_card-name", on: { click: _vm.showUser } },
+          [_vm._v(_vm._s(_vm.user.name))]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "user_card-posts" }, [
+          _vm._v("Posts: " + _vm._s(_vm.user.posts)),
+        ]),
+        _vm._v(" "),
+        this.$store.state.follows.followings.includes(_vm.user.idUsu)
+          ? _c(
+              "button",
+              { staticClass: "button-Unfollow", on: { click: _vm.follow } },
+              [_vm._v(_vm._s(_vm.$t("profile.unfollow")))]
+            )
+          : _c(
+              "button",
+              { staticClass: "button-follow", on: { click: _vm.follow } },
+              [_vm._v(_vm._s(_vm.$t("profile.follow")))]
+            ),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -167,7 +167,7 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
     }
 
     //Get all post of the user passed
-    public static function getPostsUsu($idUsu){
+    public static function getPostsUsu($idUsu, $limit){
         //DB::table('POSTS')->select('....')->select('....')->raw(....)->where(....)->get()
         $posts = DB::select(
             DB::raw("
@@ -179,7 +179,8 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
             from `post` 
             inner join `user` on `user`.`idUsu` = `post`.`idUsu`
             WHERE `post`.`idUsu` = $idUsu
-            AND `post`.`deleted_at` IS null;")
+            AND `post`.`deleted_at` IS null
+            LIMIT $limit, 6;")
         );
 
         return $posts;

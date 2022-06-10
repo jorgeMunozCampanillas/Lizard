@@ -111,6 +111,7 @@
             background: #fff;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
             border-radius: 10px;
+            border: 2px solid black;
         
             .post_options-borrar{
                 color: red;
@@ -120,7 +121,13 @@
                 padding: .3rem 2rem .3rem .6rem;
                 color: $primary-dark;
                 font-weight: bold;
+                border-bottom: 1px solid black;
             }
+
+            li:last-child{
+                border-bottom: none;
+            }
+            
         }
     }
 

@@ -244,5 +244,9 @@ class UserController extends Controller
         return response()->json(User::getRandomUserNotFollow(), 200);
     }
 
+    public function getWork(Request $request){
+        return response()->json(User::getWork());
+    }
+
 
 }

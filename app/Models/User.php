@@ -79,4 +79,15 @@ class User extends Authenticatable
 
     }
 
+    public static function getWork(){
+        $work = DB::select(
+            DB::raw("
+            SELECT DAY(`post`.`created_at`) as 'day', COUNT('day') AS 'count' FROM `post`
+            WHERE `post`.`idUsu` = ".Auth::id()." AND MONTH(`post`.`created_at`) =  MONTH(CURRENT_DATE())
+            GROUP BY DAY(`post`.`created_at`)
+            HAVING count('day') > 0;")
+        );
+        return $work;
+    }
+
 }

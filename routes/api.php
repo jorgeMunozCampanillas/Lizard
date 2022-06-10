@@ -60,6 +60,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
             Route::get('following/{idUsu}',[App\Http\Controllers\UserController::class, 'getFollowingDetails']);
             Route::get('followers/{idUsu}',[App\Http\Controllers\UserController::class, 'getFollowerDetails']);
         });
+
+        Route::get('getWork', [App\Http\Controllers\UserController::class, 'getWork']);
+
     });
     
     //Post
@@ -77,7 +80,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
         Route::post('view',[ App\Http\Controllers\PostController::class, 'addView']);
 
         //Get all posts of the user passed
-        Route::get('posts/{idUsu}', [App\Http\Controllers\PostController::class, 'getPosts']);
+        Route::get('posts/{idUsu}/{limit}', [App\Http\Controllers\PostController::class, 'getPosts']);
         //Get all posts deleteds of the user passed
         Route::get('deleted/{idUsu}', [App\Http\Controllers\PostController::class, 'getPostsDeleted']);
         //Get all posts of the users following
@@ -86,6 +89,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
         //like/dislike action
         Route::post('like', [App\Http\Controllers\PostController::class, 'like']);
         Route::get('getLastPostLoved', [App\Http\Controllers\PostController::class, 'getLastPostLoved']);
+    
     });
     
     //Tags

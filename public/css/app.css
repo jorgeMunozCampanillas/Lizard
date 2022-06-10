@@ -546,6 +546,47 @@ button {
   transform: translateY(1px);
 }
 
+.button-load {
+  background: none;
+  border: 0;
+  color: inherit;
+  line-height: normal;
+  font-family: "Segoe UI", "Roboto";
+  color: #FFFFFE;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.3rem;
+  background-color: rgb(247, 247, 51);
+  font-size: 1rem;
+  color: #1b1b1d;
+  font-weight: 600;
+}
+.button-load:hover {
+  transform: translateY(1px);
+}
+
+.follows-button {
+  background: none;
+  border: 0;
+  color: inherit;
+  line-height: normal;
+  font-family: "Segoe UI", "Roboto";
+  color: #FFFFFE;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.3rem;
+  background-color: #FFFFFE;
+  font-size: 1rem;
+  color: #1b1b1d;
+  font-weight: 600;
+  margin: 0 1rem;
+}
+.follows-button:hover {
+  transform: translateY(1px);
+}
+
 .form {
   height: calc(100vh - 3rem);
   display: flex;
@@ -729,6 +770,7 @@ button {
   background: #fff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  border: 2px solid black;
 }
 .post .post_info-options .post_options-menu .post_options-borrar {
   color: red;
@@ -737,6 +779,10 @@ button {
   padding: 0.3rem 2rem 0.3rem 0.6rem;
   color: #2B2C34;
   font-weight: bold;
+  border-bottom: 1px solid black;
+}
+.post .post_info-options .post_options-menu li:last-child {
+  border-bottom: none;
 }
 .post .post_data {
   padding-top: 0.7rem;
@@ -1284,6 +1330,7 @@ a {
 #profile .profile_header .profile_header-data {
   height: 4rem;
   width: 100%;
+  padding-right: 2rem;
   background-color: #1b1b1d;
   display: flex;
   justify-content: right;
@@ -1297,6 +1344,20 @@ a {
   grid-column-end: span 12;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+}
+#profile .profile_main .profile_main-follows {
+  grid-column-end: span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.8rem;
+  margin-top: 3rem;
+}
+#profile .profile_main .profile_main-follows .profile_follows-msg {
+  grid-column-end: span 12;
+  text-align: center;
+}
+#profile .profile_main .profile_main-follows .user {
+  grid-column-end: span 3;
 }
 #profile .profile_main #nav_profile {
   grid-column-end: span 12;
@@ -1314,6 +1375,28 @@ a {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 1.8rem;
+}
+#profile .profile_main #profile_resume #profile_resume-month {
+  grid-column-end: span 12;
+  text-align: center;
+}
+#profile .profile_main #profile_resume #profile_resume-month #month_table {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-spacing: 0.7rem 0.2rem;
+  padding: 0.5rem 0;
+}
+#profile .profile_main #profile_resume #profile_resume-month #month_table th {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+#profile .profile_main #profile_resume #profile_resume-month #month_table td {
+  border: 2px solid black;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #1b1b1d;
 }
 #profile .profile_main #profile_resume .profile_resume-part {
   grid-column-end: span 12;
@@ -1373,7 +1456,8 @@ a {
   content: "🏆";
 }
 #profile .profile_main #profile_tags {
-  margin: 3rem 5rem 0 5rem;
+  margin: 3rem;
+  gap: 1.8rem;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-column-end: span 12;
@@ -1381,12 +1465,24 @@ a {
 #profile .profile_main #profile_tags h2 {
   grid-column-end: span 12;
 }
+#profile .profile_main #profile_tags .profile_tags-title {
+  grid-column-end: span 12;
+  text-align: center;
+}
+#profile .profile_main #profile_tags .profile_tags-msg {
+  grid-column-end: span 12;
+  text-align: center;
+}
 #profile .profile_main #profile_tags #tags {
   display: flex;
   grid-column-end: span 12;
+  justify-content: center;
 }
 #profile .profile_main #profile_tags #tags .tag {
   margin: 0.4rem;
+}
+#profile .profile_main #profile_tags .profile_load {
+  grid-column-end: span 12;
 }
 #profile .post {
   grid-column-end: span 4;

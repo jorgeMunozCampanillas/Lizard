@@ -173,5 +173,34 @@
     &:hover{
         transform: translateY(1px);
     }
-    
+}
+
+.button-load{
+    @include normalize-btn-basic();
+    text-align: center;
+    padding: .3rem .7rem;
+    border-radius: .3rem;
+    background-color: rgb(247, 247, 51);
+    font-size: $text-normal-size;
+    color: $primary-dark-strong;
+    font-weight: 600;
+
+    &:hover{
+        transform: translateY(1px);
+    }
+}
+
+.follows-button{
+    @include normalize-btn-basic();
+    text-align: center;
+    padding: .3rem .7rem;
+    border-radius: .3rem;
+    background-color: $primary-white;
+    font-size: $text-normal-size;
+    color: $primary-dark-strong;
+    font-weight: 600;
+    margin: 0 1rem;
+    &:hover{
+        transform: translateY(1px);
+    }
 }

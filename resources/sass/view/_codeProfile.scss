@@ -33,6 +33,7 @@
         .profile_header-data{
             height: 4rem;
             width: 100%;
+            padding-right: 2rem;
             background-color:  $primary-dark-strong;
             display: flex;
             justify-content: right;
@@ -49,6 +50,22 @@
         grid-column-end: span 12;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
+
+        .profile_main-follows{
+            grid-column-end: span 12;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.8rem;
+            margin-top: 3rem;
+
+            .profile_follows-msg{
+                grid-column-end: span 12;
+                text-align: center;
+            }
+            .user{
+                grid-column-end: span 3;
+            }
+        }
 
 
         #nav_profile{
@@ -73,6 +90,30 @@
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             gap: 1.8rem;
+
+            #profile_resume-month{
+                grid-column-end: span 12;
+                text-align: center;
+
+                #month_table{
+                    margin-top: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    border-spacing: .7rem .2rem;
+                    padding: .5rem 0;
+                    th{
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                    td{
+                        border: 2px solid black;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        background-color: $primary-dark-strong;
+                    }
+                }
+            }
 
             .profile_resume-part{
                 grid-column-end: span 12;
@@ -164,7 +205,9 @@
             
         }
         #profile_tags{
-            margin: 3rem 5rem 0 5rem;
+            margin: 3rem;
+
+            gap: 1.8rem;
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             grid-column-end: span 12;
@@ -172,13 +215,25 @@
             h2{
                 grid-column-end: span 12;
             }
+            .profile_tags-title{
+                grid-column-end: span 12;
+                text-align: center;
+            }
+            .profile_tags-msg{
+                grid-column-end: span 12;
+                text-align: center;
+            }
             #tags{
                 display: flex;
                 grid-column-end: span 12;
+                justify-content: center;
 
                 .tag{
                     margin: .4rem;
                 }
+            }
+            .profile_load{
+                grid-column-end: span 12;
             }
         }
     }

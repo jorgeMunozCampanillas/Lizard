@@ -153,8 +153,7 @@ class PostController extends Controller
     //-------------------------------------
     //Get all post of the user passed
     public function getPosts(Request $request){
-        
-        $posts = Post::getPostsUsu($request->idUsu);
+        $posts = Post::getPostsUsu($request->idUsu, $request->limit);
 
         return response()->json([
             'data' => $posts,

@@ -5372,8 +5372,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
@@ -5406,9 +5404,7 @@ __webpack_require__.r(__webpack_exports__);
       return aux;
     },
     postName: function postName() {
-      console.log(this.data.postName.length);
-
-      if (this.data.postName.length > 15) {
+      if (this.data.postName.length > 12) {
         return this.data.postName.slice(0, 12) + "...";
       }
 
@@ -37989,9 +37985,26 @@ var render = function () {
                       },
                       [
                         _c("i", { staticClass: "bi bi-trash-fill" }),
-                        _vm._v(" Borrar"),
+                        _vm._v(" Delete"),
                       ]
                     ),
+                    _vm._v(" "),
+                    _vm.data.deleted_at == null
+                      ? _c(
+                          "li",
+                          {
+                            on: {
+                              click: function ($event) {
+                                return _vm.showCode()
+                              },
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-pencil-fill" }),
+                            _vm._v(" Edit"),
+                          ]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _vm.data.deleted_at != null
                       ? _c(
@@ -38006,8 +38019,6 @@ var render = function () {
                           ]
                         )
                       : _vm._e(),
-                    _vm._v(" "),
-                    _c("li", [_vm._v("Colección")]),
                   ]
                 ),
                 _vm._v(" "),
@@ -38027,7 +38038,6 @@ var render = function () {
             : _vm._e(),
         ]),
       ]),
-      _vm._v("\r\n            " + _vm._s(_vm.data.deleted_at) + "\r\n    "),
     ]),
   ])
 }
