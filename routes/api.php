@@ -89,6 +89,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
         //like/dislike action
         Route::post('like', [App\Http\Controllers\PostController::class, 'like']);
         Route::get('getLastPostLoved', [App\Http\Controllers\PostController::class, 'getLastPostLoved']);
+        Route::get('statistics', [App\Http\Controllers\PostController::class, 'statistics']);
     
     });
     

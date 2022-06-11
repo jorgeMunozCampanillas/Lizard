@@ -47,6 +47,7 @@
         <!-- Components -->
       
     <div id="profile_resume" v-if="optionSecond=='profile'">
+
       <div id="profile_resume-month">
         <h2>📅 Your work this month 📅</h2>
         <h4>June</h4>
@@ -61,77 +62,41 @@
             <th>Do</th>
           </thead>
           <tr v-for="semana in 4">
-            <td v-for="dia in 7">{{semana*7+dia-7}}</td>
+            <td v-for="dia in 7" :class="{'month_table-work':dayWork(semana*7+dia-7)}"></td>
           </tr>
         </table>
       </div>
-      <!-- <h1 class="profile_resume-part">Your Best Posts</h1>
+
+      <div id="profile_resume-statics">
+        <h2>Total statistics 📈</h2>
+        <div id="statics-container">
+          <div class="static">
+            <p>Views 👀</p>
+            <p>{{statistics.views}}</p>
+          </div>
+          <div class="static">
+            <p>Likes 💙</p>
+            <p>{{statistics.likes}}</p>
+          </div>
+          <div class="static">
+            <p>Follows 🙍‍♂️</p>
+            <p>{{statistics.followers}}</p>
+          </div>
+          <div class="static">
+            <p>Forks 📤</p>
+            <p>5</p>
+          </div>
+        </div>
+      </div>
+
       <div class="resume-container resume-container-best">
-        <h2 class="profile_resume-title"> First place #1</h2>
+        <h1 class="profile_resume-title"> Your Best Posts </h1>
         <Post
             :data="posts[0]"
             :likes="likes"
             class="post" 
         ></Post>
       </div>
-      <div class="resume-container">
-        <h2 class="profile_resume-title"> Second place #2 🥈</h2>
-        <Post
-            :data="posts[1]"
-            :likes="likes"
-            class="post" 
-        ></Post>
-      </div>
-      <div class="resume-container">
-        <h2 class="profile_resume-title"> Third place #3 🥉</h2>
-        <Post
-            :data="posts[1]"
-            :likes="likes"
-            class="post" 
-        ></Post>
-      </div>
-
-      <h1 class="profile_resume-part">💙 More Likes 💙</h1>
-      <div class="resume-container">
-        <Post
-            :data="posts[1]"
-            :likes="likes"
-            class="post" 
-        ></Post>
-      </div>
-
-      <div class="resume-container">
-        <h2 class="profile_resume-title">👀 More Views 👀</h2>
-        <Post
-            :data="posts[2]"
-            :likes="likes"
-            class="post" 
-        ></Post>
-                <div class="profile_resume-data">
-          <ul>
-            <li>Likes: 3</li>
-            <li>Views: 90</li>
-            <li>Forks: 12</li>
-            <li>Date: 12-01-2021</li>
-          </ul>
-        </div>
-      </div>
-      <div class="resume-container">
-        <h2 class="profile_resume-title"> More Forked</h2>
-        <Post
-            :data="posts[2]"
-            :likes="likes"
-            class="post" 
-        ></Post>
-        <div class="profile_resume-data">
-          <ul>
-            <li>Likes: 3</li>
-            <li>Views: 90</li>
-            <li>Forks: 12</li>
-            <li>Date: 12-01-2021</li>
-          </ul>
-        </div>
-      </div> -->
     </div>
 
     <!-- Deleted -->
@@ -225,9 +190,12 @@ export default {
       searchTags:[],
       nameTagSearch:'',
       limit:0,
+      work:[],
+      statistics:[],
     }
   },
   mounted() {
+    this.getWork();
     this.getAuthLikes();
     if (this.$route.params.opmain) this.optionMain = this.$route.params.opmain
     this.SET_OPMAIN(this.optionMain)
@@ -240,16 +208,28 @@ export default {
     followings(){
       return this.$store.state.follows.followings.length;
     },
-    dayWork(day){
+    dayWorkl(day){
       for (const i of this.work) {
         if (i.day==day) {
-          return i.count;
+          console.log(i.count)
+          return true;
         }
       }
+      console.log(false)
       return false;
     },
   },
   methods:{
+    dayWork(day){
+      for (const i of this.work) {
+        if (i.day==day) {
+          console.log(i.count)
+          return true;
+        }
+      }
+      console.log(false)
+      return false;
+    },
     getPosts(){
         axios.get('/api/post/posts/'+this.$store.state.auth.idUsu+'/'+this.limit).then(res=>{
           if (res.status) {
@@ -367,16 +347,21 @@ export default {
       });
     },
     getWork(){
+      //Month work
       axios.get('/api/user/getWork')
       .then(res=>{
-        console.log("getWork")
-        console.log(res.data)
         this.work = res.data;
       })
       .catch(err=>{
         console.log("Error en Profile.vue getWork");
         console.log(err);
       })
+      //Statics
+      axios.get('/api/post/statistics')
+      .then(res => {
+        this.statistics = res.data;
+      })
+     
     },
 
 

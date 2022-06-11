@@ -187,41 +187,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -242,10 +207,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       tags: [],
       searchTags: [],
       nameTagSearch: '',
-      limit: 0
+      limit: 0,
+      work: [],
+      statistics: []
     };
   },
   mounted: function mounted() {
+    this.getWork();
     this.getAuthLikes();
     if (this.$route.params.opmain) this.optionMain = this.$route.params.opmain;
     this.SET_OPMAIN(this.optionMain);
@@ -257,7 +225,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     followings: function followings() {
       return this.$store.state.follows.followings.length;
     },
-    dayWork: function dayWork(day) {
+    dayWorkl: function dayWorkl(day) {
       var _iterator = _createForOfIteratorHelper(this.work),
           _step;
 
@@ -266,7 +234,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           var i = _step.value;
 
           if (i.day == day) {
-            return i.count;
+            console.log(i.count);
+            return true;
           }
         }
       } catch (err) {
@@ -275,10 +244,33 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _iterator.f();
       }
 
+      console.log(false);
       return false;
     }
   },
   methods: {
+    dayWork: function dayWork(day) {
+      var _iterator2 = _createForOfIteratorHelper(this.work),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var i = _step2.value;
+
+          if (i.day == day) {
+            console.log(i.count);
+            return true;
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      console.log(false);
+      return false;
+    },
     getPosts: function getPosts() {
       var _this = this;
 
@@ -413,13 +405,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getWork: function getWork() {
       var _this11 = this;
 
+      //Month work
       axios.get('/api/user/getWork').then(function (res) {
-        console.log("getWork");
-        console.log(res.data);
         _this11.work = res.data;
       })["catch"](function (err) {
         console.log("Error en Profile.vue getWork");
         console.log(err);
+      }); //Statics
+
+      axios.get('/api/post/statistics').then(function (res) {
+        _this11.statistics = res.data;
       });
     },
     //SETTERS
@@ -930,7 +925,13 @@ var render = function () {
                     return _c(
                       "tr",
                       _vm._l(7, function (dia) {
-                        return _c("td", [_vm._v(_vm._s(semana * 7 + dia - 7))])
+                        return _c("td", {
+                          class: {
+                            "month_table-work": _vm.dayWork(
+                              semana * 7 + dia - 7
+                            ),
+                          },
+                        })
                       }),
                       0
                     )
@@ -939,6 +940,48 @@ var render = function () {
                 2
               ),
             ]),
+            _vm._v(" "),
+            _c("div", { attrs: { id: "profile_resume-statics" } }, [
+              _c("h2", [_vm._v("Total statistics 📈")]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "statics-container" } }, [
+                _c("div", { staticClass: "static" }, [
+                  _c("p", [_vm._v("Views 👀")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.statistics.views))]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "static" }, [
+                  _c("p", [_vm._v("Likes 💙")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.statistics.likes))]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "static" }, [
+                  _c("p", [_vm._v("Follows 🙍‍♂️")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.statistics.followers))]),
+                ]),
+                _vm._v(" "),
+                _vm._m(1),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "resume-container resume-container-best" },
+              [
+                _c("h1", { staticClass: "profile_resume-title" }, [
+                  _vm._v(" Your Best Posts "),
+                ]),
+                _vm._v(" "),
+                _c("Post", {
+                  staticClass: "post",
+                  attrs: { data: _vm.posts[0], likes: _vm.likes },
+                }),
+              ],
+              1
+            ),
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -947,7 +990,7 @@ var render = function () {
             "div",
             { attrs: { id: "profile_tags" } },
             [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _vm._l(_vm.posts, function (post) {
                 return _c("Post", {
@@ -1025,7 +1068,7 @@ var render = function () {
             [
               _c("br"),
               _vm._v(" "),
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "ul",
@@ -1119,6 +1162,16 @@ var staticRenderFns = [
       _c("th", [_vm._v("Sa")]),
       _vm._v(" "),
       _c("th", [_vm._v("Do")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "static" }, [
+      _c("p", [_vm._v("Forks 📤")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("5")]),
     ])
   },
   function () {

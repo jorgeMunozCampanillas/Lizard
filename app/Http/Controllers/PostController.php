@@ -291,6 +291,13 @@ class PostController extends Controller
         return response()->json(Post::isMyOwn($idPost));
     }
 
+    //------------------------------------
+    // <<<<<<<<<<<- STATISTICS ->>>>>>>>>>>>>
+    //------------------------------------
+    public function statistics(Request $request){
+        $statistics = Post::statistics();
+        return response()->json($statistics);
+    }
 
 }
 

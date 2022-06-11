@@ -286,4 +286,16 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
 
         return $posts;
     }
+
+
+    public static function statistics(){
+        $views = DB::table('post')->where('idUsu', '1')->count('post.views');
+        $likes = DB::table('post')->join('post_like', 'post.idPost', '=', 'post_like.idPost')->where('post.idUsu', '1')->count();
+        $followers = DB::table('post')->join('followers', 'post.idUsu', '=', 'followers.following')->where('post.idUsu', '1')->count();
+        return [
+            "views" => $views,
+            "likes" => $likes, 
+            "followers" => $followers,
+        ];
+    }
 }

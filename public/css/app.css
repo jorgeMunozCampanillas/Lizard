@@ -1377,7 +1377,7 @@ a {
   gap: 1.8rem;
 }
 #profile .profile_main #profile_resume #profile_resume-month {
-  grid-column-end: span 12;
+  grid-column-end: span 6;
   text-align: center;
 }
 #profile .profile_main #profile_resume #profile_resume-month #month_table {
@@ -1397,6 +1397,23 @@ a {
   width: 1.5rem;
   height: 1.5rem;
   background-color: #1b1b1d;
+}
+#profile .profile_main #profile_resume #profile_resume-month #month_table .month_table-work {
+  background-color: green;
+}
+#profile .profile_main #profile_resume #profile_resume-statics {
+  grid-column-end: span 6;
+  text-align: center;
+}
+#profile .profile_main #profile_resume #profile_resume-statics #statics-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  font-weight: 600;
+}
+#profile .profile_main #profile_resume #profile_resume-statics #statics-container .static {
+  padding: 0 1rem;
 }
 #profile .profile_main #profile_resume .profile_resume-part {
   grid-column-end: span 12;
@@ -1430,14 +1447,14 @@ a {
   height: 60vh !important;
 }
 #profile .profile_main #profile_resume .resume-container-best .post .iframe iframe {
-  transform: scale(0.5);
+  transform: scale(none);
 }
-#profile .profile_main #profile_resume .resume-container:nth-child(2) {
+#profile .profile_main #profile_resume .resume-container:nth-child(3) {
   grid-column-start: 2;
   grid-column-end: 12;
   position: relative;
 }
-#profile .profile_main #profile_resume .resume-container:nth-child(2)::after {
+#profile .profile_main #profile_resume .resume-container:nth-child(3)::after {
   position: absolute;
   top: 5rem;
   right: -12rem;
@@ -1446,7 +1463,7 @@ a {
   z-index: 0;
   content: "🏆";
 }
-#profile .profile_main #profile_resume .resume-container:nth-child(2)::before {
+#profile .profile_main #profile_resume .resume-container:nth-child(3)::before {
   position: absolute;
   top: 5rem;
   left: -12rem;
