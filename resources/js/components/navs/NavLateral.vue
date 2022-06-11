@@ -6,24 +6,25 @@
             <!-- Options -->
             <div>
               <ul id="nav-logo">
-                  <router-link :to="{name:'home'}" id="nav_logo-home">
+                  <router-link class="button" :to="{name:'home'}" id="nav_logo-home">
                       <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
                       <h2 id="logo-title">Lizard</h2>
                   </router-link>
               </ul>
               <div class="menu_options-stack menu_option-center">
-                <li class="menu_options-option menu_options-create">
-                <i class="bi bi-postage"></i> Create Post <i class="bi bi-chevron-down"></i>
-                </li>
+                <router-link :to="{name:'create-code'}" class="create_post-button menu_options-option menu_options-create">
+                  <i class="bi bi-postage"></i> Create Post
+                </router-link>
               </div>
               <div class="menu_options-stack">
                 <li class="menu_options-option"><router-link :to="{name:'my-code'}">Your Work</router-link></li>
-                <li class="menu_options-option">Activity</li>
+                <li class="menu_options-option"><router-link :to="{name:'my-code', params: { opmain: 'following' }}">Following</router-link></li>
               </div>
               <div class="menu_options-stack">
-                <li class="menu_options-option"><router-link :to="{name:'my-code', params: { opmain: 'following' }}">Following</router-link></li>
-                <li class="menu_options-option">Trending</li>
-                <li class="menu_options-option">Loved</li>
+                <h3>Actual Stacks</h3>
+                <div class="stacks">
+                  <img v-for="name in frameworksName" :key="name" :src="`/storage/codeIcons/`+name+`.png`" width="30px" alt="">
+                </div>
               </div>
             </div>
 
@@ -55,6 +56,7 @@ export default {
   data() {
     return {
       featuredPost:{},
+      frameworksName:["BOOTSTRAP", "CSS", "HTML", "JQUERY", "JS", "TAILWIND"]
     }
   },
   computed:{

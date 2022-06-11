@@ -221,7 +221,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   mounted: function mounted() {
     this.getWork();
     this.getAuthLikes();
-    if (this.$route.params.opmain) this.optionMain = this.$route.params.opmain;
+
+    if (this.$route.params.opmain) {
+      this.optionMain = this.$route.params.opmain;
+      this.optionSecond = "none";
+    }
+
     this.SET_OPMAIN(this.optionMain);
   },
   computed: {
@@ -336,8 +341,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this4 = this;
 
       axios.get('/api/user/follow/following/' + this.$store.state.auth.idUsu).then(function (res) {
-        console.log("FOLLOWINGSSSSSSSSSSSS");
-        console.log(res.data.data);
         _this4.followsDetails = res.data.data;
       })["catch"](function (err) {
         console.log('Error en CodeProfile.vue getFollowings');
@@ -1244,19 +1247,19 @@ var render = function () {
         _c("div", { staticClass: "user_card-posts" }, [
           _vm._v("Posts: " + _vm._s(_vm.user.posts)),
         ]),
-        _vm._v(" "),
-        this.$store.state.follows.followings.includes(_vm.user.idUsu)
-          ? _c(
-              "button",
-              { staticClass: "button-Unfollow", on: { click: _vm.follow } },
-              [_vm._v(_vm._s(_vm.$t("profile.unfollow")))]
-            )
-          : _c(
-              "button",
-              { staticClass: "button-follow", on: { click: _vm.follow } },
-              [_vm._v(_vm._s(_vm.$t("profile.follow")))]
-            ),
       ]),
+      _vm._v(" "),
+      this.$store.state.follows.followings.includes(_vm.user.idUsu)
+        ? _c(
+            "button",
+            { staticClass: "button-Unfollow", on: { click: _vm.follow } },
+            [_c("i", { staticClass: "bi bi-person-dash-fill" })]
+          )
+        : _c(
+            "button",
+            { staticClass: "button-follow", on: { click: _vm.follow } },
+            [_c("i", { staticClass: "bi bi-person-plus-fill" })]
+          ),
     ]),
   ])
 }

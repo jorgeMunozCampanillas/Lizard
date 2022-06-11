@@ -84,6 +84,7 @@ export default {
   methods:{
     //Get all code from the user passed
     getPosts(){
+      //aqui
         let idUsu = this.$route.params.idUsu;
         axios.get('/api/post/posts/'+idUsu).then(res=>{
           if (res.status) {

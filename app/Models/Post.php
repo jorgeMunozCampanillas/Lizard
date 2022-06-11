@@ -143,7 +143,7 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
             inner join `user` on `user`.`idUsu` = `post`.`idUsu`
             WHERE `post`.`deleted_at` IS null
             ORDER BY `post`.`views` DESC
-            LIMIT $offset, 7;")
+            LIMIT $offset, 4;")
         );
 
         

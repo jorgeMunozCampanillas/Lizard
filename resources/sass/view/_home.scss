@@ -1,4 +1,5 @@
-#home{
+#home{    
+    overflow-x: hidden;
     font-family: $title-typography;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -9,8 +10,10 @@
     min-height: calc(100vh - 3rem);
     row-gap: 3rem;
     // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
- 
+
     #post-wrapper{
+        position: relative;
+        z-index: 15;
         margin-top: 2.5rem;
         display: grid;
         grid-column-end: span 12;
@@ -31,8 +34,8 @@
 
         #posts{
             padding: 2rem;
-            grid-column-start: 4;
-            grid-column-end: 10;
+            grid-column-start: 2;
+            grid-column-end: 12;
     
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -41,6 +44,7 @@
             align-items: center;
 
             position: relative;
+            z-index: 15;
 
             
             .button-post_next{
@@ -49,19 +53,13 @@
             }
             .post_back{
                 position: absolute;
-                background-color: $primary-blue-strong;
-                width: 2rem;
-                height: 4rem;
-                border-radius: 1rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-weight: bold;
-                left: -1rem;
+                left: -2rem;
             }
             .post{
                 grid-column-end: span 2;
                 width: 100%;
+                position: relative;
+                z-index: 15;
             }
             
         }
@@ -85,6 +83,8 @@
     }
 
     #users_wrapper{
+        position: relative;
+        z-index: 5;
         display: grid;
         grid-column-end: span 12;
         grid-template-columns: repeat(12, 1fr);
@@ -93,14 +93,19 @@
         #users-title{
             grid-column-start: 2;
             grid-column-end: span 10;
+            position: relative;
+            z-index: 5;
         }
 
         #users{
             grid-column-start: 2;
-            grid-column-end: 10;
+            grid-column-end: 12;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.8rem;
+            justify-self: center;
+            position: relative;
+            z-index: 5;
 
             .user{
                 grid-column-end: span 1;
@@ -110,9 +115,16 @@
     }
 
     #footer_wrapper{
-        height: 10rem;
+        height: 13rem;
+        padding-bottom: 3rem;
         grid-column-end: span 12;
-        background-color: black;
+        background-color: $primary-dark-strong;
+        text-align: center;
+        #footer_wrapper-data{
+            padding: 3rem 0;
+            display: flex;
+            justify-content: space-around;
+        }
     }
 
 }
@@ -123,6 +135,13 @@
         margin-top: .5rem;
         border: 1.5px solid white;
     }
+}
+
+#wave{
+    width: 100vw;
+    position: absolute;
+    z-index: 1;
+    bottom: -3.2rem;
 }
 
 @media (max-width: $breakpoint-portatil){

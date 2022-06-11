@@ -203,7 +203,10 @@ export default {
   mounted() {
     this.getWork();
     this.getAuthLikes();
-    if (this.$route.params.opmain) this.optionMain = this.$route.params.opmain
+    if (this.$route.params.opmain){
+      this.optionMain = this.$route.params.opmain
+      this.optionSecond = "none";
+    } 
     this.SET_OPMAIN(this.optionMain)
 
   },
@@ -279,8 +282,6 @@ export default {
     getFollowings(){
       axios.get('/api/user/follow/following/'+this.$store.state.auth.idUsu)
       .then(res=>{
-        console.log("FOLLOWINGSSSSSSSSSSSS")
-        console.log(res.data.data)
         this.followsDetails = res.data.data
       })
       .catch(err=>{

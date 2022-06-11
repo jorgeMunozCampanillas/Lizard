@@ -60,10 +60,22 @@
     }
 }
 .button-follow{
-    background-color: green;
+    @include normalize-btn-basic();
+    padding: .5rem;
+    border: 2px solid rgb(42, 170, 42);
+    i{
+        font-size: 1.2rem;
+        color: rgb(42, 170, 42);
+    }
 }
 .button-Unfollow{
-    background-color: red;
+    @include normalize-btn-basic();
+    padding: .5rem;
+    border: 2px solid red;
+    i{
+        font-size: 1.2rem;
+        color: red;
+    }
 }
 .button-like{
     background-color: white;
@@ -203,4 +215,12 @@
     &:hover{
         transform: translateY(1px);
     }
+}
+
+.create_post-button{
+    @include normalize-btn-basic();
+}
+
+.button{
+    @include normalize-btn-basic();
 }

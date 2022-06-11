@@ -1,6 +1,6 @@
 .user_card-wrapper{
-    display: flex;
-    align-content: center;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     background-color: $secondary-dark;
     box-shadow: 7px 7px $primary-dark-strong;
     border-radius: 1rem;
@@ -10,16 +10,31 @@
         width: 7rem;
         height: 7rem;
         border-radius: 100%;
+        grid-column-end: span 4;
     }
 
     .user_card-details{
         font-size: $text-big-size;
         font-family: $title-typography;
+        padding: .2rem .7rem;
+        grid-column-end: span 6;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    button{
+        grid-column-end: span 2;
+        display: inline;
+        height: min-content;
+        padding: .2rem 0;
+        align-self: center;
     }
 
     .user_card-name{
         font-weight: bold;
     }
+
 
 }
 

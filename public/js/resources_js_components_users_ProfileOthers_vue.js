@@ -97,6 +97,7 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
+      //aqui
       var idUsu = this.$route.params.idUsu;
       axios.get('/api/post/posts/' + idUsu).then(function (res) {
         if (res.status) {

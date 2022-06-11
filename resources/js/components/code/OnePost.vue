@@ -11,12 +11,12 @@
 
     </button>
     <div class="post_user">
-        <img :src="'/storage/'+data.userImg" class="post_user-img" alt="">
+        <img :src="'/storage/'+data.userImg" class="post_user-img button" alt="" @click="showUser()">
             <div class="post_info">
                 <!-- Names -->
                 <div class="post_info-names">
                     <button class="button-text"><h3>{{postName}}</h3></button>
-                    <button class="button-text"><h5 @click="showUser()">{{data.name}}</h5></button>
+                    <button class="button-text" @click="showUser()"><h5>{{data.name}}</h5></button>
                 </div>
 
 

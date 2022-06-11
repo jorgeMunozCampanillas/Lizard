@@ -2,7 +2,7 @@
   <div>
     <nav id="nav" class="nav-3">
         <div id="nav_data">
-            <ul id="nav-logo">
+            <ul class="button" id="nav-logo">
                 <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
             </ul>
             <ul id="nav_data-post">

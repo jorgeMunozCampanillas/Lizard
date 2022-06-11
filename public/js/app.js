@@ -5595,7 +5595,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -5764,6 +5763,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -5771,7 +5771,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      featuredPost: {}
+      featuredPost: {},
+      frameworksName: ["BOOTSTRAP", "CSS", "HTML", "JQUERY", "JS", "TAILWIND"]
     };
   },
   computed: {
@@ -37907,8 +37908,13 @@ var render = function () {
     _vm._v(" "),
     _c("div", { staticClass: "post_user" }, [
       _c("img", {
-        staticClass: "post_user-img",
+        staticClass: "post_user-img button",
         attrs: { src: "/storage/" + _vm.data.userImg, alt: "" },
+        on: {
+          click: function ($event) {
+            return _vm.showUser()
+          },
+        },
       }),
       _vm._v(" "),
       _c("div", { staticClass: "post_info" }, [
@@ -37917,19 +37923,18 @@ var render = function () {
             _c("h3", [_vm._v(_vm._s(_vm.postName))]),
           ]),
           _vm._v(" "),
-          _c("button", { staticClass: "button-text" }, [
-            _c(
-              "h5",
-              {
-                on: {
-                  click: function ($event) {
-                    return _vm.showUser()
-                  },
+          _c(
+            "button",
+            {
+              staticClass: "button-text",
+              on: {
+                click: function ($event) {
+                  return _vm.showUser()
                 },
               },
-              [_vm._v(_vm._s(_vm.data.name))]
-            ),
-          ]),
+            },
+            [_c("h5", [_vm._v(_vm._s(_vm.data.name))])]
+          ),
         ]),
         _vm._v(" "),
         _c("ul", { staticClass: "post_info-meta" }, [
@@ -38164,7 +38169,16 @@ var render = function () {
             )
           : _vm._e(),
         _vm._v(" "),
-        _c("i", { staticClass: "bi bi-pencil-square" }),
+        this.$store.state.auth.permissions > 0
+          ? _c(
+              "div",
+              {
+                staticClass: "button-create-code",
+                on: { click: _vm.createCode },
+              },
+              [_c("i", { staticClass: "bi bi-pencil-square" })]
+            )
+          : _vm._e(),
         _vm._v(" "),
         this.$store.state.auth.permissions > 0
           ? _c("User-Options", { attrs: { id: "user_options" } })
@@ -38201,6 +38215,7 @@ var render = function () {
     _c("nav", { staticClass: "nav-2", attrs: { id: "nav" } }, [
       _c("ul", { staticClass: "nav-info" }, [
         _c("img", {
+          staticClass: "button",
           attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
         }),
         _vm._v(" "),
@@ -38314,7 +38329,10 @@ var render = function () {
             [
               _c(
                 "router-link",
-                { attrs: { to: { name: "home" }, id: "nav_logo-home" } },
+                {
+                  staticClass: "button",
+                  attrs: { to: { name: "home" }, id: "nav_logo-home" },
+                },
                 [
                   _c("img", {
                     attrs: {
@@ -38331,7 +38349,25 @@ var render = function () {
             1
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "div",
+            { staticClass: "menu_options-stack menu_option-center" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass:
+                    "create_post-button menu_options-option menu_options-create",
+                  attrs: { to: { name: "create-code" } },
+                },
+                [
+                  _c("i", { staticClass: "bi bi-postage" }),
+                  _vm._v(" Create Post\n              "),
+                ]
+              ),
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "menu_options-stack" }, [
             _c(
@@ -38345,12 +38381,6 @@ var render = function () {
               1
             ),
             _vm._v(" "),
-            _c("li", { staticClass: "menu_options-option" }, [
-              _vm._v("Activity"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "menu_options-stack" }, [
             _c(
               "li",
               { staticClass: "menu_options-option" },
@@ -38367,12 +38397,26 @@ var render = function () {
               ],
               1
             ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "menu_options-stack" }, [
+            _c("h3", [_vm._v("Actual Stacks")]),
             _vm._v(" "),
-            _c("li", { staticClass: "menu_options-option" }, [
-              _vm._v("Trending"),
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "menu_options-option" }, [_vm._v("Loved")]),
+            _c(
+              "div",
+              { staticClass: "stacks" },
+              _vm._l(_vm.frameworksName, function (name) {
+                return _c("img", {
+                  key: name,
+                  attrs: {
+                    src: "/storage/codeIcons/" + name + ".png",
+                    width: "30px",
+                    alt: "",
+                  },
+                })
+              }),
+              0
+            ),
           ]),
         ]),
         _vm._v(" "),
@@ -38405,20 +38449,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "menu_options-stack menu_option-center" }, [
-      _c("li", { staticClass: "menu_options-option menu_options-create" }, [
-        _c("i", { staticClass: "bi bi-postage" }),
-        _vm._v(" Create Post "),
-        _c("i", { staticClass: "bi bi-chevron-down" }),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38446,6 +38477,7 @@ var render = function () {
       _c(
         "ul",
         {
+          staticClass: "button",
           attrs: { id: "nav-logo" },
           on: {
             click: function ($event) {
@@ -38532,7 +38564,7 @@ var render = function () {
   return _c("div", [
     _c("nav", { staticClass: "nav-3", attrs: { id: "nav" } }, [
       _c("div", { attrs: { id: "nav_data" } }, [
-        _c("ul", { attrs: { id: "nav-logo" } }, [
+        _c("ul", { staticClass: "button", attrs: { id: "nav-logo" } }, [
           _c("img", {
             attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
           }),
@@ -38641,6 +38673,7 @@ var render = function () {
       _c("nav", { staticClass: "nav-2", attrs: { id: "nav" } }, [
         _c("ul", { staticClass: "nav-info" }, [
           _c("img", {
+            staticClass: "button",
             attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
           }),
           _vm._v(" "),

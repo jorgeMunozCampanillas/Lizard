@@ -2,7 +2,7 @@
 <div>
     <nav id="nav" class="nav-2">
         <ul class="nav-info">
-            <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
+            <img class="button" :src="'/storage/logo2-bueno.png'" id="logo" alt="">
             <div>
                 <input id="project-title" type="text" placeholder="Untitled" :value="post.postName">
                 <h6 id="logo-title">{{this.$store.state.auth.name}}</h6>

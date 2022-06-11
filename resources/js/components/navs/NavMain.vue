@@ -1,7 +1,7 @@
 <template>
 <div>
     <nav id="nav" class="nav-5">
-        <ul @click="home()" id="nav-logo">
+        <ul class="button" @click="home()" id="nav-logo">
             <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
             <h2 id="logo-title">Lizard</h2>
         </ul>

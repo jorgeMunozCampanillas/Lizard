@@ -5,9 +5,9 @@
         <div class="user_card-details">
             <div @click="showUser" class="user_card-name">{{user.name}}</div>
             <div class="user_card-posts">Posts: {{user.posts}}</div>
-            <button @click="follow" class="button-Unfollow" v-if="this.$store.state.follows.followings.includes(user.idUsu)">{{$t('profile.unfollow')}}</button>
-            <button @click="follow" class="button-follow" v-else>{{$t('profile.follow')}}</button>
         </div>
+        <button @click="follow" class="button-Unfollow" v-if="this.$store.state.follows.followings.includes(user.idUsu)"><i class="bi bi-person-dash-fill"></i></button>
+        <button @click="follow" class="button-follow" v-else><i class="bi bi-person-plus-fill"></i></button>
     </div>
   </div>
 </template>

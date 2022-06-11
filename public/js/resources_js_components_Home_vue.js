@@ -76,17 +76,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -97,8 +86,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: [],
-      beforePosts: [],
-      afterPosts: [],
       likes: [],
       limit: 7,
       offset: 0,
@@ -131,11 +118,7 @@ __webpack_require__.r(__webpack_exports__);
       this.afterPosts = [];
       this.posts = [];
       axios.get('/api/code/' + this.offset).then(function (res) {
-        _this.posts = res.data.data.slice(0, 4);
-
-        _this.afterPosts.push(res.data.data[4]);
-
-        _this.afterPosts.push(res.data.data[6]);
+        _this.posts = res.data.data;
       })["catch"](function (err) {
         console.log("Error Home.vue getPosts");
         console.log(err.data);
@@ -153,9 +136,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     next: function next() {
       this.offset += 4;
-      this.beforePosts = [];
-      this.beforePosts.push(this.posts[1]);
-      this.beforePosts.push(this.posts[3]);
       this.getPosts();
     },
     back: function back() {
@@ -406,29 +386,6 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { attrs: { id: "before_posts" } },
-        [
-          _vm._l(_vm.beforePosts, function (post) {
-            return _c("Post", {
-              key: post.idPost,
-              staticClass: "post",
-              attrs: { data: post, likes: _vm.likes },
-            })
-          }),
-          _vm._v(" "),
-          !_vm.beforeNull
-            ? _c("Post", { staticClass: "post", attrs: { likes: [0] } })
-            : _vm._e(),
-          _vm._v(" "),
-          !_vm.beforeNull
-            ? _c("Post", { staticClass: "post", attrs: { likes: [0] } })
-            : _vm._e(),
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
         { attrs: { id: "posts" } },
         [
           _c(
@@ -438,9 +395,14 @@ var render = function () {
           ),
           _vm._v(" "),
           _vm.offset >= 4
-            ? _c("div", { staticClass: "post_back", on: { click: _vm.back } }, [
-                _c("i", { staticClass: "bi bi-arrow-bar-left" }),
-              ])
+            ? _c(
+                "button",
+                {
+                  staticClass: "button-post_next post_back",
+                  on: { click: _vm.back },
+                },
+                [_c("i", { staticClass: "bi bi-arrow-bar-left" })]
+              )
             : _vm._e(),
           _vm._v(" "),
           _vm._l(_vm.posts, function (post) {
@@ -469,29 +431,6 @@ var render = function () {
         ],
         2
       ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { attrs: { id: "after_posts" } },
-        [
-          _vm._l(_vm.afterPosts, function (post) {
-            return _c("Post", {
-              key: post.idPost,
-              staticClass: "post",
-              attrs: { data: post, likes: _vm.likes },
-            })
-          }),
-          _vm._v(" "),
-          !_vm.afterNull
-            ? _c("Post", { staticClass: "post", attrs: { likes: [0] } })
-            : _vm._e(),
-          _vm._v(" "),
-          !_vm.afterNull
-            ? _c("Post", { staticClass: "post", attrs: { likes: [0] } })
-            : _vm._e(),
-        ],
-        2
-      ),
     ]),
     _vm._v(" "),
     _c("div", { attrs: { id: "users_wrapper" } }, [
@@ -509,9 +448,29 @@ var render = function () {
         }),
         1
       ),
+      _vm._v(" "),
+      _c(
+        "svg",
+        {
+          attrs: {
+            id: "wave",
+            xmlns: "http://www.w3.org/2000/svg",
+            viewBox: "0 0 1440 320",
+          },
+        },
+        [
+          _c("path", {
+            attrs: {
+              fill: "#1b1b1d",
+              "fill-opacity": "1",
+              d: "M0,32L10.9,32C21.8,32,44,32,65,48C87.3,64,109,96,131,101.3C152.7,107,175,85,196,96C218.2,107,240,149,262,154.7C283.6,160,305,128,327,133.3C349.1,139,371,181,393,197.3C414.5,213,436,203,458,202.7C480,203,502,213,524,234.7C545.5,256,567,288,589,277.3C610.9,267,633,213,655,202.7C676.4,192,698,224,720,234.7C741.8,245,764,235,785,224C807.3,213,829,203,851,186.7C872.7,171,895,149,916,128C938.2,107,960,85,982,64C1003.6,43,1025,21,1047,16C1069.1,11,1091,21,1113,48C1134.5,75,1156,117,1178,122.7C1200,128,1222,96,1244,90.7C1265.5,85,1287,107,1309,138.7C1330.9,171,1353,213,1375,229.3C1396.4,245,1418,235,1429,229.3L1440,224L1440,320L1429.1,320C1418.2,320,1396,320,1375,320C1352.7,320,1331,320,1309,320C1287.3,320,1265,320,1244,320C1221.8,320,1200,320,1178,320C1156.4,320,1135,320,1113,320C1090.9,320,1069,320,1047,320C1025.5,320,1004,320,982,320C960,320,938,320,916,320C894.5,320,873,320,851,320C829.1,320,807,320,785,320C763.6,320,742,320,720,320C698.2,320,676,320,655,320C632.7,320,611,320,589,320C567.3,320,545,320,524,320C501.8,320,480,320,458,320C436.4,320,415,320,393,320C370.9,320,349,320,327,320C305.5,320,284,320,262,320C240,320,218,320,196,320C174.5,320,153,320,131,320C109.1,320,87,320,65,320C43.6,320,22,320,11,320L0,320Z",
+            },
+          }),
+        ]
+      ),
     ]),
     _vm._v(" "),
-    _c("footer", { attrs: { id: "footer_wrapper" } }),
+    _vm._m(1),
   ])
 }
 var staticRenderFns = [
@@ -520,9 +479,38 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "users-title" } }, [
-      _c("h2", [_vm._v("Interesting People to Follow")]),
+      _c("h1", { staticClass: "title" }, [
+        _vm._v("Interesting People "),
+        _c("hr"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { attrs: { id: "footer_wrapper" } }, [
+      _c("br"),
+      _c("br"),
+      _c("br"),
       _vm._v(" "),
-      _c("hr"),
+      _c("h3", [_vm._v("Lizard®")]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "footer_wrapper-data" } }, [
+        _c("p", [
+          _c("b", [_vm._v("GitHub:")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "https://github.com/holge7/Lizard" } }, [
+            _vm._v("https://github.com/holge7/Lizard"),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("p", [_c("b", [_vm._v("Sponsors:")]), _vm._v(" Holge")]),
+        _vm._v(" "),
+        _c("p", [_c("b", [_vm._v("Based in:")]), _vm._v(" CodePen - GitHub")]),
+        _vm._v(" "),
+        _c("p", [_c("b", [_vm._v("Version: ")]), _vm._v(" 1.0")]),
+      ]),
     ])
   },
 ]
@@ -565,19 +553,19 @@ var render = function () {
         _c("div", { staticClass: "user_card-posts" }, [
           _vm._v("Posts: " + _vm._s(_vm.user.posts)),
         ]),
-        _vm._v(" "),
-        this.$store.state.follows.followings.includes(_vm.user.idUsu)
-          ? _c(
-              "button",
-              { staticClass: "button-Unfollow", on: { click: _vm.follow } },
-              [_vm._v(_vm._s(_vm.$t("profile.unfollow")))]
-            )
-          : _c(
-              "button",
-              { staticClass: "button-follow", on: { click: _vm.follow } },
-              [_vm._v(_vm._s(_vm.$t("profile.follow")))]
-            ),
       ]),
+      _vm._v(" "),
+      this.$store.state.follows.followings.includes(_vm.user.idUsu)
+        ? _c(
+            "button",
+            { staticClass: "button-Unfollow", on: { click: _vm.follow } },
+            [_c("i", { staticClass: "bi bi-person-dash-fill" })]
+          )
+        : _c(
+            "button",
+            { staticClass: "button-follow", on: { click: _vm.follow } },
+            [_c("i", { staticClass: "bi bi-person-plus-fill" })]
+          ),
     ]),
   ])
 }
