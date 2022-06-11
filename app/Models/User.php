@@ -70,7 +70,7 @@ class User extends Authenticatable
                 FROM `post` WHERE `post`.`idUsu` = `user`.`idUsu`
             ) as `posts` 
             from `user` 
-            WHERE `user`.`idUsu` != 1
+            WHERE `user`.`idUsu` != ".Auth::id()."
             ORDER BY RAND ( )  
             LIMIT 3;")
         );

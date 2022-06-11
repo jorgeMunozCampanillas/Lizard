@@ -174,8 +174,8 @@ class PostController extends Controller
 
     //Get all posts of the users following
     public function getPostsFollowing(Request $request){
-        $posts = Followers::getFollowingPosts();
-
+        $posts = Followers::getFollowingPosts($request->limit);
+        // dd($request->limit);
         return response()->json([
             'data' => $posts,
         ], 200);

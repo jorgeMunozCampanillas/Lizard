@@ -84,7 +84,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
         //Get all posts deleteds of the user passed
         Route::get('deleted/{idUsu}', [App\Http\Controllers\PostController::class, 'getPostsDeleted']);
         //Get all posts of the users following
-        Route::get('following', [App\Http\Controllers\PostController::class, 'getPostsFollowing']);
+        Route::get('following/{limit}', [App\Http\Controllers\PostController::class, 'getPostsFollowing']);
 
         //like/dislike action
         Route::post('like', [App\Http\Controllers\PostController::class, 'like']);

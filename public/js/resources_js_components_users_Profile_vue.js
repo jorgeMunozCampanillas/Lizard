@@ -187,6 +187,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -209,7 +210,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       nameTagSearch: '',
       limit: 0,
       work: [],
-      statistics: []
+      statistics: {
+        views: 0,
+        likes: 0,
+        followers: 0,
+        post: Array
+      }
     };
   },
   mounted: function mounted() {
@@ -330,7 +336,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this4 = this;
 
       axios.get('/api/user/follow/following/' + this.$store.state.auth.idUsu).then(function (res) {
-        console.log(res);
+        console.log("FOLLOWINGSSSSSSSSSSSS");
+        console.log(res.data.data);
         _this4.followsDetails = res.data.data;
       })["catch"](function (err) {
         console.log('Error en CodeProfile.vue getFollowings');
@@ -351,9 +358,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getPostFollowings: function getPostFollowings() {
       var _this6 = this;
 
-      axios.get('/api/post/following').then(function (res) {
-        console.log(res.data.data);
-        _this6.posts = res.data.data;
+      axios.get('/api/post/following/' + this.limit).then(function (res) {
+        res.data.data.map(function (p) {
+          return _this6.posts.push(p);
+        });
       })["catch"](function (err) {
         console.log('Error en Profile.vue getPostFollowers');
         console.log(err);
@@ -415,6 +423,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       axios.get('/api/post/statistics').then(function (res) {
         _this11.statistics = res.data;
+        console.log("Staticccccccccccccccccccc");
+        console.log(_this11.statistics);
       });
     },
     //SETTERS
@@ -483,6 +493,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     load: function load() {
       this.limit += 6;
       this.getPosts();
+    },
+    loadFollowing: function loadFollowing() {
+      this.limit += 6;
+      this.getPostFollowings();
     }
   }
 });
@@ -962,8 +976,6 @@ var render = function () {
                   _vm._v(" "),
                   _c("p", [_vm._v(_vm._s(_vm.statistics.followers))]),
                 ]),
-                _vm._v(" "),
-                _vm._m(1),
               ]),
             ]),
             _vm._v(" "),
@@ -977,7 +989,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("Post", {
                   staticClass: "post",
-                  attrs: { data: _vm.posts[0], likes: _vm.likes },
+                  attrs: { data: _vm.statistics.post[0], likes: _vm.likes },
                 }),
               ],
               1
@@ -990,7 +1002,7 @@ var render = function () {
             "div",
             { attrs: { id: "profile_tags" } },
             [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _vm._l(_vm.posts, function (post) {
                 return _c("Post", {
@@ -1068,7 +1080,7 @@ var render = function () {
             [
               _c("br"),
               _vm._v(" "),
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "ul",
@@ -1136,6 +1148,19 @@ var render = function () {
                     _c("h3", [_vm._v("Have you friends?? 🤔")]),
                   ])
                 : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "profile_load button-load",
+                  on: {
+                    click: function ($event) {
+                      return _vm.loadFollowing()
+                    },
+                  },
+                },
+                [_vm._v("Load")]
+              ),
             ],
             2
           )
@@ -1162,16 +1187,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Sa")]),
       _vm._v(" "),
       _c("th", [_vm._v("Do")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "static" }, [
-      _c("p", [_vm._v("Forks 📤")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("5")]),
     ])
   },
   function () {

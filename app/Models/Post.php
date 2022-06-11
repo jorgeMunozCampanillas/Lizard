@@ -289,13 +289,27 @@ Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
 
 
     public static function statistics(){
-        $views = DB::table('post')->where('idUsu', '1')->count('post.views');
-        $likes = DB::table('post')->join('post_like', 'post.idPost', '=', 'post_like.idPost')->where('post.idUsu', '1')->count();
-        $followers = DB::table('post')->join('followers', 'post.idUsu', '=', 'followers.following')->where('post.idUsu', '1')->count();
+        $views = DB::table('post')->where('idUsu', Auth::id())->count('post.views');
+        $likes = DB::table('post')->join('post_like', 'post.idPost', '=', 'post_like.idPost')->where('post.idUsu', Auth::id())->count();
+        $followers = DB::table('post')->join('followers', 'post.idUsu', '=', 'followers.following')->where('post.idUsu', Auth::id())->count();
+        $post = DB::select(
+            DB::raw("
+                Select `user`.`name`, `user`.`img` as `userImg`, `user`.`idUsu`, `post`.*,
+                (
+                    SELECT COUNT(`post_like`.`idPost`) 
+                    FROM `post_like` WHERE `post_like`.`idPost` = `post`.`idPost`
+                )*3 + `post`.`views` as `pnt`
+                from `post` 
+                inner join `user` on `user`.`idUsu` = `post`.`idUsu`
+                WHERE `post`.`deleted_at` IS null AND `post`.`idUsu` = ".Auth::id()."
+                ORDER BY `pnt` DESC LIMIT 1;
+            ")
+        );
         return [
             "views" => $views,
             "likes" => $likes, 
             "followers" => $followers,
+            "post" => $post,
         ];
     }
 }

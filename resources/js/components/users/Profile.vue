@@ -82,17 +82,17 @@
             <p>Follows 🙍‍♂️</p>
             <p>{{statistics.followers}}</p>
           </div>
-          <div class="static">
+          <!-- <div class="static">
             <p>Forks 📤</p>
             <p>5</p>
-          </div>
+          </div> -->
         </div>
       </div>
 
       <div class="resume-container resume-container-best">
         <h1 class="profile_resume-title"> Your Best Posts </h1>
         <Post
-            :data="posts[0]"
+            :data="statistics.post[0]"
             :likes="likes"
             class="post" 
         ></Post>
@@ -161,6 +161,7 @@
           class="post" 
       ></Post>
       <div v-if="posts[0]==null" class="profile_tags-msg"><h3>Have you friends?? 🤔</h3></div>
+      <button @click="loadFollowing()" class="profile_load button-load">Load</button>
     </div>
   </div>
 </div>
@@ -191,7 +192,12 @@ export default {
       nameTagSearch:'',
       limit:0,
       work:[],
-      statistics:[],
+      statistics:{
+        views:0,
+        likes:0,
+        followers:0,
+        post:Array,
+      },
     }
   },
   mounted() {
@@ -273,7 +279,8 @@ export default {
     getFollowings(){
       axios.get('/api/user/follow/following/'+this.$store.state.auth.idUsu)
       .then(res=>{
-        console.log(res)
+        console.log("FOLLOWINGSSSSSSSSSSSS")
+        console.log(res.data.data)
         this.followsDetails = res.data.data
       })
       .catch(err=>{
@@ -293,10 +300,9 @@ export default {
       })
     },
     getPostFollowings(){
-      axios.get('/api/post/following')
+      axios.get('/api/post/following/'+this.limit)
       .then(res=>{
-        console.log(res.data.data)
-        this.posts = res.data.data;
+        res.data.data.map(p=>this.posts.push(p))
       })
       .catch(err=>{
         console.log('Error en Profile.vue getPostFollowers')
@@ -360,6 +366,8 @@ export default {
       axios.get('/api/post/statistics')
       .then(res => {
         this.statistics = res.data;
+        console.log("Staticccccccccccccccccccc")
+        console.log(this.statistics)
       })
      
     },
@@ -423,6 +431,10 @@ export default {
     load(){
       this.limit+=6;
       this.getPosts();
+    },
+    loadFollowing(){
+      this.limit+=6;
+      this.getPostFollowings();
     },
 
   },
