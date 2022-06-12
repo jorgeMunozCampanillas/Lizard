@@ -39,10 +39,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
     //Users
     Route::group(["prefix" => "user"], function(){
         //Normal actions with the users
-        Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy', 'update', 'index'])->middleware(['admin']);
+        Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy',  'index'])->middleware(['admin']);
 
         //Get auth
         Route::get('authId', [App\Http\Controllers\UserController::class, 'authId']);
+        Route::get('authData', [App\Http\Controllers\UserController::class, 'authData']);
 
         //Get all ids of the post with likes given
         Route::get('likesGiven', [App\Http\Controllers\UserController::class, 'getLikesGiven']);

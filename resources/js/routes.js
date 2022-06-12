@@ -18,6 +18,7 @@ const Dashboard = () => import('./components/Dashboard.vue');
 //Auth
 const Home = () => import('./components/Home.vue');
 const SearchResults = () => import('./components/SearchResults.vue');
+const UserSettings = () => import('./components/users/Settings.vue');
 
 //No / Auth
 const Index = () => import('./components/Index.vue');
@@ -142,6 +143,11 @@ export const routes = [
                 name:'update-code',
                 path:'code/update/:id',
                 component:UpdateCode,
+            },
+            {
+                name:'settings',
+                path:'user/settings',
+                component:UserSettings,
             },
             
         ]

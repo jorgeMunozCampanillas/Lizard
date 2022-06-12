@@ -18,10 +18,10 @@
 
             <!-- Options -->
             <ul id="nav-with-permiss" v-if="this.$store.state.auth.permissions>0">
-                <li class="nav-mains">
+                <li class="button nav-mains">
                     <button class="button-create-code" @click="createCode"><i class="bi bi-pencil-square"></i></button>
                 </li>
-                <li>
+                <li class="button">
                     <User-Options></User-Options>
                 </li>    
             </ul>

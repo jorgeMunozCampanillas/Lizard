@@ -248,5 +248,14 @@ class UserController extends Controller
         return response()->json(User::getWork());
     }
 
+    public function authData(Request $request){
+        return response()->json([
+            "name"=>Auth::user()->name,
+            "email"=>Auth::user()->email,
+            "img"=>Auth::user()->img,
+            "created"=>Auth::user()->created_at,
+        ]);
+    }
+
 
 }

@@ -241,6 +241,9 @@
                 grid-column-end: span 12;
                 text-align: center;
             }
+            .user{
+                grid-column-end: span 3;
+            }
             #tags{
                 display: flex;
                 grid-column-end: span 12;
@@ -250,9 +253,7 @@
                     margin: .4rem;
                 }
             }
-            .profile_load{
-                grid-column-end: span 12;
-            }
+            
         }
     }
 
@@ -267,7 +268,9 @@
         flex-direction: column;
     }
 }
-
+.profile_load{
+    grid-column-end: span 12;
+}
 
 @media (max-width: $breakpoint-portatil){
     #profile{

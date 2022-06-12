@@ -5595,6 +5595,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -6335,6 +6337,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -6591,6 +6594,10 @@ var Home = function Home() {
 
 var SearchResults = function SearchResults() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_SearchResults_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/SearchResults.vue */ "./resources/js/components/SearchResults.vue"));
+};
+
+var UserSettings = function UserSettings() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_users_Settings_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/Settings.vue */ "./resources/js/components/users/Settings.vue"));
 }; //No / Auth
 
 
@@ -6717,6 +6724,10 @@ var routes = [{
     name: 'update-code',
     path: 'code/update/:id',
     component: UpdateCode
+  }, {
+    name: 'settings',
+    path: 'user/settings',
+    component: UserSettings
   }]
 }, {
   //Admins
@@ -38142,50 +38153,52 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "nav",
-      { staticClass: "nav-1", attrs: { id: "nav" } },
-      [
-        _c("ul", { attrs: { id: "search" } }, [_c("Search")], 1),
-        _vm._v(" "),
-        this.$store.state.isAuthenticated == false
-          ? _c(
-              "ul",
-              { attrs: { id: "nav-out-permiss" } },
-              [
-                _c("LangSwitch"),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  [
-                    _c("router-link", { attrs: { to: { name: "login" } } }, [
-                      _vm._v(_vm._s(_vm.$t("nav.login"))),
-                    ]),
-                  ],
-                  1
-                ),
-              ],
-              1
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        this.$store.state.auth.permissions > 0
-          ? _c(
-              "div",
-              {
-                staticClass: "button-create-code",
-                on: { click: _vm.createCode },
-              },
-              [_c("i", { staticClass: "bi bi-pencil-square" })]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        this.$store.state.auth.permissions > 0
-          ? _c("User-Options", { attrs: { id: "user_options" } })
-          : _vm._e(),
-      ],
-      1
-    ),
+    _c("nav", { staticClass: "nav-1", attrs: { id: "nav" } }, [
+      _c("ul", { attrs: { id: "search" } }, [_c("Search")], 1),
+      _vm._v(" "),
+      this.$store.state.isAuthenticated == false
+        ? _c(
+            "ul",
+            { attrs: { id: "nav-out-permiss" } },
+            [
+              _c("LangSwitch"),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c("router-link", { attrs: { to: { name: "login" } } }, [
+                    _vm._v(_vm._s(_vm.$t("nav.login"))),
+                  ]),
+                ],
+                1
+              ),
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      this.$store.state.auth.permissions > 0
+        ? _c(
+            "div",
+            {
+              staticClass: "button-create-code",
+              on: { click: _vm.createCode },
+            },
+            [_c("i", { staticClass: "bi bi-pencil-square" })]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "button" },
+        [
+          this.$store.state.auth.permissions > 0
+            ? _c("User-Options")
+            : _vm._e(),
+        ],
+        1
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -38520,7 +38533,7 @@ var render = function () {
         _vm._v(" "),
         this.$store.state.auth.permissions > 0
           ? _c("ul", { attrs: { id: "nav-with-permiss" } }, [
-              _c("li", { staticClass: "nav-mains" }, [
+              _c("li", { staticClass: "button nav-mains" }, [
                 _c(
                   "button",
                   {
@@ -38531,7 +38544,7 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _c("li", [_c("User-Options")], 1),
+              _c("li", { staticClass: "button" }, [_c("User-Options")], 1),
             ])
           : _vm._e(),
       ]),
@@ -39105,6 +39118,7 @@ var render = function () {
           [
             _c(
               "li",
+              { staticClass: "button" },
               [
                 this.$store.state.auth.permissions > 1
                   ? _c(
@@ -39119,6 +39133,7 @@ var render = function () {
             _vm._v(" "),
             _c(
               "li",
+              { staticClass: "button" },
               [
                 _c("router-link", { attrs: { to: { name: "my-code" } } }, [
                   _vm._v(_vm._s(_vm.$t("nav.profile"))),
@@ -39127,14 +39142,36 @@ var render = function () {
               1
             ),
             _vm._v(" "),
-            _c("li", [_vm._v("Settings")]),
+            _c(
+              "li",
+              { staticClass: "button" },
+              [
+                _c("router-link", { attrs: { to: { name: "home" } } }, [
+                  _vm._v("Home"),
+                ]),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "button" },
+              [
+                _c("router-link", { attrs: { to: { name: "settings" } } }, [
+                  _vm._v("Settings"),
+                ]),
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("LangSwitch", { attrs: { id: "lang_switch" } }),
             _vm._v(" "),
-            _c("li", [
-              _c("button", { on: { click: _vm.logout } }, [
-                _vm._v(_vm._s(_vm.$t("nav.sing_out"))),
-              ]),
+            _c("li", { staticClass: "button" }, [
+              _c(
+                "button",
+                { staticClass: "button", on: { click: _vm.logout } },
+                [_vm._v(_vm._s(_vm.$t("nav.sing_out")))]
+              ),
             ]),
           ],
           1
@@ -55921,7 +55958,7 @@ module.exports = JSON.parse('{"nav":{"home":"Home","components":"Componentes","v
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_SearchResults_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1,"resources_js_components_code_ShowCode_vue":1,"resources_js_components_code_UpdateCode_vue":1,"resources_js_components_users_Profile_vue":1,"resources_js_components_users_ProfileOthers_vue":1,"resources_js_components_errors_Permiss_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Base_vue":1,"resources_js_components_users_Login_vue":1,"resources_js_components_users_Register_vue":1,"resources_js_components_Dashboard_vue":1,"resources_js_components_Home_vue":1,"resources_js_components_SearchResults_vue":1,"resources_js_components_users_Settings_vue":1,"resources_js_components_Index_vue":1,"resources_js_components_code_CreateCode_vue":1,"resources_js_components_code_ShowCode_vue":1,"resources_js_components_code_UpdateCode_vue":1,"resources_js_components_users_Profile_vue":1,"resources_js_components_users_ProfileOthers_vue":1,"resources_js_components_errors_Permiss_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

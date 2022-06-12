@@ -5,9 +5,9 @@
     <img class="profile_header-img" :src="'/storage/'+user.img" alt="">
     <div class="profile_header-data">
       <ul>
-        <li>{{$t('profile.components_count', {msg:'0'})}}</li>
-        <li @click="showFollowers">{{$t('profile.followers_count', {msg:get_followers})}}</li>
-        <li @click="showFollowings">{{$t('profile.following_count', {msg:get_followings})}}</li>
+        <li class="follows-button" @click="showPosts">Components</li>
+        <li class="follows-button" @click="showFollowers">{{$t('profile.followers_count', {msg:get_followers})}}</li>
+        <li class="follows-button" @click="showFollowings">{{$t('profile.following_count', {msg:get_followings})}}</li>
         <li>
           <button @click="follow" class="button-Unfollow" v-if="this.$store.state.follows.followings.includes(user.idUsu)">{{$t('profile.unfollow')}}</button>
           <button @click="follow" class="button-follow" v-else>{{$t('profile.follow')}}</button>
@@ -25,33 +25,35 @@
           :likes="likes"
           class="post" 
       ></Post>
+      <button @click="load()" class="profile_load button-load">Load</button>
     </div>
-    <div v-else-if="optionNav==2">
-      <div v-for="user in followersDetails" :key="user.idUsu">
-        <img :src="'/storage/'+user.img" alt="">
-        <h3>{{user.name}}</h3>
-      </div>
+    <div id="profile_tags" v-else-if="optionNav==2">
+      <User-Card v-for="user in posts" :key="user.idUsu"
+        class="user"
+        :user="user"
+      />
     </div>
-    <div v-else-if="optionNav==3">
-      <div v-for="user in followingsDetails" :key="user.idUsu">
-        <img :src="'/storage/'+user.img" alt="">
-        <h3>{{user.name}}</h3>
-      </div>
+    <div id="profile_tags" v-else-if="optionNav==3">
+      <User-Card v-for="user in posts" :key="user.idUsu"
+        class="user"
+        :user="user"
+      />
     </div>
-    
   </div>
 </div>
 </template>
 
 <script>
 import Post from '../code/OnePost.vue';
+import UserCard from './UserCard.vue';
 export default {
   components:{
-    Post
+    Post,
+    UserCard,
   },
   data() {
     return {
-      posts: '',
+      posts: {},
       user:{},
 
       //Follows
@@ -66,6 +68,8 @@ export default {
 
       //Nav Options
       optionNav:1,
+
+      limit:0,
     }
   },
   mounted() {
@@ -82,11 +86,17 @@ export default {
     }
   },
   methods:{
+    showPosts(){
+      this.getPosts()
+      .then(()=>{
+        this.optionNav = 1;
+      })
+    },
     //Get all code from the user passed
     getPosts(){
       //aqui
         let idUsu = this.$route.params.idUsu;
-        axios.get('/api/post/posts/'+idUsu).then(res=>{
+        return axios.get('/api/post/posts/'+idUsu+'/'+this.limit).then(res=>{
           if (res.status) {
             this.posts = res.data.data;
           }else{
@@ -154,7 +164,7 @@ export default {
       axios.get('/api/user/follow/followers/'+this.user.idUsu)
       .then(res=>{
         this.optionNav=2;
-        this.followersDetails = res.data.data;
+        this.posts = res.data.data;
       })
       .catch(err=>{
         console.log('Error en CodeProfile.vue getFollowings');
@@ -163,16 +173,21 @@ export default {
     },
         //Followings
     showFollowings(){
+            console.log("User id: "+this.user.idUsu)
       axios.get('/api/user/follow/following/'+this.user.idUsu)
       .then(res=>{
         this.optionNav=3;
-        this.followingsDetails = res.data.data;
+        this.posts = res.data.data;
       })
       .catch(err=>{
         console.log('Error en CodeProfile.vue getFollowings');
         console.log(err);
       })
     },
+  },
+  load(){
+    this.limit+=6;
+    this.getPosts();
   },
 }
 </script>

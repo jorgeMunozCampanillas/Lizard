@@ -1,0 +1,81 @@
+#setting-wrapper{
+    background-color: $primary-dark;
+    min-height: calc(100vh - 4.5rem);
+    font-family: $title-typography;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: min-content;
+    color: $primary-white;
+    justify-content: center;
+    justify-items: center;
+    overflow: hidden;
+    .settings-title{
+        grid-column-end: span 12;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    #settings-options{
+        grid-column-end: span 12;
+        height: 60%;
+        width: 100%;
+
+        .option{
+            display: flex;
+            align-items: center;
+            font-size: $text-big-size;
+            margin: 1rem;
+            width: 100%;
+            p{
+                font-weight: 600;
+                width: 8%;
+            }
+            .input-data{
+                font-size: 1rem;
+                color: white;
+                font-weight: bold;
+                background-color: $primary-dark;
+                border: none;
+                outline: none;
+                background-color: $primary-dark !important;
+                &::placeholder{
+                    color: white;
+                    opacity: 1;
+                }
+            }
+            .option-img{
+                width: 50px;
+                height: 50px;
+            }
+            label{
+                margin-left: 2rem;
+                border: 2px solid $primary-white;
+                padding: .3rem 1rem;
+            }
+            .save-button{
+                border: 2px solid white;
+                font-size: 1.3rem;
+                padding: .3rem 1rem;
+            }
+            h3{
+                color: $primary-orange;
+            }
+        }
+
+        .info{
+            display: flex;
+            justify-content: center;
+        }
+
+        .dan-zone{
+            color: $primary-orange;
+        }
+        .nor-zone{
+            color: $primary-white;
+        }
+    }
+
+}
+
+.settings-normal{
+}

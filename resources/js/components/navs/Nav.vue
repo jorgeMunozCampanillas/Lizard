@@ -14,7 +14,9 @@
 
         <!-- Options -->
         <div @click="createCode" class="button-create-code" v-if="this.$store.state.auth.permissions>0"><i class="bi bi-pencil-square"></i></div>
-        <User-Options id="user_options" v-if="this.$store.state.auth.permissions>0"></User-Options>
+        <div class="button">
+            <User-Options v-if="this.$store.state.auth.permissions>0"></User-Options>
+        </div>
     </nav>
 </div>
 </template>

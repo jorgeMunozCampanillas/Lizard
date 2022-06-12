@@ -293,7 +293,7 @@ button {
   position: absolute;
   right: 2rem;
   top: 2.5rem;
-  z-index: 5;
+  z-index: 355;
   background-color: #44444b;
   align-items: flex-start;
   font-size: 1rem;
@@ -307,7 +307,7 @@ button {
   width: 100%;
   padding: 0.3rem 0.5rem;
 }
-#options *:hover {
+#options li:hover {
   transition: all 0.2s;
   background-color: #E45858;
 }
@@ -1594,6 +1594,9 @@ a {
   grid-column-end: span 12;
   text-align: center;
 }
+#profile .profile_main #profile_tags .user {
+  grid-column-end: span 3;
+}
 #profile .profile_main #profile_tags #tags {
   display: flex;
   grid-column-end: span 12;
@@ -1601,9 +1604,6 @@ a {
 }
 #profile .profile_main #profile_tags #tags .tag {
   margin: 0.4rem;
-}
-#profile .profile_main #profile_tags .profile_load {
-  grid-column-end: span 12;
 }
 #profile .post {
   grid-column-end: span 4;
@@ -1616,6 +1616,10 @@ a {
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
+}
+
+.profile_load {
+  grid-column-end: span 12;
 }
 
 @media (max-width: 1850px) {
@@ -1655,6 +1659,89 @@ a {
 #seach_wrapper #post_search .post {
   grid-column-end: span 4;
   width: 90%;
+}
+
+#setting-wrapper {
+  background-color: #2B2C34;
+  min-height: calc(100vh - 4.5rem);
+  font-family: "Segoe UI", "Roboto";
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: -webkit-min-content;
+  grid-template-rows: min-content;
+  color: #FFFFFE;
+  justify-content: center;
+  justify-items: center;
+  overflow: hidden;
+}
+#setting-wrapper .settings-title {
+  grid-column-end: span 12;
+  text-align: center;
+  padding: 1rem 0;
+}
+#setting-wrapper #settings-options {
+  grid-column-end: span 12;
+  height: 60%;
+  width: 100%;
+}
+#setting-wrapper #settings-options .option {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  margin: 1rem;
+  width: 100%;
+}
+#setting-wrapper #settings-options .option p {
+  font-weight: 600;
+  width: 8%;
+}
+#setting-wrapper #settings-options .option .input-data {
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  background-color: #2B2C34;
+  border: none;
+  outline: none;
+  background-color: #2B2C34 !important;
+}
+#setting-wrapper #settings-options .option .input-data::-moz-placeholder {
+  color: white;
+  opacity: 1;
+}
+#setting-wrapper #settings-options .option .input-data:-ms-input-placeholder {
+  color: white;
+  opacity: 1;
+}
+#setting-wrapper #settings-options .option .input-data::placeholder {
+  color: white;
+  opacity: 1;
+}
+#setting-wrapper #settings-options .option .option-img {
+  width: 50px;
+  height: 50px;
+}
+#setting-wrapper #settings-options .option label {
+  margin-left: 2rem;
+  border: 2px solid #FFFFFE;
+  padding: 0.3rem 1rem;
+}
+#setting-wrapper #settings-options .option .save-button {
+  border: 2px solid white;
+  font-size: 1.3rem;
+  padding: 0.3rem 1rem;
+}
+#setting-wrapper #settings-options .option h3 {
+  color: #E45858;
+}
+#setting-wrapper #settings-options .info {
+  display: flex;
+  justify-content: center;
+}
+#setting-wrapper #settings-options .dan-zone {
+  color: #E45858;
+}
+#setting-wrapper #settings-options .nor-zone {
+  color: #FFFFFE;
 }
 
 .wrapper {

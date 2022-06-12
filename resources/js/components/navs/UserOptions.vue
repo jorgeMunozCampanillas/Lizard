@@ -6,12 +6,13 @@
         </button>
         <ul id="options" v-if="options">
             <!-- Admin User -->
-            <li><router-link v-if="this.$store.state.auth.permissions>1" :to="{name:'dashboard'}" >{{$t('nav.dashboard')}}</router-link></li>
+            <li class="button"><router-link v-if="this.$store.state.auth.permissions>1" :to="{name:'dashboard'}" >{{$t('nav.dashboard')}}</router-link></li>
             <!-- Users -->
-            <li><router-link :to="{name:'my-code'}">{{$t('nav.profile')}}</router-link></li>
-            <li>Settings</li>
+            <li class="button"><router-link :to="{name:'my-code'}">{{$t('nav.profile')}}</router-link></li>
+            <li class="button"><router-link :to="{name:'home'}">Home</router-link></li>
+            <li class="button"><router-link :to="{name:'settings'}">Settings</router-link></li>
             <LangSwitch id="lang_switch"></LangSwitch>
-            <li><button @click="logout">{{$t('nav.sing_out')}}</button></li>
+            <li class="button"><button class="button" @click="logout">{{$t('nav.sing_out')}}</button></li>
         </ul>
     </div>
 </template>

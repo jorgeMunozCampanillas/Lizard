@@ -20,7 +20,7 @@ class Followers extends Model
     //Return id, name, img of followings
     public static function getFollowingDetails($idFollow){
         return DB::select(
-            DB::raw("Select `user`.`name`, `user`.`img`, `user`.`idUsu`, ( SELECT COUNT(`post`.`idPost`) FROM `post` WHERE `post`.`idUsu` = `user`.`idUsu` ) as `posts` from `user` JOIN (SELECT f.following FROM followers f WHERE f.follower = 1) f WHERE `user`.`idUsu` = f.following; "));
+            DB::raw("Select `user`.`name`, `user`.`img`, `user`.`idUsu`, ( SELECT COUNT(`post`.`idPost`) FROM `post` WHERE `post`.`idUsu` = `user`.`idUsu` ) as `posts` from `user` JOIN (SELECT f.following FROM followers f WHERE f.follower = $idFollow) f WHERE `user`.`idUsu` = f.following; "));
     }
     //Get all post that user where we are following
     public static function getFollowingPosts($limit){
