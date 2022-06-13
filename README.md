@@ -199,6 +199,11 @@ Week 5:
 - Search bar
 - cdn
 
+Week 6:
+- Dashboard
+- New Home
+- New profile
+
 <!-- ACKNOWLEDGMENTS -->
 ## Helpful 🙏 
 
