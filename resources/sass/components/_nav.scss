@@ -292,10 +292,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 30rem;
+    height: 15rem;
     position: absolute;
     right: 2rem;
-    top: 2.5rem;
+    top: 3.5rem;
     z-index: 355;
     background-color: $secondary-dark;
     align-items: flex-start;
@@ -311,6 +311,9 @@
     li:hover{
         transition: all .2s;
         background-color: $primary-orange;
+    }
+    li{
+        margin: 0 !important;
     }
 }
 

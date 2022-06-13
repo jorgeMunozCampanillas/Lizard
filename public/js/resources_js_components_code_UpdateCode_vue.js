@@ -127,6 +127,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 //Code mirror
 
 
@@ -22573,60 +22576,63 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "div",
-        { staticClass: "code_enter" },
-        [
-          _c("Editor", {
-            staticClass: "editor",
-            attrs: { code: _vm.post.html, lang: "xml", language: "HTML" },
-            on: { update: _vm.updateCode },
-          }),
-          _vm._v(" "),
-          _c("Editor", {
-            staticClass: "editor",
-            attrs: { code: _vm.post.css, lang: "css", language: "CSS" },
-            on: { update: _vm.updateCode },
-          }),
-          _vm._v(" "),
-          _c("Editor", {
-            staticClass: "editor",
-            attrs: { code: _vm.post.js, lang: "js", language: "JS" },
-            on: { update: _vm.updateCode },
-          }),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm.previewMode
-        ? _c("Preview", {
-            staticClass: "code_preview-wrapper",
-            attrs: {
-              src: _vm.src,
-              postName: _vm.postName,
-              frameworksName: _vm.frameworksName,
-              tags: _vm.post.tags,
-            },
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "code_output" }, [
-        _c("iframe", {
-          staticClass: "code-represent",
-          attrs: { id: "code", srcdoc: _vm.src },
-        }),
+  return _c("div", [
+    _c(
+      "div",
+      { attrs: { id: "editor" } },
+      [
+        _c(
+          "div",
+          { staticClass: "code_enter" },
+          [
+            _c("Editor", {
+              staticClass: "editor",
+              attrs: { code: _vm.post.html, lang: "xml", language: "HTML" },
+              on: { update: _vm.updateCode },
+            }),
+            _vm._v(" "),
+            _c("Editor", {
+              staticClass: "editor",
+              attrs: { code: _vm.post.css, lang: "css", language: "CSS" },
+              on: { update: _vm.updateCode },
+            }),
+            _vm._v(" "),
+            _c("Editor", {
+              staticClass: "editor",
+              attrs: { code: _vm.post.js, lang: "js", language: "JS" },
+              on: { update: _vm.updateCode },
+            }),
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("div", {
-          staticStyle: { position: "absolute", top: "0", "z-index": "-5" },
-          attrs: { id: "codeScreenArea" },
-        }),
-      ]),
-    ],
-    1
-  )
+        _vm.previewMode
+          ? _c("Preview", {
+              staticClass: "code_preview-wrapper",
+              attrs: {
+                src: _vm.src,
+                postName: _vm.postName,
+                frameworksName: _vm.frameworksName,
+                tags: _vm.post.tags,
+              },
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "code_output" }, [
+          _c("iframe", {
+            staticClass: "code-represent",
+            attrs: { id: "code", srcdoc: _vm.src },
+          }),
+          _vm._v(" "),
+          _c("div", {
+            staticStyle: { position: "absolute", top: "0", "z-index": "-5" },
+            attrs: { id: "codeScreenArea" },
+          }),
+        ]),
+      ],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -42,6 +42,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    console.log("Busco en:");
+    console.log(this.$route.params.route);
+
+    if (this.$route.params.route == undefined) {
+      this.$router.push({
+        name: 'home'
+      });
+    }
+
     if (this.$store.state.isAuthenticated) {
       this.getAuthLikes();
     }

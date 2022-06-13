@@ -289,10 +289,10 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 30rem;
+  height: 15rem;
   position: absolute;
   right: 2rem;
-  top: 2.5rem;
+  top: 3.5rem;
   z-index: 355;
   background-color: #44444b;
   align-items: flex-start;
@@ -310,6 +310,9 @@ button {
 #options li:hover {
   transition: all 0.2s;
   background-color: #E45858;
+}
+#options li {
+  margin: 0 !important;
 }
 
 #avatar {

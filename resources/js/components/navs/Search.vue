@@ -11,7 +11,7 @@
             </div>
         </div>
       <div id="searc_results" v-if="toSearch!=''">
-        <div @click="foo()" v-for="search in namesSearch" :key="search.id" class="searc_result" >{{search.namee}}</div>
+        <div @click="foo(search.namee)" v-for="search in namesSearch" :key="search.id" class="searc_result" >{{search.namee}}</div>
       </div>
     </div>
   </div>
@@ -44,7 +44,8 @@ export default {
                 console.log(err)
             })
         },
-        foo(){
+        foo(search){
+            if (search) this.toSearch = search.replace("#", "");
             let routeToPass='';
             switch (this.optionsSearch) {
                 case 'tags':
@@ -57,8 +58,8 @@ export default {
                 default:
                     break;
             }
-            this.$router.push({name:'search', params: {route: routeToPass}})
-            this.toSearch = '';
+            
+            this.$router.push({name:'search', params: {route: routeToPass, name: this.toSearch}})
         },
         changeOptionSearch(option){
             this.optionsSearch = option;

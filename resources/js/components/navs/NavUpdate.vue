@@ -23,7 +23,10 @@
         </ul>
     </nav>
     <!-- Settings -->
-    <Settings id="settings" v-if="settingsMode" />
+        <div id="settings_wrapper" v-if="settingsMode">
+            <div @click="settings" class="settings_back"></div>
+            <Settings class="settings"/>
+        </div>
 </div>
 </template>
 

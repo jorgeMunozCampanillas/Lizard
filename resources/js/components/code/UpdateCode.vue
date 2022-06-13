@@ -1,25 +1,28 @@
 <template>
 <div>
-  <!-- EDITOR -->
-  <div class="code_enter">
-    <Editor class="editor" :code="post.html" lang="xml" language="HTML" v-on:update="updateCode"/>
-    <Editor class="editor" :code="post.css" lang="css" language="CSS" v-on:update="updateCode"/>
-    <Editor class="editor" :code="post.js" lang="js" language="JS" v-on:update="updateCode"/>
+  <div id="editor">
+    <!-- EDITOR -->
+    <div class="code_enter">
+      <Editor class="editor" :code="post.html" lang="xml" language="HTML" v-on:update="updateCode"/>
+      <Editor class="editor" :code="post.css" lang="css" language="CSS" v-on:update="updateCode"/>
+      <Editor class="editor" :code="post.js" lang="js" language="JS" v-on:update="updateCode"/>
+    </div>
+    <!-- PREVIEW -->
+    <Preview v-if="previewMode" 
+      :src="src" 
+      :postName="postName" 
+      :frameworksName="frameworksName" 
+      :tags="post.tags"
+    class="code_preview-wrapper"></Preview>
+  
+    <!-- OUTPUT -->
+    <div class="code_output">
+      <iframe id="code" :srcdoc="src" class="code-represent"> </iframe>
+      <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
+    </div>
   </div>
-  <!-- PREVIEW -->
-  <Preview v-if="previewMode" 
-    :src="src" 
-    :postName="postName" 
-    :frameworksName="frameworksName" 
-    :tags="post.tags"
-  class="code_preview-wrapper"></Preview>
 
-  <!-- OUTPUT -->
-  <div class="code_output">
-    <iframe id="code" :srcdoc="src" class="code-represent"> </iframe>
-    <div style="position:absolute;top:0;z-index:-5;" id="codeScreenArea"></div>
   </div>
-</div>
 </template>
 
 <script>
