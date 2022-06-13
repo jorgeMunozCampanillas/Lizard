@@ -16,9 +16,10 @@
       </ul>
     </div>
     <div>
-      <h3 v-if="!manage">Do something Mr/s.Admin {{this.$store.state.auth.permissions.name}}</h3>
+        <h3 v-if="!manage">Do something Mr/s.Admin {{this.$store.state.auth.permissions.name}}</h3>
         <dash-users id="table" v-if="manage == 'manageUsers'"></dash-users>
         <dash-posts id="table" v-if="manage == 'managePosts'"></dash-posts>
+        <dash-tag id="table" v-if="manage == 'manageTags'"></dash-tag>
     </div>
   </div>
 </div>
@@ -27,8 +28,9 @@
 <script>
 import DashUsers from './Dashboard/DashUsers.vue';
 import DashPosts from './Dashboard/DashPosts.vue';
+import DashTag from './Dashboard/DashTag.vue';
 export default {
-  components: { DashUsers, DashPosts },
+  components: { DashUsers, DashPosts, DashTag },
     data() {
       return {
         //users

@@ -76,6 +76,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
         //Normal actions with code
         Route::resource('code', App\Http\Controllers\PostController::class)->except(['index']);
         Route::get('delete/{idPost}/{idUsu}', [ App\Http\Controllers\PostController::class, 'destroy'])->middleware(['sameUser']);
+        Route::get('deletePostAdmin/{idPost}/{idUsu}', [ App\Http\Controllers\PostController::class, 'destroy'])->middleware(['admin']);
+        Route::post('editAdmin', [ App\Http\Controllers\PostController::class, 'editAdmin'])->middleware(['admin']);
         Route::get('restore/{idPost}', [ App\Http\Controllers\PostController::class, 'restorePost']);
 
         //Check if is my own code
@@ -102,6 +104,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     //Tags
     Route::group(["prefix"=>"tag"], function(){
         Route::resource('tag', App\Http\Controllers\TagController::class);
+        Route::post('editTag/{idTag}', [App\Http\Controllers\TagController::class, 'update']);
         Route::get('own', [App\Http\Controllers\TagController::class, 'own']);
         Route::get('getOwnPostByTag/{idTag}', [App\Http\Controllers\TagController::class, 'getOwnPostByTag']);
     });

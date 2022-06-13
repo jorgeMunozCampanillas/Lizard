@@ -307,5 +307,13 @@ class PostController extends Controller
         ], 200);
     }
 
+    public function editAdmin(Request $request){
+        $post = $request->idPost;
+        $post = Post::find($post);
+        
+        $post->postName = $request->namePost;
+        $post->save();
+    }
+
 }
 

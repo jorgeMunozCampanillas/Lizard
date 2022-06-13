@@ -48,9 +48,12 @@
 
 #table{
     padding: 1rem;
+    overflow-y: scroll;
+    height: 20rem;
 }
 
 #table-wrapper{
+
     td{
         padding: .3rem 1rem;
         text-align: center;
@@ -76,8 +79,7 @@
         border-radius: .6rem;
         color: $primary-dark;
     }
-}
+    #table-body{
 
-#table-body{
-    border: 3px solid red !important;
+    }
 }

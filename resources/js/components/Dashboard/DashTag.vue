@@ -1,0 +1,101 @@
+<template>
+    <div>
+        <table id="table-wrapper">
+            <thead>
+                <tr>
+                    <th scope="col">#Tag</th>
+                    <th scope="col">Name Tag</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <tr v-for="tag in tags">
+                    <th :id="'user.'+tag.idUsu+'.idTag'" scope="row">{{tag.idTag}}</th>
+
+                    <!-- Name -->
+                    <td :id="'user.'+tag.idUsu+'.name'" scope="row">
+                    <span v-if="tag.tag != tagEdit.tag">{{tag.tag}}</span>
+                    <input v-model='tag.tag' v-else />  
+                    </td>
+        
+                    
+                    <button class="button-delete button" @click.prevent="deleteTag(tag)" v-if="!tagEdit">Delete</button>
+                    <button class="button-edit button" @click.prevent="edit(tag)" v-if="!tagEdit">Edit</button>
+                    <button class="button-susccess button" @click.prevent="editSuccess()" v-if="tagEdit.idTag == tag.idTag">Success</button>
+                    <button class="button-delete button" @click.prevent="editCancel(tag)" v-if="tagEdit.idTag == tag.idTag">Cancel</button>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+      return {
+        users:[],
+        tagEdit:false,
+        tags:[]
+      }
+    },
+    created() {
+      this.getTags();
+    },
+    methods: {
+      //Crud
+      //Delete one user
+      deleteTag(tagDelete){
+        let data = {
+            'id':tagDelete.idTag
+        }
+        axios.delete('/api/tag/tag/'+tagDelete.idTag).then((e)=>{
+          //Update the array with the users
+          this.tags = this.tags.filter((u) => u.idTag != tagDelete.idTag);
+        })
+        .catch((e)=>{
+          console.log("error en Dashboard.vue delete")
+          console.log(e)
+        });
+      },
+
+      //Edit one user
+      edit(tagEdit){
+        this.tagEdit = tagEdit;
+      },
+      editSuccess(){
+        let data = {
+            'idTag':this.tagEdit.idTag,
+            'nameTag':this.tagEdit.tag
+        }
+        axios.post('/api/tag/editTag/'+data.idTag, data).then((e)=>{
+          this.tags.map((u)=>{
+            if (u.idTag == this.tagEdit.idTag) {
+              u = this.tagEdit;
+            }
+          })
+        })
+        .catch((e)=>{
+          console.log("error en Dashboard.vue update");
+          console.log(e);
+        })
+        this.tagEdit = false;
+      },
+      editCancel(){
+        this.tagEdit = false;
+      },
+      getTags(){
+        axios.get('/api/tag/tag')
+        .then(res => {
+            this.tags = res.data
+        })
+        .catch(err =>{
+            console.log("Error en DashTag.vue getTags")
+            console.log(err)
+        })
+      }
+    },
+}
+</script>
+<style>
+
+</style>

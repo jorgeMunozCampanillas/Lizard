@@ -1324,6 +1324,8 @@ a {
 
 #table {
   padding: 1rem;
+  overflow-y: scroll;
+  height: 20rem;
 }
 
 #table-wrapper td {
@@ -1350,11 +1352,6 @@ a {
   border-radius: 0.6rem;
   color: #2B2C34;
 }
-
-#table-body {
-  border: 3px solid red !important;
-}
-
 .code_enter {
   width: 100%;
   display: flex;
