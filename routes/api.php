@@ -39,8 +39,12 @@ Route::middleware(['auth:sanctum'])->group(function(){
     //Users
     Route::group(["prefix" => "user"], function(){
         //Normal actions with the users
-        Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy',  'index'])->middleware(['admin']);
+        Route::resource('users', App\Http\Controllers\UserController::class)->only(['destroy', 'update', 'index'])->middleware(['admin']);
+        Route::post('updateUser', [App\Http\Controllers\UserController::class, 'updateUser']);
+        Route::post('updatePassUser', [App\Http\Controllers\UserController::class, 'updatePassUser']);
+        Route::post('deleteUser', [App\Http\Controllers\UserController::class, 'deleteUser']);
 
+        
         //Get auth
         Route::get('authId', [App\Http\Controllers\UserController::class, 'authId']);
         Route::get('authData', [App\Http\Controllers\UserController::class, 'authData']);
@@ -92,6 +96,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
         Route::get('getLastPostLoved', [App\Http\Controllers\PostController::class, 'getLastPostLoved']);
         Route::get('statistics', [App\Http\Controllers\PostController::class, 'statistics']);
     
+        Route::get('allPosts', [App\Http\Controllers\PostController::class, 'allPosts']);
     });
     
     //Tags

@@ -257,5 +257,37 @@ class UserController extends Controller
         ]);
     }
 
+    public function updateUser(Request $request){
+        // dd($request);
+        $user =  User::find(Auth::id());
+        
+        $request->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+
+        //dd($request->img);
+        if ($request->img) {
+            $file = $request->file('img');
+            $path = $request->file('img')->storePublicly('avatars', 'public');
+            $user->img = $path;
+        }
+        
+        $user->name = $request->name;
+        $user->save();
+    }
+
+    public function updatePassUser(Request $request){
+        $user = User::find(Auth::id());
+        if ($request->pass1 == $request->pass2) {
+            $user->password = Hash::make($request->pass1);
+            $user->save();
+        }
+    }
+
+    public function deleteUser(){
+        $user = User::find(Auth::id());
+        $user->delete();
+    }
+
 
 }

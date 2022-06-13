@@ -58,6 +58,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -65,8 +82,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      user: {},
-      imagepreview: null
+      user: {
+        created: ''
+      },
+      imagepreview: null,
+      pass1: '',
+      pass2: ''
     };
   },
   mounted: function mounted() {
@@ -76,9 +97,9 @@ __webpack_require__.r(__webpack_exports__);
     imgSelected: function imgSelected(e) {
       var _this = this;
 
-      this.imagepreview = e.target.files[0];
+      this.user.img = e.target.files[0];
       var reader = new FileReader();
-      reader.readAsDataURL(this.imagepreview);
+      reader.readAsDataURL(this.user.img);
 
       reader.onload = function (e) {
         _this.imagepreview = e.target.result;
@@ -103,15 +124,56 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('name', this.user.name);
       data.append('img', this.user.img);
-      axios.put('api/user/users/' + this.$store.state.auth.idUsu, data).then(function (req) {
-        _this3.$router.push({
-          name: "home"
+      console.log("SII");
+      axios.post('/api/user/updateUser', data).then(function (res) {
+        //Logout
+        axios.post('/api/logout').then(function () {
+          _this3.$store.dispatch('logout');
+
+          _this3.$router.push({
+            name: "login"
+          });
+        })["catch"](function (e) {
+          console.log("Error en logout Nav.vue");
+          console.log(e);
         });
       })["catch"](function (error) {
         //this.errors = error.response.data.errors;
         console.log("Error desde saveFrom de Register.vue");
         console.log(error);
       });
+    },
+    changePass: function changePass() {
+      var _this4 = this;
+
+      if (this.pass1.length > 7) {
+        if (this.pass1 == this.pass2) {
+          var data = {
+            'pass1': this.pass1,
+            'pass2': this.pass2
+          };
+          axios.post('/api/user/updatePassUser', data).then(function () {
+            _this4.$store.dispatch('logout');
+
+            _this4.$router.push({
+              name: "login"
+            });
+          });
+        }
+      }
+    },
+    drop: function drop() {
+      var _this5 = this;
+
+      if (confirm('Are you sure?')) {
+        axios.post('/api/user/deleteUser').then(function () {
+          _this5.$store.dispatch('logout');
+
+          _this5.$router.push({
+            name: "login"
+          });
+        });
+      }
     }
   }
 });
@@ -205,122 +267,193 @@ var render = function () {
   return _c("div", { attrs: { id: "setting-wrapper" } }, [
     _c("h1", { staticClass: "settings-title" }, [_vm._v("Settings Profile")]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "settings-normal", attrs: { id: "settings-options" } },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "option" }, [
-          _c("p", [_vm._v("Name")]),
+    _c("div", { attrs: { id: "nor-wrapper" } }, [
+      _c(
+        "div",
+        { staticClass: "settings-normal", attrs: { id: "settings-options" } },
+        [
+          _vm._m(0),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.user.name,
-                expression: "user.name",
-              },
-            ],
-            staticClass: "input-data",
-            attrs: {
-              type: "text",
-              name: "name",
-              placeholder: _vm.$t("log.holder_name"),
-            },
-            domProps: { value: _vm.user.name },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.user, "name", $event.target.value)
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "option" }, [
-          _c("p", [_vm._v("Avatar")]),
-          _vm._v(" "),
-          _vm.imagepreview == null
-            ? _c("img", {
-                staticClass: "option-img",
-                attrs: { src: "/storage/" + _vm.user.img, alt: "" },
-              })
-            : _c("img", {
-                staticClass: "option-img",
-                attrs: { src: _vm.imagepreview, alt: "" },
-              }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "img" } }, [_vm._v("New avatar")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "input-data",
-            staticStyle: { visibility: "hidden" },
-            attrs: { id: "img", placeholder: "img", type: "file", name: "img" },
-            on: { change: _vm.imgSelected },
-          }),
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "option" },
-          [
-            _c("p", [_vm._v("Lang")]),
+          _c("div", { staticClass: "option" }, [
+            _c("p", [_vm._v("Email:   ")]),
             _vm._v(" "),
-            _c("LangSwitch", { attrs: { id: "lang_switch" } }),
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "option" }, [
+            _c("p", [_vm._v(_vm._s(_vm.user.email))]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "option" }, [
+            _c("p", [_vm._v("Created date:   ")]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(_vm.user.created.split("T")[0]))]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "settings-normal", attrs: { id: "settings-options" } },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "option" }, [
+            _c("p", [_vm._v("Name:   ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.name,
+                  expression: "user.name",
+                },
+              ],
+              staticClass: "input-data",
+              attrs: {
+                type: "text",
+                name: "name",
+                placeholder: _vm.$t("log.holder_name"),
+              },
+              domProps: { value: _vm.user.name },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "name", $event.target.value)
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "option" }, [
+            _c("p", [_vm._v("Avatar  ")]),
+            _vm._v(" "),
+            _vm.imagepreview == null
+              ? _c("img", {
+                  staticClass: "option-img",
+                  attrs: { src: "/storage/" + _vm.user.img, alt: "" },
+                })
+              : _c("img", {
+                  staticClass: "option-img",
+                  attrs: { src: _vm.imagepreview, alt: "" },
+                }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "img" } }, [_vm._v("Change avatar")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "input-data",
+              staticStyle: { visibility: "hidden" },
+              attrs: {
+                id: "img",
+                placeholder: "img",
+                type: "file",
+                name: "img",
+              },
+              on: { change: _vm.imgSelected },
+            }),
+          ]),
+          _vm._v(" "),
           _c(
-            "button",
-            {
-              staticClass: "button save-button",
-              on: { click: _vm.saveNormal },
-            },
-            [_vm._v("Save")]
+            "div",
+            { staticClass: "option" },
+            [
+              _c("p", [_vm._v("Lang")]),
+              _vm._v(" "),
+              _c("LangSwitch", { attrs: { id: "lang_switch" } }),
+            ],
+            1
           ),
-        ]),
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "settings-danger", attrs: { id: "settings-options" } },
-      [
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _c("div", { staticClass: "option" }, [
-          _c("p", [_vm._v("Password: ")]),
           _vm._v(" "),
-          _c("input", {
-            staticClass: "input-data",
-            attrs: {
-              type: "password",
-              name: "password",
-              placeholder: _vm.$t("log.holder_pass"),
-            },
-          }),
+          _c("div", { staticClass: "option" }, [
+            _c(
+              "button",
+              {
+                staticClass: "button save-button",
+                on: { click: _vm.saveNormal },
+              },
+              [_vm._v("Save")]
+            ),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "settings-danger", attrs: { id: "settings-options" } },
+        [
+          _vm._m(2),
           _vm._v(" "),
-          _c("input", {
-            staticClass: "input-data",
-            attrs: {
-              type: "password",
-              name: "password",
-              placeholder: _vm.$t("log.holder_pass"),
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _vm._m(3),
-      ]
-    ),
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "option option-password" }, [
+            _c("p", [_vm._v("Password: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.pass1,
+                  expression: "pass1",
+                },
+              ],
+              staticClass: "input-data",
+              attrs: {
+                type: "password",
+                name: "password",
+                placeholder: _vm.$t("log.holder_pass"),
+              },
+              domProps: { value: _vm.pass1 },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.pass1 = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.pass2,
+                  expression: "pass2",
+                },
+              ],
+              staticClass: "input-data",
+              attrs: {
+                type: "password",
+                name: "password",
+                placeholder: _vm.$t("log.holder_pass"),
+              },
+              domProps: { value: _vm.pass2 },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.pass2 = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "button", on: { click: _vm.changePass } },
+              [_vm._v("Change Password")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "option" }, [
+            _c("button", { staticClass: "button", on: { click: _vm.drop } }, [
+              _c("h3", [_vm._v("Drop Account")]),
+            ]),
+          ]),
+        ]
+      ),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -329,7 +462,21 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "option nor-zone" }, [
-      _c("h2", [_vm._v("Normal zone")]),
+      _c("h3", [_vm._v("Info zone")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "option nor-zone" }, [
+      _c("h3", [_vm._v("Normal zone")]),
+      _vm._v(" "),
+      _c("p", [
+        _c("i", [
+          _vm._v("(You can change this properties, you will be logged out)"),
+        ]),
+      ]),
     ])
   },
   function () {
@@ -347,18 +494,8 @@ var staticRenderFns = [
     return _c("div", { staticClass: "info" }, [
       _c("p", [
         _vm._v(
-          "⚠ To change your password you must write your old password and the new one twice, notice, once it is changed, the change cannot be reversed ⚠"
+          "⚠ To change your password you must write the new one twice, notice, once it is changed, the change cannot be reversed ⚠"
         ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "option" }, [
-      _c("button", { staticClass: "button" }, [
-        _c("h3", [_vm._v("Drop Account")]),
       ]),
     ])
   },

@@ -15,11 +15,17 @@
         padding: 1rem 0;
     }
 
+    #nor-wrapper{
+        grid-column-end: span 12;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+    }
+
     #settings-options{
         grid-column-end: span 12;
-        height: 60%;
+        height: max-content;
         width: 100%;
-
+        margin: 2rem 0;
         .option{
             display: flex;
             align-items: center;
@@ -28,14 +34,15 @@
             width: 100%;
             p{
                 font-weight: 600;
-                width: 8%;
+                width: max-content;
             }
             .input-data{
                 font-size: 1rem;
                 color: white;
                 font-weight: bold;
                 background-color: $primary-dark;
-                border: none;
+                // border: none;
+                padding: .2rem;
                 outline: none;
                 background-color: $primary-dark !important;
                 &::placeholder{
@@ -54,11 +61,20 @@
             }
             .save-button{
                 border: 2px solid white;
-                font-size: 1.3rem;
-                padding: .3rem 1rem;
+                font-size: 1rem;
+                padding: .2rem .8rem;
             }
             h3{
                 color: $primary-orange;
+            }
+        }
+        .option-password{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            input{
+                margin: .5rem 0;
             }
         }
 
@@ -72,6 +88,13 @@
         }
         .nor-zone{
             color: $primary-white;
+            flex-direction: column;
+            align-items: flex-start;
+            p{
+                width: max-content;
+                font-size: .8rem;
+                font-weight: normal;
+            }
         }
     }
 

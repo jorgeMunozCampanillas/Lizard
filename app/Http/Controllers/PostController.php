@@ -299,5 +299,13 @@ class PostController extends Controller
         return response()->json($statistics);
     }
 
+    public function allPosts(Request $request){
+        $posts = Post::getPosts();
+
+        return response()->json([
+            'data' => $posts,
+        ], 200);
+    }
+
 }
 

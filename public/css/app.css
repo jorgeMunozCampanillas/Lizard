@@ -1281,19 +1281,26 @@ a {
   }
 }
 #dashboard {
-  color: white;
+  color: #FFFFFE;
   background-color: #2B2C34;
-  height: 100vh;
+  font-family: "Segoe UI", "Roboto";
+  height: calc(100vh - 4.5rem);
+  padding: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+#dashboard #dash-title {
+  color: #FFFFFE;
+  text-align: center;
 }
 
 #dash-table {
-  border: 3px solid red;
   margin: 3rem 7rem;
+  padding: 1rem;
 }
 
-#dash-options {
-  border: 3px solid green;
-}
 #dash-options ul {
   display: flex;
 }
@@ -1301,11 +1308,51 @@ a {
   margin: 1rem 1.5rem;
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
-  color: #0D6EFD;
+}
+#dash-options ul li .select {
+  border-bottom: 2px solid #52C7D0;
 }
 #dash-options ul li:focus {
   background-color: #0D6EFD;
   color: white;
+}
+#dash-options .dash-option {
+  color: #FFFFFE;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+#table {
+  padding: 1rem;
+}
+
+#table-wrapper td {
+  padding: 0.3rem 1rem;
+  text-align: center;
+}
+#table-wrapper .button-delete {
+  background-color: #C82333;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+}
+#table-wrapper .button-edit {
+  background-color: #E0A800;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  color: #2B2C34;
+}
+#table-wrapper .button-susccess {
+  background-color: #218838;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  color: #2B2C34;
+}
+
+#table-body {
+  border: 3px solid red !important;
 }
 
 .code_enter {
@@ -1679,10 +1726,18 @@ a {
   text-align: center;
   padding: 1rem 0;
 }
+#setting-wrapper #nor-wrapper {
+  grid-column-end: span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
 #setting-wrapper #settings-options {
   grid-column-end: span 12;
-  height: 60%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   width: 100%;
+  margin: 2rem 0;
 }
 #setting-wrapper #settings-options .option {
   display: flex;
@@ -1693,14 +1748,16 @@ a {
 }
 #setting-wrapper #settings-options .option p {
   font-weight: 600;
-  width: 8%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 #setting-wrapper #settings-options .option .input-data {
   font-size: 1rem;
   color: white;
   font-weight: bold;
   background-color: #2B2C34;
-  border: none;
+  padding: 0.2rem;
   outline: none;
   background-color: #2B2C34 !important;
 }
@@ -1727,11 +1784,20 @@ a {
 }
 #setting-wrapper #settings-options .option .save-button {
   border: 2px solid white;
-  font-size: 1.3rem;
-  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  padding: 0.2rem 0.8rem;
 }
 #setting-wrapper #settings-options .option h3 {
   color: #E45858;
+}
+#setting-wrapper #settings-options .option-password {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+#setting-wrapper #settings-options .option-password input {
+  margin: 0.5rem 0;
 }
 #setting-wrapper #settings-options .info {
   display: flex;
@@ -1742,6 +1808,15 @@ a {
 }
 #setting-wrapper #settings-options .nor-zone {
   color: #FFFFFE;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#setting-wrapper #settings-options .nor-zone p {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 0.8rem;
+  font-weight: normal;
 }
 
 .wrapper {

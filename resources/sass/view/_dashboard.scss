@@ -1,16 +1,25 @@
 #dashboard{
-    color: white;
+    color: $primary-white;
     background-color: $primary-dark;
-    height: 100vh;
+    font-family: $title-typography;
+    height: calc(100vh - 4.5rem);
+    padding: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    #dash-title{
+        color: $primary-white;
+        text-align: center;
+    }
 }
 
 #dash-table{
-    border: 3px solid red;
     margin: 3rem 7rem;
+    padding: 1rem;
 }
 
 #dash-options{
-    border: 3px solid green;
 
     ul{
         display: flex;
@@ -19,7 +28,9 @@
             margin: 1rem 1.5rem;
             padding: .5rem 1rem;
             border-radius: .2rem;
-            color: $primary-blue-strong;
+            .select{
+                border-bottom: 2px solid $primary-blue;
+            }
         }
         
         li:focus{
@@ -27,4 +38,46 @@
             color: white;
         }
     }
+
+    .dash-option{
+        color: $primary-white;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
+
+#table{
+    padding: 1rem;
+}
+
+#table-wrapper{
+    td{
+        padding: .3rem 1rem;
+        text-align: center;
+    }
+
+    .button-delete{
+        background-color: #C82333;
+        padding: .3rem 1rem;
+        font-size: 1rem;
+        border-radius: .6rem;
+    }
+    .button-edit{
+        background-color: #E0A800;
+        padding: .3rem 1rem;
+        font-size: 1rem;
+        border-radius: .6rem;
+        color: $primary-dark;
+    }
+    .button-susccess{
+        background-color: #218838;
+        padding: .3rem 1rem;
+        font-size: 1rem;
+        border-radius: .6rem;
+        color: $primary-dark;
+    }
+}
+
+#table-body{
+    border: 3px solid red !important;
 }
