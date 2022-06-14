@@ -140,7 +140,7 @@ var render = function () {
     _c("h2", [_vm._v(_vm._s(_vm.msg))]),
     _vm._v(" "),
     _c("button", { staticClass: "button-err", on: { click: _vm.foo } }, [
-      _vm._v("Back to home"),
+      _vm._v(_vm._s(_vm.$t("permiss.back"))),
     ]),
   ])
 }

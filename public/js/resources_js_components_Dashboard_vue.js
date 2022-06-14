@@ -756,7 +756,7 @@ var render = function () {
                     staticClass: "button dash-option",
                     class: { select: _vm.select("manageUsers") },
                   },
-                  [_vm._v("Users")]
+                  [_vm._v(_vm._s(_vm.$t("dash.users")))]
                 ),
               ]
             ),
@@ -780,7 +780,7 @@ var render = function () {
                     staticClass: "button dash-option",
                     class: { select: _vm.select("managePosts") },
                   },
-                  [_vm._v("Posts")]
+                  [_vm._v(_vm._s(_vm.$t("dash.posts")))]
                 ),
               ]
             ),
@@ -804,7 +804,7 @@ var render = function () {
                     staticClass: "button dash-option",
                     class: { select: _vm.select("manageTags") },
                   },
-                  [_vm._v("Tags")]
+                  [_vm._v(_vm._s(_vm.$t("dash.tags")))]
                 ),
               ]
             ),
@@ -818,7 +818,8 @@ var render = function () {
           !_vm.manage
             ? _c("h3", [
                 _vm._v(
-                  "Do something Mr/s.Admin " +
+                  _vm._s(_vm.$t("dash.adminMsg")) +
+                    " " +
                     _vm._s(this.$store.state.auth.permissions.name)
                 ),
               ])
@@ -865,7 +866,33 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("table", { attrs: { id: "table-wrapper" } }, [
-      _vm._m(0),
+      _c("thead", [
+        _c("tr", [
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashPost.post"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashPost.usu"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashPost.namePost"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashPost.likes"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashPost.created"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dash.options"))),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c(
         "tbody",
@@ -934,7 +961,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Delete")]
+                        [_vm._v(_vm._s(_vm.$t("dash.delete")))]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -950,7 +977,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Edit")]
+                        [_vm._v(_vm._s(_vm.$t("dash.edit")))]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -966,7 +993,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Success")]
+                        [_vm._v(_vm._s(_vm.$t("dash.success")))]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -982,7 +1009,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Cancel")]
+                        [_vm._v(_vm._s(_vm.$t("dash.cancel")))]
                       )
                     : _vm._e(),
                 ])
@@ -994,28 +1021,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#Post")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#Usu")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name Post")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Likes")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Created_at")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Options")]),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1039,7 +1045,17 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("table", { attrs: { id: "table-wrapper" } }, [
-      _vm._m(0),
+      _c("thead", [
+        _c("tr", [
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashTag.tag"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashTag.nameTag"))),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c(
         "tbody",
@@ -1092,7 +1108,7 @@ var render = function () {
                       },
                     },
                   },
-                  [_vm._v("Delete")]
+                  [_vm._v(_vm._s(_vm.$t("dash.delete")))]
                 )
               : _vm._e(),
             _vm._v(" "),
@@ -1108,7 +1124,7 @@ var render = function () {
                       },
                     },
                   },
-                  [_vm._v("Edit")]
+                  [_vm._v(_vm._s(_vm.$t("dash.edit")))]
                 )
               : _vm._e(),
             _vm._v(" "),
@@ -1124,7 +1140,7 @@ var render = function () {
                       },
                     },
                   },
-                  [_vm._v("Success")]
+                  [_vm._v(_vm._s(_vm.$t("dash.success")))]
                 )
               : _vm._e(),
             _vm._v(" "),
@@ -1140,7 +1156,7 @@ var render = function () {
                       },
                     },
                   },
-                  [_vm._v("Cancel")]
+                  [_vm._v(_vm._s(_vm.$t("dash.cancel")))]
                 )
               : _vm._e(),
           ])
@@ -1150,20 +1166,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#Tag")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name Tag")]),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1187,7 +1190,33 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("table", { attrs: { id: "table-wrapper" } }, [
-      _vm._m(0),
+      _c("thead", [
+        _c("tr", [
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashUsers.id"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashUsers.name"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashUsers.email"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashUsers.permissions"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashUsers.created"))),
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [
+            _vm._v(_vm._s(_vm.$t("dashUsers.options"))),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c(
         "tbody",
@@ -1273,7 +1302,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Delete")]
+                        [_vm._v(_vm._s(_vm.$t("dash.delete")))]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -1289,7 +1318,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Edit")]
+                        [_vm._v(_vm._s(_vm.$t("dash.edit")))]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -1305,7 +1334,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Success")]
+                        [_vm._v(_vm._s(_vm.$t("dash.success")))]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -1321,7 +1350,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Cancel")]
+                        [_vm._v(_vm._s(_vm.$t("dash.cancel")))]
                       )
                     : _vm._e(),
                 ])
@@ -1333,28 +1362,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Permissions")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Created_at")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Options")]),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

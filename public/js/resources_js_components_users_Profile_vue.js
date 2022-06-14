@@ -187,7 +187,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -811,7 +810,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Friends")]
+            [_vm._v(_vm._s(_vm.$t("profile.friends")))]
           ),
         ]),
         _vm._v(" "),
@@ -829,7 +828,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Profile")]
+                [_vm._v(_vm._s(_vm.$t("profile.profile")))]
               ),
               _vm._v(" "),
               _c(
@@ -842,7 +841,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("All posts")]
+                [_vm._v(_vm._s(_vm.$t("profile.allPosts")))]
               ),
               _vm._v(" "),
               _c(
@@ -855,7 +854,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Tags")]
+                [_vm._v(_vm._s(_vm.$t("profile.tags")))]
               ),
               _vm._v(" "),
               _c(
@@ -868,7 +867,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Loved")]
+                [_vm._v(_vm._s(_vm.$t("profile.loved")))]
               ),
               _vm._v(" "),
               _c(
@@ -902,7 +901,7 @@ var render = function () {
               _vm._v(" "),
               _vm.followsDetails[0] == null
                 ? _c("div", { staticClass: "profile_follows-msg" }, [
-                    _c("h3", [_vm._v("You dont follow to any")]),
+                    _c("h3", [_vm._v(_vm._s(_vm.$t("profile.dontFollow")))]),
                   ])
                 : _vm._e(),
             ],
@@ -928,9 +927,7 @@ var render = function () {
       _vm.optionSecond == "profile"
         ? _c("div", { attrs: { id: "profile_resume" } }, [
             _c("div", { attrs: { id: "profile_resume-month" } }, [
-              _c("h2", [_vm._v("📅 Your work this month 📅")]),
-              _vm._v(" "),
-              _c("h4", [_vm._v("June")]),
+              _c("h2", [_vm._v(_vm._s(_vm.$t("profile.thisMonth")))]),
               _vm._v(" "),
               _c(
                 "table",
@@ -959,23 +956,23 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { attrs: { id: "profile_resume-statics" } }, [
-              _c("h2", [_vm._v("Total statistics 📈")]),
+              _c("h2", [_vm._v(_vm._s(_vm.$t("profile.statistics")))]),
               _vm._v(" "),
               _c("div", { attrs: { id: "statics-container" } }, [
                 _c("div", { staticClass: "static" }, [
-                  _c("p", [_vm._v("Views 👀")]),
+                  _c("p", [_vm._v(_vm._s(_vm.$t("profile.views")))]),
                   _vm._v(" "),
                   _c("p", [_vm._v(_vm._s(_vm.statistics.views))]),
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "static" }, [
-                  _c("p", [_vm._v("Likes 💙")]),
+                  _c("p", [_vm._v(_vm._s(_vm.$t("profile.likes")))]),
                   _vm._v(" "),
                   _c("p", [_vm._v(_vm._s(_vm.statistics.likes))]),
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "static" }, [
-                  _c("p", [_vm._v("Follows 🙍‍♂️")]),
+                  _c("p", [_vm._v(_vm._s(_vm.$t("profile.follows")))]),
                   _vm._v(" "),
                   _c("p", [_vm._v(_vm._s(_vm.statistics.followers))]),
                 ]),
@@ -987,7 +984,7 @@ var render = function () {
               { staticClass: "resume-container resume-container-best" },
               [
                 _c("h1", { staticClass: "profile_resume-title" }, [
-                  _vm._v(" Your Best Posts "),
+                  _vm._v(_vm._s(_vm.$t("profile.bestPost"))),
                 ]),
                 _vm._v(" "),
                 _c("Post", {
@@ -1005,7 +1002,10 @@ var render = function () {
             "div",
             { attrs: { id: "profile_tags" } },
             [
-              _vm._m(1),
+              _c("h2", [
+                _vm._v(_vm._s(_vm.$t("profile.delete")) + " "),
+                _c("i", { staticClass: "bi bi-trash-fill" }),
+              ]),
               _vm._v(" "),
               _vm._l(_vm.posts, function (post) {
                 return _c("Post", {
@@ -1024,7 +1024,7 @@ var render = function () {
             "div",
             { attrs: { id: "profile_tags" } },
             [
-              _c("h2", [_vm._v("All your posts")]),
+              _c("h2", [_vm._v(_vm._s(_vm.$t("profile.allYourPosts")))]),
               _vm._v(" "),
               _vm._l(_vm.posts, function (post) {
                 return _c("Post", {
@@ -1056,7 +1056,7 @@ var render = function () {
             "div",
             { attrs: { id: "profile_tags" } },
             [
-              _c("h2", [_vm._v('Last loveds "<3" ')]),
+              _c("h2", [_vm._v(_vm._s(_vm.$t("profile.lastLoveds")) + '"<3"')]),
               _vm._v(" "),
               _vm._l(_vm.posts, function (post) {
                 return _c("Post", {
@@ -1068,7 +1068,9 @@ var render = function () {
               _vm._v(" "),
               _vm.posts[0] == null
                 ? _c("div", { staticClass: "profile_tags-msg" }, [
-                    _c("h3", [_vm._v("You dont love any post </3")]),
+                    _c("h3", [
+                      _vm._v(_vm._s(_vm.$t("profile.yourDontLove")) + " </3"),
+                    ]),
                   ])
                 : _vm._e(),
             ],
@@ -1083,7 +1085,10 @@ var render = function () {
             [
               _c("br"),
               _vm._v(" "),
-              _vm._m(2),
+              _c("h2", [
+                _vm._v(_vm._s(_vm.$t("profile.allTags")) + " "),
+                _c("hr"),
+              ]),
               _vm._v(" "),
               _c(
                 "ul",
@@ -1119,13 +1124,15 @@ var render = function () {
               _vm._v(" "),
               _vm.nameTagSearch == ""
                 ? _c("div", { staticClass: "profile_tags-msg" }, [
-                    _c("h1", [_vm._v("👆 Select one #Tag 👆")]),
+                    _c("h1", [_vm._v(_vm._s(_vm.$t("profile.selectTag")))]),
                   ])
                 : _vm._e(),
               _vm._v(" "),
               _vm.posts[0] == null && _vm.nameTagSearch != ""
                 ? _c("div", { staticClass: "profile_tags-msg" }, [
-                    _c("h3", [_vm._v("You dont have any post :/")]),
+                    _c("h3", [
+                      _vm._v(_vm._s(_vm.$t("profile.youDontHavePost"))),
+                    ]),
                   ])
                 : _vm._e(),
             ],
@@ -1148,7 +1155,9 @@ var render = function () {
               _vm._v(" "),
               _vm.posts[0] == null
                 ? _c("div", { staticClass: "profile_tags-msg" }, [
-                    _c("h3", [_vm._v("Have you friends?? 🤔")]),
+                    _c("h3", [
+                      _vm._v(_vm._s(_vm.$t("profile.haveYouFriends"))),
+                    ]),
                   ])
                 : _vm._e(),
               _vm._v(" "),
@@ -1162,7 +1171,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Load")]
+                [_vm._v(_vm._s(_vm.$t("profile.load")))]
               ),
             ],
             2
@@ -1191,21 +1200,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Do")]),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", [
-      _vm._v("Deleted "),
-      _c("i", { staticClass: "bi bi-trash-fill" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", [_vm._v("All your tags "), _c("hr")])
   },
 ]
 render._withStripped = true

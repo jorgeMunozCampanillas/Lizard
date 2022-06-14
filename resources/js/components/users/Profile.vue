@@ -15,14 +15,14 @@
       <ul class="nav_profile-main nav_profile-option">
           <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('profile')" :class="{active: optionMain == 'your_work'}">{{$t('profile.your_work')}}</li>
           <li @click="SET_OPMAIN('following'), SET_OPSECOND('none')" :class="{active: optionMain == 'following'}">{{$t('profile.following')}}</li>
-          <li @click="SET_OPMAIN(5), SET_OPSECOND('none')" :class="{active: optionMain == 4 || optionMain == 5}">Friends</li>
+          <li @click="SET_OPMAIN(5), SET_OPSECOND('none')" :class="{active: optionMain == 4 || optionMain == 5}">{{$t('profile.friends')}}</li>
       </ul>
       <hr>
       <ul v-if="optionMain == 'your_work'" class="nav_profile-work nav_profile-option">
-          <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('profile')" :class="{active: optionSecond == 'profile'}">Profile</li>
-          <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('all')" :class="{active: optionSecond == 'all'}">All posts</li>
-          <li @click="SET_OPSECOND(2), SET_OPSECOND('tags')" :class="{active: optionSecond == 'tags'}">Tags</li>
-          <li @click="SET_OPSECOND(2), SET_OPSECOND('loved')" :class="{active: optionSecond == 'loved'}">Loved</li>
+          <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('profile')" :class="{active: optionSecond == 'profile'}">{{$t('profile.profile')}}</li>
+          <li @click="SET_OPMAIN('your_work'), SET_OPSECOND('all')" :class="{active: optionSecond == 'all'}">{{$t('profile.allPosts')}}</li>
+          <li @click="SET_OPSECOND(2), SET_OPSECOND('tags')" :class="{active: optionSecond == 'tags'}">{{$t('profile.tags')}}</li>
+          <li @click="SET_OPSECOND(2), SET_OPSECOND('loved')" :class="{active: optionSecond == 'loved'}">{{$t('profile.loved')}}</li>
           <li @click="SET_OPSECOND('your_work'), SET_OPSECOND('deleted')" :class="{active: optionSecond == 'deleted'}">{{$t('profile.delete')}}</li>
       </ul>
     </nav>
@@ -33,7 +33,7 @@
         class="user"
         :user="user"
       />
-      <div v-if="followsDetails[0]==null" class="profile_follows-msg"><h3>You dont follow to any</h3></div>
+      <div v-if="followsDetails[0]==null" class="profile_follows-msg"><h3>{{$t('profile.dontFollow')}}</h3></div>
     </div>
     <!-- Following -->
     <div class="profile_main-follows" v-if="optionMain==5">
@@ -49,8 +49,7 @@
     <div id="profile_resume" v-if="optionSecond=='profile'">
 
       <div id="profile_resume-month">
-        <h2>📅 Your work this month 📅</h2>
-        <h4>June</h4>
+        <h2>{{$t('profile.thisMonth')}}</h2>
         <table id="month_table">
           <thead>
             <th>Lu</th>
@@ -68,18 +67,18 @@
       </div>
 
       <div id="profile_resume-statics">
-        <h2>Total statistics 📈</h2>
+        <h2>{{$t('profile.statistics')}}</h2>
         <div id="statics-container">
           <div class="static">
-            <p>Views 👀</p>
+            <p>{{$t('profile.views')}}</p>
             <p>{{statistics.views}}</p>
           </div>
           <div class="static">
-            <p>Likes 💙</p>
+            <p>{{$t('profile.likes')}}</p>
             <p>{{statistics.likes}}</p>
           </div>
           <div class="static">
-            <p>Follows 🙍‍♂️</p>
+            <p>{{$t('profile.follows')}}</p>
             <p>{{statistics.followers}}</p>
           </div>
           <!-- <div class="static">
@@ -90,7 +89,7 @@
       </div>
 
       <div class="resume-container resume-container-best">
-        <h1 class="profile_resume-title"> Your Best Posts </h1>
+        <h1 class="profile_resume-title">{{$t('profile.bestPost')}}</h1>
         <Post
             :data="statistics.post[0]"
             :likes="likes"
@@ -101,7 +100,7 @@
 
     <!-- Deleted -->
     <div id="profile_tags" v-if="optionSecond=='deleted'">
-      <h2>Deleted <i class="bi bi-trash-fill"></i></h2>
+      <h2>{{$t('profile.delete')}} <i class="bi bi-trash-fill"></i></h2>
       <Post 
         v-for="post in posts" :key="post.idPost"
           :data="post"
@@ -112,7 +111,7 @@
 
     <!-- All posts -->
     <div id="profile_tags" v-if="optionSecond=='all'">
-      <h2>All your posts</h2>
+      <h2>{{$t('profile.allYourPosts')}}</h2>
       <Post 
         v-for="post in posts" :key="post.idPost"
           :data="post"
@@ -124,20 +123,20 @@
 
     <!-- Loveds -->
     <div id="profile_tags" v-if="optionSecond=='loved'">
-      <h2>Last loveds "&lt;3" </h2>
+      <h2>{{$t('profile.lastLoveds')}}"&lt;3"</h2>
       <Post 
         v-for="post in posts" :key="post.idPost"
           :data="post"
           :likes="likes"
           class="post" 
       ></Post>
-      <div v-if="posts[0]==null" class="profile_tags-msg"><h3>You dont love any post &lt;/3</h3></div>
+      <div v-if="posts[0]==null" class="profile_tags-msg"><h3>{{$t('profile.yourDontLove')}} &lt;/3</h3></div>
     </div>
 
     <!-- Tags -->
     <div id="profile_tags" v-if="optionSecond=='tags'">
       <br>
-      <h2>All your tags <hr></h2>
+      <h2>{{$t('profile.allTags')}} <hr></h2>
       <ul id="tags">
         <li @click="searchTag(tag.idTag, tag.tag)" class="button-tag tag" v-for="tag in tags">{{tag.tag}}</li>
       </ul>
@@ -148,8 +147,8 @@
             :likes="likes"
             class="post" 
         ></Post>
-      <div v-if="nameTagSearch==''" class="profile_tags-msg"><h1>👆 Select one #Tag 👆</h1></div>
-      <div v-if="posts[0]==null && nameTagSearch!=''" class="profile_tags-msg"><h3>You dont have any post :/</h3></div>
+      <div v-if="nameTagSearch==''" class="profile_tags-msg"><h1>{{$t('profile.selectTag')}}</h1></div>
+      <div v-if="posts[0]==null && nameTagSearch!=''" class="profile_tags-msg"><h3>{{$t('profile.youDontHavePost')}}</h3></div>
     </div>
     
     <!-- Following posts -->
@@ -160,8 +159,8 @@
           :likes="likes"
           class="post" 
       ></Post>
-      <div v-if="posts[0]==null" class="profile_tags-msg"><h3>Have you friends?? 🤔</h3></div>
-      <button @click="loadFollowing()" class="profile_load button-load">Load</button>
+      <div v-if="posts[0]==null" class="profile_tags-msg"><h3>{{$t('profile.haveYouFriends')}}</h3></div>
+      <button @click="loadFollowing()" class="profile_load button-load">{{$t('profile.load')}}</button>
     </div>
   </div>
 </div>

@@ -451,7 +451,7 @@ var render = function () {
           _c(
             "li",
             { staticClass: "follows-button", on: { click: _vm.showPosts } },
-            [_vm._v("Components")]
+            [_vm._v(_vm._s(_vm.$t("profile.components")))]
           ),
           _vm._v(" "),
           _c(
@@ -522,7 +522,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Load")]
+                [_vm._v(_vm._s(_vm.$t("profile.load")))]
               ),
             ],
             2

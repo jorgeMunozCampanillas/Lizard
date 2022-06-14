@@ -5,8 +5,8 @@
             <i class="bi bi-search"></i>
             <input @keyup="searchNames" v-model="toSearch" type="text" id="search-input" placeholder="Search Post...">
             <div id="search_options">
-                <button class="button-navSearch" :class="{'search_option-select': existOption('tags')}" @click="changeOptionSearch('tags')">#tags</button>
-                <button class="button-navSearch" :class="{'search_option-select': existOption('component')}" @click="changeOptionSearch('component')">#component</button>
+                <button class="button-navSearch" :class="{'search_option-select': existOption('tags')}" @click="changeOptionSearch('tags')">{{$t('nav.tags')}}</button>
+                <button class="button-navSearch" :class="{'search_option-select': existOption('component')}" @click="changeOptionSearch('component')">{{$t('nav.component')}}</button>
                 <!-- <button class="button-navSearch" :class="{'search_option-select': existOption('profile')}" @click="changeOptionSearch('profile')">#profile</button> -->
             </div>
         </div>

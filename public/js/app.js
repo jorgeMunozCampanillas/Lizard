@@ -38005,7 +38005,7 @@ var render = function () {
                       },
                       [
                         _c("i", { staticClass: "bi bi-trash-fill" }),
-                        _vm._v(" Delete"),
+                        _vm._v(_vm._s(_vm.$t("onePost.delete"))),
                       ]
                     ),
                     _vm._v(" "),
@@ -38021,7 +38021,7 @@ var render = function () {
                           },
                           [
                             _c("i", { staticClass: "bi bi-pencil-fill" }),
-                            _vm._v(" Edit"),
+                            _vm._v(_vm._s(_vm.$t("onePost.edit"))),
                           ]
                         )
                       : _vm._e(),
@@ -38035,7 +38035,7 @@ var render = function () {
                           },
                           [
                             _c("i", { staticClass: "bi bi-recycle" }),
-                            _vm._v(" Restore"),
+                            _vm._v(_vm._s(_vm.$t("onePost.restore"))),
                           ]
                         )
                       : _vm._e(),
@@ -38226,7 +38226,7 @@ var render = function () {
       _c("ul", { staticClass: "nav-info" }, [
         _c("img", {
           staticClass: "button",
-          attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
+          attrs: { src: "/storage/logo.svg", id: "logo", alt: "" },
         }),
         _vm._v(" "),
         _c("div", [
@@ -38245,15 +38245,19 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("ul", { staticClass: "nav-options" }, [
-        _c("li", { staticClass: "nav-option", on: { click: _vm.exit } }, [
-          _c("i", { staticClass: "bi bi-house-fill" }),
-          _vm._v(" Home"),
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-option button", on: { click: _vm.exit } },
+          [
+            _c("i", { staticClass: "bi bi-house-fill" }),
+            _vm._v(" " + _vm._s(_vm.$t("nav.home"))),
+          ]
+        ),
         _vm._v(" "),
         _c(
           "li",
           {
-            staticClass: "nav-option",
+            staticClass: "nav-option button",
             on: {
               click: function ($event) {
                 $event.preventDefault()
@@ -38263,14 +38267,18 @@ var render = function () {
           },
           [
             _c("i", { staticClass: "bi bi-cloud-download-fill" }),
-            _vm._v(" Save"),
+            _vm._v(" " + _vm._s(_vm.$t("nav.save"))),
           ]
         ),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-option", on: { click: _vm.settings } }, [
-          _c("i", { staticClass: "bi bi-gear-fill" }),
-          _vm._v(" Setting"),
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-option button", on: { click: _vm.settings } },
+          [
+            _c("i", { staticClass: "bi bi-gear-fill" }),
+            _vm._v(" " + _vm._s(_vm.$t("nav.setting"))),
+          ]
+        ),
         _vm._v(" "),
         _c("li", [
           _c(
@@ -38345,11 +38353,7 @@ var render = function () {
                 },
                 [
                   _c("img", {
-                    attrs: {
-                      src: "/storage/logo2-bueno.png",
-                      id: "logo",
-                      alt: "",
-                    },
+                    attrs: { src: "/storage/logo.svg", id: "logo", alt: "" },
                   }),
                   _vm._v(" "),
                   _c("h2", { attrs: { id: "logo-title" } }, [_vm._v("Lizard")]),
@@ -38372,7 +38376,9 @@ var render = function () {
                 },
                 [
                   _c("i", { staticClass: "bi bi-postage" }),
-                  _vm._v(" Create Post\n              "),
+                  _vm._v(
+                    " " + _vm._s(_vm.$t("nav.createPost")) + "\n              "
+                  ),
                 ]
               ),
             ],
@@ -38385,7 +38391,7 @@ var render = function () {
               { staticClass: "menu_options-option" },
               [
                 _c("router-link", { attrs: { to: { name: "my-code" } } }, [
-                  _vm._v("Your Work"),
+                  _vm._v(_vm._s(_vm.$t("nav.yourWork"))),
                 ]),
               ],
               1
@@ -38402,7 +38408,7 @@ var render = function () {
                       to: { name: "my-code", params: { opmain: "following" } },
                     },
                   },
-                  [_vm._v("Following")]
+                  [_vm._v(_vm._s(_vm.$t("nav.following")))]
                 ),
               ],
               1
@@ -38410,7 +38416,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "menu_options-stack" }, [
-            _c("h3", [_vm._v("Actual Stacks")]),
+            _c("h3", [_vm._v(_vm._s(_vm.$t("nav.actualStack")))]),
             _vm._v(" "),
             _c(
               "div",
@@ -38433,14 +38439,20 @@ var render = function () {
         _c("div", [
           _c("div", { staticClass: "menu_options-stack" }, [
             _c("h3", { staticClass: "menu_options-title" }, [
-              _vm._v("Featured Week Post:"),
+              _vm._v(_vm._s(_vm.$t("nav.featured"))),
             ]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(_vm.featuredPost.namePost))]),
             _vm._v(" "),
             _c("div", { attrs: { id: "menu_options-container-featured" } }, [
               _c("div", [
-                _c("p", [_vm._v("Likes: " + _vm._s(_vm.featuredPost.likes))]),
+                _c("p", [
+                  _vm._v(
+                    _vm._s(_vm.$t("nav.like")) +
+                      " " +
+                      _vm._s(_vm.featuredPost.likes)
+                  ),
+                ]),
               ]),
               _vm._v(" "),
               _c("iframe", {
@@ -38451,7 +38463,11 @@ var render = function () {
                 },
               }),
               _vm._v(" "),
-              _c("p", [_vm._v("By: " + _vm._s(_vm.featuredPost.name))]),
+              _c("p", [
+                _vm._v(
+                  _vm._s(_vm.$t("nav.by")) + " " + _vm._s(_vm.featuredPost.name)
+                ),
+              ]),
             ]),
           ]),
         ]),
@@ -38497,7 +38513,7 @@ var render = function () {
         },
         [
           _c("img", {
-            attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
+            attrs: { src: "/storage/logo.svg", id: "logo", alt: "" },
           }),
           _vm._v(" "),
           _c("h2", { attrs: { id: "logo-title" } }, [_vm._v("Lizard")]),
@@ -38569,7 +38585,7 @@ var render = function () {
       _c("div", { attrs: { id: "nav_data" } }, [
         _c("ul", { staticClass: "button", attrs: { id: "nav-logo" } }, [
           _c("img", {
-            attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
+            attrs: { src: "/storage/logo.svg", id: "logo", alt: "" },
           }),
         ]),
         _vm._v(" "),
@@ -38675,7 +38691,7 @@ var render = function () {
       _c("ul", { staticClass: "nav-info" }, [
         _c("img", {
           staticClass: "button",
-          attrs: { src: "/storage/logo2-bueno.png", id: "logo", alt: "" },
+          attrs: { src: "/storage/logo.svg", id: "logo", alt: "" },
         }),
         _vm._v(" "),
         _c("div", [
@@ -38697,7 +38713,7 @@ var render = function () {
       _c("ul", { staticClass: "nav-options" }, [
         _c("li", { staticClass: "nav-option", on: { click: _vm.exit } }, [
           _c("i", { staticClass: "bi bi-house-fill" }),
-          _vm._v(" Home"),
+          _vm._v(" " + _vm._s(_vm.$t("nav.home"))),
         ]),
         _vm._v(" "),
         _c(
@@ -38713,13 +38729,13 @@ var render = function () {
           },
           [
             _c("i", { staticClass: "bi bi-cloud-download-fill" }),
-            _vm._v(" Update"),
+            _vm._v(" " + _vm._s(_vm.$t("nav.update"))),
           ]
         ),
         _vm._v(" "),
         _c("li", { staticClass: "nav-option", on: { click: _vm.settings } }, [
           _c("i", { staticClass: "bi bi-gear-fill" }),
-          _vm._v(" Setting"),
+          _vm._v(" " + _vm._s(_vm.$t("nav.setting"))),
         ]),
         _vm._v(" "),
         _c("li", [
@@ -38822,7 +38838,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("#tags")]
+            [_vm._v(_vm._s(_vm.$t("nav.tags")))]
           ),
           _vm._v(" "),
           _c(
@@ -38836,7 +38852,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("#component")]
+            [_vm._v(_vm._s(_vm.$t("nav.component")))]
           ),
         ]),
       ]),
@@ -38933,7 +38949,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("MODE")]
+            [_vm._v(_vm._s(_vm.$t("nav.mode")))]
           ),
         ]),
       ]),
@@ -39138,7 +39154,7 @@ var render = function () {
               { staticClass: "button" },
               [
                 _c("router-link", { attrs: { to: { name: "home" } } }, [
-                  _vm._v("Home"),
+                  _vm._v(_vm._s(_vm.$t("nav.home"))),
                 ]),
               ],
               1
@@ -39149,7 +39165,7 @@ var render = function () {
               { staticClass: "button" },
               [
                 _c("router-link", { attrs: { to: { name: "settings" } } }, [
-                  _vm._v("Settings"),
+                  _vm._v(_vm._s(_vm.$t("nav.setting"))),
                 ]),
               ],
               1
@@ -55827,7 +55843,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"nav":{"home":"Home","components":"Components","views":"Views","new_component":"New Component","login":"Login","dashboard":"Dashboard","profile":"Your Profile","sing_out":"Sing out"},"log":{"holder_email":"Email","holder_pass":"Password","holder_name":"Name","holder_confirm_pas":"Confirm Password","login":"Log in","or":"OR","dont_account_msg":"You dont have account yet?? 😮","register_now":"Register NOW!!","err_log":"The username or password is incorrect","register":"Register","have_account":"Do you already have an account? 😉","login_now":"Login NOW!!"},"home":{"top_comopnents":"Tops Components"},"profile":{"components_count":"Components {msg}","followers_count":"Followers: {msg}","following_count":"Following {msg}","unfollow":"- Unfollow","follow":"+ Follow","your_work":"Your Work","following":"Following","trending":"Trending","components":"Components","collections":"Collections","delete":"Deleted"}}');
+module.exports = JSON.parse('{"nav":{"home":"Home","components":"Components","views":"Views","new_component":"New Component","login":"Login","dashboard":"Dashboard","profile":"Your Profile","sing_out":"Sing out","save":"Save","setting":"Settings","createPost":"Create Post","yourWork":"Yor Work","following":"Following","actualStack":"Actual Stacks","featured":"Featured Week Post:","like":"Likes: ","by":"By: ","update":"Update","proyectName":"Proyect Name:","stacks":"Stacks","addNewTag":"Add new Tag","add":"Add","cancel":"Cancel","tags":"#tags","component":"#component","mode":"MODE"},"log":{"holder_email":"Email","holder_pass":"Password","holder_name":"Name","holder_confirm_pas":"Confirm Password","login":"Log in","or":"OR","dont_account_msg":"You dont have account yet?? 😮","register_now":"Register NOW!!","err_log":"The username or password is incorrect","register":"Register","have_account":"Do you already have an account? 😉","login_now":"Login NOW!!"},"home":{"top_comopnents":"Tops Components"},"profile":{"components_count":"Components {msg}","followers_count":"Followers: {msg}","following_count":"Following {msg}","unfollow":"- Unfollow","follow":"+ Follow","your_work":"Your Work","following":"Following","trending":"Trending","components":"Components","collections":"Collections","delete":"Deleted","friends":"Friends","profile":"Profile","allPosts":"All posts","tags":"Tags","loved":"Loved","dontFollow":"You dont follow to any","thisMonth":"📅 Your work this month 📅","statistics":"Total statistics 📈","views":"Views 👀","likes":"Likes 💙","follows":"Follows 🙍‍♂️","bestPost":" Your Best Posts","allYourPosts":"All your posts","lastLoveds":"Last loveds","yourDontLove":"You dont love any post","allTags":"All your Tags","selectTag":"👆 Select one #Tag 👆","youDontHavePost":"You dont have any post :/","haveYouFriends":"Have you friends?? 🤔","load":"Load"},"settings":{"settingsProfile":"Settings Profile","infoZone":"Info zone","email":"Email: ","name":"Name","createdDate":"Created date:","normalZone":"Normal zone","msg1":"(You can change this properties, you will be logged out)","change":"Change","lang":"Lang","save":"Save","danZone":"Dangerous zone","danMsg":"⚠ To change your password you must write the new one twice, notice, once it is changed, the change cannot be reversed ⚠","password":"Password: ","changePass":"Change Password","dropAccount":"Drop Account"},"onePost":{"delete":"Delete","edit":"Edit","restore":"Restore"},"dash":{"options":"Options","delete":"Delete","edit":"Edit","success":"Success","cancel":"Cancel","users":"Users","posts":"Posts","tags":"Tags","adminMsg":"Do something Mr/s.Admin"},"dashPost":{"post":"#Post","usu":"#Usu","namePost":"Name Post","likes":"Likes","created":"Created"},"dashTag":{"tag":"#Tag","nameTag":"Name Tag"},"dashUsers":{"id":"#Usu","name":"Name","email":"Email","permissions":"Permissions","created":"Created","options":"Options"},"permiss":{"back":"Back to home"},"search":{"resultMsg":"Results of search:"},"index":{"openSource":"Open source","repository":"repository","community":"for community ","components":"components","and":"and","views":"views","viewComponents":"View Components"}}');
 
 /***/ }),
 
@@ -55838,7 +55854,7 @@ module.exports = JSON.parse('{"nav":{"home":"Home","components":"Components","vi
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"nav":{"home":"Home","components":"Componentes","views":"Vistas","new_component":"Crear Componente","login":"Entrar","dashboard":"Administración","profile":"Tu perfil","sing_out":"Salir"},"log":{"holder_email":"Email","holder_pass":"Contraseña","holder_name":"Nombre","holder_confirm_pas":"Confirmar contraseña","login":"Entrar","or":"O","dont_account_msg":"Aún no tienes una cuenta?? 😮","register_now":"Registrate AHORA!!","err_log":"El usuario o contraseña son incorrectas","register":"Registrarse","have_account":"Ya tienes una cuenta? 😉","login_now":"Entra AHORA!!"},"home":{"top_comopnents":"Mejores Componentes"},"profile":{"components_count":"Componentes {msg}","followers_count":"Seguidores: {msg}","following_count":"Siguiendo {msg}","unfollow":"- Dejar de seguir","follow":"+ Seguir","your_work":"Tu trabajo","following":"Siguiendo","trending":"Tendencias","components":"Componentes","collections":"Colecciones","delete":"Borrados"}}');
+module.exports = JSON.parse('{"nav":{"home":"Home","components":"Componentes","views":"Vistas","new_component":"Crear Componente","login":"Entrar","dashboard":"Administración","profile":"Tu perfil","sing_out":"Salir","save":"Guardar","setting":"Ajustes","createPost":"Crear Post","yourWork":"Tu trabajo","following":"Siguiendo","actualStack":"Actual Stacks","featured":"Mejor Post semanal:","like":"Likes: ","by":"By: ","update":"Update","proyectName":"Nombre poryecto:","stacks":"Stacks","addNewTag":"Añadir etiqueta","add":"Añadir","cancel":"Cancelar","tags":"#Etiquetas","component":"#componentes","mode":"MODO"},"log":{"holder_email":"Email","holder_pass":"Contraseña","holder_name":"Nombre","holder_confirm_pas":"Confirmar contraseña","login":"Entrar","or":"O","dont_account_msg":"Aún no tienes una cuenta?? 😮","register_now":"Registrate AHORA!!","err_log":"El usuario o contraseña son incorrectas","register":"Registrarse","have_account":"Ya tienes una cuenta? 😉","login_now":"Entra AHORA!!"},"home":{"top_comopnents":"Mejores Componentes"},"profile":{"components_count":"Componentes {msg}","followers_count":"Seguidores: {msg}","following_count":"Siguiendo {msg}","unfollow":"- Dejar de seguir","follow":"+ Seguir","your_work":"Tu trabajo","following":"Siguiendo","trending":"Tendencias","components":"Componentes","collections":"Colecciones","delete":"Borrados","friends":"Amigos","profile":"Perfil","allPosts":"Todos los posts","tags":"Etiquetas","loved":"Me gustas","dontFollow":"No sigues a nadie","thisMonth":"📅 Tu trabajo este mes 📅","statistics":"Estadisticas totales 📈","views":"Vistas 👀","likes":"Likes 💙","follows":"Seguidores 🙍‍♂️","bestPost":" Tu mejor post","allYourPosts":"Todos tus posts","lastLoveds":"Ultmos likes ","yourDontLove":"No te gusta ningun post","allTags":"Todas tus etiquetas","selectTag":"👆 Selecciona una #Etiqueta 👆","youDontHavePost":"No tienes ningun post :/","haveYouFriends":"Tienes amigos?? 🤔","load":"Cargar"},"settings":{"settingsProfile":"Ajustes de perfil","infoZone":"Zona de información","email":"Email: ","name":"Nombre","createdDate":"Fecha de creación:","normalZone":"Zona Normal","msg1":"(Puedes cambiar estas propiedades, seras deslogueado)","change":"Cambiar","lang":"Lenguaje","save":"Guardar","danZone":"Zona de Peligro","danMsg":"⚠ Para cambiar tu contraseña deberas escribirla 2 veces, aviso, una vez cambiada no se podran revertir los cambios ⚠","password":"Contraseña: ","changePass":"Cambiar contraseña","dropAccount":"Borrar cuenta"},"onePost":{"delete":"Borrar","edit":"Editar","restore":"Restaurar"},"dash":{"options":"Opciones","delete":"Borrar","edit":"Editar","success":"Confirmar","cancel":"Cancelar","users":"Usuarios","posts":"Posts","tags":"Etiquetas","adminMsg":"Haz algo Sr/Sra.Admin"},"dashPost":{"post":"#Post","usu":"#Usu","namePost":"Nombre Post","likes":"Likes","created":"Creado"},"dashTag":{"tag":"#Tag","nameTag":"Nombre Tag"},"dashUsers":{"id":"#Usu","name":"Nombre","email":"Email","permissions":"Permisos","created":"Creado","options":"Opciones"},"permiss":{"back":"Volver a la home"},"search":{"resultMsg":"Resultados de la busqueda:"},"index":{"openSource":"Codigo abierto","repository":"repositorio","community":"de la comunidad ","components":"componentes","and":"y","views":"vistas","viewComponents":"Ver componentes"}}');
 
 /***/ })
 

@@ -5,18 +5,18 @@
     <div id="dash-options">
       <ul>
         <li>
-          <button @click.prevent="manageChange('manageUsers')"><h3 :class="{'select':select('manageUsers')}" class="button dash-option">Users</h3></button>
+          <button @click.prevent="manageChange('manageUsers')"><h3 :class="{'select':select('manageUsers')}" class="button dash-option">{{$t('dash.users')}}</h3></button>
         </li>
         <li >
-          <button @click.prevent="manageChange('managePosts')"><h3 :class="{'select':select('managePosts')}" class="button dash-option">Posts</h3></button>
+          <button @click.prevent="manageChange('managePosts')"><h3 :class="{'select':select('managePosts')}" class="button dash-option">{{$t('dash.posts')}}</h3></button>
         </li>
         <li>
-          <button @click.prevent="manageChange('manageTags')"><h3 :class="{'select':select('manageTags')}" class="button dash-option">Tags</h3></button>
+          <button @click.prevent="manageChange('manageTags')"><h3 :class="{'select':select('manageTags')}" class="button dash-option">{{$t('dash.tags')}}</h3></button>
         </li>
       </ul>
     </div>
     <div>
-        <h3 v-if="!manage">Do something Mr/s.Admin {{this.$store.state.auth.permissions.name}}</h3>
+        <h3 v-if="!manage">{{$t('dash.adminMsg')}} {{this.$store.state.auth.permissions.name}}</h3>
         <dash-users id="table" v-if="manage == 'manageUsers'"></dash-users>
         <dash-posts id="table" v-if="manage == 'managePosts'"></dash-posts>
         <dash-tag id="table" v-if="manage == 'manageTags'"></dash-tag>

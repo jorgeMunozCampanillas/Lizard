@@ -9,12 +9,12 @@
 
         <!-- name -->
         <div class="preview-name">
-          <h3>Nombre de proyecto:</h3>
+          <h3>{{$t('nav.proyectName')}}</h3>
           <input type="text" :value="postName">
         </div>
         <!-- stacks -->
         <div class="preview-stacks">
-          <h3>Stacks</h3>
+          <h3>{{$t('nav.stacks')}}</h3>
           <img v-for="name in frameworksName" :key="name" :src="`/storage/codeIcons/`+name+`.png`" width="20px" alt="">
         </div>
         <!-- tags -->
@@ -25,17 +25,17 @@
             </div>
           </div>
           <div class="tag-options">
-            <label for="">Add new Tag</label>
+            <label for="">{{$t('nav.addNewTag')}}</label>
             <input v-model="newTag" type="text">
-            <div @click="addTag()">Add</div>
+            <div @click="addTag()">{{$t('nav.add')}}</div>
           </div>
         </div>
 
       </div>
 
       <div>
-        <button @click="save()">Save</button>
-        <button @click="cancelPreView()">Cancel</button>
+        <button @click="save()">{{$t('nav.save')}}</button>
+        <button @click="cancelPreView()">{{$t('nav.cancel')}}</button>
       </div>
     </div>
   </div>

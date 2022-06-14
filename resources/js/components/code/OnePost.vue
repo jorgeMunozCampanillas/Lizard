@@ -35,9 +35,9 @@
                     <!-- Options -->
                     <li class="post_info-options" v-if="data.idUsu == this.$store.state.auth.idUsu">
                         <ul class="post_options-menu" :class="{'hidden':dropHidden}">
-                            <li @click="drop" class="post_options-borrar"><i class="bi bi-trash-fill"></i> Delete</li>
-                            <li v-if="data.deleted_at == null" @click="showCode()"><i class="bi bi-pencil-fill"></i> Edit</li>
-                            <li v-if="data.deleted_at != null" @click="restore" class="post_options-restore"><i class="bi bi-recycle"></i> Restore</li>
+                            <li @click="drop" class="post_options-borrar"><i class="bi bi-trash-fill"></i>{{$t('onePost.delete')}}</li>
+                            <li v-if="data.deleted_at == null" @click="showCode()"><i class="bi bi-pencil-fill"></i>{{$t('onePost.edit')}}</li>
+                            <li v-if="data.deleted_at != null" @click="restore" class="post_options-restore"><i class="bi bi-recycle"></i>{{$t('onePost.restore')}}</li>
                         </ul>
                         <button @click="dropMenu()" class="post_options-button"><i class="bi bi-three-dots"></i></button>
                     </li>

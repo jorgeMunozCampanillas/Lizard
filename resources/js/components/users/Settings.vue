@@ -1,60 +1,60 @@
 <template>
     <div id="setting-wrapper">
-        <h1 class="settings-title">Settings Profile</h1> 
+        <h1 class="settings-title">{{$t('settings.settingsProfile')}}</h1> 
         <div id="nor-wrapper">
             <div id="settings-options" class="settings-normal">
                 <div class="option nor-zone">
-                    <h3>Info zone</h3>
+                    <h3>{{$t('settings.infoZone')}}</h3>
                 </div>
                 <div class="option">
-                    <p>Email: &nbsp;&nbsp;</p>
+                    <p>{{$t('settings.email')}} &nbsp;&nbsp;</p>
                     <p>{{user.email}}</p>
                 </div>
                 <div class="option">
-                    <p>Created date: &nbsp;&nbsp;</p>
+                    <p>{{$t('settings.createdDate')}} &nbsp;&nbsp;</p>
                     <p>{{user.created.split('T')[0]}}</p>
                 </div>
             </div>
             <div id="settings-options" class="settings-normal">
                 <div class="option nor-zone">
-                    <h3>Normal zone</h3>
-                    <p><i>(You can change this properties, you will be logged out)</i></p>
+                    <h3>{{$t('settings.normalZone')}}</h3>
+                    <p><i>{{$t('settings.msg1')}}</i></p>
                 </div>
                 <div class="option">
-                    <p>Name: &nbsp;&nbsp;</p>
+                    <p>{{$t('settings.name')}} &nbsp;&nbsp;</p>
                     <input class="input-data" type="text" name="name" :placeholder="$t('log.holder_name')" v-model="user.name">
                 </div>
                 <div class="option">
                     <p>Avatar&nbsp;&nbsp;</p>
                     <img v-if="imagepreview==null" class="option-img" :src="'/storage/'+user.img" alt="">
                     <img v-else class="option-img" :src="imagepreview" alt="">
-                    <label for="img">Change avatar</label>
+                    <label for="img">{{$t('settings.cambiar')}} avatar</label>
                     <input id="img" style="visibility:hidden;" class="input-data" placeholder="img" type="file" name="img" @change="imgSelected">
                 </div>
                 <div class="option">
-                    <p>Lang</p>
+                    <p>{{$t('settings.lang')}}</p>
                     <LangSwitch id="lang_switch"></LangSwitch>
                 </div>
                 <div class="option">
-                    <button @click="saveNormal" class="button save-button">Save</button>
+                    <button @click="saveNormal" class="button save-button">{{$t('settings.save')}}</button>
                 </div>
             </div>
             <div id="settings-options" class="settings-danger">
                 <div class="option dan-zone">
-                    <h2>Dangerous zone</h2>
+                    <h2>{{$t('settings.danZone')}}</h2>
                 </div>
                 <div class="info">
-                    <p>⚠ To change your password you must write the new one twice, notice, once it is changed, the change cannot be reversed ⚠</p>
+                    <p>{{$t('settings.danMsg')}}</p>
                 </div>
                 <div class="option option-password">
-                    <p>Password: </p>
+                    <p>{{$t('settings.password')}}</p>
                     <input v-model="pass1" class="input-data" type="password" name="password" :placeholder="$t('log.holder_pass')">
                     <input v-model="pass2" class="input-data" type="password" name="password" :placeholder="$t('log.holder_pass')">
-                    <button @click="changePass" class="button">Change Password</button>
+                    <button @click="changePass" class="button">{{$t('settings.changePass')}}</button>
                 </div>
                 <div class="option">
                     <button @click="drop" class="button">
-                        <h3>Drop Account</h3>
+                        <h3>{{$t('settings.dropAccount')}}</h3>
                     </button>
                 </div>
             </div>

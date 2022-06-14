@@ -3,7 +3,7 @@
     <nav id="nav" class="nav-3">
         <div id="nav_data">
             <ul class="button" id="nav-logo">
-                <img :src="'/storage/logo2-bueno.png'" id="logo" alt="">
+                <img :src="'/storage/logo.svg'" id="logo" alt="">
             </ul>
             <ul id="nav_data-post">
                 <li><h3 id="data_post-name">{{post.postName}}</h3></li>

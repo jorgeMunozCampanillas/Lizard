@@ -3,12 +3,12 @@
         <table id="table-wrapper">
             <thead>
                 <tr>
-                    <th scope="col">#Post</th>
-                    <th scope="col">#Usu</th>
-                    <th scope="col">Name Post</th>
-                    <th scope="col">Likes</th>
-                    <th scope="col">Created_at</th>
-                    <th scope="col">Options</th>
+                    <th scope="col">{{$t('dashPost.post')}}</th>
+                    <th scope="col">{{$t('dashPost.usu')}}</th>
+                    <th scope="col">{{$t('dashPost.namePost')}}</th>
+                    <th scope="col">{{$t('dashPost.likes')}}</th>
+                    <th scope="col">{{$t('dashPost.created')}}</th>
+                    <th scope="col">{{$t('dash.options')}}</th>
                 </tr>
             </thead>
             <tbody id="table-body">
@@ -28,10 +28,10 @@
                     </td>
                     <td>{{post.created_at}}</td>
                     <td v-if="post.idUsu != $store.state.auth.permissions.idUsu">
-                    <button class="button-delete button" @click.prevent="deletePost(post)" v-if="!postEdit">Delete</button>
-                    <button class="button-edit button" @click.prevent="edit(post)" v-if="!postEdit">Edit</button>
-                    <button class="button-susccess button" @click.prevent="editSuccess()" v-if="postEdit.idPost == post.idPost">Success</button>
-                    <button class="button-delete button" @click.prevent="editCancel(post)" v-if="postEdit.idPost == post.idPost">Cancel</button>
+                    <button class="button-delete button" @click.prevent="deletePost(post)" v-if="!postEdit">{{$t('dash.delete')}}</button>
+                    <button class="button-edit button" @click.prevent="edit(post)" v-if="!postEdit">{{$t('dash.edit')}}</button>
+                    <button class="button-susccess button" @click.prevent="editSuccess()" v-if="postEdit.idPost == post.idPost">{{$t('dash.success')}}</button>
+                    <button class="button-delete button" @click.prevent="editCancel(post)" v-if="postEdit.idPost == post.idPost">{{$t('dash.cancel')}}</button>
                     </td>
                 </tr>
             </tbody>

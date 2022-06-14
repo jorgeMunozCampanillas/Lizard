@@ -2,7 +2,7 @@
 <div>
     <nav id="nav" class="nav-2">
         <ul class="nav-info">
-            <img class="button" :src="'/storage/logo2-bueno.png'" id="logo" alt="">
+            <img class="button" :src="'/storage/logo.svg'" id="logo" alt="">
             <div>
                 <input id="project-title" type="text" placeholder="Untitled" :value="post.postName">
                 <h6 id="logo-title">{{this.$store.state.auth.name}}</h6>
@@ -11,9 +11,9 @@
 
         <!-- Options -->
         <ul class="nav-options">
-            <li class="nav-option" @click="exit"><i class="bi bi-house-fill"></i>&nbsp;Home</li>
-            <li class="nav-option" @click.prevent="update"><i class="bi bi-cloud-download-fill"></i>&nbsp;Update</li>
-            <li class="nav-option" @click="settings"><i class="bi bi-gear-fill"></i>&nbsp;Setting</li>
+            <li class="nav-option" @click="exit"><i class="bi bi-house-fill"></i>&nbsp;{{$t('nav.home')}}</li>
+            <li class="nav-option" @click.prevent="update"><i class="bi bi-cloud-download-fill"></i>&nbsp;{{$t('nav.update')}}</li>
+            <li class="nav-option" @click="settings"><i class="bi bi-gear-fill"></i>&nbsp;{{$t('nav.setting')}}</li>
             <li>
                 <button>
                     <i v-if="this.$store.state.isAuthenticated==false" style="font-size:1.6rem" class="bi bi-person-circle"></i>

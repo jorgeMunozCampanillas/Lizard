@@ -7,7 +7,26 @@
         "login":"Entrar",
         "dashboard":"Administración",
         "profile":"Tu perfil",
-        "sing_out":"Salir"
+        "sing_out":"Salir",
+
+        "save":"Guardar",
+        "setting":"Ajustes",
+        "createPost":"Crear Post",
+        "yourWork":"Tu trabajo",
+        "following":"Siguiendo",
+        "actualStack":"Actual Stacks",
+        "featured":"Mejor Post semanal:",
+        "like":"Likes: ",
+        "by":"By: ",
+        "update":"Update",
+        "proyectName":"Nombre poryecto:",
+        "stacks":"Stacks",
+        "addNewTag":"Añadir etiqueta",
+        "add":"Añadir",
+        "cancel":"Cancelar",
+        "tags":"#Etiquetas",
+        "component":"#componentes",
+        "mode":"MODO"
     },
     "log":{
         "holder_email":"Email",
@@ -41,6 +60,96 @@
         "trending":"Tendencias",
         "components":"Componentes",
         "collections":"Colecciones",
-        "delete":"Borrados"
+        "delete":"Borrados",
+
+        "friends":"Amigos",
+        "profile":"Perfil",
+        "allPosts":"Todos los posts",
+        "tags":"Etiquetas",
+        "loved":"Me gustas",
+        "dontFollow":"No sigues a nadie",
+        "thisMonth":"📅 Tu trabajo este mes 📅",
+        "statistics":"Estadisticas totales 📈",
+        "views":"Vistas 👀",
+        "likes":"Likes 💙",
+        "follows":"Seguidores 🙍‍♂️",
+        "bestPost":" Tu mejor post",
+        "allYourPosts":"Todos tus posts",
+        "lastLoveds":"Ultmos likes ",
+        "yourDontLove":"No te gusta ningun post",
+        "allTags":"Todas tus etiquetas",
+        "selectTag":"👆 Selecciona una #Etiqueta 👆",
+        "youDontHavePost":"No tienes ningun post :/",
+        "haveYouFriends":"Tienes amigos?? 🤔",
+        "load":"Cargar"
+    },
+    "settings":{
+        "settingsProfile":"Ajustes de perfil",
+        "infoZone":"Zona de información",
+        "email":"Email: ",
+        "name":"Nombre",
+        "createdDate":"Fecha de creación:",
+        "normalZone":"Zona Normal",
+        "msg1":"(Puedes cambiar estas propiedades, seras deslogueado)",
+        "change":"Cambiar",
+        "lang":"Lenguaje",
+        "save":"Guardar",
+        "danZone":"Zona de Peligro",
+        "danMsg":"⚠ Para cambiar tu contraseña deberas escribirla 2 veces, aviso, una vez cambiada no se podran revertir los cambios ⚠",
+        "password":"Contraseña: ",
+        "changePass":"Cambiar contraseña",
+        "dropAccount":"Borrar cuenta"
+    
+    },
+    "onePost":{
+        "delete":"Borrar",
+        "edit":"Editar",
+        "restore":"Restaurar"
+    },
+    "dash":{
+        "options":"Opciones",
+        "delete":"Borrar",
+        "edit":"Editar",
+        "success":"Confirmar",
+        "cancel":"Cancelar",
+        "users":"Usuarios",
+        "posts":"Posts",
+        "tags":"Etiquetas",
+        "adminMsg":"Haz algo Sr/Sra.Admin"
+    },
+    "dashPost":{
+        "post":"#Post",
+        "usu":"#Usu",
+        "namePost":"Nombre Post",
+        "likes":"Likes",
+        "created":"Creado"
+    },
+    "dashTag":{
+        "tag":"#Tag",
+        "nameTag":"Nombre Tag"
+    },
+    "dashUsers":{
+        "id":"#Usu",
+        "name":"Nombre",
+        "email":"Email",
+        "permissions":"Permisos",
+        "created":"Creado",
+        "options":"Opciones"
+    },
+    "permiss":{
+        "back":"Volver a la home"
+    },
+    "search":{
+        "resultMsg":"Resultados de la busqueda:"
+    },
+    "index":{
+        "openSource":"Codigo abierto",
+        "repository":"repositorio",
+        "community":"de la comunidad ",
+        "components":"componentes",
+        "and":"y",
+        "views":"vistas",
+        "viewComponents":"Ver componentes"
     }
+
 }

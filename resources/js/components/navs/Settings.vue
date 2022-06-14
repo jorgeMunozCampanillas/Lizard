@@ -6,7 +6,7 @@
             <ul>
                 <li class="button" @click="SET_MAIN('css')">CSS </li>
                 <li class="button" @click="SET_MAIN('js')">JS</li>
-                <li class="button" @click="SET_MAIN('display')">MODE</li>
+                <li class="button" @click="SET_MAIN('display')">{{$t('nav.mode')}}</li>
             </ul>
         </nav>
         <nav id="setting_options">

@@ -2,7 +2,7 @@
 <div>
   <div id="seach_wrapper">
     <div id="posts">
-    <h1 class="title">Results of search: '<i>{{$route.params.name}}</i>'</h1>
+    <h1 class="title">{{$t('search.resultMsg')}} '<i>{{$route.params.name}}</i>'</h1>
       <div id="post_search">
         <Post 
           v-for="post in posts" :key="post.idPost"

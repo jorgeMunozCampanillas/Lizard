@@ -1,7 +1,7 @@
 <template>
   <div id="error">
     <h2>{{msg}}</h2>
-    <button @click="foo" class="button-err">Back to home</button>
+    <button @click="foo" class="button-err">{{$t('permiss.back')}}</button>
   </div>
 </template>
 

@@ -1488,46 +1488,46 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "body-index" }, [
+    _c("main", { staticClass: "main-index" }, [
+      _c("h1", [_vm._v("Lizard")]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(_vm._s(_vm.$t("index.openSource")) + " "),
+        _c("span", [_vm._v(_vm._s(_vm.$t("index.repository")))]),
+        _vm._v(" " + _vm._s(_vm.$t("index.community")) + " "),
+        _c("span", [_vm._v(" " + _vm._s(_vm.$t("index.components")))]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v("\n            " + _vm._s(_vm.$t("index.and")) + " "),
+        _c("span", [_vm._v(_vm._s(_vm.$t("index.views")))]),
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "main_buttons" } }, [
+        _c("button", { staticClass: "button-normal" }, [
+          _vm._v(" " + _vm._s(_vm.$t("index.viewComponents"))),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "body-index" }, [
-      _c("main", { staticClass: "main-index" }, [
-        _c("h1", [_vm._v("Lizard")]),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "main_count" } }, [
-          _c("p"),
-          _c("p", { staticClass: "js-object-components" }),
-          _vm._v("  "),
-          _c("p"),
-          _vm._v(" "),
-          _c("p", [_c("i", { staticClass: "fa-solid fa-gallery-thumbnails" })]),
-          _c("p", { staticClass: "js-object-log" }),
-          _vm._v(" "),
-          _c("p"),
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("Open source "),
-          _c("span", [_vm._v("repository")]),
-          _vm._v(" for community "),
-          _c("span", [_vm._v("components")]),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v("\n            and "),
-          _c("span", [_vm._v("views")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "main_buttons" } }, [
-          _c("button", { staticClass: "button-normal" }, [
-            _vm._v(" View Components"),
-          ]),
-        ]),
-      ]),
+    return _c("div", { attrs: { id: "main_count" } }, [
+      _c("p"),
+      _c("p", { staticClass: "js-object-components" }),
+      _vm._v("  "),
+      _c("p"),
+      _vm._v(" "),
+      _c("p", [_c("i", { staticClass: "fa-solid fa-gallery-thumbnails" })]),
+      _c("p", { staticClass: "js-object-log" }),
+      _vm._v(" "),
+      _c("p"),
     ])
   },
 ]

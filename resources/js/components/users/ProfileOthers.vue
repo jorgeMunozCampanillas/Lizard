@@ -5,7 +5,7 @@
     <img class="profile_header-img" :src="'/storage/'+user.img" alt="">
     <div class="profile_header-data">
       <ul>
-        <li class="follows-button" @click="showPosts">Components</li>
+        <li class="follows-button" @click="showPosts">{{$t('profile.components')}}</li>
         <li class="follows-button" @click="showFollowers">{{$t('profile.followers_count', {msg:get_followers})}}</li>
         <li class="follows-button" @click="showFollowings">{{$t('profile.following_count', {msg:get_followings})}}</li>
         <li>
@@ -25,7 +25,7 @@
           :likes="likes"
           class="post" 
       ></Post>
-      <button @click="load()" class="profile_load button-load">Load</button>
+      <button @click="load()" class="profile_load button-load">{{$t('profile.load')}}</button>
     </div>
     <div id="profile_tags" v-else-if="optionNav==2">
       <User-Card v-for="user in posts" :key="user.idUsu"

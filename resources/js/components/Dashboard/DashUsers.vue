@@ -3,12 +3,12 @@
 <table id="table-wrapper">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Permissions</th>
-            <th scope="col">Created_at</th>
-            <th scope="col">Options</th>
+            <th scope="col">{{$t('dashUsers.id')}}</th>
+            <th scope="col">{{$t('dashUsers.name')}}</th>
+            <th scope="col">{{$t('dashUsers.email')}}</th>
+            <th scope="col">{{$t('dashUsers.permissions')}}</th>
+            <th scope="col">{{$t('dashUsers.created')}}</th>
+            <th scope="col">{{$t('dashUsers.options')}}</th>
         </tr>
         </thead>
         <tbody>
@@ -29,10 +29,10 @@
                 <td>{{user.permissions}}</td>
                 <td>{{user.created_at.substr(0,10)}}</td>
                 <td v-if="user.idUsu != $store.state.auth.permissions.idUsu">
-                <button class="button-delete button" @click.prevent="deleteUser(user)" v-if="!userEdit">Delete</button>
-                <button class="button-edit button" @click.prevent="edit(user)" v-if="!userEdit">Edit</button>
-                <button class="button-susccess button" @click.prevent="editSuccess()" v-if="userEdit.idUsu == user.idUsu">Success</button>
-                <button class="button-delete button" @click.prevent="editCancel(user)" v-if="userEdit.idUsu == user.idUsu">Cancel</button>
+                <button class="button-delete button" @click.prevent="deleteUser(user)" v-if="!userEdit">{{$t('dash.delete')}}</button>
+                <button class="button-edit button" @click.prevent="edit(user)" v-if="!userEdit">{{$t('dash.edit')}}</button>
+                <button class="button-susccess button" @click.prevent="editSuccess()" v-if="userEdit.idUsu == user.idUsu">{{$t('dash.success')}}</button>
+                <button class="button-delete button" @click.prevent="editCancel(user)" v-if="userEdit.idUsu == user.idUsu">{{$t('dash.cancel')}}</button>
                 </td>
             </tr>
         </tbody>

@@ -22677,7 +22677,7 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "code_preview-options" }, [
         _c("div", { staticClass: "preview-name" }, [
-          _c("h3", [_vm._v("Nombre de proyecto:")]),
+          _c("h3", [_vm._v(_vm._s(_vm.$t("nav.proyectName")))]),
           _vm._v(" "),
           _c("input", {
             attrs: { type: "text" },
@@ -22689,7 +22689,7 @@ var render = function () {
           "div",
           { staticClass: "preview-stacks" },
           [
-            _c("h3", [_vm._v("Stacks")]),
+            _c("h3", [_vm._v(_vm._s(_vm.$t("nav.stacks")))]),
             _vm._v(" "),
             _vm._l(_vm.frameworksName, function (name) {
               return _c("img", {
@@ -22729,7 +22729,9 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "tag-options" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("Add new Tag")]),
+            _c("label", { attrs: { for: "" } }, [
+              _vm._v(_vm._s(_vm.$t("nav.addNewTag"))),
+            ]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -22761,7 +22763,7 @@ var render = function () {
                   },
                 },
               },
-              [_vm._v("Add")]
+              [_vm._v(_vm._s(_vm.$t("nav.add")))]
             ),
           ]),
         ]),
@@ -22777,7 +22779,7 @@ var render = function () {
               },
             },
           },
-          [_vm._v("Save")]
+          [_vm._v(_vm._s(_vm.$t("nav.save")))]
         ),
         _vm._v(" "),
         _c(
@@ -22789,7 +22791,7 @@ var render = function () {
               },
             },
           },
-          [_vm._v("Cancel")]
+          [_vm._v(_vm._s(_vm.$t("nav.cancel")))]
         ),
       ]),
     ]),

@@ -7,7 +7,26 @@
         "login":"Login",
         "dashboard":"Dashboard",
         "profile":"Your Profile",
-        "sing_out":"Sing out"
+        "sing_out":"Sing out",
+
+        "save":"Save",
+        "setting":"Settings",
+        "createPost":"Create Post",
+        "yourWork":"Yor Work",
+        "following":"Following",
+        "actualStack":"Actual Stacks",
+        "featured":"Featured Week Post:",
+        "like":"Likes: ",
+        "by":"By: ",
+        "update":"Update",
+        "proyectName":"Proyect Name:",
+        "stacks":"Stacks",
+        "addNewTag":"Add new Tag",
+        "add":"Add",
+        "cancel":"Cancel",
+        "tags":"#tags",
+        "component":"#component",
+        "mode":"MODE"
     },
     "log":{
         "holder_email":"Email",
@@ -41,6 +60,96 @@
         "trending":"Trending",
         "components":"Components",
         "collections":"Collections",
-        "delete":"Deleted"
+        "delete":"Deleted",
+
+        "friends":"Friends",
+        "profile":"Profile",
+        "allPosts":"All posts",
+        "tags":"Tags",
+        "loved":"Loved",
+        "dontFollow":"You dont follow to any",
+        "thisMonth":"📅 Your work this month 📅",
+        "statistics":"Total statistics 📈",
+        "views":"Views 👀",
+        "likes":"Likes 💙",
+        "follows":"Follows 🙍‍♂️",
+        "bestPost":" Your Best Posts",
+        "allYourPosts":"All your posts",
+        "lastLoveds":"Last loveds",
+        "yourDontLove":"You dont love any post",
+        "allTags":"All your Tags",
+        "selectTag":"👆 Select one #Tag 👆",
+        "youDontHavePost":"You dont have any post :/",
+        "haveYouFriends":"Have you friends?? 🤔",
+        "load":"Load"
+    },
+    "settings":{
+        "settingsProfile":"Settings Profile",
+        "infoZone":"Info zone",
+        "email":"Email: ",
+        "name":"Name",
+        "createdDate":"Created date:",
+        "normalZone":"Normal zone",
+        "msg1":"(You can change this properties, you will be logged out)",
+        "change":"Change",
+        "lang":"Lang",
+        "save":"Save",
+        "danZone":"Dangerous zone",
+        "danMsg":"⚠ To change your password you must write the new one twice, notice, once it is changed, the change cannot be reversed ⚠",
+        "password":"Password: ",
+        "changePass":"Change Password",
+        "dropAccount":"Drop Account"
+    
+    },
+    "onePost":{
+        "delete":"Delete",
+        "edit":"Edit",
+        "restore":"Restore"
+    },
+    "dash":{
+        "options":"Options",
+        "delete":"Delete",
+        "edit":"Edit",
+        "success":"Success",
+        "cancel":"Cancel",
+        "users":"Users",
+        "posts":"Posts",
+        "tags":"Tags",
+        "adminMsg":"Do something Mr/s.Admin"
+    },
+    "dashPost":{
+        "post":"#Post",
+        "usu":"#Usu",
+        "namePost":"Name Post",
+        "likes":"Likes",
+        "created":"Created"
+    },
+    "dashTag":{
+        "tag":"#Tag",
+        "nameTag":"Name Tag"
+    },
+    "dashUsers":{
+        "id":"#Usu",
+        "name":"Name",
+        "email":"Email",
+        "permissions":"Permissions",
+        "created":"Created",
+        "options":"Options"
+    },
+    "permiss":{
+        "back":"Back to home"
+    },
+    "search":{
+        "resultMsg":"Results of search:"
+    },
+    "index":{
+        "openSource":"Open source",
+        "repository":"repository",
+        "community":"for community ",
+        "components":"components",
+        "and":"and",
+        "views":"views",
+        "viewComponents":"View Components"
     }
+
 }

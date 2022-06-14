@@ -6,10 +6,10 @@
                 <p><p class="js-object-components"></p> &nbsp;</p>
                 <p><i class="fa-solid fa-gallery-thumbnails"></i> <p class="js-object-log"></p> </p>
             </div>
-            <p>Open source <span>repository</span> for community <span>components</span> <br>
-                and <span>views</span></p>
+            <p>{{$t('index.openSource')}} <span>{{$t('index.repository')}}</span> {{$t('index.community')}} <span> {{$t('index.components')}}</span> <br>
+                {{$t('index.and')}} <span>{{$t('index.views')}}</span></p>
             <div id="main_buttons">
-                <button class="button-normal"> View Components</button>
+                <button class="button-normal"> {{$t('index.viewComponents')}}</button>
                 <!-- <button class="button-line">Follow us on Twitter</button> -->
             </div>
         </main>

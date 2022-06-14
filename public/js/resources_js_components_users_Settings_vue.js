@@ -265,23 +265,27 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "setting-wrapper" } }, [
-    _c("h1", { staticClass: "settings-title" }, [_vm._v("Settings Profile")]),
+    _c("h1", { staticClass: "settings-title" }, [
+      _vm._v(_vm._s(_vm.$t("settings.settingsProfile"))),
+    ]),
     _vm._v(" "),
     _c("div", { attrs: { id: "nor-wrapper" } }, [
       _c(
         "div",
         { staticClass: "settings-normal", attrs: { id: "settings-options" } },
         [
-          _vm._m(0),
+          _c("div", { staticClass: "option nor-zone" }, [
+            _c("h3", [_vm._v(_vm._s(_vm.$t("settings.infoZone")))]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "option" }, [
-            _c("p", [_vm._v("Email:   ")]),
+            _c("p", [_vm._v(_vm._s(_vm.$t("settings.email")) + "   ")]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(_vm.user.email))]),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "option" }, [
-            _c("p", [_vm._v("Created date:   ")]),
+            _c("p", [_vm._v(_vm._s(_vm.$t("settings.createdDate")) + "   ")]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(_vm.user.created.split("T")[0]))]),
           ]),
@@ -292,10 +296,14 @@ var render = function () {
         "div",
         { staticClass: "settings-normal", attrs: { id: "settings-options" } },
         [
-          _vm._m(1),
+          _c("div", { staticClass: "option nor-zone" }, [
+            _c("h3", [_vm._v(_vm._s(_vm.$t("settings.normalZone")))]),
+            _vm._v(" "),
+            _c("p", [_c("i", [_vm._v(_vm._s(_vm.$t("settings.msg1")))])]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "option" }, [
-            _c("p", [_vm._v("Name:   ")]),
+            _c("p", [_vm._v(_vm._s(_vm.$t("settings.name")) + "   ")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -337,7 +345,9 @@ var render = function () {
                   attrs: { src: _vm.imagepreview, alt: "" },
                 }),
             _vm._v(" "),
-            _c("label", { attrs: { for: "img" } }, [_vm._v("Change avatar")]),
+            _c("label", { attrs: { for: "img" } }, [
+              _vm._v(_vm._s(_vm.$t("settings.cambiar")) + " avatar"),
+            ]),
             _vm._v(" "),
             _c("input", {
               staticClass: "input-data",
@@ -356,7 +366,7 @@ var render = function () {
             "div",
             { staticClass: "option" },
             [
-              _c("p", [_vm._v("Lang")]),
+              _c("p", [_vm._v(_vm._s(_vm.$t("settings.lang")))]),
               _vm._v(" "),
               _c("LangSwitch", { attrs: { id: "lang_switch" } }),
             ],
@@ -370,7 +380,7 @@ var render = function () {
                 staticClass: "button save-button",
                 on: { click: _vm.saveNormal },
               },
-              [_vm._v("Save")]
+              [_vm._v(_vm._s(_vm.$t("settings.save")))]
             ),
           ]),
         ]
@@ -380,12 +390,16 @@ var render = function () {
         "div",
         { staticClass: "settings-danger", attrs: { id: "settings-options" } },
         [
-          _vm._m(2),
+          _c("div", { staticClass: "option dan-zone" }, [
+            _c("h2", [_vm._v(_vm._s(_vm.$t("settings.danZone")))]),
+          ]),
           _vm._v(" "),
-          _vm._m(3),
+          _c("div", { staticClass: "info" }, [
+            _c("p", [_vm._v(_vm._s(_vm.$t("settings.danMsg")))]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "option option-password" }, [
-            _c("p", [_vm._v("Password: ")]),
+            _c("p", [_vm._v(_vm._s(_vm.$t("settings.password")))]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -442,13 +456,13 @@ var render = function () {
             _c(
               "button",
               { staticClass: "button", on: { click: _vm.changePass } },
-              [_vm._v("Change Password")]
+              [_vm._v(_vm._s(_vm.$t("settings.changePass")))]
             ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "option" }, [
             _c("button", { staticClass: "button", on: { click: _vm.drop } }, [
-              _c("h3", [_vm._v("Drop Account")]),
+              _c("h3", [_vm._v(_vm._s(_vm.$t("settings.dropAccount")))]),
             ]),
           ]),
         ]
@@ -456,50 +470,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "option nor-zone" }, [
-      _c("h3", [_vm._v("Info zone")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "option nor-zone" }, [
-      _c("h3", [_vm._v("Normal zone")]),
-      _vm._v(" "),
-      _c("p", [
-        _c("i", [
-          _vm._v("(You can change this properties, you will be logged out)"),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "option dan-zone" }, [
-      _c("h2", [_vm._v("Dangerous zone")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "info" }, [
-      _c("p", [
-        _vm._v(
-          "⚠ To change your password you must write the new one twice, notice, once it is changed, the change cannot be reversed ⚠"
-        ),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

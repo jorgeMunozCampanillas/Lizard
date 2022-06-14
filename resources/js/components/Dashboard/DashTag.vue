@@ -3,8 +3,8 @@
         <table id="table-wrapper">
             <thead>
                 <tr>
-                    <th scope="col">#Tag</th>
-                    <th scope="col">Name Tag</th>
+                    <th scope="col">{{$t('dashTag.tag')}}</th>
+                    <th scope="col">{{$t('dashTag.nameTag')}}</th>
                 </tr>
             </thead>
             <tbody id="table-body">
@@ -18,10 +18,10 @@
                     </td>
         
                     
-                    <button class="button-delete button" @click.prevent="deleteTag(tag)" v-if="!tagEdit">Delete</button>
-                    <button class="button-edit button" @click.prevent="edit(tag)" v-if="!tagEdit">Edit</button>
-                    <button class="button-susccess button" @click.prevent="editSuccess()" v-if="tagEdit.idTag == tag.idTag">Success</button>
-                    <button class="button-delete button" @click.prevent="editCancel(tag)" v-if="tagEdit.idTag == tag.idTag">Cancel</button>
+                    <button class="button-delete button" @click.prevent="deleteTag(tag)" v-if="!tagEdit">{{$t('dash.delete')}}</button>
+                    <button class="button-edit button" @click.prevent="edit(tag)" v-if="!tagEdit">{{$t('dash.edit')}}</button>
+                    <button class="button-susccess button" @click.prevent="editSuccess()" v-if="tagEdit.idTag == tag.idTag">{{$t('dash.success')}}</button>
+                    <button class="button-delete button" @click.prevent="editCancel(tag)" v-if="tagEdit.idTag == tag.idTag">{{$t('dash.cancel')}}</button>
                     
                 </tr>
             </tbody>

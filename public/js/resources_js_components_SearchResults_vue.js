@@ -172,7 +172,7 @@ var render = function () {
     _c("div", { attrs: { id: "seach_wrapper" } }, [
       _c("div", { attrs: { id: "posts" } }, [
         _c("h1", { staticClass: "title" }, [
-          _vm._v("Results of search: '"),
+          _vm._v(_vm._s(_vm.$t("search.resultMsg")) + " '"),
           _c("i", [_vm._v(_vm._s(_vm.$route.params.name))]),
           _vm._v("'"),
         ]),
