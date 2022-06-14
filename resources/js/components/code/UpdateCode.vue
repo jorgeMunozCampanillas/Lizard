@@ -61,11 +61,11 @@ export default {
         previewMode: false,
         frameworksName:'',
         tags:[],
+ 
     }
   },
 
   mounted() {
-    this.check();
     //this come from navUdate
     this.$root.$on('update', (postName) => this.preView(postName));
     this.$root.$on('changeFramework', newFrameworks =>{
@@ -84,9 +84,7 @@ export default {
   },
   methods: {
     check(){
-      setTimeout(()=>{
-        console.log("Post: "+this.post.idPost)
-        axios.get('/api/post/isMyOwn/'+this.post.idPost)
+      axios.get('/api/post/isMyOwn/'+this.post.idPost)
         .then(res=>{
           if (!res.data) {
             console.log("NO ES MI CODIGO");
@@ -97,13 +95,15 @@ export default {
           console.log("Error en UpdateCode.vue check")
           console.log(err)
         })
-      },400)
     },
 
     getCode(){
       axios.get('/api/post/code/'+this.$route.params.id)
       .then(res => {
+
           this.post = res.data.data[0];
+          console.log("POSTTTTTTTTTTTTTTTTTTTTT")
+          console.log(this.post)
           this.tags=this.post.tags;
 
           let dataToNav = {
@@ -111,9 +111,9 @@ export default {
             postName:this.post.postName,
             idPost:this.post.idPost
           }
-          console.log("si soy")
-          console.log(this.post)
+
           this.$root.$emit('navUpdate', this.post);
+          this.check();
       })
       .catch(err => {
           console.log("Error ShowCode.vue getCode");

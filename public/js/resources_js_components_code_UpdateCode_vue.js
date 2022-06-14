@@ -165,8 +165,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    this.check(); //this come from navUdate
-
+    //this come from navUdate
     this.$root.$on('update', function (postName) {
       return _this.preView(postName);
     });
@@ -191,38 +190,37 @@ __webpack_require__.r(__webpack_exports__);
     check: function check() {
       var _this2 = this;
 
-      setTimeout(function () {
-        console.log("Post: " + _this2.post.idPost);
-        axios.get('/api/post/isMyOwn/' + _this2.post.idPost).then(function (res) {
-          if (!res.data) {
-            console.log("NO ES MI CODIGO");
+      axios.get('/api/post/isMyOwn/' + this.post.idPost).then(function (res) {
+        if (!res.data) {
+          console.log("NO ES MI CODIGO");
 
-            _this2.$router.push({
-              name: 'show-code',
-              id: _this2.post.idPost
-            });
-          }
-        })["catch"](function (err) {
-          console.log("Error en UpdateCode.vue check");
-          console.log(err);
-        });
-      }, 400);
+          _this2.$router.push({
+            name: 'show-code',
+            id: _this2.post.idPost
+          });
+        }
+      })["catch"](function (err) {
+        console.log("Error en UpdateCode.vue check");
+        console.log(err);
+      });
     },
     getCode: function getCode() {
       var _this3 = this;
 
       axios.get('/api/post/code/' + this.$route.params.id).then(function (res) {
         _this3.post = res.data.data[0];
+        console.log("POSTTTTTTTTTTTTTTTTTTTTT");
+        console.log(_this3.post);
         _this3.tags = _this3.post.tags;
         var dataToNav = {
           userName: _this3.post.name,
           postName: _this3.post.postName,
           idPost: _this3.post.idPost
         };
-        console.log("si soy");
-        console.log(_this3.post);
 
         _this3.$root.$emit('navUpdate', _this3.post);
+
+        _this3.check();
       })["catch"](function (err) {
         console.log("Error ShowCode.vue getCode");
         console.log(err);
@@ -22767,32 +22765,35 @@ var render = function () {
             ),
           ]),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c(
-          "button",
-          {
-            on: {
-              click: function ($event) {
-                return _vm.save()
-              },
-            },
-          },
-          [_vm._v(_vm._s(_vm.$t("nav.save")))]
-        ),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function ($event) {
-                return _vm.cancelPreView()
+        _c("div", { staticClass: "preview-buttons" }, [
+          _c(
+            "button",
+            {
+              staticClass: "button button-create-code ",
+              on: {
+                click: function ($event) {
+                  return _vm.save()
+                },
               },
             },
-          },
-          [_vm._v(_vm._s(_vm.$t("nav.cancel")))]
-        ),
+            [_vm._v(_vm._s(_vm.$t("nav.save")))]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "button button-create-code ",
+              staticStyle: { color: "red" },
+              on: {
+                click: function ($event) {
+                  return _vm.cancelPreView()
+                },
+              },
+            },
+            [_vm._v(_vm._s(_vm.$t("nav.cancel")))]
+          ),
+        ]),
       ]),
     ]),
   ])

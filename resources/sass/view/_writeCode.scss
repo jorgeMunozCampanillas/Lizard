@@ -76,6 +76,9 @@
             padding: 1rem;
             color: $primary-white;
             font-family: $title-typography;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
 
             .preview-name{
                 display: flex;
@@ -94,6 +97,14 @@
                     div{
                         color: red;
                     }
+                }
+            }
+
+            .preview-buttons{
+                display: flex;
+                align-items: center;
+                button{
+                    margin: 0 1rem;
                 }
             }
 

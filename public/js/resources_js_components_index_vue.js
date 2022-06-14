@@ -1506,9 +1506,16 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "main_buttons" } }, [
-        _c("button", { staticClass: "button-normal" }, [
-          _vm._v(" " + _vm._s(_vm.$t("index.viewComponents"))),
-        ]),
+        _c(
+          "button",
+          { staticClass: "button-normal" },
+          [
+            _c("router-link", { attrs: { to: { name: "home" } } }, [
+              _vm._v(_vm._s(_vm.$t("index.viewComponents"))),
+            ]),
+          ],
+          1
+        ),
       ]),
     ]),
   ])

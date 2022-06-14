@@ -23553,32 +23553,35 @@ var render = function () {
             ),
           ]),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c(
-          "button",
-          {
-            on: {
-              click: function ($event) {
-                return _vm.save()
-              },
-            },
-          },
-          [_vm._v(_vm._s(_vm.$t("nav.save")))]
-        ),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function ($event) {
-                return _vm.cancelPreView()
+        _c("div", { staticClass: "preview-buttons" }, [
+          _c(
+            "button",
+            {
+              staticClass: "button button-create-code ",
+              on: {
+                click: function ($event) {
+                  return _vm.save()
+                },
               },
             },
-          },
-          [_vm._v(_vm._s(_vm.$t("nav.cancel")))]
-        ),
+            [_vm._v(_vm._s(_vm.$t("nav.save")))]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "button button-create-code ",
+              staticStyle: { color: "red" },
+              on: {
+                click: function ($event) {
+                  return _vm.cancelPreView()
+                },
+              },
+            },
+            [_vm._v(_vm._s(_vm.$t("nav.cancel")))]
+          ),
+        ]),
       ]),
     ]),
   ])

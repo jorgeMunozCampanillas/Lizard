@@ -687,6 +687,29 @@ button {
   cursor: pointer;
 }
 
+.button-delete {
+  background-color: #C82333;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+}
+
+.button-edit {
+  background-color: #E0A800;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  color: #2B2C34;
+}
+
+.button-susccess {
+  background-color: #218838;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  color: #2B2C34;
+}
+
 .form {
   height: calc(100vh - 3rem);
   display: flex;
@@ -1402,26 +1425,6 @@ a {
   padding: 0.3rem 1rem;
   text-align: center;
 }
-#table-wrapper .button-delete {
-  background-color: #C82333;
-  padding: 0.3rem 1rem;
-  font-size: 1rem;
-  border-radius: 0.6rem;
-}
-#table-wrapper .button-edit {
-  background-color: #E0A800;
-  padding: 0.3rem 1rem;
-  font-size: 1rem;
-  border-radius: 0.6rem;
-  color: #2B2C34;
-}
-#table-wrapper .button-susccess {
-  background-color: #218838;
-  padding: 0.3rem 1rem;
-  font-size: 1rem;
-  border-radius: 0.6rem;
-  color: #2B2C34;
-}
 .code_enter {
   width: 100%;
   display: flex;
@@ -1492,6 +1495,9 @@ a {
   padding: 1rem;
   color: #FFFFFE;
   font-family: "Segoe UI", "Roboto";
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .code_preview-wrapper .code_preview .code_preview-options .preview-name {
   display: flex;
@@ -1509,6 +1515,13 @@ a {
 }
 .code_preview-wrapper .code_preview .code_preview-options .tags .tag div {
   color: red;
+}
+.code_preview-wrapper .code_preview .code_preview-options .preview-buttons {
+  display: flex;
+  align-items: center;
+}
+.code_preview-wrapper .code_preview .code_preview-options .preview-buttons button {
+  margin: 0 1rem;
 }
 
 #profile {

@@ -31,12 +31,12 @@
           </div>
         </div>
 
+        <div class="preview-buttons">
+          <button class="button button-create-code " @click="save()">{{$t('nav.save')}}</button>
+          <button class="button button-create-code " style="color:red;" @click="cancelPreView()">{{$t('nav.cancel')}}</button>
+        </div>
       </div>
 
-      <div>
-        <button @click="save()">{{$t('nav.save')}}</button>
-        <button @click="cancelPreView()">{{$t('nav.cancel')}}</button>
-      </div>
     </div>
   </div>
 </template>
