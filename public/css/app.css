@@ -147,6 +147,15 @@ button {
   height: 80%;
 }
 
+@media (max-width: 650px) {
+  .button-create-code {
+    display: none !important;
+  }
+
+  #search {
+    width: 80% !important;
+  }
+}
 /*-_-_-_-_-_-_-_-_- NAV 2 -_-_-_-_-_-_-_-_-*/
 .nav-2 {
   font-family: "Segoe UI", "Roboto";
@@ -226,7 +235,7 @@ button {
 #settings_wrapper .settings {
   height: 70vh;
   border: 3px solid #1b1b1d;
-  width: 30%;
+  width: 40%;
   background-color: #2B2C34;
   z-index: 30;
 }
@@ -278,7 +287,7 @@ button {
   grid-column-end: span 6;
 }
 
-#nav-with-permiss, #nav-out-permiss {
+#nav-with-permiss {
   grid-column-end: span 3;
   justify-content: space-around;
 }
@@ -397,7 +406,24 @@ button {
 .nav-5 #nav-options #nav-with-permiss li {
   margin: 0 1rem;
 }
+.nav-5 #nav-options #nav-out-permiss {
+  width: 20%;
+}
 
+@media (max-width: 650px) {
+  .nav-5 #nav-logo {
+    grid-column-end: span 4;
+    display: flex;
+  }
+  .nav-5 #search {
+    display: none !important;
+  }
+  .nav-5 #nav-options {
+    grid-column-end: span 8;
+    justify-content: flex-end;
+    margin-right: 0.5rem;
+  }
+}
 .button-normal {
   background: none;
   border: 0;
@@ -411,6 +437,7 @@ button {
   color: #2B2C34;
   background-color: #FFFFFE;
   border-radius: 1rem;
+  cursor: pointer;
 }
 .button-normal:hover {
   color: #FFFFFE;
@@ -730,6 +757,16 @@ button {
   font-weight: bold;
 }
 
+@media (max-width: 1544px) {
+  .form .form-container {
+    width: 50%;
+  }
+}
+@media (max-width: 650px) {
+  .form .form-container {
+    width: 70%;
+  }
+}
 .data {
   font-family: "Segoe UI", "Roboto";
   height: 6%;
@@ -921,6 +958,16 @@ button {
   align-items: flex-start;
   border-right: 3px solid black;
 }
+#setting_nav #setting_main ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+#setting_nav #setting_main ul li {
+  margin: 0.5rem 0;
+}
 #setting_nav #setting_options {
   grid-column-end: span 9;
   padding: 0.5rem;
@@ -1012,6 +1059,16 @@ button {
     font-size: 1rem;
   }
 }
+@media (max-width: 1544px) {
+  .user_card-wrapper .user_card-img {
+    width: 3rem !important;
+    height: 3rem !important;
+    border-radius: 100%;
+  }
+  .user_card-wrapper .user_card-details {
+    font-size: 0.8rem;
+  }
+}
 #search_bar {
   display: flex;
 }
@@ -1060,11 +1117,11 @@ button {
 }
 
 .body-index {
-  background-image: url(/images/index.png?5f66ace1e1e7c7c662dcab83b42bf314);
+  background-image: url(/images/index.svg?467eef29e0fe526c20820f0e98a99a63);
   background-size: contain;
   background-color: #2B2C34;
   font-family: "Segoe UI", "Roboto";
-  height: calc(100vh - 3rem);
+  height: calc(100vh - 4.5rem);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -1281,6 +1338,16 @@ a {
   }
   #users_wrapper #users .user {
     grid-column-end: span 1;
+  }
+}
+@media (max-width: 1544px) {
+  #post-wrapper #posts .post {
+    grid-column-end: span 4 !important;
+    width: 100%;
+  }
+
+  #users_wrapper #users .user {
+    grid-column-end: span 3 !important;
   }
 }
 #dashboard {
@@ -1679,6 +1746,33 @@ a {
     width: 100%;
   }
 }
+@media (max-width: 1100px) {
+  #profile_resume #profile_resume-month, #profile_resume #profile_resume-statics {
+    grid-column-end: span 12 !important;
+    margin-bottom: 2rem;
+  }
+
+  #profile_posts .post {
+    grid-column-end: span 12 !important;
+  }
+
+  .profile_main-follows .user {
+    grid-column-end: span 6 !important;
+  }
+
+  #profile_tags .post {
+    grid-column-end: span 6 !important;
+  }
+}
+@media (max-width: 650px) {
+  .profile_main-follows .user {
+    grid-column-end: span 12 !important;
+  }
+
+  #profile_tags .post {
+    grid-column-end: span 12 !important;
+  }
+}
 #seach_wrapper {
   background-color: #2B2C34;
   min-height: calc(100vh - 3rem);
@@ -1708,6 +1802,11 @@ a {
   width: 90%;
 }
 
+@media (max-width: 1100px) {
+  #seach_wrapper .post {
+    grid-column-end: span 12 !important;
+  }
+}
 #setting-wrapper {
   background-color: #2B2C34;
   min-height: calc(100vh - 4.5rem);
@@ -1845,4 +1944,18 @@ a {
 }
 .wrapper .container-parcial {
   grid-column-end: span 10;
+}
+
+@media (max-width: 1100px) {
+  #nav_main-lateral {
+    display: none;
+  }
+
+  #nav_main-top {
+    grid-column-end: span 12 !important;
+  }
+
+  .container-parcial {
+    grid-column-end: span 12 !important;
+  }
 }

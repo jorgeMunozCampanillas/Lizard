@@ -7,7 +7,7 @@
     color: $primary-white;
     min-height: calc(100vh - 3rem);
     max-height: max-content;
-
+    
     .profile_header{
         grid-column-end: span 12;
         display: flex;
@@ -316,4 +316,45 @@
         }
     }
     
+}
+
+
+@media (max-width: $breakpoint-3){
+    #profile_resume{
+        #profile_resume-month, #profile_resume-statics{
+            grid-column-end: span 12 !important;
+            margin-bottom: 2rem;
+        }
+    }
+
+    #profile_posts{
+        .post{
+            grid-column-end: span 12 !important;
+        }
+    }
+
+    .profile_main-follows{
+        .user{
+            grid-column-end: span 6 !important;
+        }
+    }
+    #profile_tags{
+        .post{
+            grid-column-end: span 6 !important;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-4){
+    .profile_main-follows{
+        .user{
+            grid-column-end: span 12 !important;
+        }
+    }
+
+    #profile_tags{
+        .post{
+            grid-column-end: span 12 !important;
+        }
+    }
 }

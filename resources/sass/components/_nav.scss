@@ -132,6 +132,18 @@
 
 
 }
+@media (max-width: $breakpoint-4){
+    .button-create-code{
+        display: none !important;
+    }
+
+    #search{
+        width: 80% !important;
+    }
+}
+
+
+
 
 
 /*-_-_-_-_-_-_-_-_- NAV 2 -_-_-_-_-_-_-_-_-*/
@@ -218,7 +230,7 @@
     .settings{
         height: 70vh;
         border: 3px solid $primary-dark-strong;
-        width: 30%;
+        width: 40%;
         background-color: $primary-dark;
         z-index: 30;
     }
@@ -281,7 +293,7 @@
 #nav-pages{
     grid-column-end: span 6
 }
-#nav-with-permiss, #nav-out-permiss{
+#nav-with-permiss{
     grid-column-end: span 3;
     justify-content: space-around;
 }
@@ -405,5 +417,27 @@
                 margin: 0 1rem;
             }
         }
+
+        #nav-out-permiss{
+            width: 20%;
+        }
     }
 }
+@media (max-width: $breakpoint-4){
+    .nav-5{
+        #nav-logo{
+            grid-column-end: span 4;
+            display: flex;
+        }
+        #search{
+            display: none !important;
+        }
+        #nav-options{
+            grid-column-end: span 8;
+            justify-content: flex-end;
+            margin-right: .5rem;
+        }
+    }
+}
+
+

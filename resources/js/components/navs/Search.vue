@@ -7,7 +7,7 @@
             <div id="search_options">
                 <button class="button-navSearch" :class="{'search_option-select': existOption('tags')}" @click="changeOptionSearch('tags')">#tags</button>
                 <button class="button-navSearch" :class="{'search_option-select': existOption('component')}" @click="changeOptionSearch('component')">#component</button>
-                <button class="button-navSearch" :class="{'search_option-select': existOption('profile')}" @click="changeOptionSearch('profile')">#profile</button>
+                <!-- <button class="button-navSearch" :class="{'search_option-select': existOption('profile')}" @click="changeOptionSearch('profile')">#profile</button> -->
             </div>
         </div>
       <div id="searc_results" v-if="toSearch!=''">

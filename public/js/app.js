@@ -38161,24 +38161,17 @@ var render = function () {
       _c("ul", { attrs: { id: "search" } }, [_c("Search")], 1),
       _vm._v(" "),
       this.$store.state.isAuthenticated == false
-        ? _c(
-            "ul",
-            { attrs: { id: "nav-out-permiss" } },
-            [
-              _c("LangSwitch"),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: { name: "login" } } }, [
-                    _vm._v(_vm._s(_vm.$t("nav.login"))),
-                  ]),
-                ],
-                1
-              ),
-            ],
-            1
-          )
+        ? _c("ul", { attrs: { id: "nav-out-permiss" } }, [
+            _c(
+              "li",
+              [
+                _c("router-link", { attrs: { to: { name: "login" } } }, [
+                  _vm._v(_vm._s(_vm.$t("nav.login"))),
+                ]),
+              ],
+              1
+            ),
+          ])
         : _vm._e(),
       _vm._v(" "),
       this.$store.state.auth.permissions > 0
@@ -38515,24 +38508,17 @@ var render = function () {
         _c("ul", { attrs: { id: "search" } }, [_c("Search")], 1),
         _vm._v(" "),
         this.$store.state.isAuthenticated == false
-          ? _c(
-              "ul",
-              { attrs: { id: "nav-out-permiss" } },
-              [
-                _c("LangSwitch"),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  [
-                    _c("router-link", { attrs: { to: { name: "login" } } }, [
-                      _vm._v(_vm._s(_vm.$t("nav.login"))),
-                    ]),
-                  ],
-                  1
-                ),
-              ],
-              1
-            )
+          ? _c("ul", { attrs: { id: "nav-out-permiss" } }, [
+              _c(
+                "li",
+                [
+                  _c("router-link", { attrs: { to: { name: "login" } } }, [
+                    _vm._v(_vm._s(_vm.$t("nav.login"))),
+                  ]),
+                ],
+                1
+              ),
+            ])
           : _vm._e(),
         _vm._v(" "),
         this.$store.state.auth.permissions > 0
@@ -38852,20 +38838,6 @@ var render = function () {
             },
             [_vm._v("#component")]
           ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "button-navSearch",
-              class: { "search_option-select": _vm.existOption("profile") },
-              on: {
-                click: function ($event) {
-                  return _vm.changeOptionSearch("profile")
-                },
-              },
-            },
-            [_vm._v("#profile")]
-          ),
         ]),
       ]),
       _vm._v(" "),
@@ -38919,13 +38891,16 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { attrs: { id: "setting_nav" } }, [
-      _c("div", { attrs: { id: "close" } }, [_vm._v("x")]),
+      _c("div", { staticClass: "button", attrs: { id: "close" } }, [
+        _vm._v("x"),
+      ]),
       _vm._v(" "),
       _c("nav", { attrs: { id: "setting_main" } }, [
         _c("ul", [
           _c(
             "li",
             {
+              staticClass: "button",
               on: {
                 click: function ($event) {
                   return _vm.SET_MAIN("css")
@@ -38938,6 +38913,7 @@ var render = function () {
           _c(
             "li",
             {
+              staticClass: "button",
               on: {
                 click: function ($event) {
                   return _vm.SET_MAIN("js")
@@ -38950,6 +38926,7 @@ var render = function () {
           _c(
             "li",
             {
+              staticClass: "button",
               on: {
                 click: function ($event) {
                   return _vm.SET_MAIN("display")
@@ -38989,7 +38966,7 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _vm.isUsed("bootstrap")
-                      ? _c("div", { staticClass: "quitFramework" }, [
+                      ? _c("div", { staticClass: "button quitFramework" }, [
                           _vm._v("X"),
                         ])
                       : _vm._e(),
@@ -39017,7 +38994,7 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _vm.isUsed("tailwind")
-                      ? _c("div", { staticClass: "quitFramework" }, [
+                      ? _c("div", { staticClass: "button quitFramework" }, [
                           _vm._v("X"),
                         ])
                       : _vm._e(),
@@ -39044,7 +39021,7 @@ var render = function () {
                     _c("div", [_vm._v("Pure CSS")]),
                     _vm._v(" "),
                     _vm.isUsed("css")
-                      ? _c("div", { staticClass: "quitFramework" }, [
+                      ? _c("div", { staticClass: "button quitFramework" }, [
                           _vm._v("X"),
                         ])
                       : _vm._e(),
@@ -39072,7 +39049,9 @@ var render = function () {
                   }),
                   _vm._v(" "),
                   _vm.isUsed("jquery")
-                    ? _c("div", { staticClass: "quitFramework" }, [_vm._v("X")])
+                    ? _c("div", { staticClass: "button quitFramework" }, [
+                        _vm._v("X"),
+                      ])
                     : _vm._e(),
                   _vm._v(" "),
                   _c("div", [_vm._v("JQuey")]),

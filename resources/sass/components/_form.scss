@@ -75,3 +75,17 @@
         font-weight: bold;
     }
 }
+@media (max-width: $breakpoint-2){
+    .form{
+        .form-container{
+            width: 50%;
+        }
+    }
+}
+@media (max-width: $breakpoint-4){
+    .form{
+        .form-container{
+            width: 70%;
+        }
+    }
+}

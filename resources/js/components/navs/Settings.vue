@@ -1,36 +1,36 @@
 <template>
   <div>
     <div id="setting_nav">
-        <div id="close">x</div>
+        <div class="button" id="close">x</div>
         <nav id="setting_main">
             <ul>
-                <li @click="SET_MAIN('css')">CSS </li>
-                <li @click="SET_MAIN('js')">JS</li>
-                <li @click="SET_MAIN('display')">MODE</li>
+                <li class="button" @click="SET_MAIN('css')">CSS </li>
+                <li class="button" @click="SET_MAIN('js')">JS</li>
+                <li class="button" @click="SET_MAIN('display')">MODE</li>
             </ul>
         </nav>
         <nav id="setting_options">
             <ul id="setting_options-css" class="setting_option" v-if="optionMain=='css'">
                 <li class="card_technology" @click="changeFramework('bootstrap')">
                     <img src="/storage/codeIcons/BOOTSTRAP.png" alt="">
-                    <div v-if="isUsed('bootstrap')" class="quitFramework">X</div>
+                    <div v-if="isUsed('bootstrap')" class="button quitFramework">X</div>
                     <div>Bootstrap</div>
                 </li>
                 <li class="card_technology" @click="changeFramework('tailwind')">
                     <img src="/storage/codeIcons/TAILWIND.png" alt="">
-                    <div v-if="isUsed('tailwind')" class="quitFramework">X</div>
+                    <div v-if="isUsed('tailwind')" class="button quitFramework">X</div>
                     <div>Tailwind</div>
                 </li>
                 <li class="card_technology" @click="changeFramework('css')">
                     <img src="/storage/codeIcons/CSS.png" alt="">
                     <div>Pure CSS</div>
-                    <div v-if="isUsed('css')" class="quitFramework">X</div>
+                    <div v-if="isUsed('css')" class="button quitFramework">X</div>
                 </li>
             </ul>
             <ul id="setting_options-js" v-if="optionMain=='js'">
                 <li class="card_technology" @click="changeFramework('jquery')">
                     <img src="/storage/codeIcons/JQUERY.png" alt="">
-                    <div v-if="isUsed('jquery')" class="quitFramework">X</div>
+                    <div v-if="isUsed('jquery')" class="button quitFramework">X</div>
                     <div>JQuey</div>
                 </li>
             </ul>

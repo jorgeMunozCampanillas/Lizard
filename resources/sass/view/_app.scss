@@ -25,3 +25,15 @@
         grid-column-end: span 10;
     }
 }
+
+@media (max-width: $breakpoint-3){
+    #nav_main-lateral{
+        display: none;
+    }
+    #nav_main-top{
+        grid-column-end: span 12 !important;
+    }
+    .container-parcial{
+        grid-column-end: span 12 !important;
+    }
+}

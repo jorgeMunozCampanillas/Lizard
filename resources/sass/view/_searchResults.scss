@@ -29,3 +29,11 @@
         }
     }
 }
+@media (max-width: $breakpoint-3){
+    #seach_wrapper{
+
+        .post{
+            grid-column-end: span 12 !important;
+        }
+    }
+}

@@ -78,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('email', this.form.email);
       data.append('password', this.form.password);
       data.append('img', this.form.img);
-      axios.post('api/user/users', data).then(function (req) {
+      axios.post('/api/users', data).then(function (req) {
         _this2.$router.push({
           name: "login"
         });

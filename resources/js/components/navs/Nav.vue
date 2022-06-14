@@ -8,7 +8,7 @@
 
         <!-- No registe -->
         <ul id="nav-out-permiss" v-if="this.$store.state.isAuthenticated==false">
-            <LangSwitch></LangSwitch>
+            <!-- <LangSwitch></LangSwitch> -->
             <li><router-link :to="{name:'login'}" >{{$t('nav.login')}}</router-link></li>
         </ul>
 

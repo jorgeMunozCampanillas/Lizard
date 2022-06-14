@@ -1,9 +1,9 @@
 .body-index{
-    background-image: url('./../../media/img/index.png');
+    background-image: url('./../../media/img/index.svg');
     background-size: contain;
     background-color: $primary-dark;
     font-family: $title-typography;
-    height: calc(100vh - 3rem);
+    height: calc(100vh - 4.5rem);
     overflow: hidden;
 
     display: flex;
