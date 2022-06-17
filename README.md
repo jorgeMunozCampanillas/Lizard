@@ -7,7 +7,9 @@
 
   <h1 align="center">Lizard</h1>
    <h4 align="center">
-       👋 Say goodbye to "coding" style just CNTRL + C / CNTRL + V 👋
+       👋 Say goodbye to "coding" style just CNTRL + C / CNTRL + V 👋 <br>
+       OR<br>
+       https://res.cloudinary.com/lizardd/raw/upload/v1655465329/cdn-lizard_oanjla.js
   </h4>
 </div>
 <br>
