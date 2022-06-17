@@ -156,7 +156,7 @@ or
 - [X] Code
   - [X] Code beautiful
   - [X] Code Crud
-  - [X] Code Screenshot
+  - [X] Code Screenshot.
 
 - [X] Post
   - [X] View
