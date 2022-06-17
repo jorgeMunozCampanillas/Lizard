@@ -19,6 +19,7 @@ Lizard is a page to upload components and views of the TailwindCSS framework, on
 
 <div align="center">
 
+
 <h1># Stack #</h1>
 
 | Front | Back | miscellany
@@ -148,23 +149,19 @@ or
 - [X] SPA
 - [X] Middleware Auth
 - [X] Multilanguage
-- [ ] Dashboard
+- [X] Dashboard
   - [X] Users 
-  - [ ] Post
+  - [X] Post
   
-- [ ] Code
+- [X] Code
   - [X] Code beautiful
   - [X] Code Crud
   - [X] Code Screenshot
-  - [ ] Change theme
-  - [ ] Change displayed
 
-- [ ] Post
+- [X] Post
   - [X] View
-  - [ ] Filter
+  - [X] Filter
   - [X] Likes
-  - [ ] Comment
-  - [ ] Add fav
 
 
 
