@@ -13,7 +13,10 @@
   </h4>
 </div>
 <br>
-<h2>🎥Video check point : <a href="https://youtu.be/nBudKXeISSw"> https://youtu.be/nBudKXeISSw </a></h2>
+<h2>🎥Video resume : <a href="https://youtu.be/vqMS9xy2kSA"> https://youtu.be/vqMS9xy2kSA </a></h2>
+<h2>Manual user: 
+ https://github.com/jorgeMunozCampanillas/Lizard/files/8928141/Jorge.Munoz.Lizard.User.Guide.pdf)
+</h2>
 <!-- ABOUT THE PROJECT -->
 ## About Lizard
 
