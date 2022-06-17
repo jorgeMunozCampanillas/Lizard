@@ -29,7 +29,6 @@ Route::get('getPostByName/{name}', [App\Http\Controllers\PostController::class, 
 Route::get('getPostByTag/{name}', [App\Http\Controllers\PostController::class, 'getPostByTag']);
 Route::get('getPostFeatured', [App\Http\Controllers\PostController::class, 'getPostFeatured']);
 
-
 //Code
 //get all code
 Route::resource('code/{offset}', App\Http\Controllers\PostController::class)->only(['index']);
